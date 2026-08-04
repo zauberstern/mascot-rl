@@ -1,0 +1,808 @@
+{
+  "generated_at": "2026-08-28T18:27:29.625913+00:00",
+  "cost_law": {
+    "formula": "usd = n_cells * 1.91h * $0.022/vcpu-hour",
+    "hours_per_cell": 1.91,
+    "usd_per_vcpu_hour": 0.022,
+    "usd_per_cell": 0.04202
+  },
+  "id_mismatches_resolved": [
+    {
+      "sweep": "C",
+      "issue": "Plan text lists 3 ppo heads (tanh_l1, dirichlet_tilt, dirichlet_mean) at mlp/mean_std_cao. dirichlet_mean is not in ppo's _ALGO_HEADS entry in the fullgrid generator (softmax, tanh_l1, dirichlet_tilt), so no fullgrid cell exists.",
+      "resolution": "Leave fullgrid generator unchanged. Cherry-pick generator copies the two fullgrid heads and clones a new cell from the ppo reference with head=dirichlet_mean (validate_cfg accepts)."
+    },
+    {
+      "sweep": "A/D/narrative",
+      "issue": "Post-RL-audit registry adds cppo + sdr_composite; fullgrid YAML tree may lag until regenerate. rl_backend=sb3 is a runtime routing switch, not a fullgrid axis cell.",
+      "resolution": "Cherry-pick clones cppo (Sweep A + I + narrative), sdr_composite (Sweep D + narrative), and rb-sb3 narrative cells from the ppo reference. Tier 1 = 147; Tier 2 = 24."
+    }
+  ],
+  "arms": [
+    "opt",
+    "eq",
+    "mix"
+  ],
+  "tiers": {
+    "screening": {
+      "n_cells": 147,
+      "sweeps_a_to_f": {
+        "A": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_single_ppo_mlp_softmax_mean_std_cao",
+              "opt_K100_single_cppo_mlp_softmax_mean_std_cao",
+              "opt_K100_single_sac_mlp_softmax_mtm_pnl",
+              "opt_K100_single_td3_mlp_softmax_mtm_pnl",
+              "opt_K100_single_ddpg_mlp_softmax_mtm_pnl",
+              "opt_K100_single_dqn_mlp_mtm_pnl",
+              "opt_K100_single_mcpg_mlp_softmax_mtm_pnl",
+              "opt_K100_single_rrl_mlp_softmax_mtm_pnl",
+              "opt_K100_multi_happo_mlp_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+              "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+              "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+              "eq_K100_single_td3_mlp_softmax_mtm_pnl",
+              "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+              "eq_K100_single_dqn_mlp_mtm_pnl",
+              "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+              "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+              "eq_K100_multi_happo_mlp_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K100_single_ppo_mlp_softmax_mean_std_cao",
+              "mix_K100_single_cppo_mlp_softmax_mean_std_cao",
+              "mix_K100_single_sac_mlp_softmax_mtm_pnl",
+              "mix_K100_single_td3_mlp_softmax_mtm_pnl",
+              "mix_K100_single_ddpg_mlp_softmax_mtm_pnl",
+              "mix_K100_single_dqn_mlp_mtm_pnl",
+              "mix_K100_single_mcpg_mlp_softmax_mtm_pnl",
+              "mix_K100_single_rrl_mlp_softmax_mtm_pnl",
+              "mix_K100_multi_happo_mlp_mean_std_cao"
+            ]
+          }
+        },
+        "B": {
+          "per_arm": 4,
+          "total": 12,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_single_ppo_gru_softmax_mean_std_cao",
+              "opt_K100_single_ppo_lstm_softmax_mean_std_cao",
+              "opt_K100_single_ppo_transformer_softmax_mean_std_cao",
+              "opt_K100_single_ppo_mamba_softmax_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+              "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+              "eq_K100_single_ppo_transformer_softmax_mean_std_cao",
+              "eq_K100_single_ppo_mamba_softmax_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K100_single_ppo_gru_softmax_mean_std_cao",
+              "mix_K100_single_ppo_lstm_softmax_mean_std_cao",
+              "mix_K100_single_ppo_transformer_softmax_mean_std_cao",
+              "mix_K100_single_ppo_mamba_softmax_mean_std_cao"
+            ]
+          }
+        },
+        "C": {
+          "per_arm": 3,
+          "total": 9,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "opt_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "opt_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "mix_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "mix_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ]
+          }
+        },
+        "D": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_single_ppo_mlp_softmax_mtm_pnl",
+              "opt_K100_single_ppo_mlp_softmax_meanvar_kolm",
+              "opt_K100_single_ppo_mlp_softmax_cvar_ru",
+              "opt_K100_single_ppo_mlp_softmax_entropic_oce",
+              "opt_K100_single_ppo_mlp_softmax_smse",
+              "opt_K100_single_ppo_mlp_softmax_rsqp",
+              "opt_K100_single_ppo_mlp_softmax_differential_sharpe",
+              "opt_K100_single_ppo_mlp_softmax_mikkila_asym",
+              "opt_K100_single_ppo_mlp_softmax_sdr_composite"
+            ],
+            "eq": [
+              "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+              "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+              "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+              "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+              "eq_K100_single_ppo_mlp_softmax_smse",
+              "eq_K100_single_ppo_mlp_softmax_rsqp",
+              "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+              "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+              "eq_K100_single_ppo_mlp_softmax_sdr_composite"
+            ],
+            "mix": [
+              "mix_K100_single_ppo_mlp_softmax_mtm_pnl",
+              "mix_K100_single_ppo_mlp_softmax_meanvar_kolm",
+              "mix_K100_single_ppo_mlp_softmax_cvar_ru",
+              "mix_K100_single_ppo_mlp_softmax_entropic_oce",
+              "mix_K100_single_ppo_mlp_softmax_smse",
+              "mix_K100_single_ppo_mlp_softmax_rsqp",
+              "mix_K100_single_ppo_mlp_softmax_differential_sharpe",
+              "mix_K100_single_ppo_mlp_softmax_mikkila_asym",
+              "mix_K100_single_ppo_mlp_softmax_sdr_composite"
+            ]
+          }
+        },
+        "E": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+              "opt_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+              "opt_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+              "opt_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+              "opt_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+              "opt_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+              "opt_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "opt_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "opt_K100_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ],
+            "eq": [
+              "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+              "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+              "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+              "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+              "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+              "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+              "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ],
+            "mix": [
+              "mix_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+              "mix_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+              "mix_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+              "mix_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+              "mix_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+              "mix_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+              "mix_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "mix_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "mix_K100_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ]
+          }
+        },
+        "F": {
+          "per_arm": 3,
+          "total": 9,
+          "cell_ids": {
+            "opt": [
+              "opt_K100_multi_happo_mlp_meanvar_kolm",
+              "opt_K100_multi_happo_mlp_cvar_ru",
+              "opt_K100_multi_happo_mlp_entropic_oce"
+            ],
+            "eq": [
+              "eq_K100_multi_happo_mlp_meanvar_kolm",
+              "eq_K100_multi_happo_mlp_cvar_ru",
+              "eq_K100_multi_happo_mlp_entropic_oce"
+            ],
+            "mix": [
+              "mix_K100_multi_happo_mlp_meanvar_kolm",
+              "mix_K100_multi_happo_mlp_cvar_ru",
+              "mix_K100_multi_happo_mlp_entropic_oce"
+            ]
+          }
+        }
+      },
+      "sweep_g_train_world": {
+        "per_arm": 6,
+        "total": 18,
+        "cell_ids": {
+          "opt": [
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune"
+          ],
+          "eq": [
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune"
+          ],
+          "mix": [
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune"
+          ]
+        }
+      },
+      "sweep_h_policy_mode": {
+        "per_arm": 3,
+        "total": 9,
+        "cell_ids": {
+          "opt": [
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+            "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis"
+          ],
+          "eq": [
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+            "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis"
+          ],
+          "mix": [
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+            "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis"
+          ]
+        }
+      },
+      "sweep_i_crucible_foil": {
+        "total": 9,
+        "cell_ids": [
+          "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+          "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+          "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+          "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible",
+          "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+          "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+          "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+          "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+          "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible"
+        ]
+      },
+      "cell_ids": [
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao",
+        "opt_K100_single_cppo_mlp_softmax_mean_std_cao",
+        "opt_K100_single_sac_mlp_softmax_mtm_pnl",
+        "opt_K100_single_td3_mlp_softmax_mtm_pnl",
+        "opt_K100_single_ddpg_mlp_softmax_mtm_pnl",
+        "opt_K100_single_dqn_mlp_mtm_pnl",
+        "opt_K100_single_mcpg_mlp_softmax_mtm_pnl",
+        "opt_K100_single_rrl_mlp_softmax_mtm_pnl",
+        "opt_K100_multi_happo_mlp_mean_std_cao",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+        "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+        "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+        "eq_K100_single_td3_mlp_softmax_mtm_pnl",
+        "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+        "eq_K100_single_dqn_mlp_mtm_pnl",
+        "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+        "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+        "eq_K100_multi_happo_mlp_mean_std_cao",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao",
+        "mix_K100_single_cppo_mlp_softmax_mean_std_cao",
+        "mix_K100_single_sac_mlp_softmax_mtm_pnl",
+        "mix_K100_single_td3_mlp_softmax_mtm_pnl",
+        "mix_K100_single_ddpg_mlp_softmax_mtm_pnl",
+        "mix_K100_single_dqn_mlp_mtm_pnl",
+        "mix_K100_single_mcpg_mlp_softmax_mtm_pnl",
+        "mix_K100_single_rrl_mlp_softmax_mtm_pnl",
+        "mix_K100_multi_happo_mlp_mean_std_cao",
+        "opt_K100_single_ppo_gru_softmax_mean_std_cao",
+        "opt_K100_single_ppo_lstm_softmax_mean_std_cao",
+        "opt_K100_single_ppo_transformer_softmax_mean_std_cao",
+        "opt_K100_single_ppo_mamba_softmax_mean_std_cao",
+        "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+        "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+        "eq_K100_single_ppo_transformer_softmax_mean_std_cao",
+        "eq_K100_single_ppo_mamba_softmax_mean_std_cao",
+        "mix_K100_single_ppo_gru_softmax_mean_std_cao",
+        "mix_K100_single_ppo_lstm_softmax_mean_std_cao",
+        "mix_K100_single_ppo_transformer_softmax_mean_std_cao",
+        "mix_K100_single_ppo_mamba_softmax_mean_std_cao",
+        "opt_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "opt_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "opt_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "mix_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "mix_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "mix_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "opt_K100_single_ppo_mlp_softmax_mtm_pnl",
+        "opt_K100_single_ppo_mlp_softmax_meanvar_kolm",
+        "opt_K100_single_ppo_mlp_softmax_cvar_ru",
+        "opt_K100_single_ppo_mlp_softmax_entropic_oce",
+        "opt_K100_single_ppo_mlp_softmax_smse",
+        "opt_K100_single_ppo_mlp_softmax_rsqp",
+        "opt_K100_single_ppo_mlp_softmax_differential_sharpe",
+        "opt_K100_single_ppo_mlp_softmax_mikkila_asym",
+        "opt_K100_single_ppo_mlp_softmax_sdr_composite",
+        "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+        "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+        "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+        "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+        "eq_K100_single_ppo_mlp_softmax_smse",
+        "eq_K100_single_ppo_mlp_softmax_rsqp",
+        "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+        "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+        "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+        "mix_K100_single_ppo_mlp_softmax_mtm_pnl",
+        "mix_K100_single_ppo_mlp_softmax_meanvar_kolm",
+        "mix_K100_single_ppo_mlp_softmax_cvar_ru",
+        "mix_K100_single_ppo_mlp_softmax_entropic_oce",
+        "mix_K100_single_ppo_mlp_softmax_smse",
+        "mix_K100_single_ppo_mlp_softmax_rsqp",
+        "mix_K100_single_ppo_mlp_softmax_differential_sharpe",
+        "mix_K100_single_ppo_mlp_softmax_mikkila_asym",
+        "mix_K100_single_ppo_mlp_softmax_sdr_composite",
+        "opt_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+        "opt_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+        "opt_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+        "opt_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+        "opt_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+        "opt_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+        "opt_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "opt_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "opt_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+        "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+        "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+        "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+        "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+        "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+        "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "mix_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+        "mix_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+        "mix_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+        "mix_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+        "mix_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+        "mix_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+        "mix_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "mix_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "mix_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "opt_K100_multi_happo_mlp_meanvar_kolm",
+        "opt_K100_multi_happo_mlp_cvar_ru",
+        "opt_K100_multi_happo_mlp_entropic_oce",
+        "eq_K100_multi_happo_mlp_meanvar_kolm",
+        "eq_K100_multi_happo_mlp_cvar_ru",
+        "eq_K100_multi_happo_mlp_entropic_oce",
+        "mix_K100_multi_happo_mlp_meanvar_kolm",
+        "mix_K100_multi_happo_mlp_cvar_ru",
+        "mix_K100_multi_happo_mlp_entropic_oce",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+        "opt_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+        "mix_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+        "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+        "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+        "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+        "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible",
+        "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+        "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+        "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+        "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+        "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible"
+      ],
+      "cost": {
+        "n_cells": 147,
+        "wall_hours": 280.77,
+        "usd_at_1_vcpu": 6.1769
+      }
+    },
+    "narrative": {
+      "n_cells": 24,
+      "cell_ids": {
+        "opt": [
+          "opt_K100_single_ppo_mlp_softmax_mean_std_cao",
+          "opt_K100_single_ppo_mamba_dirichlet_tilt_cvar_ru",
+          "opt_K100_multi_happo_mlp_mean_std_cao",
+          "opt_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+          "opt_K100_single_dqn_mlp_mtm_pnl",
+          "opt_K100_single_cppo_mlp_softmax_mean_std_cao",
+          "opt_K100_single_ppo_mlp_softmax_sdr_composite",
+          "opt_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3"
+        ],
+        "eq": [
+          "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+          "eq_K100_single_ppo_mamba_dirichlet_tilt_cvar_ru",
+          "eq_K100_multi_happo_mlp_mean_std_cao",
+          "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+          "eq_K100_single_dqn_mlp_mtm_pnl",
+          "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+          "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+          "eq_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3"
+        ],
+        "mix": [
+          "mix_K100_single_ppo_mlp_softmax_mean_std_cao",
+          "mix_K100_single_ppo_mamba_dirichlet_tilt_cvar_ru",
+          "mix_K100_multi_happo_mlp_mean_std_cao",
+          "mix_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+          "mix_K100_single_dqn_mlp_mtm_pnl",
+          "mix_K100_single_cppo_mlp_softmax_mean_std_cao",
+          "mix_K100_single_ppo_mlp_softmax_sdr_composite",
+          "mix_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3"
+        ]
+      },
+      "cost": {
+        "n_cells": 24,
+        "wall_hours": 45.84,
+        "usd_at_1_vcpu": 1.0085
+      }
+    },
+    "k200": {
+      "n_cells": 111,
+      "sweeps_a_to_f": {
+        "A": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_single_ppo_mlp_softmax_mean_std_cao",
+              "opt_K200_single_cppo_mlp_softmax_mean_std_cao",
+              "opt_K200_single_sac_mlp_softmax_mtm_pnl",
+              "opt_K200_single_td3_mlp_softmax_mtm_pnl",
+              "opt_K200_single_ddpg_mlp_softmax_mtm_pnl",
+              "opt_K200_single_dqn_mlp_mtm_pnl",
+              "opt_K200_single_mcpg_mlp_softmax_mtm_pnl",
+              "opt_K200_single_rrl_mlp_softmax_mtm_pnl",
+              "opt_K200_multi_happo_mlp_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K200_single_ppo_mlp_softmax_mean_std_cao",
+              "eq_K200_single_cppo_mlp_softmax_mean_std_cao",
+              "eq_K200_single_sac_mlp_softmax_mtm_pnl",
+              "eq_K200_single_td3_mlp_softmax_mtm_pnl",
+              "eq_K200_single_ddpg_mlp_softmax_mtm_pnl",
+              "eq_K200_single_dqn_mlp_mtm_pnl",
+              "eq_K200_single_mcpg_mlp_softmax_mtm_pnl",
+              "eq_K200_single_rrl_mlp_softmax_mtm_pnl",
+              "eq_K200_multi_happo_mlp_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K200_single_ppo_mlp_softmax_mean_std_cao",
+              "mix_K200_single_cppo_mlp_softmax_mean_std_cao",
+              "mix_K200_single_sac_mlp_softmax_mtm_pnl",
+              "mix_K200_single_td3_mlp_softmax_mtm_pnl",
+              "mix_K200_single_ddpg_mlp_softmax_mtm_pnl",
+              "mix_K200_single_dqn_mlp_mtm_pnl",
+              "mix_K200_single_mcpg_mlp_softmax_mtm_pnl",
+              "mix_K200_single_rrl_mlp_softmax_mtm_pnl",
+              "mix_K200_multi_happo_mlp_mean_std_cao"
+            ]
+          }
+        },
+        "B": {
+          "per_arm": 4,
+          "total": 12,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_single_ppo_gru_softmax_mean_std_cao",
+              "opt_K200_single_ppo_lstm_softmax_mean_std_cao",
+              "opt_K200_single_ppo_transformer_softmax_mean_std_cao",
+              "opt_K200_single_ppo_mamba_softmax_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K200_single_ppo_gru_softmax_mean_std_cao",
+              "eq_K200_single_ppo_lstm_softmax_mean_std_cao",
+              "eq_K200_single_ppo_transformer_softmax_mean_std_cao",
+              "eq_K200_single_ppo_mamba_softmax_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K200_single_ppo_gru_softmax_mean_std_cao",
+              "mix_K200_single_ppo_lstm_softmax_mean_std_cao",
+              "mix_K200_single_ppo_transformer_softmax_mean_std_cao",
+              "mix_K200_single_ppo_mamba_softmax_mean_std_cao"
+            ]
+          }
+        },
+        "C": {
+          "per_arm": 3,
+          "total": 9,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "opt_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "opt_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ],
+            "eq": [
+              "eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ],
+            "mix": [
+              "mix_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+              "mix_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+              "mix_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao"
+            ]
+          }
+        },
+        "D": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_single_ppo_mlp_softmax_mtm_pnl",
+              "opt_K200_single_ppo_mlp_softmax_meanvar_kolm",
+              "opt_K200_single_ppo_mlp_softmax_cvar_ru",
+              "opt_K200_single_ppo_mlp_softmax_entropic_oce",
+              "opt_K200_single_ppo_mlp_softmax_smse",
+              "opt_K200_single_ppo_mlp_softmax_rsqp",
+              "opt_K200_single_ppo_mlp_softmax_differential_sharpe",
+              "opt_K200_single_ppo_mlp_softmax_mikkila_asym",
+              "opt_K200_single_ppo_mlp_softmax_sdr_composite"
+            ],
+            "eq": [
+              "eq_K200_single_ppo_mlp_softmax_mtm_pnl",
+              "eq_K200_single_ppo_mlp_softmax_meanvar_kolm",
+              "eq_K200_single_ppo_mlp_softmax_cvar_ru",
+              "eq_K200_single_ppo_mlp_softmax_entropic_oce",
+              "eq_K200_single_ppo_mlp_softmax_smse",
+              "eq_K200_single_ppo_mlp_softmax_rsqp",
+              "eq_K200_single_ppo_mlp_softmax_differential_sharpe",
+              "eq_K200_single_ppo_mlp_softmax_mikkila_asym",
+              "eq_K200_single_ppo_mlp_softmax_sdr_composite"
+            ],
+            "mix": [
+              "mix_K200_single_ppo_mlp_softmax_mtm_pnl",
+              "mix_K200_single_ppo_mlp_softmax_meanvar_kolm",
+              "mix_K200_single_ppo_mlp_softmax_cvar_ru",
+              "mix_K200_single_ppo_mlp_softmax_entropic_oce",
+              "mix_K200_single_ppo_mlp_softmax_smse",
+              "mix_K200_single_ppo_mlp_softmax_rsqp",
+              "mix_K200_single_ppo_mlp_softmax_differential_sharpe",
+              "mix_K200_single_ppo_mlp_softmax_mikkila_asym",
+              "mix_K200_single_ppo_mlp_softmax_sdr_composite"
+            ]
+          }
+        },
+        "E": {
+          "per_arm": 9,
+          "total": 27,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+              "opt_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+              "opt_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+              "opt_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+              "opt_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+              "opt_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+              "opt_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "opt_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "opt_K200_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ],
+            "eq": [
+              "eq_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+              "eq_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+              "eq_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+              "eq_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+              "eq_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+              "eq_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+              "eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ],
+            "mix": [
+              "mix_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+              "mix_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+              "mix_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+              "mix_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+              "mix_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+              "mix_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+              "mix_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+              "mix_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+              "mix_K200_single_ddpg_mlp_tanh_l1_mikkila_asym"
+            ]
+          }
+        },
+        "F": {
+          "per_arm": 3,
+          "total": 9,
+          "cell_ids": {
+            "opt": [
+              "opt_K200_multi_happo_mlp_meanvar_kolm",
+              "opt_K200_multi_happo_mlp_cvar_ru",
+              "opt_K200_multi_happo_mlp_entropic_oce"
+            ],
+            "eq": [
+              "eq_K200_multi_happo_mlp_meanvar_kolm",
+              "eq_K200_multi_happo_mlp_cvar_ru",
+              "eq_K200_multi_happo_mlp_entropic_oce"
+            ],
+            "mix": [
+              "mix_K200_multi_happo_mlp_meanvar_kolm",
+              "mix_K200_multi_happo_mlp_cvar_ru",
+              "mix_K200_multi_happo_mlp_entropic_oce"
+            ]
+          }
+        }
+      },
+      "cell_ids": [
+        "opt_K200_single_ppo_mlp_softmax_mean_std_cao",
+        "opt_K200_single_cppo_mlp_softmax_mean_std_cao",
+        "opt_K200_single_sac_mlp_softmax_mtm_pnl",
+        "opt_K200_single_td3_mlp_softmax_mtm_pnl",
+        "opt_K200_single_ddpg_mlp_softmax_mtm_pnl",
+        "opt_K200_single_dqn_mlp_mtm_pnl",
+        "opt_K200_single_mcpg_mlp_softmax_mtm_pnl",
+        "opt_K200_single_rrl_mlp_softmax_mtm_pnl",
+        "opt_K200_multi_happo_mlp_mean_std_cao",
+        "eq_K200_single_ppo_mlp_softmax_mean_std_cao",
+        "eq_K200_single_cppo_mlp_softmax_mean_std_cao",
+        "eq_K200_single_sac_mlp_softmax_mtm_pnl",
+        "eq_K200_single_td3_mlp_softmax_mtm_pnl",
+        "eq_K200_single_ddpg_mlp_softmax_mtm_pnl",
+        "eq_K200_single_dqn_mlp_mtm_pnl",
+        "eq_K200_single_mcpg_mlp_softmax_mtm_pnl",
+        "eq_K200_single_rrl_mlp_softmax_mtm_pnl",
+        "eq_K200_multi_happo_mlp_mean_std_cao",
+        "mix_K200_single_ppo_mlp_softmax_mean_std_cao",
+        "mix_K200_single_cppo_mlp_softmax_mean_std_cao",
+        "mix_K200_single_sac_mlp_softmax_mtm_pnl",
+        "mix_K200_single_td3_mlp_softmax_mtm_pnl",
+        "mix_K200_single_ddpg_mlp_softmax_mtm_pnl",
+        "mix_K200_single_dqn_mlp_mtm_pnl",
+        "mix_K200_single_mcpg_mlp_softmax_mtm_pnl",
+        "mix_K200_single_rrl_mlp_softmax_mtm_pnl",
+        "mix_K200_multi_happo_mlp_mean_std_cao",
+        "opt_K200_single_ppo_gru_softmax_mean_std_cao",
+        "opt_K200_single_ppo_lstm_softmax_mean_std_cao",
+        "opt_K200_single_ppo_transformer_softmax_mean_std_cao",
+        "opt_K200_single_ppo_mamba_softmax_mean_std_cao",
+        "eq_K200_single_ppo_gru_softmax_mean_std_cao",
+        "eq_K200_single_ppo_lstm_softmax_mean_std_cao",
+        "eq_K200_single_ppo_transformer_softmax_mean_std_cao",
+        "eq_K200_single_ppo_mamba_softmax_mean_std_cao",
+        "mix_K200_single_ppo_gru_softmax_mean_std_cao",
+        "mix_K200_single_ppo_lstm_softmax_mean_std_cao",
+        "mix_K200_single_ppo_transformer_softmax_mean_std_cao",
+        "mix_K200_single_ppo_mamba_softmax_mean_std_cao",
+        "opt_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "opt_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "opt_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "mix_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+        "mix_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+        "mix_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+        "opt_K200_single_ppo_mlp_softmax_mtm_pnl",
+        "opt_K200_single_ppo_mlp_softmax_meanvar_kolm",
+        "opt_K200_single_ppo_mlp_softmax_cvar_ru",
+        "opt_K200_single_ppo_mlp_softmax_entropic_oce",
+        "opt_K200_single_ppo_mlp_softmax_smse",
+        "opt_K200_single_ppo_mlp_softmax_rsqp",
+        "opt_K200_single_ppo_mlp_softmax_differential_sharpe",
+        "opt_K200_single_ppo_mlp_softmax_mikkila_asym",
+        "opt_K200_single_ppo_mlp_softmax_sdr_composite",
+        "eq_K200_single_ppo_mlp_softmax_mtm_pnl",
+        "eq_K200_single_ppo_mlp_softmax_meanvar_kolm",
+        "eq_K200_single_ppo_mlp_softmax_cvar_ru",
+        "eq_K200_single_ppo_mlp_softmax_entropic_oce",
+        "eq_K200_single_ppo_mlp_softmax_smse",
+        "eq_K200_single_ppo_mlp_softmax_rsqp",
+        "eq_K200_single_ppo_mlp_softmax_differential_sharpe",
+        "eq_K200_single_ppo_mlp_softmax_mikkila_asym",
+        "eq_K200_single_ppo_mlp_softmax_sdr_composite",
+        "mix_K200_single_ppo_mlp_softmax_mtm_pnl",
+        "mix_K200_single_ppo_mlp_softmax_meanvar_kolm",
+        "mix_K200_single_ppo_mlp_softmax_cvar_ru",
+        "mix_K200_single_ppo_mlp_softmax_entropic_oce",
+        "mix_K200_single_ppo_mlp_softmax_smse",
+        "mix_K200_single_ppo_mlp_softmax_rsqp",
+        "mix_K200_single_ppo_mlp_softmax_differential_sharpe",
+        "mix_K200_single_ppo_mlp_softmax_mikkila_asym",
+        "mix_K200_single_ppo_mlp_softmax_sdr_composite",
+        "opt_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+        "opt_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+        "opt_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+        "opt_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+        "opt_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+        "opt_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+        "opt_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "opt_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "opt_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "eq_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+        "eq_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+        "eq_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+        "eq_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+        "eq_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+        "eq_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+        "eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "mix_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+        "mix_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+        "mix_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+        "mix_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+        "mix_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+        "mix_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+        "mix_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+        "mix_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+        "mix_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+        "opt_K200_multi_happo_mlp_meanvar_kolm",
+        "opt_K200_multi_happo_mlp_cvar_ru",
+        "opt_K200_multi_happo_mlp_entropic_oce",
+        "eq_K200_multi_happo_mlp_meanvar_kolm",
+        "eq_K200_multi_happo_mlp_cvar_ru",
+        "eq_K200_multi_happo_mlp_entropic_oce",
+        "mix_K200_multi_happo_mlp_meanvar_kolm",
+        "mix_K200_multi_happo_mlp_cvar_ru",
+        "mix_K200_multi_happo_mlp_entropic_oce"
+      ],
+      "cost": {
+        "n_cells": 111,
+        "wall_hours": 212.01,
+        "usd_at_1_vcpu": 4.6642
+      }
+    }
+  },
+  "unexpected_refusals": [],
+  "set_algebra": {
+    "screening_n": 147,
+    "narrative_n": 24,
+    "k200_n": 111,
+    "total_n": 282,
+    "screening_narrative_overlap": [
+      "eq_K100_multi_happo_mlp_mean_std_cao",
+      "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "eq_K100_single_dqn_mlp_mtm_pnl",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+      "mix_K100_multi_happo_mlp_mean_std_cao",
+      "mix_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "mix_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "mix_K100_single_dqn_mlp_mtm_pnl",
+      "mix_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "mix_K100_single_ppo_mlp_softmax_sdr_composite",
+      "opt_K100_multi_happo_mlp_mean_std_cao",
+      "opt_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "opt_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "opt_K100_single_dqn_mlp_mtm_pnl",
+      "opt_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "opt_K100_single_ppo_mlp_softmax_sdr_composite"
+    ]
+  }
+}

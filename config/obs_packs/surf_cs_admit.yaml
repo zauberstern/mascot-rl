@@ -1,0 +1,6 @@
+# Lane B mirror of Lane A: resolve channels from signal_allowlist.json at
+# campaign consume time (spine default honesty).
+pack_id: surf_cs_admit
+estimand: signal_obs_geometry_v1
+resolve_from: signal_allowlist
+channels: []

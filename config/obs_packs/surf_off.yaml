@@ -1,0 +1,6 @@
+# Lane B / H2 baseline: no surface channels in the RL obs cube.
+# Campaign consume: surface_obs_lane=off or --no-surface-signals.
+# Do not pass this file to assert_geometry_pack_valid (empty pack refused).
+pack_id: surf_off
+estimand: signal_obs_geometry_v1
+channels: []

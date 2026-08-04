@@ -1,0 +1,111 @@
+# Spectrum arm config: opt
+# Derived from overnight.yaml; only arm/run_label/n_assets differ by design.
+n_paths: 256
+n_assets: 50
+n_steps: 126
+n_strikes: 15
+n_maturities: 4
+hurst_exponent: 0.1
+asset_corr: 0.45
+d_model: 48
+d_state: 16
+macro_dim: 16
+seq_len: 32
+turnover_limit: 0.15
+lr: 0.0003
+entropy_coef: 0.02
+train_epochs: 3
+teamtr_kl0: 0.01
+teamtr_enabled: false
+teamtr_kl_floor: 0.002
+teamtr_shuffle_order: false
+universe_mode: iv_hypergraph
+universe_selection_metric: copula_tail
+universe_liquidity_pool: 200
+universe_tail_threshold: 0.9
+universe_iv_corr_threshold: 0.35
+proj_penalty_coef: 2.5
+proj_gap_alert_threshold: 0.25
+execution_spread_bps: 0.0
+execution_impact_coef: 0.0
+ppo_minibatch_size: 64
+truncation_bootstrap: true
+agent_permutation: random
+adv_norm_scope: minibatch
+max_grad_norm: 10.0
+adam_eps: 1.0e-5
+stability_evals: true
+eval_seeds: 0,1,2,3,4,5,6,7,8,9
+nested_fold_months: 12
+nested_wfo_retrain: true
+nested_wfo_val_months: 3
+nested_wfo_finetune_passes: 3
+nested_wfo_max_folds: null
+adversarial_iv_shock: 0.05
+capacity_impact_coef: 0.01
+capacity_spread_bps: 5.0
+om_touch_enabled: true
+om_touch_fee_bps: 0.0
+om_touch_spread_multiplier: 1.0
+hedge_leg_spread_bps: 5.0
+plugins:
+  om_touch:
+    enabled: true
+    fee_bps: 0.0
+    spread_multiplier: 1.0
+    hedge_leg_spread_bps: 5.0
+  projection_backend: cvxpy
+publication_evals: true
+publication_baselines: true
+publication_ablations: true
+publication_ablation_folds: false
+publication_ablation_seeds: false
+publication_n_trials: null
+publication_ablation_variants: 5
+capital_gates_require_stability: true
+capital_gates_require_retrain_wfo: true
+wfo_positive_fold_rate_min: 0.7
+multiseed_sharpe_p05_min: 0.0
+adversarial_max_degradation: 0.5
+risk_max_gross_leverage: 50.0
+risk_max_net_exposure: 25.0
+risk_max_name_abs_weight: 5.0
+risk_max_abs_delta_dot: 1.0
+risk_raise_on_breach: true
+episodes: 700
+horizon: 0
+eval_episodes: 50
+ocl_soak_n: 16384
+ocl_resoak_every: 100
+use_gpu: true
+seed: 42
+macro_start: '2003-01-01'
+macro_end: '2024-12-31'
+lake_base_dir: /mnt/volsurf/volsurf_data_lake
+arctic_db_path: /mnt/volsurf/volsurf_arcticdb
+arctic_library: hyper_volanet_features
+historical_oos_eval: true
+hist_panel_start: '2007-01-01'
+is_hist_start: '2007-01-01'
+is_hist_end: '2021-12-31'
+oos_start: '2022-01-01'
+oos_end: '2024-12-31'
+oos_universe_start: '2007-01-01'
+oos_universe_end: '2021-12-31'
+oos_materialize_if_missing: true
+oos_force_rematerialize: false
+log_file: logs/overnight_alpha.log
+report_dir: logs/overnight_report
+run_label: arm-opt-spectrum
+run_notes: 'Spectrum arm opt: options-only; status-quo delta soft CMDP'
+temporal_backend: mamba
+use_dhgnn: true
+use_projection: true
+capacity_base_aum_usd: 50000000.0
+publication_impact_sweep: true
+publication_planned_folds: 5
+arm:
+  id: opt
+  option_slots: 50
+  equity_slots: 0
+  delta_mode: soft

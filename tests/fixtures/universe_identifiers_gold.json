@@ -1,0 +1,5 @@
+{
+  "gold_n_secid": 511,
+  "required_cols": ["secid", "cusip", "ticker", "first_date", "last_date", "n_days"],
+  "forbidden_cols": ["ric", "permid"]
+}

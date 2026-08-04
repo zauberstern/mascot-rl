@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.extract-notes
+
+# Secrets and local env
+.env
+
+# Build and logs
+build/
+logs/
+*.egg-info/
+dist/
+
+# Data (keep pseudo fixtures)
+/data/*
+!/data/pseudo/**
+
+# IDE
+.idea/
+.vscode/

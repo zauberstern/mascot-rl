@@ -1,0 +1,89 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BatchOps",
+      "Effect": "Allow",
+      "Action": [
+        "batch:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "EcrOps",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload",
+        "ecr:CreateRepository",
+        "ecr:DescribeRepositories",
+        "ecr:DescribeImages"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "BurstS3",
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:HeadBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::volsurf-burst-*",
+        "arn:aws:s3:::volsurf-burst-*/*"
+      ]
+    },
+    {
+      "Sid": "BurstCfn",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CreateStack",
+        "cloudformation:UpdateStack",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ListStacks",
+        "cloudformation:DeleteStack"
+      ],
+      "Resource": "arn:aws:cloudformation:*:*:stack/volsurf-burst-*/*"
+    },
+    {
+      "Sid": "BudgetsRead",
+      "Effect": "Allow",
+      "Action": [
+        "budgets:ViewBudget",
+        "budgets:DescribeBudgets"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ServiceQuotas",
+      "Effect": "Allow",
+      "Action": [
+        "servicequotas:GetServiceQuota",
+        "servicequotas:ListServiceQuotas",
+        "servicequotas:RequestServiceQuotaIncrease"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "StsIdentity",
+      "Effect": "Allow",
+      "Action": "sts:GetCallerIdentity",
+      "Resource": "*"
+    },
+    {
+      "Sid": "PassBurstRoles",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::*:role/volsurf-burst-*"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+# Spectrum arm: equity-only (eq). Training uses stk_ret labels; no option slots.
+# Diagnostic / research path; capital claim uses research_positive_alpha gates.
+n_paths: 64
+n_assets: 50
+n_steps: 126
+n_strikes: 1
+n_maturities: 1
+d_model: 48
+d_state: 16
+macro_dim: 16
+seq_len: 32
+turnover_limit: 0.15
+lr: 0.0003
+entropy_coef: 0.02
+train_epochs: 3
+temporal_backend: mlp
+use_dhgnn: false
+spatial_mode: none
+use_projection: true
+plugins:
+  projection_backend: cvxpy
+  om_touch:
+    enabled: true
+    fee_bps: 0.0
+    spread_multiplier: 1.0
+    hedge_leg_spread_bps: 5.0
+claim_label_stem: stk_ret
+equity_bps: 5.0
+headline_fill: pct75
+reward_shaping_ablation: true
+cost_in_decision: true
+primary_train: historical_arm_env
+policy: single_agent
+projection_mode: hard
+run_label: arm-eq-spectrum
+run_notes: "Spectrum arm eq: equities-only; stk_ret estimand"
+arm:
+  id: eq
+  option_slots: 0
+  equity_slots: 50
+  delta_mode: soft
+  equity_label_stem: stk_ret
+  alpha_claim: true
+portfolio_arm: eq
+train_world: historical
+universe_arm: dyn_hrp
+use_surface_signals: true
+k: 100
+cpcv_n_splits: 8
+cpcv_n_test_groups: 3
+cpcv_purge_days: 21
+cpcv_embargo_days: 21

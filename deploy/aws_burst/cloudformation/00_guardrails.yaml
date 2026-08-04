@@ -1,0 +1,104 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: MascotRL AWS burst guardrails (eu-central-1). $180 budget + SNS + hard-deny Budget Action at 95%.
+Parameters:
+  NotificationEmail:
+    Type: String
+  BudgetAmount:
+    Type: Number
+    Default: 180
+Resources:
+  BudgetTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: volsurf-burst-budget
+      Subscription:
+        - Endpoint: !Ref NotificationEmail
+          Protocol: email
+  BurstSpendDenyPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: volsurf-burst-spend-deny
+      Description: Attached by Budgets Action at 95% actual spend to hard-stop Batch/EC2.
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyBatchAndEC2SpendAboveBudget
+            Effect: Deny
+            Action:
+              - batch:SubmitJob
+              - ec2:RunInstances
+              - ec2:StartInstances
+              - ecs:RunTask
+              - ecs:StartTask
+            Resource: "*"
+  BudgetsActionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: volsurf-burst-budgets-action-exec
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: budgets.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: budgets-apply-iam-policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - iam:AttachRolePolicy
+                  - iam:DetachRolePolicy
+                Resource: !Sub arn:aws:iam::${AWS::AccountId}:role/*
+              - Effect: Allow
+                Action:
+                  - iam:GetPolicy
+                  - iam:GetPolicyVersion
+                Resource: !Ref BurstSpendDenyPolicy
+  BurstBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: volsurf-burst-180
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit:
+          Amount: !Ref BudgetAmount
+          Unit: USD
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: SNS
+              Address: !Ref BudgetTopic
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 95
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: SNS
+              Address: !Ref BudgetTopic
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: SNS
+              Address: !Ref BudgetTopic
+  # BudgetsAction lives on the Batch stack so Early Validation sees BatchJobRole.
+Outputs:
+  TopicArn:
+    Value: !Ref BudgetTopic
+  BudgetName:
+    Value: volsurf-burst-180
+  SpendDenyPolicyArn:
+    Value: !Ref BurstSpendDenyPolicy
+  BudgetsActionExecutionRoleArn:
+    Value: !GetAtt BudgetsActionExecutionRole.Arn

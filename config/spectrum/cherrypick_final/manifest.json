@@ -1,0 +1,235 @@
+{
+  "wave": "PICK",
+  "n_cells": 54,
+  "scope": "eq_only",
+  "scope_reason": "Data gate t4: Arctic opt100/mix100 libraries empty (0 symbols); rematerialize deferred under host swap pressure. Evidence-triggered reduction per thesis-submission-sprint plan (only allowed cut).",
+  "sweeps": {
+    "A": [
+      "eq_K100_multi_happo_mlp_mean_std_cao",
+      "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+      "eq_K100_single_dqn_mlp_mtm_pnl",
+      "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+      "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+      "eq_K100_single_td3_mlp_softmax_mtm_pnl"
+    ],
+    "B": [
+      "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+      "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+      "eq_K100_single_ppo_transformer_softmax_mean_std_cao"
+    ],
+    "C": [
+      "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+      "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+      "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao"
+    ],
+    "D": [
+      "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+      "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+      "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+      "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+      "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+      "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+      "eq_K100_single_ppo_mlp_softmax_rsqp",
+      "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+      "eq_K100_single_ppo_mlp_softmax_smse"
+    ],
+    "E": [
+      "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+      "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+      "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+      "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+      "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+      "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+      "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+      "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl"
+    ],
+    "F": [
+      "eq_K100_multi_happo_mlp_cvar_ru",
+      "eq_K100_multi_happo_mlp_entropic_oce",
+      "eq_K100_multi_happo_mlp_meanvar_kolm"
+    ],
+    "G": [
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr"
+    ],
+    "H": [
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation"
+    ],
+    "I": [
+      "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible",
+      "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+      "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+      "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+      "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+      "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+      "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+      "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible"
+    ]
+  },
+  "cells": [
+    "eq_K100_multi_happo_mlp_cvar_ru",
+    "eq_K100_multi_happo_mlp_entropic_oce",
+    "eq_K100_multi_happo_mlp_mean_std_cao",
+    "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible",
+    "eq_K100_multi_happo_mlp_meanvar_kolm",
+    "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+    "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+    "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+    "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+    "eq_K100_single_dqn_mlp_mtm_pnl",
+    "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+    "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+    "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+    "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+    "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+    "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+    "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+    "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+    "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+    "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+    "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+    "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+    "eq_K100_single_ppo_mlp_softmax_rsqp",
+    "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+    "eq_K100_single_ppo_mlp_softmax_smse",
+    "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+    "eq_K100_single_ppo_transformer_softmax_mean_std_cao",
+    "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+    "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+    "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+    "eq_K100_single_td3_mlp_softmax_mtm_pnl",
+    "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl"
+  ],
+  "dropped_arms": [
+    "opt",
+    "mix"
+  ],
+  "dropped_cells_count": 182,
+  "pick2": {
+    "wave": "PICK2",
+    "n_cells": 6,
+    "scope": "eq_only",
+    "cells": [
+      "eq_K100_multi_happo_mlp_mean_std_cao",
+      "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+      "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible"
+    ]
+  },
+  "k200": {
+    "wave": "K200",
+    "n_cells": 36,
+    "scope": "eq_only",
+    "cells": [
+      "eq_K200_multi_happo_mlp_cvar_ru",
+      "eq_K200_multi_happo_mlp_entropic_oce",
+      "eq_K200_multi_happo_mlp_mean_std_cao",
+      "eq_K200_multi_happo_mlp_meanvar_kolm",
+      "eq_K200_single_cppo_mlp_softmax_mean_std_cao",
+      "eq_K200_single_ddpg_mlp_softmax_mtm_pnl",
+      "eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+      "eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+      "eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "eq_K200_single_dqn_mlp_mtm_pnl",
+      "eq_K200_single_mcpg_mlp_softmax_mtm_pnl",
+      "eq_K200_single_ppo_gru_softmax_mean_std_cao",
+      "eq_K200_single_ppo_lstm_softmax_mean_std_cao",
+      "eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+      "eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+      "eq_K200_single_ppo_mlp_softmax_cvar_ru",
+      "eq_K200_single_ppo_mlp_softmax_differential_sharpe",
+      "eq_K200_single_ppo_mlp_softmax_entropic_oce",
+      "eq_K200_single_ppo_mlp_softmax_mean_std_cao",
+      "eq_K200_single_ppo_mlp_softmax_meanvar_kolm",
+      "eq_K200_single_ppo_mlp_softmax_mikkila_asym",
+      "eq_K200_single_ppo_mlp_softmax_mtm_pnl",
+      "eq_K200_single_ppo_mlp_softmax_rsqp",
+      "eq_K200_single_ppo_mlp_softmax_sdr_composite",
+      "eq_K200_single_ppo_mlp_softmax_smse",
+      "eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+      "eq_K200_single_ppo_transformer_softmax_mean_std_cao",
+      "eq_K200_single_rrl_mlp_softmax_mtm_pnl",
+      "eq_K200_single_sac_mlp_softmax_mtm_pnl",
+      "eq_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+      "eq_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+      "eq_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+      "eq_K200_single_td3_mlp_softmax_mtm_pnl",
+      "eq_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+      "eq_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+      "eq_K200_single_td3_mlp_tanh_l1_mtm_pnl"
+    ]
+  },
+  "image_digest": "sha256:1408af76550e93b19ba606458ee8244283418aa8b82288cf81e2ff81636924e3",
+  "dropped_cells": [
+    {
+      "stem": "eq_K100_single_ppo_mamba_dirichlet_tilt_cvar_ru",
+      "reason": "Burst m7i-flex.large (8 GiB) SIGKILL on screening cell after force retry; local t5 smoke PASS but production image OOM. Drop+disclose per thesis-submission-sprint t5 escape.",
+      "when": "2026-08-25"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mamba_softmax_mean_std_cao",
+      "reason": "Burst m7i-flex.large (8 GiB) SIGKILL on screening cell after force retry; local t5 smoke PASS but production image OOM. Drop+disclose per thesis-submission-sprint t5 escape.",
+      "when": "2026-08-25"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mamba_softmax_mean_std_cao",
+      "reason": "Burst m7i-flex.large (8 GiB) SIGKILL on screening cell after force retry; local t5 smoke PASS but production image OOM. Drop+disclose per thesis-submission-sprint t5 escape.",
+      "when": "2026-08-25"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+      "reason": "Free-tier quarantine: hybrid_pretrain_finetune train-world yields non-finite policy_obs under lake 26-ch cube; fail-closed CPCV refuses all folds. Not a silent soft-fail. Defer root-cause + re-admit to paid high-mem debug (see logs/aws_burst/PAID_ACCOUNT_CANDIDATE_RUNS.md).",
+      "when": "2026-08-26"
+    },
+    {
+      "stem": "eq_K200_single_ppo_gru_softmax_mean_std_cao",
+      "reason": "Free-tier quarantine: K200 sequence model SIGKILL/OOM on ~8 GiB Spot. K100 GRU already validated on free tier. Re-run K200 seq on paid account with Memory>=12-16 GiB (CFN delta in THESIS_SUITE_COST_QUOTE.md).",
+      "when": "2026-08-26"
+    },
+    {
+      "stem": "eq_K200_single_ppo_lstm_softmax_mean_std_cao",
+      "reason": "Free-tier quarantine: K200 LSTM tried to allocate ~8.3 GiB and OOM'd. K100 LSTM validated on free tier. Paid re-run with higher job memory.",
+      "when": "2026-08-26"
+    },
+    {
+      "stem": "eq_K200_single_ppo_transformer_softmax_mean_std_cao",
+      "reason": "Free-tier quarantine: K200 transformer SIGKILL on ~8 GiB Spot. K100 transformer is the free-tier sequence canary. Paid re-run with higher job memory.",
+      "when": "2026-08-26"
+    }
+  ]
+}

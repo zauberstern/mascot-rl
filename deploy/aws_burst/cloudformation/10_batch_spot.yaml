@@ -1,0 +1,279 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: MascotRL burst network + Batch Spot (public subnets, S3 gateway, no NAT).
+Parameters:
+  MaxvCpus:
+    Type: Number
+    Default: 32
+  ImageUri:
+    Type: String
+    Default: public.ecr.aws/docker/library/python:3.12-slim-bookworm
+  InstanceTypes:
+    Type: CommaDelimitedList
+    Default: m7i-flex.large
+  JobMemoryMiB:
+    Type: Number
+    Default: 6912
+  HimemJobMemoryMiB:
+    Type: Number
+    Default: 16384
+Resources:
+  PanelsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub volsurf-burst-${AWS::AccountId}-panels
+  ArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub volsurf-burst-${AWS::AccountId}-artifacts
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.42.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags: [{Key: Name, Value: volsurf-burst-vpc}]
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  AttachIgw:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.42.0.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+  PublicSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.42.1.0/24
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachIgw
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref Igw
+  AssocA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetA
+      RouteTableId: !Ref PublicRouteTable
+  AssocB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetB
+      RouteTableId: !Ref PublicRouteTable
+  S3Endpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref Vpc
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
+      VpcEndpointType: Gateway
+      RouteTableIds: [!Ref PublicRouteTable]
+  BatchServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: batch.amazonaws.com}
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole
+  BatchJobRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: volsurf-burst-BatchJobRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: ecs-tasks.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: volsurf-burst-job-s3
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: [s3:GetObject, s3:ListBucket]
+                Resource:
+                  - !GetAtt PanelsBucket.Arn
+                  - !Sub ${PanelsBucket.Arn}/*
+              - Effect: Allow
+                Action: [s3:GetObject, s3:PutObject, s3:ListBucket]
+                Resource:
+                  - !GetAtt ArtifactsBucket.Arn
+                  - !Sub ${ArtifactsBucket.Arn}/*
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - logs:CreateLogGroup
+                Resource: !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/batch/volsurf-burst-cell*
+  JobAlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: volsurf-burst-job-failures
+  CellLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/batch/volsurf-burst-cell
+      RetentionInDays: 30
+  FailedJobsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: volsurf-burst-failed-jobs
+      AlarmDescription: Batch failed job count > 0
+      Namespace: AWS/Batch
+      MetricName: FailedJobs
+      Dimensions:
+        - Name: JobQueue
+          Value: volsurf-burst-queue
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref JobAlarmTopic
+  EcsInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: ec2.amazonaws.com}
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles: [!Ref EcsInstanceRole]
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: mascotrl burst egress
+      VpcId: !Ref Vpc
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+  SpotEnv:
+    Type: AWS::Batch::ComputeEnvironment
+    Properties:
+      Type: MANAGED
+      State: ENABLED
+      ServiceRole: !GetAtt BatchServiceRole.Arn
+      ComputeResources:
+        Type: SPOT
+        AllocationStrategy: SPOT_CAPACITY_OPTIMIZED
+        MinvCpus: 0
+        DesiredvCpus: 0
+        MaxvCpus: !Ref MaxvCpus
+        InstanceTypes: !Ref InstanceTypes
+        Subnets: [!Ref PublicSubnetA, !Ref PublicSubnetB]
+        SecurityGroupIds: [!Ref SecurityGroup]
+        InstanceRole: !GetAtt InstanceProfile.Arn
+  JobQueue:
+    Type: AWS::Batch::JobQueue
+    Properties:
+      JobQueueName: volsurf-burst-queue
+      State: ENABLED
+      Priority: 1
+      ComputeEnvironmentOrder:
+        - Order: 1
+          ComputeEnvironment: !Ref SpotEnv
+  CellJobDefinition:
+    Type: AWS::Batch::JobDefinition
+    Properties:
+      JobDefinitionName: volsurf-burst-cell
+      Type: container
+      PlatformCapabilities: [EC2]
+      RetryStrategy:
+        Attempts: 3
+        EvaluateOnExit:
+          - OnStatusReason: Host EC2*
+            Action: RETRY
+          - OnReason: "*"
+            Action: EXIT
+      Timeout:
+        AttemptDurationSeconds: 43200
+      ContainerProperties:
+        Image: !Ref ImageUri
+        Vcpus: 1
+        Memory: !Ref JobMemoryMiB
+        JobRoleArn: !GetAtt BatchJobRole.Arn
+        Command: [python, deploy/aws_burst/docker/cell_runner.py]
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group: !Ref CellLogGroup
+            awslogs-region: !Ref AWS::Region
+            awslogs-stream-prefix: cell
+  HimemCellJobDefinition:
+    Type: AWS::Batch::JobDefinition
+    Properties:
+      JobDefinitionName: volsurf-burst-cell-himem
+      Type: container
+      PlatformCapabilities: [EC2]
+      RetryStrategy:
+        Attempts: 3
+        EvaluateOnExit:
+          - OnStatusReason: Host EC2*
+            Action: RETRY
+          - OnReason: "*"
+            Action: EXIT
+      Timeout:
+        AttemptDurationSeconds: 43200
+      ContainerProperties:
+        Image: !Ref ImageUri
+        Vcpus: 1
+        Memory: !Ref HimemJobMemoryMiB
+        JobRoleArn: !GetAtt BatchJobRole.Arn
+        Command: [python, deploy/aws_burst/docker/cell_runner.py]
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group: !Ref CellLogGroup
+            awslogs-region: !Ref AWS::Region
+            awslogs-stream-prefix: cell-himem
+  # BudgetsAction is armed post-deploy via scripts/aws_arm_budget_action.py
+  # (CFN Early Validation requires the Batch job role to already exist).
+Outputs:
+  JobQueueArn:
+    Value: !Ref JobQueue
+  JobQueueName:
+    Value: volsurf-burst-queue
+  JobDefinitionArn:
+    Value: !Ref CellJobDefinition
+  ComputeEnvironmentArn:
+    Value: !Ref SpotEnv
+  PanelsBucketName:
+    Value: !Ref PanelsBucket
+  ArtifactsBucketName:
+    Value: !Ref ArtifactsBucket
+  VpcId:
+    Value: !Ref Vpc
+  CellLogGroupName:
+    Value: !Ref CellLogGroup
+  JobAlarmTopicArn:
+    Value: !Ref JobAlarmTopic
+  BatchJobRoleName:
+    Value: volsurf-burst-BatchJobRole
+  BatchJobRoleArn:
+    Value: !GetAtt BatchJobRole.Arn

@@ -1,0 +1,643 @@
+{
+  "wave": "VAL",
+  "n_cells": 90,
+  "scope": "eq_only_validation",
+  "purpose": "Widest free-tier correctness net before paid Tier A/B",
+  "cells": [
+    "eq_K100_multi_happo_mlp_cvar_ru",
+    "eq_K100_multi_happo_mlp_entropic_oce",
+    "eq_K100_multi_happo_mlp_mean_std_cao",
+    "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible",
+    "eq_K100_multi_happo_mlp_meanvar_kolm",
+    "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+    "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+    "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+    "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+    "eq_K100_single_dqn_mlp_mtm_pnl",
+    "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+    "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+    "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+    "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+    "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+    "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+    "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+    "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+    "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+    "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+    "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+    "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+    "eq_K100_single_ppo_mlp_softmax_rsqp",
+    "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+    "eq_K100_single_ppo_mlp_softmax_smse",
+    "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+    "eq_K100_single_ppo_transformer_softmax_mean_std_cao",
+    "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+    "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+    "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+    "eq_K100_single_td3_mlp_softmax_mtm_pnl",
+    "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible",
+    "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+    "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+    "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+    "eq_K200_multi_happo_mlp_cvar_ru",
+    "eq_K200_multi_happo_mlp_entropic_oce",
+    "eq_K200_multi_happo_mlp_mean_std_cao",
+    "eq_K200_multi_happo_mlp_meanvar_kolm",
+    "eq_K200_single_cppo_mlp_softmax_mean_std_cao",
+    "eq_K200_single_ddpg_mlp_softmax_mtm_pnl",
+    "eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+    "eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+    "eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+    "eq_K200_single_dqn_mlp_mtm_pnl",
+    "eq_K200_single_mcpg_mlp_softmax_mtm_pnl",
+    "eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+    "eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+    "eq_K200_single_ppo_mlp_softmax_cvar_ru",
+    "eq_K200_single_ppo_mlp_softmax_differential_sharpe",
+    "eq_K200_single_ppo_mlp_softmax_entropic_oce",
+    "eq_K200_single_ppo_mlp_softmax_mean_std_cao",
+    "eq_K200_single_ppo_mlp_softmax_meanvar_kolm",
+    "eq_K200_single_ppo_mlp_softmax_mikkila_asym",
+    "eq_K200_single_ppo_mlp_softmax_mtm_pnl",
+    "eq_K200_single_ppo_mlp_softmax_rsqp",
+    "eq_K200_single_ppo_mlp_softmax_sdr_composite",
+    "eq_K200_single_ppo_mlp_softmax_smse",
+    "eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+    "eq_K200_single_rrl_mlp_softmax_mtm_pnl",
+    "eq_K200_single_sac_mlp_softmax_mtm_pnl",
+    "eq_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+    "eq_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+    "eq_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+    "eq_K200_single_td3_mlp_softmax_mtm_pnl",
+    "eq_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+    "eq_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+    "eq_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+    "eq_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3",
+    "eq_K10_single_ppo_mamba_softmax_mean_std_cao",
+    "eq_K25_single_ppo_mamba_softmax_mean_std_cao"
+  ],
+  "entries": [
+    {
+      "stem": "eq_K100_multi_happo_mlp_cvar_ru",
+      "source": "config/spectrum/cherrypick/eq_K100_multi_happo_mlp_cvar_ru.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_multi_happo_mlp_entropic_oce",
+      "source": "config/spectrum/cherrypick/eq_K100_multi_happo_mlp_entropic_oce.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_multi_happo_mlp_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_multi_happo_mlp_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_multi_happo_mlp_mean_std_cao_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_multi_happo_mlp_meanvar_kolm",
+      "source": "config/spectrum/cherrypick/eq_K100_multi_happo_mlp_meanvar_kolm.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_cppo_mlp_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_cppo_mlp_softmax_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_cppo_mlp_softmax_mean_std_cao_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ddpg_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ddpg_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ddpg_mlp_softmax_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ddpg_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ddpg_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ddpg_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_dqn_mlp_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_dqn_mlp_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_dqn_mlp_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_mcpg_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_mcpg_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_mcpg_mlp_softmax_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_gru_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_gru_softmax_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_lstm_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_lstm_softmax_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_dirichlet_mean_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_dirichlet_tilt_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_cvar_ru",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_cvar_ru.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_differential_sharpe",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_differential_sharpe.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_entropic_oce",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_entropic_oce.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_carry.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_crisis.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_pm-archetype_inflation.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-garch.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-gbm.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-heston.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-rbergomi.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-sabr.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mean_std_cao_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_meanvar_kolm",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_meanvar_kolm.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mikkila_asym",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mikkila_asym.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_rsqp",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_rsqp.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_sdr_composite",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_sdr_composite.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_smse",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_softmax_smse.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_mlp_tanh_l1_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_transformer_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/eq_K100_single_ppo_transformer_softmax_mean_std_cao.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_rrl_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_rrl_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_rrl_mlp_softmax_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_sac_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_sac_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_sac_mlp_softmax_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_sac_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/eq_K100_single_sac_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_sac_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/eq_K100_single_sac_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_sac_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_sac_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_td3_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_td3_mlp_softmax_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible",
+      "source": "config/spectrum/cherrypick/eq_K100_single_td3_mlp_softmax_mtm_pnl_uni-crucible.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_td3_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/eq_K100_single_td3_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_td3_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/eq_K100_single_td3_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_td3_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/eq_K100_single_td3_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "pick_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_multi_happo_mlp_cvar_ru",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_multi_happo_mlp_cvar_ru.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_multi_happo_mlp_entropic_oce",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_multi_happo_mlp_entropic_oce.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_multi_happo_mlp_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_multi_happo_mlp_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_multi_happo_mlp_meanvar_kolm",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_multi_happo_mlp_meanvar_kolm.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_cppo_mlp_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_cppo_mlp_softmax_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ddpg_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ddpg_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ddpg_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ddpg_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ddpg_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_dqn_mlp_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_dqn_mlp_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_mcpg_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_mcpg_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_dirichlet_mean_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_dirichlet_tilt_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_cvar_ru",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_cvar_ru.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_differential_sharpe",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_differential_sharpe.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_entropic_oce",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_entropic_oce.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_meanvar_kolm",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_meanvar_kolm.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_mikkila_asym",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_mikkila_asym.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_rsqp",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_rsqp.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_sdr_composite",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_sdr_composite.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_softmax_smse",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_softmax_smse.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_ppo_mlp_tanh_l1_mean_std_cao.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_rrl_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_rrl_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_sac_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_sac_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_sac_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_sac_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_sac_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_sac_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_sac_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_sac_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_td3_mlp_softmax_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_td3_mlp_softmax_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_td3_mlp_tanh_l1_differential_sharpe",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_td3_mlp_tanh_l1_differential_sharpe.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_td3_mlp_tanh_l1_mikkila_asym",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_td3_mlp_tanh_l1_mikkila_asym.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K200_single_td3_mlp_tanh_l1_mtm_pnl",
+      "source": "config/spectrum/cherrypick/k200/eq_K200_single_td3_mlp_tanh_l1_mtm_pnl.yaml",
+      "role": "k200_served",
+      "acceptance": "validated_final"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune",
+      "source": "config/spectrum/cherrypick/_deferred_train_world/eq_K100_single_ppo_mlp_softmax_mean_std_cao_tw-hybrid_pretrain_finetune.yaml",
+      "role": "hybrid_negative_control",
+      "acceptance": "validated_final_or_single_attempt_fail_closed_error"
+    },
+    {
+      "stem": "eq_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3",
+      "source": "config/spectrum/cherrypick/narrative/eq_K100_single_ppo_mlp_softmax_mean_std_cao_rb-sb3.yaml",
+      "role": "sb3_backend_parity",
+      "acceptance": "validated_final",
+      "restamp": "screening tier from narrative"
+    },
+    {
+      "stem": "eq_K10_single_ppo_mamba_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/_dropped_mamba/eq_K100_single_ppo_mamba_softmax_mean_std_cao.yaml",
+      "role": "mamba_memory_probe",
+      "acceptance": "validated_final",
+      "note": "K=10 mamba probe; requires_himem; n_minibatches=32"
+    },
+    {
+      "stem": "eq_K25_single_ppo_mamba_softmax_mean_std_cao",
+      "source": "config/spectrum/cherrypick/_dropped_mamba/eq_K100_single_ppo_mamba_softmax_mean_std_cao.yaml",
+      "role": "mamba_memory_probe",
+      "acceptance": "validated_final",
+      "note": "K=25 mamba probe; requires_himem; n_minibatches=64"
+    }
+  ]
+}

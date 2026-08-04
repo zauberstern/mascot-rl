@@ -1,0 +1,7 @@
+{
+  "final_entropy": 4.5916924476623535,
+  "final_mean_reward": 0.0,
+  "max_weight": 0.20051901042461395,
+  "total_optimizer_steps": 128,
+  "weight_l1_vs_ew": 0.001625359058380127
+}

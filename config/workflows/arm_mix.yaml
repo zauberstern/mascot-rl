@@ -1,0 +1,51 @@
+# Spectrum arm: mix (options + equities). Diagnostic only — ArmSpec forces alpha_claim=false.
+n_paths: 64
+n_assets: 50
+n_steps: 126
+n_strikes: 5
+n_maturities: 2
+d_model: 48
+d_state: 16
+macro_dim: 16
+seq_len: 32
+turnover_limit: 0.15
+lr: 0.0003
+entropy_coef: 0.02
+train_epochs: 3
+temporal_backend: mlp
+use_dhgnn: false
+spatial_mode: none
+use_projection: true
+plugins:
+  # Mix requires overlay projection (option + equity books).
+  projection_backend: overlay_cvxpy
+  om_touch:
+    enabled: true
+    fee_bps: 0.0
+    spread_multiplier: 1.0
+    hedge_leg_spread_bps: 5.0
+claim_label_stem: dh_ret_lagdelta
+equity_label_stem: stk_ret
+headline_fill: pct75
+reward_shaping_ablation: true
+cost_in_decision: true
+primary_train: historical_arm_env
+policy: single_agent
+projection_mode: soft
+run_label: arm-mix-spectrum
+run_notes: "Spectrum arm mix: diagnostic-only (alpha_claim forced false)"
+arm:
+  id: mix
+  option_slots: 25
+  equity_slots: 25
+  delta_mode: soft
+  option_label_stem: dh_ret_lagdelta
+  equity_label_stem: stk_ret
+  alpha_claim: false
+portfolio_arm: mix
+diagnostic_only: true
+train_world: historical
+cpcv_n_splits: 8
+cpcv_n_test_groups: 3
+cpcv_purge_days: 21
+cpcv_embargo_days: 21

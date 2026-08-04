@@ -1,0 +1,53 @@
+{
+  "profiles": {
+    "volsurf-burst-1": {
+      "max_vcpus": 500,
+      "allowed_instance_types": [
+        "m7i",
+        "c7i",
+        "r7i"
+      ],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 28672,
+      "instance_mem_mib": 131072,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-2": {
+      "max_vcpus": 300,
+      "allowed_instance_types": [
+        "m7i",
+        "c7i",
+        "r7i"
+      ],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 28672,
+      "instance_mem_mib": 131072,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-3": {
+      "max_vcpus": 300,
+      "allowed_instance_types": [
+        "m7i",
+        "c7i",
+        "r7i"
+      ],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 28672,
+      "instance_mem_mib": 131072,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-4": {
+      "max_vcpus": 96,
+      "allowed_instance_types": [
+        "m7i",
+        "c7i",
+        "r7i"
+      ],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 28672,
+      "instance_mem_mib": 131072,
+      "credit_usd": 196.0
+    }
+  },
+  "_comment": "Live Spot quotas (2026-08-30): b1 L-34B43A08=500; b2/b3=300; b4=96. CE MaxvCpus matched to quota."
+}

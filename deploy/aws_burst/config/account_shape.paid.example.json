@@ -1,0 +1,37 @@
+{
+  "profiles": {
+    "volsurf-burst-1": {
+      "max_vcpus": 512,
+      "allowed_instance_types": ["m7i", "c7i", "r7i"],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 16384,
+      "instance_mem_mib": 16384,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-2": {
+      "max_vcpus": 512,
+      "allowed_instance_types": ["m7i", "c7i", "r7i"],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 16384,
+      "instance_mem_mib": 16384,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-3": {
+      "max_vcpus": 512,
+      "allowed_instance_types": ["m7i", "c7i", "r7i"],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 16384,
+      "instance_mem_mib": 16384,
+      "credit_usd": 196.0
+    },
+    "volsurf-burst-4": {
+      "max_vcpus": 512,
+      "allowed_instance_types": ["m7i", "c7i", "r7i"],
+      "job_memory_mib": 12288,
+      "himem_job_memory_mib": 16384,
+      "instance_mem_mib": 16384,
+      "credit_usd": 196.0
+    }
+  },
+  "_comment": "AWS_ADVICE staged strategy: 512 Spot vCPU x 4 paid accounts (2048 fleet). Activate only after each account's L-34B43A08 request APPROVED and CE redeployed."
+}
