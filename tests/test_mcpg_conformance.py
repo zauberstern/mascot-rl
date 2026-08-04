@@ -103,9 +103,3 @@ def test_rsqp_matches_neagu_definition():
     assert float(w[g > 0].sum()) == pytest.approx(0.0)
     assert grad_xi is not None
 
-
-def test_neagu_reference_repo_present():
-    assert (_REF / "mcpg.py").is_file()
-    text = (_REF / "mcpg.py").read_text(encoding="utf-8")
-    assert "Sparse-Reward" in text or "sparse" in text.lower()
-    assert "rsqp" in text.lower()

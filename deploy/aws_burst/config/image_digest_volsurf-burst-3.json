@@ -1,0 +1,5 @@
+{
+  "profile": "volsurf-burst-3",
+  "image": "000000000003.dkr.ecr.eu-central-1.amazonaws.com/volsurf-burst:latest",
+  "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000003"
+}

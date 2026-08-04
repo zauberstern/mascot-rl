@@ -1,0 +1,31 @@
+{
+  "wave": "RC6_NARRATIVE",
+  "region": "eu-central-1",
+  "n_cells": 1,
+  "cells": [
+    "config/spectrum/cherrypick/rc6_narrative/eq_K100_single_ppo_mlp_sparse_tilt_differential_sharpe.yaml"
+  ],
+  "shards": [
+    {
+      "profile": "volsurf-burst-1",
+      "shard": 0
+    },
+    {
+      "profile": "volsurf-burst-2",
+      "shard": 1
+    },
+    {
+      "profile": "volsurf-burst-3",
+      "shard": 2
+    },
+    {
+      "profile": "volsurf-burst-4",
+      "shard": 3
+    }
+  ],
+  "local_equivalent": ".venv/bin/python scripts/run_spectrum_campaign.py --config-dir config/spectrum/cherrypick/rc6_narrative --no-dry-run",
+  "expected_cells": [
+    "eq_K100_single_ppo_mlp_sparse_tilt_differential_sharpe"
+  ],
+  "n_expected": 1
+}

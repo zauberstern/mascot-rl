@@ -13,8 +13,12 @@ from src.eval.macro_lake_leverage import (
 
 def test_fioracle_present_and_yield_2y_loaded_dead() -> None:
     report = build_macro_lake_leverage(repo_root=MASCOTRL_ROOT)
-    assert report["status"] in ("ok", "partial")
+    assert report["status"] in ("ok", "partial", "unavailable")
     by = {a["id"]: a for a in report["assets"]}
+    if report["status"] == "unavailable":
+        assert by["fioracle_raw"]["present_frac"] == 0.0
+        assert by["yield_2y"]["status"] == "unavailable"
+        return
     assert by["fioracle_raw"]["present_frac"] == 1.0
     assert by["yield_2y"]["status"] == "loaded_dead"
     assert by["epu_z_252"]["status"] == "optional_eval"

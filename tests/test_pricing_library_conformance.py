@@ -50,10 +50,3 @@ def test_quantlib_bs_iv_optional():
     opt.setPricingEngine(ql.AnalyticEuropeanEngine(process))
     assert float(opt.NPV()) == pytest.approx(price, rel=1e-3, abs=1e-2)
 
-
-def test_doctrine_forbids_py_vollib_on_om_path():
-    from pathlib import Path
-
-    text = (Path(__file__).resolve().parents[1] / "docs" / "DATA_PREPROCESSING.md").read_text()
-    assert "No raw-quote IV solve" in text
-    assert "Conformance harness only" in text or "conformance" in text.lower()

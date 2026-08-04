@@ -146,5 +146,5 @@ def test_rc6_happo_wave_cell_count() -> None:
     for p in cells:
         cfg = Path(p).read_text(encoding="utf-8")
         assert "happo_dispatch_only" not in cfg
-        assert "protocol_tier: narrative" in cfg
+        assert "claim_tier: narrative" in cfg
         assert "himem_job_memory_mib: 57344" in cfg

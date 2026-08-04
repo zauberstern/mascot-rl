@@ -43,7 +43,17 @@ def test_build_plan_stems_filter_keeps_four_shards(monkeypatch: pytest.MonkeyPat
     assert sum(1 for s in plan["shard_plans"] if s) == 1
 
 
-def test_build_plan_stems_unknown_raises() -> None:
+def test_build_plan_stems_unknown_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        submit_mod,
+        "armed_profiles",
+        lambda _root: [
+            {"profile": "volsurf-burst-1", "shard": "0", "account_id": "1"},
+            {"profile": "volsurf-burst-2", "shard": "1", "account_id": "2"},
+            {"profile": "volsurf-burst-3", "shard": "2", "account_id": "3"},
+            {"profile": "volsurf-burst-4", "shard": "3", "account_id": "4"},
+        ],
+    )
     with pytest.raises(ValueError, match="stems_not_in_wave"):
         submit_mod.build_plan(
             ROOT,

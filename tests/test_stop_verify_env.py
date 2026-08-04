@@ -5,6 +5,8 @@ import importlib.util
 import os
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 HOOK = ROOT / ".cursor" / "hooks" / "resolve_pytest_cmd.py"
 
@@ -18,12 +20,12 @@ def _load_resolve():
 
 
 def test_resolve_pytest_cmd_prefers_venv_python():
+    if not HOOK.is_file():
+        pytest.skip(".cursor hook removed in public extract")
     mod = _load_resolve()
     venv_python = ROOT / ".venv" / "bin" / "python"
     if not (venv_python.is_file() and os.access(venv_python, os.X_OK)):
         # CI / fresh clones may not have a local venv; skip only then.
-        import pytest
-
         pytest.skip("project .venv not present")
     cmd = mod.resolve_pytest_cmd(str(ROOT), extra=["-q"])
     assert cmd[0] == str(venv_python)

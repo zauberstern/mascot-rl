@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import math
 from pathlib import Path
 from typing import Tuple
 
@@ -77,6 +78,67 @@ def opencl_available() -> bool:
         return False
 
 
+def _atm_sigma_from_surface(vol_grid: torch.Tensor) -> torch.Tensor:
+    """ATM local-vol scalar per option from a 2D or 3D surface grid."""
+    if vol_grid.dim() == 2:
+        s_mid = vol_grid.shape[0] // 2
+        m_mid = vol_grid.shape[1] // 2
+        return vol_grid[s_mid, m_mid].clamp_min(1e-6)
+    if vol_grid.dim() == 3:
+        s_mid = vol_grid.shape[1] // 2
+        m_mid = vol_grid.shape[2] // 2
+        return vol_grid[:, s_mid, m_mid].clamp_min(1e-6)
+    raise ValueError("vol_grid must be 2D [S,M] or 3D [K,S,M]")
+
+
+def _bs_greeks_torch(
+    spot: torch.Tensor,
+    strike: torch.Tensor,
+    time_to_mat: torch.Tensor,
+    rate: torch.Tensor,
+    sigma: torch.Tensor,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Pure-torch ATM European call greeks (public-extract fallback)."""
+    spot = spot.reshape(-1)
+    strike = strike.reshape(-1)
+    time_to_mat = time_to_mat.reshape(-1).clamp_min(1e-6)
+    rate = rate.reshape(-1)
+    sigma = sigma.reshape(-1).clamp_min(1e-6)
+    if sigma.numel() == 1 and spot.numel() > 1:
+        sigma = sigma.expand_as(spot)
+    sqrt_t = torch.sqrt(time_to_mat)
+    d1 = (torch.log(spot / strike.clamp_min(1e-6)) + (rate + 0.5 * sigma * sigma) * time_to_mat) / (
+        sigma * sqrt_t
+    )
+    d2 = d1 - sigma * sqrt_t
+    cdf = lambda x: 0.5 * (1.0 + torch.erf(x / math.sqrt(2.0)))
+    pdf = lambda x: torch.exp(-0.5 * x * x) / math.sqrt(2.0 * math.pi)
+    prices = spot * cdf(d1) - strike * torch.exp(-rate * time_to_mat) * cdf(d2)
+    deltas = cdf(d1)
+    vegas = spot * pdf(d1) * sqrt_t
+    return prices, deltas, vegas
+
+
+def _bs_greeks_torch_batch(
+    spot: torch.Tensor,
+    strike: torch.Tensor,
+    time_to_mat: torch.Tensor,
+    rate: torch.Tensor,
+    vol_grid: torch.Tensor,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    with torch.no_grad():
+        if vol_grid.dim() == 3:
+            n = spot.numel()
+            if vol_grid.shape[0] != n:
+                raise ValueError(f"vol_grid batch {vol_grid.shape[0]} != n_assets {n}")
+            sigma = _atm_sigma_from_surface(vol_grid)
+            return _bs_greeks_torch(spot, strike, time_to_mat, rate, sigma)
+        if vol_grid.dim() != 2:
+            raise ValueError("vol_grid must be 2D [S,M] or 3D [K,S,M]")
+        sigma = _atm_sigma_from_surface(vol_grid)
+        return _bs_greeks_torch(spot, strike, time_to_mat, rate, sigma)
+
+
 def get_portfolio_greeks(
     spot: torch.Tensor,
     strike: torch.Tensor,
@@ -99,11 +161,6 @@ def get_portfolio_greeks(
     if os.environ.get("MASCOTRL_FORCE_CPU_PRICING", "").strip() in ("1", "true", "True"):
         use_gpu = False
 
-    if polaris_pricer_cpp is None:
-        raise ImportError(
-            "polaris_pricer_cpp unavailable; build extensions first"
-        ) from _LOAD_ERROR
-
     def _f32(t: torch.Tensor) -> torch.Tensor:
         return t.detach().to(dtype=torch.float32).contiguous()
 
@@ -112,6 +169,10 @@ def get_portfolio_greeks(
     time_to_mat = _f32(time_to_mat).reshape(-1)
     rate = _f32(rate).reshape(-1)
     vol_grid = _f32(vol_grid)
+
+    if polaris_pricer_cpp is None:
+        return _bs_greeks_torch_batch(spot, strike, time_to_mat, rate, vol_grid)
+
     force_cpu = not use_gpu
 
     # Per-asset stacked surfaces: one OpenCL/AVX launch (preferred CMDP path).

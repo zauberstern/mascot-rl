@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "cap_usd": 180.0,
+  "chosen_vcpus": 1,
+  "usd_total": 4.335318,
+  "hours_per_cell": 1.91,
+  "candidates": [
+    {
+      "vcpus": 1,
+      "usd_total": 4.335318,
+      "hours_per_cell": 1.91
+    }
+  ],
+  "usd_per_vcpu_hour_used": 0.0234,
+  "n_cells": 1,
+  "note": "Sanitized public-extract snapshot; recompute at quote time in live burst"
+}

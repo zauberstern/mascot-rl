@@ -1,0 +1,21 @@
+[project]
+name = "mascotrl"
+version = "0.1.0"
+description = "RL portfolio allocation with CPCV and nested WFO evaluation"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+# Phase 3 baseline (2026-09-02): 2024 collected, 80% coverage, CI floors 1974 tests / 80% cov
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "--tb=short"]
+markers = [
+  "unit: pure numerical / invariant tests (ms)",
+  "integration: env contract + short train smoke (s)",
+  "regression: seeded golden / slow (min)",
+  "slow: alias for long-running; exclude locally with -m 'not slow'",
+  "plumbing: schema/YAML/AWS/stamp tests kept flat for now",
+]

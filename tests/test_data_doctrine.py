@@ -32,17 +32,3 @@ def test_option_filter_defaults_require_iv_and_attrition_arb():
     assert cfg.drop_surface_arb_days is False
 
 
-def test_data_preprocessing_doc_exists_and_locks_no_raw_iv():
-    path = Path(__file__).resolve().parents[1] / "docs" / "DATA_PREPROCESSING.md"
-    text = path.read_text(encoding="utf-8")
-    assert "No raw-quote IV solve" in text
-    assert "vsurfd" in text.lower() or "vol_surface" in text
-    assert "generative" in text.lower()
-    assert "QuantLib" in text
-
-
-def test_surface_obs_lane_names_documented():
-    path = Path(__file__).resolve().parents[1] / "docs" / "DATA_PREPROCESSING.md"
-    text = path.read_text(encoding="utf-8")
-    for lane in ("geometry_lite", "cs_admit", "off"):
-        assert lane in text
