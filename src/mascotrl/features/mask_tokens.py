@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from src.policy.rasp_locks import assert_mask_honesty
+from mascotrl.policy.rasp_locks import assert_mask_honesty
 
 
 class MaskTokenEncoder(nn.Module):

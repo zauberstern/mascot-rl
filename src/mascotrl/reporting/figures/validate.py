@@ -9,7 +9,7 @@ import re
 import warnings
 from typing import Any
 
-from src.reporting.figures.labels import AXIS_LABELS, is_snake_case
+from mascotrl.reporting.figures.labels import AXIS_LABELS, is_snake_case
 
 _DEFAULT_MPL_CYCLE_HEXES = frozenset(
     c.lower()

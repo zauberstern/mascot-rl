@@ -12,24 +12,24 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.governor import check_submit_allowed, projected_wave_cost
-from src.aws_burst.image_digest import load_digest_record, pinned_image_uri
-from src.aws_burst.job_routing import (
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.governor import check_submit_allowed, projected_wave_cost
+from mascotrl.aws_burst.image_digest import load_digest_record, pinned_image_uri
+from mascotrl.aws_burst.job_routing import (
     JOB_DEFINITION_HIMEM,
     JOB_DEFINITION_HIMEM56,
     JOB_DEFINITION_STANDARD,
     cell_requires_himem,
     partition_cells_for_submit,
 )
-from src.aws_burst.jobdef import (
+from mascotrl.aws_burst.jobdef import (
     DEFAULT_ECS_OVERHEAD_MIB,
     DEFAULT_INSTANCE_MEM_MIB,
     assert_job_memory_fits_instance,
     build_container_env,
 )
-from src.aws_burst.manifest import build_manifest, manifest_sha256
-from src.aws_burst.profiles import (
+from mascotrl.aws_burst.manifest import build_manifest, manifest_sha256
+from mascotrl.aws_burst.profiles import (
     MAX_VCPUS_PER_ACCOUNT,
     REGION,
     allowed_instance_types_for_profile,
@@ -42,7 +42,7 @@ from src.aws_burst.profiles import (
     panel_bucket,
     profile_shape,
 )
-from src.aws_burst.waves import WAVES, _local_equivalent_for, discover_wave_cells, shard_cells
+from mascotrl.aws_burst.waves import WAVES, _local_equivalent_for, discover_wave_cells, shard_cells
 
 COMPUTE_ENV_NAME = "volsurf-burst-spot"  # logical; match by JobQueue CE order
 JOB_DEFINITION_NAME = JOB_DEFINITION_STANDARD
@@ -231,8 +231,8 @@ def assert_wave_panel_families_present(
     ``required_panel_families()`` plus ``gics`` to appear in
     ``panel_manifest['families_present']``.
     """
-    from src.data.feature_panels import required_panel_families
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.data.feature_panels import required_panel_families
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     needs_cube = False
     base = Path(root) if root is not None else ROOT
@@ -375,7 +375,7 @@ def served_pick_stems_for_pick2_gate(root: Path) -> list[str]:
     and Batch discovery share one eq-only source of truth. Falls back to the
     raw PICK glob when the manifest is absent.
     """
-    from src.aws_burst.waves import _cherrypick_final_served_stems
+    from mascotrl.aws_burst.waves import _cherrypick_final_served_stems
 
     served = _cherrypick_final_served_stems(root, "PICK")
     if served is None:
@@ -451,7 +451,7 @@ def assert_deskorg_priors_complete(root: Path) -> None:
     Accepts either a sealed local ``index.json`` or an S3 watch snapshot.
     Incomplete stale indexes must not mask a complete watch (and vice versa).
     """
-    from src.aws_burst.waves import WAVES
+    from mascotrl.aws_burst.waves import WAVES
 
     required = ("PICK_SMOKE", "PICK", "PICK2", "K200", "FEATNET", "HYBRID")
     for wave_name in required:

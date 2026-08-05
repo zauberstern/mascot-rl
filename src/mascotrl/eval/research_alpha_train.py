@@ -10,28 +10,28 @@ import numpy as np
 import pandas as pd
 import torch
 
-from src.arms import arm_spec_from_cfg
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.differential_sharpe import DifferentialSharpe
-from src.eval.friction import assert_friction_parity
-from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
-from src.eval.yaml_honesty import track_copy
-from src.policy.objective_factory import (
+from mascotrl.arms import arm_spec_from_cfg
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.differential_sharpe import DifferentialSharpe
+from mascotrl.eval.friction import assert_friction_parity
+from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+from mascotrl.eval.yaml_honesty import track_copy
+from mascotrl.policy.objective_factory import (
     episode_weights,
     mikkila_asym_reward,
     objective_gradient_path_for,
     resolve_objective_mode,
     sdr_composite_reward,
 )
-from src.policy.single_agent import make_single_agent
-from src.spectrum.registry import validate_cfg
-from src.reporting.research_alpha_router import (
+from mascotrl.policy.single_agent import make_single_agent
+from mascotrl.spectrum.registry import validate_cfg
+from mascotrl.reporting.research_alpha_router import (
     RESEARCH_PRIMARY_ALLOWED,
     RESEARCH_PRIMARY_HIST,
     research_train_friction_pair,
     resolve_research_primary_train,
 )
-from src.reporting.training_telemetry import (
+from mascotrl.reporting.training_telemetry import (
     alias_grad_norm,
     mean_reward_decomp,
     reward_decomp_from_step_info,
@@ -90,7 +90,7 @@ def synthetic_train_panel(
     all-zero factor beyond the market column degrades gracefully to a
     market-only regression rather than crashing on shape mismatch.
     """
-    from src.simulator import get_world_bundle, make_identity_cholesky
+    from mascotrl.simulator import get_world_bundle, make_identity_cholesky
 
     w = str(world or cfg.get("train_world") or "rbergomi").lower()
     if w not in SYNTHETIC_TRAIN_WORLDS:
@@ -169,7 +169,7 @@ def _turnover_cap_project(
     turnover constraint under ``projection_mode: hard``.
     """
     del t
-    from src.policy.cmdp_projector import turnover_cap_project
+    from mascotrl.policy.cmdp_projector import turnover_cap_project
 
     return turnover_cap_project(w, w_prev=w_prev, tau=tau, counter=counter)
 
@@ -185,7 +185,7 @@ def build_research_hist_env(
     """Build HistoricalArmEnv with matched research FrictionSpec."""
     # C1: fail closed on any unregistered spectrum axis value (train_world,
     # architecture, objective, algo) before building the env/agent.
-    from src.spectrum.registry import validate_cfg as _validate_spectrum_cfg
+    from mascotrl.spectrum.registry import validate_cfg as _validate_spectrum_cfg
 
     _validate_spectrum_cfg(cfg)
     resolve_research_primary_train(cfg)
@@ -211,7 +211,7 @@ def build_research_hist_env(
     if mask is None and cfg_local.get("_rebalance_mask") is not None:
         mask = np.asarray(cfg_local["_rebalance_mask"], dtype=bool)
     if mask is None and dates is not None:
-        from src.eval.cadence import build_rebalance_mask
+        from mascotrl.eval.cadence import build_rebalance_mask
 
         mask = build_rebalance_mask(dates, cadence)
     if cadence not in ("", "daily") and mask is None and dates is None:
@@ -277,7 +277,7 @@ def build_research_hist_env(
     mode = str(cfg.get("projection_mode") or "soft")
     if mode not in PROJECTION_MODES:
         raise ValueError(f"unknown projection_mode={mode!r}; expected one of {PROJECTION_MODES}")
-    from src.spectrum.policy_mode import apply_turnover_multiplier, resolve_policy_mode
+    from mascotrl.spectrum.policy_mode import apply_turnover_multiplier, resolve_policy_mode
 
     policy_mode = resolve_policy_mode(cfg_local)
     if mode == "hard":
@@ -299,7 +299,7 @@ def build_research_hist_env(
         project_fn = _soft_project
     feature_builder = None
     if bool(cfg.get("use_equity_feature_cube", False)):
-        from src.features.blocks.obs_builder import PanelObservationBuilder
+        from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
 
         extras = dict(cfg.get("feature_extras") or {})
         # Fail closed on misaligned panel extras: a fold that trains without
@@ -361,7 +361,7 @@ def build_research_hist_env(
             )
         # Wave 3: if fioracle is enabled but campaign did not pre-attach macro,
         # load here so research train still sees the cube block.
-        from src.data.macro_loader import (
+        from mascotrl.data.macro_loader import (
             attach_fioracle_macro_cube,
             fioracle_cfg_from_feature_extras,
         )
@@ -428,7 +428,7 @@ def _resolve_reward_mode(cfg: Mapping[str, Any]) -> str:
     if bool(cfg.get("mtm_pnl_reward", False)):
         return "mtm_pnl"
     try:
-        from src.policy.objective_factory import resolve_objective_mode
+        from mascotrl.policy.objective_factory import resolve_objective_mode
 
         if resolve_objective_mode(dict(cfg), default="none") == "mtm_pnl":
             return "mtm_pnl"
@@ -692,7 +692,7 @@ def train_research_hist(
     # network weights (orthogonal_init draws from the global torch RNG).
     torch.manual_seed(int(seed))
     np.random.seed(int(seed) % (2**32 - 1))
-    from src.policy.sb3_adapter import resolve_rl_backend
+    from mascotrl.policy.sb3_adapter import resolve_rl_backend
 
     _rl_backend = resolve_rl_backend(cfg)
     agent_was_provided = agent is not None
@@ -892,7 +892,7 @@ def train_research_hist(
     # episode (see sample_weight below), the research-PPO analogue of
     # HAPPO's score-function episode weights.
     objective_mode = resolve_objective_mode(cfg, default="none")
-    from src.eval.yaml_honesty import refuse_rrl_double_dsr
+    from mascotrl.eval.yaml_honesty import refuse_rrl_double_dsr
 
     refuse_rrl_double_dsr({**dict(cfg), "algo": algo, "objective": objective_mode})
     # Episode-weight spectrum objectives are primary by default so the OFAT
@@ -901,7 +901,7 @@ def train_research_hist(
     if "objective_primary" in cfg:
         objective_primary = bool(cfg.get("objective_primary"))
     else:
-        from src.policy.objective_factory import _EPISODE_WEIGHT_MODES
+        from mascotrl.policy.objective_factory import _EPISODE_WEIGHT_MODES
 
         objective_primary = objective_mode in _EPISODE_WEIGHT_MODES
     obj_path = objective_gradient_path_for(objective_mode, objective_primary)
@@ -925,7 +925,7 @@ def train_research_hist(
     epochs = int(cfg.get("train_epochs", 1) or 1)
     # RC2: policy_mode risk-aversion must reach episode_weights (turnover
     # scaling alone left carry/crisis/inflation half-implemented).
-    from src.spectrum.policy_mode import (
+    from mascotrl.spectrum.policy_mode import (
         apply_risk_aversion,
         resolve_policy_mode,
         resolve_term_spread_z_for_train,
@@ -985,7 +985,7 @@ def train_research_hist(
                 # RC6: expose EW-on-mask baseline to sparse_tilt / dirichlet heads.
                 fb = getattr(env, "feature_builder", None)
                 if fb is not None:
-                    from src.features.blocks.obs_builder import equal_weight_on_mask
+                    from mascotrl.features.blocks.obs_builder import equal_weight_on_mask
 
                     mask = getattr(fb, "_slot_mask", None)
                     if mask is None:
@@ -1116,7 +1116,7 @@ def train_research_hist(
                     parts.extend([float(w)] * length)
                 batch["sample_weight"] = torch.as_tensor(parts, dtype=torch.float32)
             if is_ppo_style:
-                from src.eval.scr_critic import resolve_scr_mix
+                from mascotrl.eval.scr_critic import resolve_scr_mix
 
                 scr_mode, scr_beta = resolve_scr_mix(cfg)
                 batch["scr_mix"] = scr_mode
@@ -1143,7 +1143,7 @@ def train_research_hist(
             # RC6: reward-to-noise = max feasible EW tilt edge vs reward std.
             # Align the return panel to visited env timesteps (not full T).
             if rew_list:
-                from src.eval.reward_noise import reward_to_noise_diagnostic
+                from mascotrl.eval.reward_noise import reward_to_noise_diagnostic
 
                 tau = float(cfg.get("turnover_limit") or 0.05)
                 panel_rets = getattr(env, "returns", None)

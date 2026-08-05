@@ -17,8 +17,8 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.reporting.portfolio_accounting import PortfolioAccountingLedger
-from src.reporting.book_style import FAMILY_ORDER, strategy_family
+from mascotrl.reporting.portfolio_accounting import PortfolioAccountingLedger
+from mascotrl.reporting.book_style import FAMILY_ORDER, strategy_family
 
 
 def strategy_frame(

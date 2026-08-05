@@ -11,8 +11,8 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from src.aws_burst.profiles import BUDGET_USD
-from src.eval.equity_substrate import stamp_equity_obs_defaults
+from mascotrl.aws_burst.profiles import BUDGET_USD
+from mascotrl.eval.equity_substrate import stamp_equity_obs_defaults
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -116,9 +116,9 @@ def _behaviour_context_for_cell(
     runner_art: dict[str, Any] | None,
 ) -> dict[str, Any]:
     """Resolve sleeves, macro, and returns for rich policy_behavior export."""
-    from src.data.paths import LAKE_ROOT
-    from src.reporting.behavior_metrics import spectrum_foil_sleeve_matrix
-    from src.reporting.policy_behavior import (
+    from mascotrl.data.paths import LAKE_ROOT
+    from mascotrl.reporting.behavior_metrics import spectrum_foil_sleeve_matrix
+    from mascotrl.reporting.policy_behavior import (
         extract_crucible_behaviour_inputs,
         load_behaviour_macro_context,
     )
@@ -148,7 +148,7 @@ def _behaviour_context_for_cell(
         cfg.get("portfolio_arm") or cfg.get("arm") or art.get("arm") or ""
     ).lower() in ("eq", ""):
         try:
-            from src.eval.equity_substrate import load_lake_dyn_hrp_panel
+            from mascotrl.eval.equity_substrate import load_lake_dyn_hrp_panel
 
             k = int(cfg.get("n_assets") or art.get("n_assets") or 100)
             _dates, lake_rets, _fac, _meta = load_lake_dyn_hrp_panel(dict(cfg), k=k)
@@ -210,16 +210,16 @@ def refresh_behavior_exports(
     (no catch-all residual bucket). Solo-cell remote exports always yield
     all-zero archetype scores.
     """
-    from src.eval.rbsa import rbsa_from_artifact
-    from src.eval.semantic_tilt import nan_semantic_tilt
-    from src.reporting.archetypal_scoring import (
+    from mascotrl.eval.rbsa import rbsa_from_artifact
+    from mascotrl.eval.semantic_tilt import nan_semantic_tilt
+    from mascotrl.reporting.archetypal_scoring import (
         bootstrap_ari,
         choose_k,
         composition_for_rows,
         rows_to_zmatrix,
         select_k_from_table,
     )
-    from src.reporting.behavior_metrics import (
+    from mascotrl.reporting.behavior_metrics import (
         BEHAVIOUR_MEASURE_IDS,
         COMPOSITION_MEASURE_IDS,
         compute_behaviour_vector,
@@ -227,18 +227,18 @@ def refresh_behavior_exports(
         regime_conditional_behaviour,
         turbulence_regimes_from_returns,
     )
-    from src.reporting.holdings_exposure import (
+    from mascotrl.reporting.holdings_exposure import (
         holdings_exposures,
         load_characteristic_panel,
         nan_exposures,
     )
-    from src.reporting.personality_probe import discriminability_probe
-    from src.reporting.policy_behavior import (
+    from mascotrl.reporting.personality_probe import discriminability_probe
+    from mascotrl.reporting.policy_behavior import (
         _enrich_scoring_row,
         build_policy_behavior,
         write_policy_behavior,
     )
-    from src.reporting.style_agreement import style_agreement as fit_style_agreement
+    from mascotrl.reporting.style_agreement import style_agreement as fit_style_agreement
 
     config_dir = config_dir or (ROOT / "config" / "spectrum" / "cherrypick")
     summary: dict[str, Any] = {
@@ -328,7 +328,7 @@ def refresh_behavior_exports(
             exposures: dict[str, Any]
             if secids and eval_dates and item["weights"].ndim == 2 and item["weights"].shape[1] == len(secids):
                 try:
-                    from src.data.paths import LAKE_ROOT
+                    from mascotrl.data.paths import LAKE_ROOT
 
                     panels = load_characteristic_panel(eval_dates, secids, lake_root=LAKE_ROOT)
                     exposures = holdings_exposures(item["weights"], panels)
@@ -358,8 +358,8 @@ def refresh_behavior_exports(
                 and item["weights"].shape[1] == len(secids)
             ):
                 try:
-                    from src.data.paths import LAKE_ROOT
-                    from src.eval.semantic_tilt import (
+                    from mascotrl.data.paths import LAKE_ROOT
+                    from mascotrl.eval.semantic_tilt import (
                         align_embeddings_to_secids,
                         embed_descriptions,
                         load_firm_text_map,
@@ -553,11 +553,11 @@ def refresh_behavior_exports(
     return summary
 
 
-from src.eval.collapse_guard import collapse_guard
-from src.eval.transfer_report import build_transfer_report
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.yaml_loader import load_cell_yaml
-from src.spectrum.registry import METRIC_ORIENTATION, metric_orientation, validate_cfg
+from mascotrl.eval.collapse_guard import collapse_guard
+from mascotrl.eval.transfer_report import build_transfer_report
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.spectrum.registry import METRIC_ORIENTATION, metric_orientation, validate_cfg
 
 
 def _aggregate_spectrum_seed_arts(seed_arts: list[dict[str, Any]]) -> dict[str, Any]:
@@ -921,8 +921,8 @@ def _run_research_arm(
     cell_out_dir: Path | str | None = None,
 ) -> tuple[dict[str, Any] | None, str | None]:
     try:
-        from src.eval.cpcv import CPCVConfig
-        from src.eval.research_alpha_cpcv import (
+        from mascotrl.eval.cpcv import CPCVConfig
+        from mascotrl.eval.research_alpha_cpcv import (
             dry_run_research_alpha_cpcv,
             run_research_alpha_cpcv,
         )
@@ -954,7 +954,7 @@ def _run_research_arm(
         if budget["dispatch_only"]:
             art, err = _run_happo_arm(cfg_local, arm)
         else:
-            from src.eval.research_happo_cpcv import run_happo_cpcv
+            from mascotrl.eval.research_happo_cpcv import run_happo_cpcv
 
             art, err = run_happo_cpcv(
                 cfg_local,
@@ -981,7 +981,7 @@ def _run_research_arm(
 
     cfg_local.setdefault("headline_fill", "pct75")
     k = int(cfg_local.get("n_assets", 8) or 8)
-    from src.eval.equity_substrate import (
+    from mascotrl.eval.equity_substrate import (
         attach_equity_obs_substrate,
         load_lake_dyn_hrp_panel,
         resolve_substrate_secids,
@@ -1079,7 +1079,7 @@ def _run_research_arm(
             cfg_local["_feature_net_errors"].append(str(exc)[:300])
 
     if bool(cfg_local.get("use_feature_net_extras", False)):
-        from src.eval.equity_substrate import (
+        from mascotrl.eval.equity_substrate import (
             apply_feature_net_extras_if_enabled,
             stamp_lake_universe_secids_for_featnet,
         )
@@ -1200,11 +1200,11 @@ def _run_happo_arm(cfg: dict, arm: str) -> tuple[dict[str, Any] | None, str | No
     try:
         import torch
 
-        from src.env.cmdp_env import CMDPEnv
-        from src.plugins.registry import build_feature_extractor, build_happo_engine
-        from src.plugins.resolve import resolve_plugins
-        from src.policy.trainer import HAPPOTrainer, TrainBatch
-        from src.simulator import get_surface_tensor
+        from mascotrl.env.cmdp_env import CMDPEnv
+        from mascotrl.plugins.registry import build_feature_extractor, build_happo_engine
+        from mascotrl.plugins.resolve import resolve_plugins
+        from mascotrl.policy.trainer import HAPPOTrainer, TrainBatch
+        from mascotrl.simulator import get_surface_tensor
     except Exception as exc:  # noqa: BLE001
         return None, f"happo_import_failed: {exc}"
 
@@ -1237,7 +1237,7 @@ def _run_happo_arm(cfg: dict, arm: str) -> tuple[dict[str, Any] | None, str | No
         }
         panel_source = train_world
         if use_panel_bridge:
-            from src.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors
+            from mascotrl.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors
 
             n_days = int(cfg_local.get("n_steps", 24) or 24) + 1
             panel = None
@@ -1248,7 +1248,7 @@ def _run_happo_arm(cfg: dict, arm: str) -> tuple[dict[str, Any] | None, str | No
                 and not bool(cfg_local.get("force_om_panel", False))
             ):
                 try:
-                    from src.eval.equity_substrate import (
+                    from mascotrl.eval.equity_substrate import (
                         load_lake_dyn_hrp_panel,
                         stamp_equity_obs_defaults,
                     )
@@ -1301,8 +1301,8 @@ def _run_happo_arm(cfg: dict, arm: str) -> tuple[dict[str, Any] | None, str | No
                 return None, "cost_in_decision_requires_nonzero_friction"
         macro_series = None
         try:
-            from src.data.paths import CANONICAL_LAKE
-            from src.spectrum.happo_macro_inject import maybe_load_happo_macro
+            from mascotrl.data.paths import CANONICAL_LAKE
+            from mascotrl.spectrum.happo_macro_inject import maybe_load_happo_macro
 
             usb_root = cfg_local.get("usb_lake_root") or CANONICAL_LAKE
             t_surf = int(surfaces.shape[0]) if hasattr(surfaces, "shape") else None
@@ -1413,7 +1413,7 @@ def _gates_from_runner(
     dry_run: bool,
 ) -> dict[str, Any]:
     """D.6: compute gate1/2/3 when real runner results exist."""
-    from src.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
+    from mascotrl.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
 
     if dry_run or runner_art is None:
         return {
@@ -1656,7 +1656,7 @@ def run_cell(
     )
     if os.environ.get("MASCOTRL_COMPUTE_HOST") == "remote":
         try:
-            from src.reporting.provenance_stamp import build_provenance_stamp
+            from mascotrl.reporting.provenance_stamp import build_provenance_stamp
 
             stamp = build_provenance_stamp(
                 container_digest=os.environ.get("MASCOTRL_CONTAINER_DIGEST"),
@@ -1916,15 +1916,15 @@ def main() -> None:
         )
         if should_export and art.get("behaviour_export") != "unavailable":
             try:
-                from src.reporting.decision_trace import (
+                from mascotrl.reporting.decision_trace import (
                     build_decision_trace_rows,
                     write_decision_trace,
                 )
-                from src.reporting.policy_behavior import (
+                from mascotrl.reporting.policy_behavior import (
                     build_policy_behavior,
                     write_policy_behavior,
                 )
-                from src.reporting.training_telemetry import (
+                from mascotrl.reporting.training_telemetry import (
                     training_rows_from_diagnostics,
                     write_training_jsonl,
                 )
@@ -1995,7 +1995,7 @@ def main() -> None:
                     if str(cfg_pre.get("algo") or "").lower() == "happo" or str(
                         cfg_pre.get("agent") or ""
                     ).lower() == "multi":
-                        from src.reporting.deskorg import (
+                        from mascotrl.reporting.deskorg import (
                             build_deskorg_artifact,
                             projection_slacks_from_path0,
                             write_deskorg,
@@ -2049,7 +2049,7 @@ def main() -> None:
             )
         # Trial ledger append (B-DSR family size).
         try:
-            from src.eval.pbo_appendix import append_trial_ledger_entry
+            from mascotrl.eval.pbo_appendix import append_trial_ledger_entry
 
             append_trial_ledger_entry(
                 ROOT / "logs" / "trial_ledger.json",

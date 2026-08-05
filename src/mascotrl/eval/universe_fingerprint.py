@@ -1,9 +1,9 @@
 """Universe fingerprint helpers (panel bundle sha256 continuity)."""
 from __future__ import annotations
 
-from pathlib import Path
+from mascotrl._root import REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = REPO_ROOT
 
 EQ_BURST_WAVES = frozenset({"PICK", "PICK2", "K200", "PICK_SMOKE", "PICK_CANARY", "VAL"})
 

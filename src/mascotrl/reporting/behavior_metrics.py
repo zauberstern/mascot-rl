@@ -10,7 +10,7 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 
 try:
-    from src.data.crucible import SLEEVE_IDS as _CRUCIBLE_SLEEVES
+    from mascotrl.data.crucible import SLEEVE_IDS as _CRUCIBLE_SLEEVES
 except Exception:  # pragma: no cover - import guard for isolated unit tests
     _CRUCIBLE_SLEEVES = (
         "trend",
@@ -959,7 +959,7 @@ def turbulence_regimes_from_returns(
     """
     if asset_returns is None:
         return np.asarray(list(existing), dtype=object) if existing is not None else None
-    from src.eval.turbulence import classify_regime, turbulence_index
+    from mascotrl.eval.turbulence import classify_regime, turbulence_index
 
     r = np.asarray(asset_returns, dtype=np.float64)
     if r.ndim != 2 or r.shape[0] < r.shape[1] + 2:
@@ -984,7 +984,7 @@ def turbulence_regimes_from_returns(
             )
     elif overlay_mode == "markov":
         try:
-            from src.eval.walk_forward_hmm import walk_forward_markov_filter
+            from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
             turb = turbulence_index(r, macro_cols=macro_cols)
             filt = walk_forward_markov_filter(

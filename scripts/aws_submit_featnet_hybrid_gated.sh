@@ -12,7 +12,7 @@ fi
 python3 - <<'PY' "$WAVE"
 import json, sys
 from pathlib import Path
-from src.aws_burst.waves import WAVES
+from mascotrl.aws_burst.waves import WAVES
 
 wave = sys.argv[1]
 root = Path(".").resolve()

@@ -32,7 +32,7 @@ from typing import Any, Callable, Sequence
 import numpy as np
 import pandas as pd
 
-from src.eval.campaign_manifest import (
+from mascotrl.eval.campaign_manifest import (
     ManifestFlushWriter,
     get_completed_extra,
     get_completed_pnl,
@@ -43,8 +43,8 @@ from src.eval.campaign_manifest import (
 # fold_runner may stash OOS aux (weights/cost/...) under this key; it is stripped
 # before Sharpe path reconstruction and cached on the resume manifest.
 _CPCV_FOLD_AUX_KEY = "__aux__"
-from src.eval.stats_rigor import annualized_sharpe
-from src.logging_utils import get_logger
+from mascotrl.eval.stats_rigor import annualized_sharpe
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.cpcv")
 

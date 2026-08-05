@@ -7,7 +7,7 @@ from typing import Any
 
 import pyarrow.parquet as pq
 
-from src.data.paths import LAKE_ROOT, assert_lake_mounted
+from mascotrl.data.paths import LAKE_ROOT, assert_lake_mounted
 
 # Flat parquet tables under lake/ that the audit walks.
 FLAT_TABLES: tuple[str, ...] = (

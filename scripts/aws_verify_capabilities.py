@@ -12,8 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.profiles import (
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.profiles import (
     BURST_PROFILES,
     MAX_VCPUS_PER_ACCOUNT,
     REGION,

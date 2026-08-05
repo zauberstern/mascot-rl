@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.reporting.behavior_metrics import BEHAVIOUR_MEASURE_IDS
-from src.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
+from mascotrl.reporting.behavior_metrics import BEHAVIOUR_MEASURE_IDS
+from mascotrl.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
 
 # Frozen archetype -> animal mascot (public codename layer).
 ARCHETYPE_TO_ANIMAL: dict[str, str] = {

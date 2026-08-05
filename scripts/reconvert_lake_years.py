@@ -13,9 +13,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.lake_builder import ParquetDataLakeBuilder  # noqa: E402
-from src.data.paths import LAKE_ROOT, MASCOTRL_ROOT  # noqa: E402
-from src.logging_utils import setup_logging  # noqa: E402
+from mascotrl.data.lake_builder import ParquetDataLakeBuilder  # noqa: E402
+from mascotrl.data.paths import LAKE_ROOT, MASCOTRL_ROOT  # noqa: E402
+from mascotrl.logging_utils import setup_logging  # noqa: E402
 
 MISMATCH_DEFAULT = {
     "options_panel": [

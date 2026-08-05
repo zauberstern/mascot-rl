@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.expert_losses import expanding_unit_interval, log_wealth_loss
+from mascotrl.eval.expert_losses import expanding_unit_interval, log_wealth_loss
 
 
 def expand_sleeping_returns(

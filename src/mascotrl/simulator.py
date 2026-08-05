@@ -7,7 +7,7 @@ import numpy as np
 import pyarrow as pa
 import torch
 
-from src.logging_utils import get_logger, log_span, log_tensor
+from mascotrl.logging_utils import get_logger, log_span, log_tensor
 
 log = get_logger("mascotrl.l1")
 
@@ -109,7 +109,7 @@ def _fill_world_config(eng: Any, config: dict) -> Any:
             )
         wcfg.heston_scheme = int(_scheme_map[_s])
     # Feller is diagnostic only — never force-fit parameters for RL worlds.
-    from src.sim.heston_qe import feller_gap
+    from mascotrl.sim.heston_qe import feller_gap
 
     _fg = feller_gap(
         kappa=wcfg.heston_kappa, theta=wcfg.heston_theta, xi=wcfg.heston_xi

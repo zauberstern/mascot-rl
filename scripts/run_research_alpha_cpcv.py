@@ -15,12 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.eval.cpcv import CPCVConfig
-from src.eval.research_alpha_cpcv import (
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.research_alpha_cpcv import (
     dry_run_research_alpha_cpcv,
     run_research_alpha_cpcv,
 )
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 _OM_DEFERRED_ALLOWED_CLAIM_TIERS = frozenset(
     {
@@ -61,9 +61,9 @@ def _toy_campaign_panel(n_days: int = 126, k: int = 8, seed: int = 0):
 def _try_load_om_panel(cfg: dict, k: int):
     """Best-effort Arctic load; returns None if unavailable."""
     try:
-        from src.data.arctic_store import ArcticStateStore
-        from src.data.oos_panel import extract_om_marks, label_matrix, load_oos_panel
-        from src.arms.training import resolve_claim_label_stem, resolve_portfolio_arm
+        from mascotrl.data.arctic_store import ArcticStateStore
+        from mascotrl.data.oos_panel import extract_om_marks, label_matrix, load_oos_panel
+        from mascotrl.arms.training import resolve_claim_label_stem, resolve_portfolio_arm
     except Exception:
         return None
     try:
@@ -101,7 +101,7 @@ def _try_load_om_panel(cfg: dict, k: int):
                 f"{arm.option_label_stem}|{arm.equity_label_stem}"
             )
             try:
-                from src.data.slot_mask import coverage_masks_for_arm
+                from mascotrl.data.slot_mask import coverage_masks_for_arm
 
                 cfg["_slot_valid_mask"] = coverage_masks_for_arm(
                     arm=arm,
@@ -135,7 +135,7 @@ def _try_load_om_panel(cfg: dict, k: int):
         factors = np.zeros((len(dates), 4), dtype=np.float64)
         factors_source = "zeros"
         try:
-            from src.eval.equity_factors import _try_load_ff_panel
+            from mascotrl.eval.equity_factors import _try_load_ff_panel
 
             ff = _try_load_ff_panel(lake_base)
             if ff is not None:

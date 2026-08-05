@@ -10,8 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.oos_panel import materialize_oos_panel
-from src.logging_utils import setup_logging
+from mascotrl.data.oos_panel import materialize_oos_panel
+from mascotrl.logging_utils import setup_logging
 
 
 def main() -> None:

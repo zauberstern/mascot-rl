@@ -9,8 +9,8 @@ import duckdb
 import pandas as pd
 import pyarrow as pa
 
-from src.data.paths import LAKE_ROOT
-from src.logging_utils import get_logger
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.data.duckdb")
 
@@ -957,7 +957,7 @@ class DuckDBFeatureEngine:
         Scoped to ``secids`` only (not the full SPX lake). Returns counts and a
         set of ``(secid, date_str)`` keys to anti-join from daily marks.
         """
-        from src.data.arbitrage_screens import (
+        from mascotrl.data.arbitrage_screens import (
             butterfly_violations,
             calendar_violations,
             merge_violation_keys,
@@ -1034,7 +1034,7 @@ class DuckDBFeatureEngine:
         rates_reader = f"read_parquet('{rates_src}', union_by_name=true)"
         if not rates.exists():
             try:
-                from src.data.paths import TIER_B
+                from mascotrl.data.paths import TIER_B
 
                 csv_path = TIER_B.get("interest_rate")
                 if csv_path is not None and Path(csv_path).exists():

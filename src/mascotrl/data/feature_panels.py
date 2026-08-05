@@ -13,9 +13,9 @@ from typing import Any, Callable, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.arctic_store import ArcticStateStore
-from src.data.paths import ARCTIC_ROOT, LAKE_ROOT, assert_lake_mounted
-from src.data.surface_signals import _canonical_secid_key
+from mascotrl.data.arctic_store import ArcticStateStore
+from mascotrl.data.paths import ARCTIC_ROOT, LAKE_ROOT, assert_lake_mounted
+from mascotrl.data.surface_signals import _canonical_secid_key
 
 log = logging.getLogger(__name__)
 

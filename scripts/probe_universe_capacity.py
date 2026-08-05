@@ -15,14 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.spectrum.capacity_probe import probe_universe_capacity
+from mascotrl.spectrum.capacity_probe import probe_universe_capacity
 
 
 def probe_from_lake(*, requested: tuple[int, ...]) -> dict:
     """Prefer live lake breadth; fall back to measured 480 secid anchor."""
     pool = 480
     try:
-        from src.data.paths import LAKE_ROOT
+        from mascotrl.data.paths import LAKE_ROOT
         import duckdb
 
         db = duckdb.connect()

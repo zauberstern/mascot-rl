@@ -124,7 +124,7 @@ def check_g0_sentinel(ledger_path: Path | None = None) -> None:
 
 
 def check_lake_mounted() -> Path:
-    from src.data.paths import LAKE_ROOT, assert_lake_mounted
+    from mascotrl.data.paths import LAKE_ROOT, assert_lake_mounted
 
     assert_lake_mounted()
     return Path(LAKE_ROOT)
@@ -134,7 +134,7 @@ def arctic_opt_mix_symbol_counts() -> dict[str, int]:
     """Return symbol counts for deferred opt/mix Arctic libraries (0 on failure)."""
     counts: dict[str, int] = {"opt100": 0, "mix100": 0}
     try:
-        from src.data.arctic_store import ArcticStateStore
+        from mascotrl.data.arctic_store import ArcticStateStore
 
         opt_store = ArcticStateStore(library_name=ARCTIC_OPT_LIBRARY)
         counts["opt100"] = len(opt_store.list_available_features())
@@ -184,7 +184,7 @@ def collect_env_snapshot(
     *,
     meminfo_path: Path | None = None,
 ) -> dict[str, Any]:
-    from src.data.paths import CANONICAL_LAKE, LAKE_ROOT
+    from mascotrl.data.paths import CANONICAL_LAKE, LAKE_ROOT
 
     lake_root = Path(LAKE_ROOT)
     snapshot: dict[str, Any] = {
@@ -204,7 +204,7 @@ def collect_env_snapshot(
 
 
 def estimate_cell(cell: ExcludedCell, *, root: Path = ROOT) -> dict[str, Any]:
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     cfg_path = root / cell.config_relpath
     cfg = load_cell_yaml(cfg_path)

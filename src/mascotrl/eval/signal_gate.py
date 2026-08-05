@@ -124,7 +124,7 @@ def fama_macbeth_detailed(
     else:
         se = float(np.std(arr, ddof=1)) / float(np.sqrt(n))
         t_stat = float(mean_coef / se) if se > _EPS else float("nan")
-    from src.eval.stats_inference import hac_mean_tstat
+    from mascotrl.eval.stats_inference import hac_mean_tstat
 
     hac = hac_mean_tstat(arr)
     t_nw = float(hac.get("t_hac", float("nan")))
@@ -254,7 +254,7 @@ def ff_alpha(
     beta, *_ = np.linalg.lstsq(design, yy, rcond=None)
     resid = yy - design @ beta
     xtx_inv = np.linalg.pinv(design.T @ design)
-    from src.eval.stats_inference import newey_west_lag
+    from mascotrl.eval.stats_inference import newey_west_lag
 
     l_bw = int(newey_west_lag(n) if lags is None else max(0, int(lags)))
     scores = design * resid[:, None]
@@ -436,7 +436,7 @@ def run_signal_gate_v2(
             f"found {bad[0]} (+{len(bad) - 1} more)"
         )
 
-    from src.eval.factor_alpha import bh_fdr
+    from mascotrl.eval.factor_alpha import bh_fdr
 
     stats: dict[str, dict[str, Any]] = {}
     scored_names: list[str] = []
@@ -615,7 +615,7 @@ def assert_geometry_pack_valid(path: str | Path) -> dict[str, Any]:
     lane ``off`` / ``--no-surface-signals`` instead. Packs with
     ``resolve_from: signal_allowlist`` are valid without inline channels.
     """
-    from src.data.surface_signals import SURFACE_SIGNAL_NAMES
+    from mascotrl.data.surface_signals import SURFACE_SIGNAL_NAMES
 
     data = load_obs_pack(path)
     pack_id = str(data.get("pack_id") or "")

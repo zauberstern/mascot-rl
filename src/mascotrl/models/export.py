@@ -8,7 +8,7 @@ from typing import Any
 import numpy as np
 import torch
 
-from src.models.registry import ModelCard, load_card, verify_bundle, zoo_root
+from mascotrl.models.registry import ModelCard, load_card, verify_bundle, zoo_root
 
 
 def _policy_forward_module(agent: Any) -> torch.nn.Module:
@@ -45,7 +45,7 @@ def export_onnx(
     rtol: float = 1e-5,
 ) -> Path:
     """Export ``policy.onnx`` into the model bundle; verify vs eager torch."""
-    from src.models.inference import load_policy
+    from mascotrl.models.inference import load_policy
 
     card = verify_bundle(model_id, root=root)
     agent, _ = load_policy(model_id, root=root)

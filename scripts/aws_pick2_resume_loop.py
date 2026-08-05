@@ -19,9 +19,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.aws_submit_wave import submit_wave  # noqa: E402
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.profiles import REGION, armed_profiles, artifact_bucket
-from src.aws_burst.waves import discover_wave_cells
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.profiles import REGION, armed_profiles, artifact_bucket
+from mascotrl.aws_burst.waves import discover_wave_cells
 
 DEFAULT_WALL_CLOCK = datetime(2026, 8, 28, 12, 0, 0, tzinfo=timezone.utc)
 LOG_PATH = ROOT / "logs" / "campaign_sprint" / "pick2_resume_loop.log"

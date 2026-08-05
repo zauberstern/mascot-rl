@@ -17,7 +17,7 @@ from typing import Any, Callable, Sequence
 import numpy as np
 import pandas as pd
 
-from src.eval.cpcv import (
+from mascotrl.eval.cpcv import (
     _CPCV_FOLD_AUX_KEY,
     CPCVConfig,
     CPCVFold,
@@ -27,15 +27,15 @@ from src.eval.cpcv import (
     reconstruct_paths,
     summarize_paths,
 )
-from src.eval.campaign_manifest import (
+from mascotrl.eval.campaign_manifest import (
     ManifestFlushWriter,
     get_completed_extra,
     get_completed_pnl,
     is_cell_complete,
     load_manifest,
 )
-from src.eval.stats_rigor import annualized_sharpe
-from src.logging_utils import get_logger
+from mascotrl.eval.stats_rigor import annualized_sharpe
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.cpcv_lib")
 

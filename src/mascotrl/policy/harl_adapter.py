@@ -16,7 +16,7 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.policy.harl")
 

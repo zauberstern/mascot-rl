@@ -9,7 +9,7 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from src.reporting.behavior_metrics import (
+from mascotrl.reporting.behavior_metrics import (
     BEHAVIOUR_MEASURE_IDS,
     compute_behaviour_vector,
 )

@@ -24,7 +24,7 @@ from typing import Any, Sequence
 
 import numpy as np
 
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.stats_inference")
 
@@ -154,7 +154,7 @@ def white_reality_check(
     (each rival demeaned to zero). Less conservative than Hansen SPA; reports a
     single p-value for the best rival vs benchmark.
     """
-    from src.eval.stats_rigor import stationary_bootstrap_indices
+    from mascotrl.eval.stats_rigor import stationary_bootstrap_indices
 
     bench = np.asarray(list(benchmark_pnls), dtype=np.float64)
     names = sorted(rival_pnls.keys())

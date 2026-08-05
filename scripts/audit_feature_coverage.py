@@ -10,8 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.feature_coverage import run_coverage_audit  # noqa: E402
-from src.data.paths import LAKE_ROOT, assert_lake_mounted  # noqa: E402
+from mascotrl.data.feature_coverage import run_coverage_audit  # noqa: E402
+from mascotrl.data.paths import LAKE_ROOT, assert_lake_mounted  # noqa: E402
 
 
 def main() -> None:

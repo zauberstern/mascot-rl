@@ -22,10 +22,10 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 
-from src.data.paths import ARCTIC_ROOT, LAKE_ROOT
-from src.data.slot_mask import build_members_by_date_from_intervals
-from src.features.pit_universe import compound_equity_return, validate_delist_handling
-from src.logging_utils import get_logger
+from mascotrl.data.paths import ARCTIC_ROOT, LAKE_ROOT
+from mascotrl.data.slot_mask import build_members_by_date_from_intervals
+from mascotrl.features.pit_universe import compound_equity_return, validate_delist_handling
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.data.equity_panel")
 
@@ -522,7 +522,7 @@ def materialize_equity_panel(
         (od / f"{UNIVERSE_SYMBOL}.json").write_text(json.dumps(meta, indent=2) + "\n")
         arctic_symbols: list[str] = []
     else:
-        from src.data.arctic_store import ArcticStateStore
+        from mascotrl.data.arctic_store import ArcticStateStore
 
         store = ArcticStateStore(
             db_path=arctic_db_path or ARCTIC_ROOT,

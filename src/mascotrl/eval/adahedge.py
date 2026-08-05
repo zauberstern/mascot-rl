@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.fixed_share import share_update
+from mascotrl.eval.fixed_share import share_update
 
 
 def _ftl_weights(S: np.ndarray, n: int) -> np.ndarray:

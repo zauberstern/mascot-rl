@@ -114,7 +114,7 @@ def assert_friction_parity(train: FrictionSpec, oos: FrictionSpec) -> None:
 
 def friction_spec_from_cfg(cfg: Mapping[str, Any] | None) -> FrictionSpec:
     """Build FrictionSpec from arm/overnight YAML keys."""
-    from src.eval.yaml_honesty import track_copy
+    from mascotrl.eval.yaml_honesty import track_copy
 
     cfg = track_copy(cfg or {})
     arm = dict(cfg.get("arm") or {})
@@ -336,7 +336,7 @@ def option_execution_drag(
     drag = 0.0
     if om_touch_enabled:
         if w_prev is not None:
-            from src.plugins.om_touch_execution import OMTouchCost
+            from mascotrl.plugins.om_touch_execution import OMTouchCost
 
             touch = OMTouchCost(
                 enabled=True,
@@ -602,7 +602,7 @@ def apply_costs(
                 dh_denom=denom_np,
             )
         if bool(hedge_impact_enabled):
-            from src.plugins.hedge_impact import hedge_impact_breakdown
+            from mascotrl.plugins.hedge_impact import hedge_impact_breakdown
 
             notion = hedge_stock_notional(
                 w_opt,

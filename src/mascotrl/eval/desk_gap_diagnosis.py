@@ -6,9 +6,9 @@ from typing import Any
 
 import numpy as np
 
-from src.eval.adahedge import follow_the_leader
-from src.eval.expert_losses import log_wealth_loss
-from src.eval.regime_desk_metrics import sharpe_annualized
+from mascotrl.eval.adahedge import follow_the_leader
+from mascotrl.eval.expert_losses import log_wealth_loss
+from mascotrl.eval.regime_desk_metrics import sharpe_annualized
 
 
 def oracle_segments(path: list[int], names: list[str]) -> list[dict[str, Any]]:

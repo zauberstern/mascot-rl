@@ -10,7 +10,7 @@ from typing import Any
 import torch
 import torch.nn.functional as F
 
-from src.policy.single_agent import PPOAgent, compute_gae
+from mascotrl.policy.single_agent import PPOAgent, compute_gae
 
 
 class CPPOAgent(PPOAgent):

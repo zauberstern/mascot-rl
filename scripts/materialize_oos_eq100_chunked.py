@@ -18,9 +18,9 @@ import pyarrow as pa
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.arctic_store import ArcticStateStore
-from src.data.duckdb_engine import DuckDBFeatureEngine, OptionFilterConfig
-from src.data.oos_panel import (
+from mascotrl.data.arctic_store import ArcticStateStore
+from mascotrl.data.duckdb_engine import DuckDBFeatureEngine, OptionFilterConfig
+from mascotrl.data.oos_panel import (
     FEATURE_STEMS,
     LABEL_STEM,
     SIGNALS_SYMBOL,
@@ -28,8 +28,8 @@ from src.data.oos_panel import (
     no_ffill_label_columns,
     pivot_long_marks_to_wide,
 )
-from src.data.pit_guards import membership_filter
-from src.logging_utils import setup_logging
+from mascotrl.data.pit_guards import membership_filter
+from mascotrl.logging_utils import setup_logging
 
 
 def _select_liquid_secids(

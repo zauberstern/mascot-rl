@@ -104,7 +104,7 @@ class RiskObjective(nn.Module):
         term_spread_z: float | None = None,
     ) -> None:
         """Scale cao_c / kappa by the mandate risk-aversion multiplier."""
-        from src.spectrum.policy_mode import apply_risk_aversion, resolve_policy_mode
+        from mascotrl.spectrum.policy_mode import apply_risk_aversion, resolve_policy_mode
 
         self.policy_mode = resolve_policy_mode({"policy_mode": policy_mode})
         self._term_spread_z = term_spread_z

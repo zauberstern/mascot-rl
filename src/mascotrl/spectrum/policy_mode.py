@@ -119,7 +119,7 @@ def resolve_term_spread_z_for_train(
         import numpy as np
         import pandas as pd
 
-        from src.data.fioracle_macro import (
+        from mascotrl.data.fioracle_macro import (
             build_fioracle_feature_frame,
             load_fioracle_macro,
         )
@@ -172,7 +172,7 @@ def per_regime_sharpe(
     """Sharpe conditioned on calm / inflationary / crisis labels."""
     import numpy as np
 
-    from src.data.regime_labels import REGIME_IDS
+    from mascotrl.data.regime_labels import REGIME_IDS
 
     r = np.asarray(returns, dtype=np.float64).reshape(-1)
     labs = list(regime_labels)

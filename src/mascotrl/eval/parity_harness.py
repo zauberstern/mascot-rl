@@ -22,10 +22,10 @@ from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
 
-from src.arms import ArmSpec, default_arm_spec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec
-from src.eval.residualization import ResidualizerState, fit_ff4_residualizer, freeze_residualizer
+from mascotrl.arms import ArmSpec, default_arm_spec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.residualization import ResidualizerState, fit_ff4_residualizer, freeze_residualizer
 
 WeightFn = Callable[..., np.ndarray]
 
@@ -406,8 +406,8 @@ def score_benchmark_panel(
     slot_valid_mask: np.ndarray | None = None,
 ) -> dict[str, dict[str, Any]]:
     """Score every named benchmark through the parity harness."""
-    from src.eval.benchmark_panel import get_weight_fn
-    from src.eval.research_alpha_train import _turnover_cap_project
+    from mascotrl.eval.benchmark_panel import get_weight_fn
+    from mascotrl.eval.research_alpha_train import _turnover_cap_project
 
     out: dict[str, dict[str, Any]] = {}
     for name in names:

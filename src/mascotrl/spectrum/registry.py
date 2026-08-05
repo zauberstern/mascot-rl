@@ -529,7 +529,7 @@ def validate_cfg(cfg: Mapping[str, object]) -> dict[str, str]:
             "(allowed=['mlp']; discrete Q heads are flat-MLP only)"
         )
     # RRL double-DSR: refuse at validate time (not only train time).
-    from src.eval.yaml_honesty import refuse_rrl_double_dsr
+    from mascotrl.eval.yaml_honesty import refuse_rrl_double_dsr
 
     refuse_rrl_double_dsr({**dict(cfg), **out})
     # Weight-head legality (fullgrid SoT + cherrypick ppo/dirichlet_mean exception).
@@ -538,7 +538,7 @@ def validate_cfg(cfg: Mapping[str, object]) -> dict[str, str]:
     _assert_happo_screening_stamp(cfg, out["algo"])
     # RASP shared locks (Part A.5). Existing OFAT soft cells without
     # turnover_limit still pass; new dirichlet/scr/hard-tau cells are gated.
-    from src.policy.rasp_locks import assert_rasp_locks
+    from mascotrl.policy.rasp_locks import assert_rasp_locks
 
     merged = dict(cfg)
     merged.update(out)

@@ -1,7 +1,7 @@
 """Evidence-gated spectrum study package."""
 from __future__ import annotations
 
-from src.spectrum.registry import (
+from mascotrl.spectrum.registry import (
     AXES,
     PORTFOLIO_ARM_IDS,
     PORTFOLIO_ARMS,

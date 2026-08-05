@@ -21,8 +21,8 @@ from typing import Any, Iterable, Sequence
 
 import duckdb
 
-from src.data.paths import LAKE_ROOT, TIER_A, TIER_B, ensure_lake_dirs, tier_a_available
-from src.logging_utils import get_logger
+from mascotrl.data.paths import LAKE_ROOT, TIER_A, TIER_B, ensure_lake_dirs, tier_a_available
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.l5.lake")
 
@@ -548,7 +548,7 @@ class ParquetDataLakeBuilder:
                     dataset=dataset, year=year, year_csv=year_csv, date_col=dc
                 )
 
-                from src.data.lake_source_audit import line_count as _line_count
+                from mascotrl.data.lake_source_audit import line_count as _line_count
 
                 staging_n = max(0, _line_count(year_csv) - 1)
                 if new_n + reject_n != staging_n:

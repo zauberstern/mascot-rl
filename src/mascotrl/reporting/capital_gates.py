@@ -336,8 +336,8 @@ def assert_protocol_provenance(
             "eval_protocol missing — refuse to write run_stats without provenance"
         )
 
-    from src.reporting.claim_language import stamp_dh_option_allocator_claim_category
-    from src.reporting.claim_stamps import apply_dh_option_allocator_claim_gates
+    from mascotrl.reporting.claim_language import stamp_dh_option_allocator_claim_category
+    from mascotrl.reporting.claim_stamps import apply_dh_option_allocator_claim_gates
 
     report = stamp_dh_option_allocator_claim_category(report)
 
@@ -466,7 +466,7 @@ def assert_protocol_provenance(
         )
     )
     if require_sharpe_vs_best_baseline:
-        from src.eval.alpha_gates import pick_best_baseline
+        from mascotrl.eval.alpha_gates import pick_best_baseline
 
         ho_sum = (ho.get("summary") or {}) if isinstance(ho, dict) else {}
         h_sh = (ho_sum.get("happo") or {}).get("sharpe")
@@ -608,8 +608,8 @@ def assert_protocol_provenance(
             capital_ok = False
             failures.append("dsr_trial_count_excludes_spectrum_cells")
 
-    from src.eval.collapse_guard import assert_collapse_guard_ok
-    from src.eval.gate_ladder import run_gate_ladder
+    from mascotrl.eval.collapse_guard import assert_collapse_guard_ok
+    from mascotrl.eval.gate_ladder import run_gate_ladder
 
     ladder = run_gate_ladder(dict(report.get("bundle") or {}))
     report["gate_ladder"] = ladder

@@ -8,7 +8,9 @@ from typing import Tuple
 
 import torch
 
-_ROOT = Path(__file__).resolve().parents[2]
+from mascotrl._root import REPO_ROOT
+
+_ROOT = REPO_ROOT
 _LOAD_ERROR: Exception | None = None
 
 

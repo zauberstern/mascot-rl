@@ -7,8 +7,8 @@ import json
 import shutil
 from pathlib import Path
 
-from src.models.export import export_onnx
-from src.models.registry import verify_bundle, zoo_root
+from mascotrl.models.export import export_onnx
+from mascotrl.models.registry import verify_bundle, zoo_root
 
 
 _PREDICT_PY = '''"""Minimal ONNX inference helper (copy with the ship/ directory)."""

@@ -421,7 +421,7 @@ def block_bootstrap_metric_ci(
     """
     backend_key = str(backend or "custom").lower().strip()
     if backend_key == "arch":
-        from src.eval.arch_bootstrap import block_bootstrap_metric_ci_arch
+        from mascotrl.eval.arch_bootstrap import block_bootstrap_metric_ci_arch
 
         out = block_bootstrap_metric_ci_arch(
             returns,

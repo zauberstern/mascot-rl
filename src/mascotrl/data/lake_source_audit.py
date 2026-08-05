@@ -14,14 +14,14 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
-from src.data.paths import (
+from mascotrl.data.paths import (
     LAKE_ROOT,
     RAW_ROOT,
     TIER_A,
     TIER_B,
     MASCOTRL_ROOT,
 )
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.lake_source_audit")
 
@@ -692,7 +692,7 @@ def _enrich_present(lake: Path) -> dict[str, Any]:
 
 def probe_wrds_catalog(lake: Path) -> dict[str, Any]:
     """List WRDS tables in contracted schemas and classify vs lake enrich."""
-    from src.data.wrds_enrich import connect_wrds
+    from mascotrl.data.wrds_enrich import connect_wrds
 
     already = {
         "wrdsapps_link_crsp_optionm.opcrsphist",
@@ -784,8 +784,8 @@ def probe_wrds_catalog(lake: Path) -> dict[str, Any]:
 
 def probe_wrds_max_dates(lake: Path) -> dict[str, Any]:
     """Live WRDS MAX(date) probes; raises if credentials missing."""
-    from src.data.om_enrich import lake_secids
-    from src.data.wrds_enrich import connect_wrds
+    from mascotrl.data.om_enrich import lake_secids
+    from mascotrl.data.wrds_enrich import connect_wrds
 
     secids = lake_secids(lake)[:50]  # cheap probe sample
     if not secids:

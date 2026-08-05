@@ -5,8 +5,8 @@ from typing import Any
 
 import numpy as np
 
-from src.eval.stats_rigor import annualized_sharpe, max_drawdown, stationary_bootstrap_indices
-from src.logging_utils import get_logger
+from mascotrl.eval.stats_rigor import annualized_sharpe, max_drawdown, stationary_bootstrap_indices
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.arch_bootstrap")
 

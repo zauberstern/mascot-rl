@@ -20,13 +20,13 @@ import pandas as pd
 from scipy.cluster.hierarchy import fcluster, linkage
 from scipy.spatial.distance import squareform
 
-from src.eval.friction import FrictionSpec, assert_friction_parity
-from src.eval.kahn_breadth import (
+from mascotrl.eval.friction import FrictionSpec, assert_friction_parity
+from mascotrl.eval.kahn_breadth import (
     effective_breadth,
     effective_number_of_bets_entropy,
     kahn_pack,
 )
-from src.eval.residualization import rolling_asset_ff4_residuals
+from mascotrl.eval.residualization import rolling_asset_ff4_residuals
 
 SLEEVE_IDS: tuple[str, ...] = (
     "trend",
@@ -749,7 +749,7 @@ def _g3_impact_cost(
     """Match train FrictionSpec square-root impact (+ spread on L1 turnover)."""
     import torch
 
-    from src.eval.friction import _equity_sqrt_impact
+    from mascotrl.eval.friction import _equity_sqrt_impact
 
     dw = np.asarray(dw_abs, dtype=np.float64).reshape(-1)
     turn = float(np.sum(np.abs(dw)))

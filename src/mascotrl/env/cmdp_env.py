@@ -7,9 +7,9 @@ from typing import Any
 import numpy as np
 import torch
 
-from src.features.extractor import AlphaFeatureExtractor
-from src.policy.happo import HAPPOEngine
-from src.pricing.interface import get_portfolio_greeks
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.policy.happo import HAPPOEngine
+from mascotrl.pricing.interface import get_portfolio_greeks
 
 # Spectrum train worlds (declared, not exclusive). Aliases normalized in __init__.
 ALLOWED_TRANSITION_SOURCES = frozenset(
@@ -208,7 +208,7 @@ class CMDPEnv:
         channel matrix is not rank-1. Pad/truncate to ``d_model`` via the shared
         numpy builder.
         """
-        from src.features.raw_state import build_raw_states_from_feature_tensor
+        from mascotrl.features.raw_state import build_raw_states_from_feature_tensor
 
         seq = min(self.t, self.seq_len)
         start = self.t - seq

@@ -10,9 +10,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.lseg_overlay import ingest_lseg_overlays  # noqa: E402
-from src.data.paths import LSEG_RAW, LAKE_ROOT, assert_lake_mounted, assert_raw_mounted  # noqa: E402
-from src.logging_utils import setup_logging  # noqa: E402
+from mascotrl.data.lseg_overlay import ingest_lseg_overlays  # noqa: E402
+from mascotrl.data.paths import LSEG_RAW, LAKE_ROOT, assert_lake_mounted, assert_raw_mounted  # noqa: E402
+from mascotrl.logging_utils import setup_logging  # noqa: E402
 
 
 def main() -> None:

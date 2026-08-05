@@ -11,7 +11,7 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from src.eval.regime_seal import load_sealed_series
+from mascotrl.eval.regime_seal import load_sealed_series
 
 MATCH_OK = 0.95
 MATCH_PARTIAL = 0.80

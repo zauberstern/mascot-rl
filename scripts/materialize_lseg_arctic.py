@@ -11,9 +11,9 @@ sys.path.insert(0, str(ROOT))
 
 import pandas as pd  # noqa: E402
 
-from src.data.arctic_store import ArcticStateStore  # noqa: E402
-from src.data.paths import ARCTIC_ROOT, LAKE_ROOT  # noqa: E402
-from src.logging_utils import setup_logging  # noqa: E402
+from mascotrl.data.arctic_store import ArcticStateStore  # noqa: E402
+from mascotrl.data.paths import ARCTIC_ROOT, LAKE_ROOT  # noqa: E402
+from mascotrl.logging_utils import setup_logging  # noqa: E402
 
 PANEL_FILES = (
     ("lseg_eq_ohlc_unadj.parquet", "lseg_eq_ohlc_unadj"),

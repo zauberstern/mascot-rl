@@ -15,7 +15,7 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.implied_moments import compute_mf_moments
+from mascotrl.data.implied_moments import compute_mf_moments
 
 _LOG = logging.getLogger(__name__)
 
@@ -1105,7 +1105,7 @@ def _load_surface_aux_from_lake(
     # --- HV (annualized stdev convention) ---
     hv_df = None
     try:
-        from src.data.equity_panel import load_sp500_security_returns
+        from mascotrl.data.equity_panel import load_sp500_security_returns
 
         raw = load_sp500_security_returns(root, start=start, end=end)
         if raw is not None and len(raw) and "secid" in raw.columns:
@@ -1188,7 +1188,7 @@ def _load_surface_aux_from_lake(
 
     # --- equity volume (for os_ratio) ---
     try:
-        from src.data.equity_panel import load_sp500_security_returns
+        from mascotrl.data.equity_panel import load_sp500_security_returns
 
         raw = load_sp500_security_returns(root, start=start, end=end)
         if raw is not None and len(raw) and "volume" in raw.columns:

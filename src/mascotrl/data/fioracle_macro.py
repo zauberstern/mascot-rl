@@ -11,7 +11,7 @@ from typing import Sequence
 import numpy as np
 import pandas as pd
 
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.data.fioracle_macro")
 
@@ -54,7 +54,7 @@ def _resolve_lake_dir(
         return candidate
     # Repo-local ingest fallback when the USB lake lacks fioracle parquet.
     try:
-        from src.data.paths import MASCOTRL_ROOT
+        from mascotrl.data.paths import MASCOTRL_ROOT
 
         alt = MASCOTRL_ROOT / "lake" / lake_subdir
         if alt.is_dir() and (alt / "vix.parquet").is_file():

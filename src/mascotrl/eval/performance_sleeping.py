@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.expert_losses import expanding_unit_interval, log_wealth_loss
-from src.eval.onehot_leader import onehot
+from mascotrl.eval.expert_losses import expanding_unit_interval, log_wealth_loss
+from mascotrl.eval.onehot_leader import onehot
 
 
 def performance_sleeping(

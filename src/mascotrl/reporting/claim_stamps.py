@@ -10,8 +10,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.data.oos_panel import LABEL_STEM
-from src.reporting.claim_language import (
+from mascotrl.data.oos_panel import LABEL_STEM
+from mascotrl.reporting.claim_language import (
     CLAIM_CATEGORY_DH_OPTION_ALLOCATOR,
     stamp_dh_option_allocator_claim_category,
 )

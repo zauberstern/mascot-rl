@@ -12,8 +12,8 @@ if str(ROOT) not in sys.path:
 
 import yaml
 
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.registry import validate_cfg
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.registry import validate_cfg
 
 TEMPLATE = (
     ROOT

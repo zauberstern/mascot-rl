@@ -20,7 +20,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from src.logging_utils import get_logger
+from mascotrl._root import REPO_ROOT
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.reporting.provenance")
 
@@ -49,7 +50,7 @@ def _git(*args: str) -> str | None:
             capture_output=True,
             text=True,
             timeout=10,
-            cwd=str(Path(__file__).resolve().parents[2]),
+            cwd=str(REPO_ROOT),
         )
         if out.returncode == 0:
             return out.stdout.strip() or None

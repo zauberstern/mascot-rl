@@ -9,17 +9,17 @@ import numpy as np
 import pandas as pd
 import torch
 
-from src.eval.collapse_guard import collapse_guard
-from src.eval.cpcv import CPCVConfig, CPCVFold, residual_equity_cpcv_config, run_cpcv
-from src.eval.cpcv_lib import run_cpcv_lib
-from src.eval.friction import FrictionSpec, friction_spec_from_cfg
-from src.eval.parity_harness import estimand_hash, score_equal_weight
-from src.eval.policy_diagnostics import summarize_policy_diagnostics
-from src.eval.research_alpha_baselines import (
+from mascotrl.eval.collapse_guard import collapse_guard
+from mascotrl.eval.cpcv import CPCVConfig, CPCVFold, residual_equity_cpcv_config, run_cpcv
+from mascotrl.eval.cpcv_lib import run_cpcv_lib
+from mascotrl.eval.friction import FrictionSpec, friction_spec_from_cfg
+from mascotrl.eval.parity_harness import estimand_hash, score_equal_weight
+from mascotrl.eval.policy_diagnostics import summarize_policy_diagnostics
+from mascotrl.eval.research_alpha_baselines import (
     policy_beats_random,
     research_baselines_from_returns,
 )
-from src.eval.research_alpha_train import (
+from mascotrl.eval.research_alpha_train import (
     SYNTHETIC_TRAIN_WORLDS,
     _discover_latest_checkpoint,
     build_research_hist_env,
@@ -27,18 +27,18 @@ from src.eval.research_alpha_train import (
     train_objective_equals_claim_metric,
     train_research_hist,
 )
-from src.eval.residualization import (
+from mascotrl.eval.residualization import (
     ResidualizerState,
     fit_ff4_residualizer,
     freeze_residualizer,
 )
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.research_alpha_cpcv")
-from src.eval.stats_rigor import annualized_sharpe
-from src.eval.yaml_honesty import track_copy
-from src.reporting.claim_stamps import stamp_research_positive_alpha
-from src.reporting.research_alpha_router import resolve_research_primary_train
+from mascotrl.eval.stats_rigor import annualized_sharpe
+from mascotrl.eval.yaml_honesty import track_copy
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.reporting.research_alpha_router import resolve_research_primary_train
 
 
 def _fill_ladder_specs(base_fric: FrictionSpec) -> dict[str, FrictionSpec]:
@@ -102,7 +102,7 @@ def _training_policy_diagnostics(folds: Sequence[Mapping[str, Any]]) -> dict[str
 
 def _signal_sensitivities(train_out: Mapping[str, Any]) -> dict[str, float]:
     """Measure named feature-channel sensitivity on the trained fold policy."""
-    from src.reporting.policy_behavior import signal_weight_sensitivity
+    from mascotrl.reporting.policy_behavior import signal_weight_sensitivity
 
     env = train_out.get("env")
     agent = train_out.get("agent")
@@ -351,7 +351,7 @@ def _slice_feature_extras(cfg: Mapping[str, Any], idx: np.ndarray) -> dict[str, 
     # Slice rebalance mask to the fold window when present.
     mask = out.get("_rebalance_mask")
     if mask is not None and idx.size > 0:
-        from src.eval.cadence import slice_rebalance_mask
+        from mascotrl.eval.cadence import slice_rebalance_mask
 
         out["_rebalance_mask"] = slice_rebalance_mask(
             np.asarray(mask, dtype=bool), idx
@@ -406,7 +406,7 @@ def _roll_test_pnl(
     persist the policy's holdings the same way it persists every benchmark's
     (via ``score_strategy``'s ``weights`` array).
     """
-    from src.models.inference import roll_oos_with_agent
+    from mascotrl.models.inference import roll_oos_with_agent
 
     return roll_oos_with_agent(
         returns=returns,
@@ -461,7 +461,7 @@ def _reconstruct_path0_aux_series(
     the book only needs one policy holdings series, not a bundle for all
     ``C(n_splits, n_test_groups)`` paths.
     """
-    from src.eval.cpcv import assign_paths, group_bounds
+    from mascotrl.eval.cpcv import assign_paths, group_bounds
 
     bounds = group_bounds(list(dates), cpcv.n_splits)
     assignments = assign_paths(cpcv)
@@ -507,12 +507,12 @@ def run_policy_level_negative_control(
     signals: Mapping[str, np.ndarray],
 ) -> dict[str, Any]:
     """Train and score one CPCV fold with name-permuted policy features."""
-    from src.eval.cpcv import build_cpcv_folds
-    from src.eval.negative_controls import (
+    from mascotrl.eval.cpcv import build_cpcv_folds
+    from mascotrl.eval.negative_controls import (
         permute_signals_across_names,
         policy_level_negative_control_stamp,
     )
-    from src.eval.stats_rigor import annualized_sharpe
+    from mascotrl.eval.stats_rigor import annualized_sharpe
 
     dates = list(dates)
     rets = np.asarray(returns, dtype=np.float64)
@@ -613,11 +613,11 @@ def run_research_alpha_cpcv(
     # see the same schedule (Phase 2 fail-closed without dates|_rebalance_mask).
     cadence = str(cfg.get("rebalance_cadence") or "daily").lower()
     if cadence not in ("", "daily") and cfg.get("_rebalance_mask") is None:
-        from src.eval.cadence import build_rebalance_mask
+        from mascotrl.eval.cadence import build_rebalance_mask
 
         cfg["_rebalance_mask"] = build_rebalance_mask(dates, cadence)
     # Stamp term-spread z for archetype_inflation risk-aversion scaling.
-    from src.spectrum.policy_mode import (
+    from mascotrl.spectrum.policy_mode import (
         resolve_policy_mode,
         resolve_term_spread_z_for_train,
     )
@@ -703,7 +703,7 @@ def run_research_alpha_cpcv(
         # fold until the seed JSON is written.
         ckpt_dir = cfg.get("_checkpoint_dir")
         if ckpt_dir:
-            from src.eval.research_alpha_train import prune_fold_checkpoints
+            from mascotrl.eval.research_alpha_train import prune_fold_checkpoints
 
             prune_fold_checkpoints(
                 Path(str(ckpt_dir)),
@@ -750,7 +750,7 @@ def run_research_alpha_cpcv(
             train_out.get("turnover_cap_binding_steps") or 0
         )
         if curves_dir:
-            from src.eval.train_budget import write_learning_curve
+            from mascotrl.eval.train_budget import write_learning_curve
 
             write_learning_curve(
                 train_out.get("learning_curve") or [],
@@ -816,7 +816,7 @@ def run_research_alpha_cpcv(
                 torch.cuda.empty_cache()
         # Cache rich OOS records (weights/cost/turnover) so resume can rebuild
         # path-0 holdings for behaviour_export without retraining.
-        from src.eval.cpcv import _CPCV_FOLD_AUX_KEY
+        from mascotrl.eval.cpcv import _CPCV_FOLD_AUX_KEY
 
         scorecard_out = dict(scorecard)
         scorecard_out[_CPCV_FOLD_AUX_KEY] = _jsonable_oos_records(
@@ -830,7 +830,7 @@ def run_research_alpha_cpcv(
     # non-headline fill_ladder rungs can undercount resumed folds. The
     # headline pct75 rung (path_summary, capital gates) stays exact.
     periods = float(cfg.get("_periods_per_year") or 252.0)
-    from src.eval.cpcv import stamp_reselect_purge_meta
+    from mascotrl.eval.cpcv import stamp_reselect_purge_meta
 
     extra_purge_indices = None
     extra_purge_radius = None
@@ -844,8 +844,8 @@ def run_research_alpha_cpcv(
         )
         extra_purge_indices = list(reselect_purge_meta["reselect_indices"])
         extra_purge_radius = int(reselect_purge_meta["purge_radius"])
-    from src.eval.cpcv_backend import resolve_use_purgedcv
-    from src.eval.cpcv_lib import run_cpcv_lib
+    from mascotrl.eval.cpcv_backend import resolve_use_purgedcv
+    from mascotrl.eval.cpcv_lib import run_cpcv_lib
 
     _cpcv_runner = run_cpcv_lib if resolve_use_purgedcv(cfg) else run_cpcv
     if out_dir is not None:
@@ -889,11 +889,11 @@ def run_research_alpha_cpcv(
         fold_pnl_by_fill["pct75"][int(fid)] = {
             str(ds): dict(rec) for ds, rec in aux.items() if isinstance(rec, Mapping)
         }
-    from src.eval.cpcv import reconstruct_paths, summarize_paths, build_cpcv_folds
-    from src.eval.cpcv_backend import resolve_use_purgedcv as _resolve_purgedcv_folds
+    from mascotrl.eval.cpcv import reconstruct_paths, summarize_paths, build_cpcv_folds
+    from mascotrl.eval.cpcv_backend import resolve_use_purgedcv as _resolve_purgedcv_folds
 
     if _resolve_purgedcv_folds(cfg):
-        from src.eval.cpcv_lib import build_cpcv_folds_lib
+        from mascotrl.eval.cpcv_lib import build_cpcv_folds_lib
 
         folds = build_cpcv_folds_lib(
             dates,
@@ -1235,7 +1235,7 @@ def run_research_alpha_cpcv(
     # Fail closed on empty learning (campaign must actually train).
     min_total = int(cfg.get("min_optimizer_steps_total", 0) or 0)
     if min_total > 0:
-        from src.eval.train_budget import assert_optimizer_step_floor
+        from mascotrl.eval.train_budget import assert_optimizer_step_floor
 
         assert_optimizer_step_floor(
             int(fold_train_meta.get("optimizer_steps_total") or 0),
@@ -1244,8 +1244,8 @@ def run_research_alpha_cpcv(
     # Persist last-fold agent into the model zoo for user access.
     if last_train_out is not None and last_train_out.get("agent") is not None:
         try:
-            from src.eval.research_alpha_train import _checkpoint_payload
-            from src.models.registry import ModelCard, make_model_id, save_model_bundle
+            from mascotrl.eval.research_alpha_train import _checkpoint_payload
+            from mascotrl.models.registry import ModelCard, make_model_id, save_model_bundle
 
             agent = last_train_out["agent"]
             env = last_train_out.get("env")

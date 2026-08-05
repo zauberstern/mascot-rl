@@ -14,17 +14,17 @@ find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 # Prefer building via setup_extensions.py / torch.utils.cpp_extension.
 # This CMakeLists documents the mandated Zen+/OpenMP flags for Layer 1.
 add_library(rbergomi_obj OBJECT
-  src/engine/rbergomi_engine.cpp
-  src/engine/circulant_fft.cpp
-  src/engine/dupire_pde.cpp
-  src/engine/bs_iv.cpp
-  src/engine/heston_cf.cpp
-  src/engine/sabr_hagan.cpp
-  src/engine/garch_duan.cpp
-  src/engine/worlds.cpp
+  src/mascotrl/engine/rbergomi_engine.cpp
+  src/mascotrl/engine/circulant_fft.cpp
+  src/mascotrl/engine/dupire_pde.cpp
+  src/mascotrl/engine/bs_iv.cpp
+  src/mascotrl/engine/heston_cf.cpp
+  src/mascotrl/engine/sabr_hagan.cpp
+  src/mascotrl/engine/garch_duan.cpp
+  src/mascotrl/engine/worlds.cpp
 )
 target_include_directories(rbergomi_obj PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/engine
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/mascotrl/engine
   ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
 target_link_libraries(rbergomi_obj PUBLIC OpenMP::OpenMP_CXX)

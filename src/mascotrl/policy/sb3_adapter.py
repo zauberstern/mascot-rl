@@ -15,8 +15,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.logging_utils import get_logger
-from src.policy.single_agent import (
+from mascotrl.logging_utils import get_logger
+from mascotrl.policy.single_agent import (
     PPOAgent,
     _BaseAgent,
     _apply_weight_head,
@@ -221,7 +221,7 @@ class SB3PPOAgent(_SB3PolicyMixin, _BaseAgent):
         with torch.no_grad():
             values = policy.predict_values(obs_f).flatten()
             next_values = policy.predict_values(self._prep_obs(next_obs)).flatten()
-            from src.eval.scr_critic import build_scr_returns
+            from mascotrl.eval.scr_critic import build_scr_returns
 
             advantages, returns, _scr_meta = build_scr_returns(
                 rewards=rewards,

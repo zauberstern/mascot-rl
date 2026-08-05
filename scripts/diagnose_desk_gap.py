@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.eval.desk_gap_diagnosis import diagnose_desk_payload
+from mascotrl.eval.desk_gap_diagnosis import diagnose_desk_payload
 
 
 def main(argv: list[str] | None = None) -> int:

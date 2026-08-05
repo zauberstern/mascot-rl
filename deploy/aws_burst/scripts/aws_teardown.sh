@@ -14,7 +14,7 @@ for p in "${BURST_PROFILES[@]}"; do
   URI="$(python3 -c "
 import sys
 sys.path.insert(0, '$ROOT')
-from src.aws_burst.image_digest import pinned_image_uri
+from mascotrl.aws_burst.image_digest import pinned_image_uri
 print(pinned_image_uri('$ROOT', '$p'))
 ")"
   if [[ "$URI" != *"@sha256:"* ]]; then

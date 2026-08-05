@@ -114,7 +114,7 @@ def coverage_masks_for_arm(
     ``panel`` / ``dates_idx`` / stem kwargs resolve matrices via
     ``wide_feature_matrix`` when arrays are omitted.
     """
-    from src.arms.spec import ArmSpec
+    from mascotrl.arms.spec import ArmSpec
 
     if not isinstance(arm, ArmSpec):
         raise TypeError(f"arm must be ArmSpec, got {type(arm)!r}")
@@ -122,7 +122,7 @@ def coverage_masks_for_arm(
     def _from_panel(stem: str, n: int) -> np.ndarray:
         if panel is None:
             raise ValueError(f"panel required to resolve stem={stem!r}")
-        from src.data.oos_panel import wide_feature_matrix
+        from mascotrl.data.oos_panel import wide_feature_matrix
 
         mat = wide_feature_matrix(panel, stem, n)
         if dates_idx is not None:

@@ -10,11 +10,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 os.chdir(ROOT)
 os.environ.setdefault("MASCOTRL_ROOT", str(ROOT))
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
 
 import pybind11
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from setuptools import setup
+
+ENGINE_DIR = ROOT / "src" / "mascotrl" / "engine"
+PRICING_DIR = ROOT / "src" / "mascotrl" / "pricing"
 
 CXX_FLAGS = [
     "-O3",
@@ -28,7 +31,7 @@ CXX_FLAGS = [
 ]
 LINK_FLAGS = ["-fopenmp"]
 include_dirs = [
-    str(ROOT / "src" / "engine"),
+    str(ENGINE_DIR),
     str(ROOT / "third_party"),
     str(ROOT / "third_party" / "OpenCL"),
     pybind11.get_include(),
@@ -45,15 +48,15 @@ except ImportError:
 ext_rbergomi = Pybind11Extension(
     "cpp_rbergomi",
     sources=[
-        "src/engine/bindings.cpp",
-        "src/engine/rbergomi_engine.cpp",
-        "src/engine/circulant_fft.cpp",
-        "src/engine/dupire_pde.cpp",
-        "src/engine/bs_iv.cpp",
-        "src/engine/heston_cf.cpp",
-        "src/engine/sabr_hagan.cpp",
-        "src/engine/garch_duan.cpp",
-        "src/engine/worlds.cpp",
+        "src/mascotrl/engine/bindings.cpp",
+        "src/mascotrl/engine/rbergomi_engine.cpp",
+        "src/mascotrl/engine/circulant_fft.cpp",
+        "src/mascotrl/engine/dupire_pde.cpp",
+        "src/mascotrl/engine/bs_iv.cpp",
+        "src/mascotrl/engine/heston_cf.cpp",
+        "src/mascotrl/engine/sabr_hagan.cpp",
+        "src/mascotrl/engine/garch_duan.cpp",
+        "src/mascotrl/engine/worlds.cpp",
     ],
     include_dirs=include_dirs,
     cxx_std=20,
@@ -78,10 +81,10 @@ def main() -> None:
             zip_safe=False,
             script_args=["build_ext", "--inplace"],
         )
-        # In-place build lands under src/; copy to repo root for `import cpp_rbergomi`.
+        # In-place build lands under src/mascotrl/; copy to repo root for import.
         import glob
 
-        for path in glob.glob(str(ROOT / "src" / "cpp_rbergomi*.so")):
+        for path in glob.glob(str(ROOT / "src" / "mascotrl" / "cpp_rbergomi*.so")):
             dest = ROOT / Path(path).name
             shutil.copy2(path, dest)
             print(f"[mascotrl] cpp_rbergomi -> {dest}")
@@ -94,10 +97,10 @@ def main() -> None:
     polaris_dir.mkdir(parents=True, exist_ok=True)
     load(
         name="polaris_pricer_cpp",
-        sources=[str(ROOT / "src" / "pricing" / "polaris_pricer.cpp")],
+        sources=[str(PRICING_DIR / "polaris_pricer.cpp")],
         extra_cflags=CXX_FLAGS,
         extra_ldflags=LINK_FLAGS + ["-L/usr/lib/x86_64-linux-gnu", "-l:libOpenCL.so.1"],
-        extra_include_paths=include_dirs + [str(ROOT / "src" / "pricing")],
+        extra_include_paths=include_dirs + [str(PRICING_DIR)],
         build_directory=str(polaris_dir),
         verbose=True,
     )

@@ -4,7 +4,9 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-MASCOTRL_ROOT = Path(__file__).resolve().parents[2]
+from mascotrl._root import REPO_ROOT
+
+MASCOTRL_ROOT = REPO_ROOT
 DATA_ROOT = MASCOTRL_ROOT / "data"
 
 # Tier A CSVs alone are ~293GB; ZSTD parquet lake can still be 80–150GB+.

@@ -62,7 +62,7 @@ def compute_gate2(
     MKT-RF, SMB, HML, RMW, CMA, UMD, PS_VWF when available). Passes when
     annualized alpha is positive and the HAC t-stat clears ``min_t_stat``.
     """
-    from src.eval.signal_gate import ff_alpha
+    from mascotrl.eval.signal_gate import ff_alpha
 
     yy = np.asarray(policy_returns, dtype=np.float64).reshape(-1)
     xx = np.asarray(factors, dtype=np.float64)
@@ -129,7 +129,7 @@ def compute_gate3(
     from ``n_baselines`` / ``n_beaten`` so EG clones do not inflate peer
     diversity. See :func:`src.eval.olps.olps_stub_names`.
     """
-    from src.eval.olps import filter_olps_stubs_from_peers
+    from mascotrl.eval.olps import filter_olps_stubs_from_peers
 
     filtered = filter_olps_stubs_from_peers(baseline_sharpes)
     baselines = {

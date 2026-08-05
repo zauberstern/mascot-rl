@@ -11,12 +11,13 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.paths import LAKE_ROOT
-from src.data.surface_signals import _canonical_secid_key
+from mascotrl._root import REPO_ROOT
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.data.surface_signals import _canonical_secid_key
 
 FIRM_TEXT_ASOF = "2026-08-18"
 FIRM_TEXT_PIT = False
-_REPO_ROOT = Path(__file__).resolve().parents[2]
+_REPO_ROOT = REPO_ROOT
 _DEFAULT_CACHE = _REPO_ROOT / "logs" / "artifacts" / "semantic_tilt" / "firm_embeddings.parquet"
 _EMPTY_MARKERS = frozenset({"", "nan", "none", "<na>", "nat"})
 _TEXT_COLS = (

@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from src.models.registry import ModelCard, load_card, verify_bundle, zoo_root
+from mascotrl.models.registry import ModelCard, load_card, verify_bundle, zoo_root
 
 # Pre-registered exclusion removed once HAPPO bundle rebuild is wired.
 HAPPO_OOS_REPLAY_SUPPORTED = True
@@ -75,7 +75,7 @@ def _rebuild_happo_engine(
     k = int(deploy.get("n_assets") or card.n_assets or card.action_dim)
     d_model = int(deploy.get("d_model", 32))
     macro_dim = int(deploy.get("macro_dim", 8))
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.policy.happo import HAPPOEngine
 
     engine = HAPPOEngine(
         k,
@@ -104,7 +104,7 @@ def load_policy(
     if card.family == "happo":
         return _rebuild_happo_engine(card, blob, root=root), card
 
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.policy.single_agent import make_single_agent
 
     deploy: dict[str, Any] = {}
     deploy_path = zoo_root(root) / model_id / "deploy_config.json"
@@ -184,8 +184,8 @@ def roll_oos_with_agent(
     ``train_residualizer`` must be the train-fold frozen fit so OOS betas are
     not refit on the test window (PIT).
     """
-    from src.eval.research_alpha_train import build_research_hist_env
-    from src.eval.yaml_honesty import track_copy
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.yaml_honesty import track_copy
 
     if train_residualizer is None:
         raise ValueError(
@@ -248,7 +248,7 @@ def roll_oos(
     root: str | Path | None = None,
 ) -> dict[str, Any]:
     """OOS roll from a bundle path. Always stamped non-confirmatory."""
-    from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+    from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
 
     agent, card = load_policy(model_id, root=root)
     if idx is None:

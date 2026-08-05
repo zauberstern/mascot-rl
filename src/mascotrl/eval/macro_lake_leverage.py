@@ -8,8 +8,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from src.data.fioracle_macro import DEFAULT_SERIES, FIORACLE_FEATURE_COLUMNS
-from src.data.paths import CANONICAL_LAKE, MASCOTRL_ROOT
+from mascotrl.data.fioracle_macro import DEFAULT_SERIES, FIORACLE_FEATURE_COLUMNS
+from mascotrl.data.paths import CANONICAL_LAKE, MASCOTRL_ROOT
 
 # Pre-registered dual-source candidates (not the full H.15 dump).
 USB_DUAL_SOURCE_CANDIDATES: tuple[str, ...] = (

@@ -7,7 +7,7 @@ from typing import Any, Mapping
 import torch
 import torch.nn.functional as F
 
-from src.policy.risk_objective import RiskObjective
+from mascotrl.policy.risk_objective import RiskObjective
 
 # Modes whose primary gradient is dense per-step reward (not batch episode weights).
 _DENSE_REWARD_MODES = frozenset(
@@ -185,7 +185,7 @@ def resolve_objective_mode(cfg: dict[str, Any], *, default: str = "none") -> str
         mode = str(raw_obj).strip()
         cand = _OBJECTIVE_ALIASES.get(mode, mode)
         try:
-            from src.spectrum.registry import allowed_ids, validate_choice
+            from mascotrl.spectrum.registry import allowed_ids, validate_choice
 
             if cand in allowed_ids("objective"):
                 mode = validate_choice("objective", cand)

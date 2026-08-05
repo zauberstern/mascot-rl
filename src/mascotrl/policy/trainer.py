@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.policy.happo import HAPPOEngine
-from src.policy.objective_factory import (
+from mascotrl.policy.happo import HAPPOEngine
+from mascotrl.policy.objective_factory import (
     episode_weights,
     objective_gradient_path_for,
 )

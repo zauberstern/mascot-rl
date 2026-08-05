@@ -51,7 +51,7 @@ def amihud_illiquidity(
     window: int = 21,
 ) -> np.ndarray:
     """Amihud: mean(|r| / dollar_volume) over a causal window → ``(T, K)``."""
-    from src.features.blocks.pandas_rolling import amihud_illiquidity_pandas
+    from mascotrl.features.blocks.pandas_rolling import amihud_illiquidity_pandas
 
     return amihud_illiquidity_pandas(returns, dollar_volume, window=window)
 

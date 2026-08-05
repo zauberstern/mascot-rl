@@ -54,7 +54,7 @@ payload = {
 out.write_text(json.dumps(payload, indent=2) + "\n")
 print(f"wrote {out}")
 
-from src.aws_burst.cost_model import affordable_frontier
+from mascotrl.aws_burst.cost_model import affordable_frontier
 frontier = affordable_frontier(
     n_cells=100,
     hours_per_cell_by_vcpu={int(k): float(v) for k, v in payload["hours_per_cell_by_vcpu"].items()},

@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from mascotrl._root import REPO_ROOT
+
 REGION = "eu-central-1"
 
 # Production waves must never use --offline (live spend + CE preflight required).
@@ -78,7 +80,7 @@ def account_shape_path(root: Path) -> Path:
 
 def load_account_shapes(root: Path | None = None) -> dict[str, dict[str, object]]:
     """Per-profile CE/job/governor shape overrides."""
-    base = Path(root) if root is not None else Path(__file__).resolve().parents[2]
+    base = Path(root) if root is not None else REPO_ROOT
     path = account_shape_path(base)
     if not path.is_file():
         return {}

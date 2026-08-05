@@ -4,8 +4,8 @@ from __future__ import annotations
 import torch
 import torch.nn as nn
 
-from src.features.mamba2 import AssetTemporalMamba
-from src.features.dhgnn import SpatialDHGNN
+from mascotrl.features.mamba2 import AssetTemporalMamba
+from mascotrl.features.dhgnn import SpatialDHGNN
 
 
 class _AssetTemporalGRU(nn.Module):

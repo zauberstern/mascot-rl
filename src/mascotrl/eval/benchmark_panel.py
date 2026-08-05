@@ -9,7 +9,7 @@ from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
 
-from src.eval.industry_baselines import (
+from mascotrl.eval.industry_baselines import (
     INDUSTRY_BASELINE_NAMES,
     INDUSTRY_BASELINE_REGISTRY,
     industry_baseline_weights,
@@ -229,7 +229,7 @@ def _make_friction_cost_fn(
         return None
     import torch
 
-    from src.eval.friction import apply_costs
+    from mascotrl.eval.friction import apply_costs
 
     kwargs = dict(friction_kwargs)
 

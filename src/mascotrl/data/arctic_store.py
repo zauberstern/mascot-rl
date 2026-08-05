@@ -8,7 +8,7 @@ import pandas as pd
 import pyarrow as pa
 from arcticdb import Arctic
 
-from src.data.paths import ARCTIC_ROOT
+from mascotrl.data.paths import ARCTIC_ROOT
 
 
 class ArcticStateStore:

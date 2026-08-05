@@ -3,20 +3,20 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.cross_section import apply_cross_section_normalize
-from src.features.blocks.experimental import build_experimental_block
-from src.features.blocks.fundamentals_pit import build_fundamentals_pit_block
-from src.features.blocks.iv_surface import build_borrow_block, build_iv_surface_block
-from src.features.blocks.jkp_lottery import build_jkp_lottery_block
-from src.features.blocks.liquidity import build_liquidity_block
-from src.features.blocks.microstructure import build_microstructure_block
-from src.features.blocks.normalize import expanding_causal_zscore
-from src.features.blocks.option_flow import build_option_flow_block
-from src.features.blocks.range_volatility import build_range_volatility_block
-from src.features.blocks.returns_momentum import build_returns_momentum_block, momentum_12_1
-from src.features.blocks.sentiment import build_sentiment_block
-from src.features.blocks.volatility_vrp import build_volatility_vrp_block
-from src.features.groups import resolve_excludes
+from mascotrl.features.blocks.cross_section import apply_cross_section_normalize
+from mascotrl.features.blocks.experimental import build_experimental_block
+from mascotrl.features.blocks.fundamentals_pit import build_fundamentals_pit_block
+from mascotrl.features.blocks.iv_surface import build_borrow_block, build_iv_surface_block
+from mascotrl.features.blocks.jkp_lottery import build_jkp_lottery_block
+from mascotrl.features.blocks.liquidity import build_liquidity_block
+from mascotrl.features.blocks.microstructure import build_microstructure_block
+from mascotrl.features.blocks.normalize import expanding_causal_zscore
+from mascotrl.features.blocks.option_flow import build_option_flow_block
+from mascotrl.features.blocks.range_volatility import build_range_volatility_block
+from mascotrl.features.blocks.returns_momentum import build_returns_momentum_block, momentum_12_1
+from mascotrl.features.blocks.sentiment import build_sentiment_block
+from mascotrl.features.blocks.volatility_vrp import build_volatility_vrp_block
+from mascotrl.features.groups import resolve_excludes
 
 
 def _dedupe_channel_names(

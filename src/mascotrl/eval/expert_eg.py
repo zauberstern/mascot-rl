@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.fixed_share import share_update
+from mascotrl.eval.fixed_share import share_update
 
 
 def eg_experts(returns: np.ndarray, *, eta: float = 0.05) -> np.ndarray:

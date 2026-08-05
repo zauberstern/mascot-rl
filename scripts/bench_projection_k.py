@@ -13,7 +13,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 
 def bench_k(

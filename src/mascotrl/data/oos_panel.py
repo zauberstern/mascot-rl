@@ -10,11 +10,11 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 
-from src.data.arctic_store import ArcticStateStore
-from src.data.duckdb_engine import DuckDBFeatureEngine, OptionFilterConfig
-from src.data.pit_guards import membership_filter
-from src.data.paths import ARCTIC_ROOT, LAKE_ROOT
-from src.logging_utils import get_logger
+from mascotrl.data.arctic_store import ArcticStateStore
+from mascotrl.data.duckdb_engine import DuckDBFeatureEngine, OptionFilterConfig
+from mascotrl.data.pit_guards import membership_filter
+from mascotrl.data.paths import ARCTIC_ROOT, LAKE_ROOT
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.l5.oos")
 
@@ -174,7 +174,7 @@ def materialize_oos_panel(
             "frozen_2021",
             "frozen",
         ) or str(universe_mode).upper() == "FROZEN_AT_2021_END":
-            from src.features.pit_universe import (
+            from mascotrl.features.pit_universe import (
                 FROZEN_AT_2021_END,
                 resolve_universe_end_for_mode,
             )
@@ -301,7 +301,7 @@ def materialize_oos_panel(
     )
     log.info("Long marks rows=%d cols=%s", long_tbl.num_rows, long_tbl.column_names)
 
-    from src.data.duckdb_engine import quote_quality_audit_counts
+    from mascotrl.data.duckdb_engine import quote_quality_audit_counts
 
     quote_audit = quote_quality_audit_counts(long_tbl.to_pandas())
     if int(quote_audit.get("n_crossed_bid_ask") or 0) > 0:
@@ -325,7 +325,7 @@ def materialize_oos_panel(
         "rows_dropped": 0,
     }
     if filters.no_calendar_arbitrage or filters.no_butterfly_arbitrage:
-        from src.data.arbitrage_screens import filter_long_marks
+        from mascotrl.data.arbitrage_screens import filter_long_marks
 
         log.info("Computing calendar/butterfly arbitrage screens …")
         try:

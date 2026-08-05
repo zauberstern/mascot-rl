@@ -10,4 +10,4 @@ BURST_PROFILES=(
 SPOT_QUOTA_CODE="L-34B43A08"
 SPOT_QUOTA_REQUEST="${SPOT_QUOTA_REQUEST:-64}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-BUDGET_USD="$(python3 -c "import sys; sys.path.insert(0,'$ROOT'); from src.aws_burst.profiles import BUDGET_USD; print(BUDGET_USD)")"
+BUDGET_USD="$(python3 -c "import sys; sys.path.insert(0,'$ROOT/src'); from mascotrl.aws_burst.profiles import BUDGET_USD; print(BUDGET_USD)")"

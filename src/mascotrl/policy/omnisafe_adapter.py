@@ -17,9 +17,9 @@ from typing import Any
 import torch
 import torch.nn.functional as F
 
-from src.logging_utils import get_logger
-from src.policy.single_agent import PPOAgent, compute_gae
-from src.policy.vendor.omnisafe import Lagrange, PIDLagrangian
+from mascotrl.logging_utils import get_logger
+from mascotrl.policy.single_agent import PPOAgent, compute_gae
+from mascotrl.policy.vendor.omnisafe import Lagrange, PIDLagrangian
 
 log = get_logger("mascotrl.policy.omnisafe")
 

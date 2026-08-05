@@ -7,26 +7,26 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from src.data.arctic_store import ArcticStateStore
-from src.data.oos_panel import (
+from mascotrl.data.arctic_store import ArcticStateStore
+from mascotrl.data.oos_panel import (
     SIGNALS_SYMBOL,
     label_matrix,
     load_oos_panel,
     wide_feature_matrix,
 )
-from src.eval.baselines import run_baseline_suite_on_panel
-from src.eval.gate_ladder import refuse_alpha_stamp, run_gate_ladder
-from src.eval.orientation_benchmarks import run_and_attach_orientation_benchmarks
-from src.eval.stats_inference import (
+from mascotrl.eval.baselines import run_baseline_suite_on_panel
+from mascotrl.eval.gate_ladder import refuse_alpha_stamp, run_gate_ladder
+from mascotrl.eval.orientation_benchmarks import run_and_attach_orientation_benchmarks
+from mascotrl.eval.stats_inference import (
     cscv_pbo_from_paths,
     hac_mean_tstat,
     hac_sharpe_se,
     romano_wolf_stepdown,
 )
-from src.eval.stats_rigor import deflated_sharpe_ratio, regime_performance_table
-from src.logging_utils import get_logger
-from src.reporting.capital_gates import KNOWN_UNMODELED_RISKS, PROJECTION_K_CEILING
-from src.reporting.claim_language import SPA_DO_NOT_CLAIM
+from mascotrl.eval.stats_rigor import deflated_sharpe_ratio, regime_performance_table
+from mascotrl.logging_utils import get_logger
+from mascotrl.reporting.capital_gates import KNOWN_UNMODELED_RISKS, PROJECTION_K_CEILING
+from mascotrl.reporting.claim_language import SPA_DO_NOT_CLAIM
 
 log = get_logger("mascotrl.eval.publication")
 
@@ -120,7 +120,7 @@ def compute_pbo(
         return {"pbo": float("nan"), "reason": "empty trial_matrix"}
     first = trial_matrix[0]
     if isinstance(first, (int, float, np.floating)):
-        from src.eval.pbo_appendix import probability_of_backtest_overfitting
+        from mascotrl.eval.pbo_appendix import probability_of_backtest_overfitting
 
         return probability_of_backtest_overfitting(
             [float(x) for x in trial_matrix], seed=int(seed)
@@ -144,7 +144,7 @@ def run_spa(
     (must clear G5's p<=0.05 against the strongest / hardest baseline). Low p
     means the candidate significantly beats that baseline.
     """
-    from src.eval.stats_rigor import hansen_spa_test
+    from mascotrl.eval.stats_rigor import hansen_spa_test
 
     if not baselines:
         return {
@@ -167,7 +167,7 @@ def run_spa(
         per[str(name)] = spa
         if spa.get("ok") and spa.get("pvalue_consistent") is not None:
             pvals.append(float(spa["pvalue_consistent"]))
-    from src.eval.alpha_gates import NONSENSE_PEERS
+    from mascotrl.eval.alpha_gates import NONSENSE_PEERS
 
     n_econ = len([k for k in baselines if k not in NONSENSE_PEERS])
     if not pvals:
@@ -257,7 +257,7 @@ def hansen_spa_with_roles(
             seed=int(seed),
         )
     else:
-        from src.eval.stats_rigor import hansen_spa_test
+        from mascotrl.eval.stats_rigor import hansen_spa_test
 
         spa = hansen_spa_test(
             list(happo_pnls),
@@ -371,7 +371,7 @@ def attach_publication_stats(
     cfg: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Attach DSR / PSR / regimes / bootstrap CIs / SPA from historical series."""
-    from src.eval.stats_rigor import (
+    from mascotrl.eval.stats_rigor import (
         block_bootstrap_metric_ci,
     )
 
@@ -513,7 +513,7 @@ def attach_publication_stats(
             log.warning("REGIME_SANITY %s", w)
 
     boot_seed = int(cfg.get("seed", 42))
-    from src.eval.arch_bootstrap import resolve_bootstrap_backend
+    from mascotrl.eval.arch_bootstrap import resolve_bootstrap_backend
 
     boot_backend = resolve_bootstrap_backend(cfg if isinstance(cfg, dict) else dict(cfg or {}))
     report["bootstrap_backend"] = boot_backend
@@ -547,8 +547,8 @@ def attach_publication_stats(
 
     # SPA: HAPPO is the *benchmark*; rivals are rich BASELINE_NAMES only.
     # Zero/random are nonsense peers (critique 07).
-    from src.eval.baselines import BASELINE_NAMES
-    from src.eval.alpha_gates import NONSENSE_PEERS
+    from mascotrl.eval.baselines import BASELINE_NAMES
+    from mascotrl.eval.alpha_gates import NONSENSE_PEERS
 
     oos_pnls = dict(ho.get("pnls") or {})
     rivals: dict[str, Any] = {}
@@ -643,7 +643,7 @@ def attach_publication_stats(
             seed=int(cfg.get("seed", 42)),
             alpha=float(cfg.get("romano_wolf_alpha", 0.05)),
         )
-        from src.eval.stats_inference import white_reality_check
+        from mascotrl.eval.stats_inference import white_reality_check
 
         report["white_reality_check"] = white_reality_check(
             oos_pnls["happo"],
@@ -652,7 +652,7 @@ def attach_publication_stats(
             seed=int(cfg.get("seed", 42)),
         )
         # Path-level RW on HAPPO − bench_j diffs when a panel is present.
-        from src.eval.stats_inference import romano_wolf_over_panel
+        from mascotrl.eval.stats_inference import romano_wolf_over_panel
 
         panel_for_rw = dict(rivals)
         fold_panels = (report.get("cpcv") or {}).get("fold_benchmark_panels") or {}
@@ -717,7 +717,7 @@ def attach_publication_stats(
 
     # Impact sensitivity sweep (robustness axis, not training).
     if bool(cfg.get("publication_impact_sweep", True)) and pnls and turns:
-        from src.reporting.capital_gates import capacity_curve_from_daily
+        from mascotrl.reporting.capital_gates import capacity_curve_from_daily
 
         sweep = []
         for coef in [0.0, 0.005, 0.01, 0.02, 0.05, 0.1]:
@@ -782,9 +782,9 @@ def run_and_attach_baselines(
     except KeyError:
         skew = None
 
-    from src.data.oos_panel import load_universe_meta
-    from src.eval.baselines import load_underlier_returns_matrix
-    from src.reporting.portfolio_accounting import PortfolioAccountingLedger
+    from mascotrl.data.oos_panel import load_universe_meta
+    from mascotrl.eval.baselines import load_underlier_returns_matrix
+    from mascotrl.reporting.portfolio_accounting import PortfolioAccountingLedger
 
     names = asset_names
     if names is None:
@@ -834,7 +834,7 @@ def run_and_attach_baselines(
     report["baseline_ledger_rows"] = len(ledger.records)
 
     # Edge vs strongest non-trivial baseline on mean PnL + alpha stamp.
-    from src.eval.alpha_gates import apply_rich_baseline_alpha_gate
+    from mascotrl.eval.alpha_gates import apply_rich_baseline_alpha_gate
 
     happo_mu = float(
         ((report.get("historical_oos") or {}).get("summary") or {})
@@ -980,7 +980,7 @@ def plot_publication_figures(report: dict[str, Any], out_dir: Path) -> list[str]
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    from src.reporting.book_style import (
+    from mascotrl.reporting.book_style import (
         C_ACCENT,
         C_BLUE,
         C_GRAY,

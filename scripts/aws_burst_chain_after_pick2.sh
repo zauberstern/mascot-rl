@@ -21,7 +21,7 @@ wait_wave_complete() {
   .venv/bin/python scripts/aws_pull_artifacts.py --wave "$wave"
   local idx
   idx="$(.venv/bin/python - <<PY
-from src.aws_burst.waves import WAVES
+from mascotrl.aws_burst.waves import WAVES
 print(WAVES["$wave"].out_subdir)
 PY
 )"

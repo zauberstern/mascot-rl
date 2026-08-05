@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.normalize import normalize_cross_section_panel
+from mascotrl.features.blocks.normalize import normalize_cross_section_panel
 
 
 def apply_cross_section_normalize(cube: np.ndarray) -> np.ndarray:

@@ -4,4 +4,4 @@ Internal / rollback only. Production default is purgedcv via
 :func:`src.eval.cpcv_backend.resolve_use_purgedcv` when the package imports.
 Set ``use_purgedcv: false`` to force this legacy path.
 """
-from src.eval.cpcv import *  # noqa: F403
+from mascotrl.eval.cpcv import *  # noqa: F403

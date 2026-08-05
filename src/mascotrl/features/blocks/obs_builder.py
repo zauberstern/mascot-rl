@@ -5,8 +5,8 @@ from typing import Any
 
 import numpy as np
 
-from src.features.blocks.assemble import assemble_equity_feature_cube
-from src.features.blocks.portfolio_state import build_portfolio_state_features
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.blocks.portfolio_state import build_portfolio_state_features
 
 # Static C + portfolio channels: w_prev, days_held, cum_cost, w_base.
 _PORTFOLIO_CHANNEL_NAMES = ("w_prev", "days_held", "cum_cost", "w_base")
@@ -117,7 +117,7 @@ class PanelObservationBuilder:
         static = np.nan_to_num(static, nan=0.0, posinf=0.0, neginf=0.0)
         # EarnMore-style: replace invalid slots before the body sees features.
         if float(np.min(self._slot_mask)) < 0.5:
-            from src.features.mask_tokens import apply_mask_tokens_to_cube
+            from mascotrl.features.mask_tokens import apply_mask_tokens_to_cube
 
             static = apply_mask_tokens_to_cube(static, self._slot_mask)
             self._representation_masked = True
@@ -140,7 +140,7 @@ class PanelObservationBuilder:
             hist = np.concatenate([pad, hist], axis=0)
         hist = np.nan_to_num(hist, nan=0.0)
         if float(np.min(self._slot_mask)) < 0.5:
-            from src.features.mask_tokens import apply_mask_tokens_to_cube
+            from mascotrl.features.mask_tokens import apply_mask_tokens_to_cube
 
             # hist is (seq, K, C); broadcast slot mask across seq.
             hist = apply_mask_tokens_to_cube(

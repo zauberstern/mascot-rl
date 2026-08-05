@@ -16,10 +16,10 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.paths import LAKE_ROOT
-from src.eval.baselines import BASELINE_NAMES
-from src.eval.stats_rigor import pack_return_summary
-from src.logging_utils import get_logger
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.eval.baselines import BASELINE_NAMES
+from mascotrl.eval.stats_rigor import pack_return_summary
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.orientation")
 

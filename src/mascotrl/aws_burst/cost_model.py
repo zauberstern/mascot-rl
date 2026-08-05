@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from src.aws_burst.profiles import BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC
+from mascotrl.aws_burst.profiles import BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC
 
 
 @dataclass(frozen=True)

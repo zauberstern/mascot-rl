@@ -10,7 +10,7 @@ from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
 
-from src.reporting.behavior_metrics import (
+from mascotrl.reporting.behavior_metrics import (
     BEHAVIOUR_MEASURE_IDS,
     SLEEVE_IDS,
     compute_behaviour_vector,
@@ -30,7 +30,7 @@ _CAUSAL_BANNED = re.compile(r"\b(causes?|because|leads to)\b", re.IGNORECASE)
 
 def build_channel_groups_from_names(names: Sequence[str]) -> dict[str, list[int]]:
     """Map feature group names to flat obs channel indices (asset 0, latest step)."""
-    from src.features.groups import FEATURE_GROUPS, _KELLY_PREFIX, _MACRO_PREFIXES
+    from mascotrl.features.groups import FEATURE_GROUPS, _KELLY_PREFIX, _MACRO_PREFIXES
 
     name_list = list(names)
     groups: dict[str, list[int]] = {}

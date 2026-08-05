@@ -13,7 +13,7 @@ if str(ROOT) not in sys.path:
 
 import boto3
 
-from src.aws_burst.profiles import BURST_PROFILES, REGION
+from mascotrl.aws_burst.profiles import BURST_PROFILES, REGION
 
 USER_NAME = "volsurf-burst-operator"
 POLICY_NAME = "volsurf-burst-operator-policy"

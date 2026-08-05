@@ -11,8 +11,8 @@ from pathlib import Path
 
 import yaml
 
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.registry import validate_cfg
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.registry import validate_cfg
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "config" / "spectrum" / "cherrypick" / "rc6"

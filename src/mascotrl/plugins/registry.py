@@ -5,17 +5,17 @@ from typing import Any
 
 import torch.nn as nn
 
-from src.features.dhgnn import SpatialDHGNN
-from src.features.extractor import AlphaFeatureExtractor
-from src.plugins.admm_projection import ADMMProjectionLayer
-from src.plugins.directed_dhgnn import DirectedSpatialDHGNN
-from src.plugins.funding_drag import FundingDrag
-from src.plugins.multibook_projection import MultibookProjectionLayer
-from src.plugins.resolve import resolve_plugins
-from src.plugins.tau_schedule import FixedTau, MacroScheduleTau
-from src.policy.convex_projection import ConvexProjectionLayer
-from src.policy.overlay_projection import OverlayProjectionLayer
-from src.policy.happo import HAPPOEngine
+from mascotrl.features.dhgnn import SpatialDHGNN
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.plugins.admm_projection import ADMMProjectionLayer
+from mascotrl.plugins.directed_dhgnn import DirectedSpatialDHGNN
+from mascotrl.plugins.funding_drag import FundingDrag
+from mascotrl.plugins.multibook_projection import MultibookProjectionLayer
+from mascotrl.plugins.resolve import resolve_plugins
+from mascotrl.plugins.tau_schedule import FixedTau, MacroScheduleTau
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.overlay_projection import OverlayProjectionLayer
+from mascotrl.policy.happo import HAPPOEngine
 
 
 def build_tau_schedule(cfg: dict[str, Any] | None = None, plugins: dict | None = None):
@@ -53,7 +53,7 @@ def build_projection(
             num_assets, turnover_limit=tau0, max_name_abs_weight=max_name
         )
     if backend == "overlay_cvxpy":
-        from src.arms import arm_spec_from_cfg
+        from mascotrl.arms import arm_spec_from_cfg
 
         ov = plugins.get("overlay") or {}
         arm = arm_spec_from_cfg(cfg)
@@ -204,7 +204,7 @@ def build_happo_engine(
     cfg: dict[str, Any] | None = None,
     plugins: dict | None = None,
 ) -> HAPPOEngine:
-    from src.reporting.capital_gates import PROJECTION_K_CEILING
+    from mascotrl.reporting.capital_gates import PROJECTION_K_CEILING
 
     plugins = plugins or resolve_plugins(cfg or {})
     cfg = cfg or {}

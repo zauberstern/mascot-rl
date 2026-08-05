@@ -28,8 +28,8 @@ from typing import Any, Sequence
 import numpy as np
 import torch
 
-from src.eval.stats_rigor import pack_return_summary
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.eval.stats_rigor import pack_return_summary
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 BASELINE_NAMES = (
     "short_vol_carry",
@@ -114,7 +114,7 @@ def load_underlier_returns_matrix(
     Source: ``TIER_B["sp500_sec"]`` under ``RAW_ROOT/macro``
     (columns: secid, date, return). Never fabricates RV from ΔIV.
     """
-    from src.data.paths import TIER_B
+    from mascotrl.data.paths import TIER_B
 
     csv_path = Path(path) if path is not None else TIER_B["sp500_sec"]
     meta: dict[str, Any] = {

@@ -11,8 +11,8 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from src.reporting.behavior_explain import explain_behaviour, shuffle_null_band
-from src.reporting.behavior_metrics import (
+from mascotrl.reporting.behavior_explain import explain_behaviour, shuffle_null_band
+from mascotrl.reporting.behavior_metrics import (
     BEHAVIOUR_MEASURE_IDS,
     SLEEVE_IDS,
     compute_behaviour_vector,
@@ -453,7 +453,7 @@ def build_policy_behavior(
     style_agreement: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Assemble ``policy_behavior.json`` schema_version 2 (interpretation only)."""
-    from src.reporting.behavior_metrics import (
+    from mascotrl.reporting.behavior_metrics import (
         regime_behaviour_deltas,
         turbulence_regimes_from_returns,
     )
@@ -839,11 +839,11 @@ def load_behaviour_macro_context(
     """
     import pandas as pd
 
-    from src.data.fioracle_macro import (
+    from mascotrl.data.fioracle_macro import (
         build_fioracle_feature_frame,
         load_fioracle_macro,
     )
-    from src.data.regime_labels import label_regimes
+    from mascotrl.data.regime_labels import label_regimes
 
     idx = pd.DatetimeIndex(pd.to_datetime(list(dates)))
     n = len(idx)
@@ -1006,7 +1006,7 @@ def plot_archetype_figures(
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    from src.reporting.book_style import C_ACCENT, C_BLUE, C_NAVY, C_NEG, C_POS
+    from mascotrl.reporting.book_style import C_ACCENT, C_BLUE, C_NAVY, C_NEG, C_POS
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

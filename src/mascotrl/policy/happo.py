@@ -13,9 +13,9 @@ from typing import Any, Mapping
 import torch
 import torch.nn as nn
 
-from src.policy.convex_projection import ConvexProjectionLayer
-from src.plugins.hypernet_actors import DeepSetsCritic, HypernetActors
-from src.plugins.tau_schedule import FixedTau
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.plugins.hypernet_actors import DeepSetsCritic, HypernetActors
+from mascotrl.plugins.tau_schedule import FixedTau
 
 
 def layer_init(layer: nn.Linear, std: float = math.sqrt(2.0)) -> nn.Linear:

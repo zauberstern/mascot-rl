@@ -3,9 +3,9 @@ from __future__ import annotations
 
 from typing import Iterable, Sequence
 
-from src.features.blocks.fundamentals_pit import FUNDAMENTALS_PIT_CHANNELS
-from src.features.blocks.iv_surface import DEFAULT_SURFACE_CHANNELS
-from src.features.blocks.returns_momentum import LOG_RETURN_WINDOWS
+from mascotrl.features.blocks.fundamentals_pit import FUNDAMENTALS_PIT_CHANNELS
+from mascotrl.features.blocks.iv_surface import DEFAULT_SURFACE_CHANNELS
+from mascotrl.features.blocks.returns_momentum import LOG_RETURN_WINDOWS
 
 CORE_MOMENTUM: tuple[str, ...] = tuple(
     name

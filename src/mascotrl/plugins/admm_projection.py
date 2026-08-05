@@ -105,7 +105,7 @@ class ADMMProjectionLayer(nn.Module):
         self.fallback_to_cvxpy = bool(fallback_to_cvxpy)
         self._cvx_oracle = None
         if self.fallback_to_cvxpy and self.K <= 50:
-            from src.policy.convex_projection import ConvexProjectionLayer
+            from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
             self._cvx_oracle = ConvexProjectionLayer(
                 self.K,

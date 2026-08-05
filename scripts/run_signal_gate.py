@@ -57,7 +57,7 @@ def _monthly_returns_full(
     ``ret_full[i]`` for ``i >= 1`` is the compounded return over
     ``(me_dates[i-1], me_dates[i]]``.
     """
-    from src.eval.cadence import month_end_mask
+    from mascotrl.eval.cadence import month_end_mask
 
     idx = pd.DatetimeIndex(dates)
     me_mask = month_end_mask(idx)
@@ -155,13 +155,13 @@ def main() -> None:
     ap.add_argument("--trial-ledger", default=str(DEFAULT_LEDGER))
     args = ap.parse_args()
 
-    from src.data.equity_panel import SELECTION_START, SELECTION_END, load_sp500_security_returns
-    from src.data.paths import LAKE_ROOT
-    from src.data.surface_signals import (
+    from mascotrl.data.equity_panel import SELECTION_START, SELECTION_END, load_sp500_security_returns
+    from mascotrl.data.paths import LAKE_ROOT
+    from mascotrl.data.surface_signals import (
         SURFACE_SIGNAL_NAMES,
         materialize_surface_signals_from_lake,
     )
-    from src.eval.signal_gate import (
+    from mascotrl.eval.signal_gate import (
         decile_long_short,
         ff_alpha,
         ic_decay,
@@ -169,7 +169,7 @@ def main() -> None:
         run_signal_gate_v2,
         write_signal_allowlist,
     )
-    from src.eval.trial_ledger import TrialLedger
+    from mascotrl.eval.trial_ledger import TrialLedger
     from scripts.run_eq_alloc_campaign import _wide_returns
 
     t0 = time.perf_counter()

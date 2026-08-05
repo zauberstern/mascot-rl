@@ -34,9 +34,9 @@ RUN python setup_extensions.py \
 from pathlib import Path
 
 import cpp_rbergomi
-from src.pricing.interface import polaris_pricer_cpp
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.pricing.interface import polaris_pricer_cpp
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
 assert cpp_rbergomi is not None, "cpp_rbergomi missing from image"
 assert polaris_pricer_cpp is not None, "polaris_pricer_cpp missing from image"

@@ -3,13 +3,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.arms.spec import (
+from mascotrl.arms.spec import (
     EQUITY_LABEL_STEM,
     OPTION_LABEL_STEM,
     ArmSpec,
     arm_spec_from_cfg,
 )
-from src.data.slot_mask import coverage_masks_for_arm
+from mascotrl.data.slot_mask import coverage_masks_for_arm
 
 
 def resolve_claim_label_stem(cfg: dict[str, Any]) -> str:

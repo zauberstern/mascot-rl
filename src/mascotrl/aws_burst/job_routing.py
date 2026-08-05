@@ -67,7 +67,7 @@ def estimate_peak_memory(cfg: Mapping[str, Any]) -> int:
 
 
 def _load_cell_cfg(root: Path, cell_rel: str) -> Mapping[str, Any] | None:
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     path = Path(cell_rel)
     if not path.is_file():

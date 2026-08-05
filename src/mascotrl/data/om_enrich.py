@@ -13,9 +13,9 @@ from typing import Any, Iterable, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.paths import LAKE_ROOT
-from src.data.wrds_enrich import ADV_NAME, connect_wrds
-from src.logging_utils import get_logger
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.data.wrds_enrich import ADV_NAME, connect_wrds
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.om_enrich")
 

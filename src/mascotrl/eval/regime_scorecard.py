@@ -16,15 +16,16 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.regime_labels import REGIME_IDS, label_regimes
-from src.eval.stats_rigor import DEFAULT_REGIMES
-from src.eval.turbulence import (
+from mascotrl.data.regime_labels import REGIME_IDS, label_regimes
+from mascotrl._root import REPO_ROOT
+from mascotrl.eval.stats_rigor import DEFAULT_REGIMES
+from mascotrl.eval.turbulence import (
     chi2_turbulence_threshold,
     classify_regime,
     classify_regime_chi2,
     turbulence_index,
 )
-from src.eval.walk_forward_hmm import (
+from mascotrl.eval.walk_forward_hmm import (
     jaccard_turbulent,
     walk_forward_hmm_filter,
     walk_forward_markov_filter,
@@ -590,7 +591,7 @@ def build_regime_scorecard(
     root = (
         Path(repo_root)
         if repo_root is not None
-        else Path(__file__).resolve().parents[2]
+        else REPO_ROOT
     )
     limitations: list[str] = []
     hygiene: dict[str, Any] = {"status": "unavailable", "reason": "macro not provided"}
@@ -629,7 +630,7 @@ def build_regime_scorecard(
     macro_sources: dict[str, str] = {}
     if asset_returns is not None:
         if use_macro_yt and dates is not None:
-            from src.eval.regime_dual_source import resolve_macro_yt_cols
+            from mascotrl.eval.regime_dual_source import resolve_macro_yt_cols
 
             macro_cols, macro_sources = resolve_macro_yt_cols(
                 macro, dates, usb_root=usb_lake_root
@@ -695,8 +696,8 @@ def build_regime_scorecard(
             models_payload = agreement.pop("models")
 
         # Overlay 3-state for per_regime_sharpe (calm→crisis only on operational).
-        from src.reporting.behavior_metrics import turbulence_regimes_from_returns
-        from src.spectrum.policy_mode import per_regime_sharpe
+        from mascotrl.reporting.behavior_metrics import turbulence_regimes_from_returns
+        from mascotrl.spectrum.policy_mode import per_regime_sharpe
 
         existing = labels.to_numpy() if labels is not None else None
         overlay = turbulence_regimes_from_returns(
@@ -791,13 +792,13 @@ def build_regime_scorecard(
 
     wiring = None
     if include_wiring:
-        from src.eval.regime_wiring_audit import audit_regime_wiring
+        from mascotrl.eval.regime_wiring_audit import audit_regime_wiring
 
         wiring = audit_regime_wiring(root)
 
     leverage = None
     if include_leverage:
-        from src.eval.macro_lake_leverage import build_macro_lake_leverage
+        from mascotrl.eval.macro_lake_leverage import build_macro_lake_leverage
 
         leverage = build_macro_lake_leverage(
             repo_root=root,

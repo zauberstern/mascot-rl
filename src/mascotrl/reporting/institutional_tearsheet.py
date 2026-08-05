@@ -13,7 +13,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from src.reporting.book_style import (
+from mascotrl.reporting.book_style import (
     C_ACCENT,
     C_BLUE,
     C_GRAY,
@@ -31,7 +31,7 @@ from src.reporting.book_style import (
     save_figure,
     shade_insample,
 )
-from src.reporting.viz_ingest import (
+from mascotrl.reporting.viz_ingest import (
     DEFAULT_FRICTION_PER_TURNOVER,
     REGIME_IS,
     REGIME_OOS,

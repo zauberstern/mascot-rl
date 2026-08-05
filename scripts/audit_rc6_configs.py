@@ -64,8 +64,8 @@ def _audit_one(p: Path, *, require_cube_false_non_hist: bool = True) -> None:
     else:
         check(str(cfg.get("projection_mode")) == "hard", f"{stem}: hardtau")
 
-    from src.spectrum.cell_schema import validate_cell_cfg
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.cell_schema import validate_cell_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     try:
         validate_cell_cfg(cfg)

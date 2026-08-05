@@ -66,7 +66,7 @@ def equal_weight_sharpe(
     if rets.ndim != 2 or rets.shape[0] < 2:
         return float("nan")
     if factors is not None and friction is not None:
-        from src.eval.parity_harness import score_equal_weight
+        from mascotrl.eval.parity_harness import score_equal_weight
 
         out = score_equal_weight(
             rets,

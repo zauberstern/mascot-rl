@@ -64,7 +64,7 @@ def make_cmdp_projector(
         tau = float(turnover_limit)
         # policy_mode turnover multiplier
         try:
-            from src.spectrum.policy_mode import apply_turnover_multiplier, resolve_policy_mode
+            from mascotrl.spectrum.policy_mode import apply_turnover_multiplier, resolve_policy_mode
 
             tau = float(apply_turnover_multiplier(tau, resolve_policy_mode(dict(cfg))))
         except Exception:

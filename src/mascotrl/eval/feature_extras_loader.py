@@ -8,7 +8,7 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.feature_panels import (
+from mascotrl.data.feature_panels import (
     FAMILY_LOADERS,
     load_analyst_long,
     load_compustat_long,
@@ -23,10 +23,10 @@ from src.data.feature_panels import (
     load_short_interest_long,
     load_worldscope_long,
 )
-from src.data.paths import LAKE_ROOT
-from src.data.surface_signals import _canonical_secid_key
-from src.features.blocks.liquidity import map_wide_to_slots
-from src.features.groups import resolve_excludes
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.data.surface_signals import _canonical_secid_key
+from mascotrl.features.blocks.liquidity import map_wide_to_slots
+from mascotrl.features.groups import resolve_excludes
 
 log = logging.getLogger(__name__)
 

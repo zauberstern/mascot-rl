@@ -27,27 +27,27 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.eval.adahedge import adahedge_fixed_share, flipflop, follow_the_leader
-from src.eval.best_k_shift import best_k_shift, theoretical_regret_bound
-from src.eval.expert_eg import boa_experts, eg_experts
-from src.eval.expert_losses import expanding_unit_interval, log_wealth_loss
-from src.eval.fixed_share import fixed_share, pre_register_alpha
-from src.eval.hold_leader import hold_leader, rolling_leader
-from src.eval.owl_hysteresis import owl_hysteresis
-from src.eval.page_hinkley_switch import page_hinkley_switch
-from src.eval.performance_sleeping import performance_sleeping
-from src.eval.regime_desk_metrics import (
+from mascotrl.eval.adahedge import adahedge_fixed_share, flipflop, follow_the_leader
+from mascotrl.eval.best_k_shift import best_k_shift, theoretical_regret_bound
+from mascotrl.eval.expert_eg import boa_experts, eg_experts
+from mascotrl.eval.expert_losses import expanding_unit_interval, log_wealth_loss
+from mascotrl.eval.fixed_share import fixed_share, pre_register_alpha
+from mascotrl.eval.hold_leader import hold_leader, rolling_leader
+from mascotrl.eval.owl_hysteresis import owl_hysteresis
+from mascotrl.eval.page_hinkley_switch import page_hinkley_switch
+from mascotrl.eval.performance_sleeping import performance_sleeping
+from mascotrl.eval.regime_desk_metrics import (
     best_solo_expert,
     book_table_row,
     per_regime_desk_stats,
     weight_turnover_l1,
 )
-from src.eval.regime_desk_peers import causal_rolling_panel_returns
-from src.eval.regime_desk_seal import align_sealed_operational_mask
-from src.eval.sleeping_experts import variable_share_sleeping
-from src.eval.turbulence import classify_regime, turbulence_index
-from src.eval.variable_share import variable_share
-from src.eval.walk_forward_hmm import jaccard_turbulent
+from mascotrl.eval.regime_desk_peers import causal_rolling_panel_returns
+from mascotrl.eval.regime_desk_seal import align_sealed_operational_mask
+from mascotrl.eval.sleeping_experts import variable_share_sleeping
+from mascotrl.eval.turbulence import classify_regime, turbulence_index
+from mascotrl.eval.variable_share import variable_share
+from mascotrl.eval.walk_forward_hmm import jaccard_turbulent
 
 # Theory-ordered Gate A/B candidates (first passer is primary; not OOS Sharpe-max).
 PRIMARY_MIXER_CANDIDATES = (
@@ -543,7 +543,7 @@ def assemble_regime_desk(
     # Live operational Markov (always computed for Jaccard vs seal).
     turbulent_live = np.asarray(turbulent_q75_live, dtype=bool)
     try:
-        from src.eval.walk_forward_hmm import walk_forward_markov_filter
+        from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
         hmm_w = min(252 * 3, max(80, t_len // 3))
         filt = walk_forward_markov_filter(

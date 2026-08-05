@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 from cvxpylayers.torch import CvxpyLayer
 
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 ALLOWED_DELTA_MODES = frozenset({"soft", "joint", "option_block", "off"})
 

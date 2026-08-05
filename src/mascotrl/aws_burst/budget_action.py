@@ -9,7 +9,7 @@ from typing import Any
 
 from botocore.exceptions import ClientError
 
-from src.aws_burst.profiles import BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC
+from mascotrl.aws_burst.profiles import BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC
 
 log = logging.getLogger(__name__)
 

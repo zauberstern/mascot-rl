@@ -75,7 +75,7 @@ class AssetTemporalPolicyBody(nn.Module):
         with_critic: bool = True,
     ) -> None:
         super().__init__()
-        from src.features.extractor import AlphaFeatureExtractor
+        from mascotrl.features.extractor import AlphaFeatureExtractor
 
         self.num_assets = int(num_assets)
         self.d_model = int(d_model)
@@ -94,7 +94,7 @@ class AssetTemporalPolicyBody(nn.Module):
                     f"image_channels={self.image_channels} must be < "
                     f"d_model={self.d_model}"
                 )
-            from src.features.surface_cnn import SurfaceImageEncoder
+            from mascotrl.features.surface_cnn import SurfaceImageEncoder
 
             self.image_encoder = SurfaceImageEncoder(embed_dim=int(surface_image_embed_dim))
             self.base_d_model = self.d_model - self.image_channels

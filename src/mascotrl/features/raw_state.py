@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Literal
 import numpy as np
 
 if TYPE_CHECKING:
-    from src.arms.spec import ArmSpec
+    from mascotrl.arms.spec import ArmSpec
 
 FeatureEncoder = Literal["pad_truncate", "legacy_sinusoid"]
 

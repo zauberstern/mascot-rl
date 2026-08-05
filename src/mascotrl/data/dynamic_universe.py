@@ -16,7 +16,7 @@ from typing import Any, Callable, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.slot_mask import select_slots_for_date, valid_mask_from_slots
+from mascotrl.data.slot_mask import select_slots_for_date, valid_mask_from_slots
 
 
 def _asof_index(dates: Sequence, asof: Any) -> int:

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.onehot_leader import onehot, trailing_sharpe
+from mascotrl.eval.onehot_leader import onehot, trailing_sharpe
 
 
 def owl_hysteresis(

@@ -8,7 +8,7 @@ from typing import Any
 
 import pandas as pd
 
-from src.data.file_fingerprints import file_fingerprints, fingerprints_match
+from mascotrl.data.file_fingerprints import file_fingerprints, fingerprints_match
 
 P3_REFUSED = (
     "lseg_worldscope.parquet",

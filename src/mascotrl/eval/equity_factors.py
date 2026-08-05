@@ -15,13 +15,13 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.paths import LAKE_ROOT
-from src.eval.factor_alpha import factor_alpha, hlz_hurdles
-from src.eval.orientation_benchmarks import (
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.eval.factor_alpha import factor_alpha, hlz_hurdles
+from mascotrl.eval.orientation_benchmarks import (
     load_cash_daily_returns,
     load_equity_daily_returns,
 )
-from src.logging_utils import get_logger
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.eval.equity_factors")
 

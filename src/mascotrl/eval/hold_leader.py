@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.onehot_leader import onehot, pick_leader, trailing_sharpe
+from mascotrl.eval.onehot_leader import onehot, pick_leader, trailing_sharpe
 
 
 def hold_leader(

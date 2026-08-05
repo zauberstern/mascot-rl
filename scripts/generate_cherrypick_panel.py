@@ -39,10 +39,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.protocol_tiers import apply_protocol_tier
-from src.spectrum.registry import PORTFOLIO_ARM_IDS, validate_cfg
-from src.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.protocol_tiers import apply_protocol_tier
+from mascotrl.spectrum.registry import PORTFOLIO_ARM_IDS, validate_cfg
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
 FULLGRID_DIR = ROOT / "config" / "spectrum" / "fullgrid"
 OUT_DIR = ROOT / "config" / "spectrum" / "cherrypick"

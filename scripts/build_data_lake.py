@@ -10,9 +10,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.lake_builder import ParquetDataLakeBuilder
-from src.data.paths import TIER_A, tier_a_available
-from src.logging_utils import log_span, setup_logging
+from mascotrl.data.lake_builder import ParquetDataLakeBuilder
+from mascotrl.data.paths import TIER_A, tier_a_available
+from mascotrl.logging_utils import log_span, setup_logging
 
 # Known S2 mismatch years from prior seal runs (scripts/reconvert_lake_years.py).
 _MISMATCH_DEFAULT = {
@@ -36,7 +36,7 @@ def _years_from_seal(seal_path: Path, dataset: str) -> list[int]:
 
 def _reconvert_mismatch_years(builder: ParquetDataLakeBuilder, log) -> int:
     """Reconvert S2 mismatch years then re-audit (skip-heavy S1/S4)."""
-    from src.data.lake_source_audit import run_coverage_audit
+    from mascotrl.data.lake_source_audit import run_coverage_audit
 
     artifacts = ROOT / "logs" / "artifacts"
     artifacts.mkdir(parents=True, exist_ok=True)

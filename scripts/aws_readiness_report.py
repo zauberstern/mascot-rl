@@ -39,9 +39,9 @@ def _pytest_focused(paths: list[str]) -> dict[str, Any]:
 def score_readiness(*, run_tests: bool = True) -> dict[str, Any]:
     from scripts.aws_smoke import compose_smoke_plan
     from scripts.aws_submit_wave import build_plan
-    from src.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
-    from src.data.feature_panels import required_panel_families
-    from src.eval.research_happo_cpcv import (
+    from mascotrl.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
+    from mascotrl.data.feature_panels import required_panel_families
+    from mascotrl.eval.research_happo_cpcv import (
         _discover_latest_happo_checkpoint,
         _maybe_resume_happo_checkpoint,
     )

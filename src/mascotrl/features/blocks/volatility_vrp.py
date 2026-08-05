@@ -21,7 +21,7 @@ def trailing_hv_panel(returns: np.ndarray, window: int) -> np.ndarray:
     Implemented via pandas rolling (library path) with the same full-window
     causal gate as the historical NumPy loop.
     """
-    from src.features.blocks.pandas_rolling import trailing_hv_panel_pandas
+    from mascotrl.features.blocks.pandas_rolling import trailing_hv_panel_pandas
 
     return trailing_hv_panel_pandas(returns, window)
 

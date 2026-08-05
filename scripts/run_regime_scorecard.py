@@ -44,7 +44,7 @@ def _load_macro_from_fioracle(
     end: str,
 ) -> pd.DataFrame | None:
     try:
-        from src.data.fioracle_macro import (
+        from mascotrl.data.fioracle_macro import (
             build_fioracle_feature_frame,
             load_fioracle_macro,
         )
@@ -207,10 +207,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = ap.parse_args(argv)
 
-    from src.data.paths import CANONICAL_LAKE
-    from src.eval.macro_lake_leverage import build_macro_lake_leverage
-    from src.eval.regime_scorecard import build_regime_scorecard
-    from src.eval.regime_wiring_audit import audit_regime_wiring
+    from mascotrl.data.paths import CANONICAL_LAKE
+    from mascotrl.eval.macro_lake_leverage import build_macro_lake_leverage
+    from mascotrl.eval.regime_scorecard import build_regime_scorecard
+    from mascotrl.eval.regime_wiring_audit import audit_regime_wiring
 
     usb = args.usb_lake_root or Path(CANONICAL_LAKE)
     out_dir = args.out
@@ -221,7 +221,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     if args.from_seal:
-        from src.eval.regime_seal import scorecard_from_seal, sealed_dir
+        from mascotrl.eval.regime_seal import scorecard_from_seal, sealed_dir
 
         seal_path = sealed_dir(out_dir, args.from_seal)
         if not seal_path.is_dir():
@@ -264,7 +264,7 @@ def main(argv: list[str] | None = None) -> int:
         gics = None
         kpt = None
         if macro is not None:
-            from src.eval.regime_return_panel import (
+            from mascotrl.eval.regime_return_panel import (
                 load_kpt_gics_sector_returns,
                 load_kpt_sector_returns,
                 load_style_desk_returns,
@@ -372,7 +372,7 @@ def main(argv: list[str] | None = None) -> int:
 
         # Report-only: Jaccard of SIC vs GICS operational Markov masks.
         if returns_source == "kpt10_gics" and kpt is not None and gics is not None:
-            from src.eval.regime_scorecard import jaccard_sic_vs_gics_operational
+            from mascotrl.eval.regime_scorecard import jaccard_sic_vs_gics_operational
 
             try:
                 j_sg = jaccard_sic_vs_gics_operational(
@@ -390,7 +390,7 @@ def main(argv: list[str] | None = None) -> int:
                 agr["jaccard_sic_vs_gics_note"] = f"unavailable: {exc}"
 
         if args.seal is not None:
-            from src.eval.regime_seal import seal_regime_run
+            from mascotrl.eval.regime_seal import seal_regime_run
 
             if asset_returns is None:
                 print(

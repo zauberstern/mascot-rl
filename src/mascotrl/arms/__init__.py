@@ -1,6 +1,6 @@
 """Spectrum study arms package."""
 
-from src.arms.spec import (
+from mascotrl.arms.spec import (
     ALLOWED_ARM_IDS,
     ALLOWED_DELTA_MODES,
     ALLOWED_RESIDUAL_MODELS,

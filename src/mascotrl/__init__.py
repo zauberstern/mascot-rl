@@ -1,1 +1,1 @@
-"""Package marker for src layout."""
+"""Package marker for mascotrl."""

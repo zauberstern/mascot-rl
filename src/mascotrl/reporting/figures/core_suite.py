@@ -8,8 +8,8 @@ from typing import Any
 
 import numpy as np
 
-from src.reporting.figures import loaders as L
-from src.reporting.book_style import (
+from mascotrl.reporting.figures import loaders as L
+from mascotrl.reporting.book_style import (
     ARM_COLORS,
     ARM_ORDER,
     C_BLUE,

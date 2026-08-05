@@ -1,5 +1,5 @@
 """Public model-zoo exports."""
-from src.models.registry import (
+from mascotrl.models.registry import (
     ModelCard,
     list_models,
     load_card,
@@ -9,7 +9,7 @@ from src.models.registry import (
     write_model_zoo_index,
     zoo_root,
 )
-from src.models.inference import act_weights, load_policy, roll_oos, roll_oos_with_agent
+from mascotrl.models.inference import act_weights, load_policy, roll_oos, roll_oos_with_agent
 
 __all__ = [
     "ModelCard",

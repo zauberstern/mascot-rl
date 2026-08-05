@@ -8,7 +8,7 @@ from __future__ import annotations
 import torch
 from torch import Tensor
 
-from src.policy.sparsemax import sparsemax
+from mascotrl.policy.sparsemax import sparsemax
 
 
 def entmax(z: Tensor, alpha: float = 1.5, dim: int = -1) -> Tensor:

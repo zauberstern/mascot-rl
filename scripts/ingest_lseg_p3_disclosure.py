@@ -17,8 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.paths import LAKE_ROOT, LSEG_RAW, RAW_ROOT, assert_lake_mounted, assert_raw_mounted
-from src.logging_utils import setup_logging
+from mascotrl.data.paths import LAKE_ROOT, LSEG_RAW, RAW_ROOT, assert_lake_mounted, assert_raw_mounted
+from mascotrl.logging_utils import setup_logging
 
 P3_FILES = (
     "lseg_ibes.parquet",

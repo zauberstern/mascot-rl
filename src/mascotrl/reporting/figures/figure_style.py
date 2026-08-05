@@ -225,7 +225,7 @@ def save_figure(
     skip_validators: bool = False,
 ) -> list[str]:
     """Validate (optional) then write PNG at 400 dpi and optional PDF twin."""
-    from src.reporting.figures.validate import run_figure_validators
+    from mascotrl.reporting.figures.validate import run_figure_validators
 
     stem = Path(stem)
     stem.parent.mkdir(parents=True, exist_ok=True)

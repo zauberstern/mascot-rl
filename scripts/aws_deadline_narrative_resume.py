@@ -22,8 +22,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.aws_submit_wave import remaining_wall_attempt_seconds, submit_wave  # noqa: E402
-from src.aws_burst.aws_client import BurstClient  # noqa: E402
-from src.aws_burst.profiles import REGION, armed_profiles, artifact_bucket  # noqa: E402
+from mascotrl.aws_burst.aws_client import BurstClient  # noqa: E402
+from mascotrl.aws_burst.profiles import REGION, armed_profiles, artifact_bucket  # noqa: E402
 
 JOB_QUEUE = "volsurf-burst-queue"
 _ACTIVE = ("SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING")

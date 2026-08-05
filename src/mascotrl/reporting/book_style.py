@@ -36,7 +36,7 @@ CMAP_SEQUENTIAL = "Greys"
 
 def apply_academic_rc() -> None:
     """Delegate to figure Okabe-Ito serif profile (single visual identity)."""
-    from src.reporting.figures.figure_style import apply_figure_rc
+    from mascotrl.reporting.figures.figure_style import apply_figure_rc
 
     apply_figure_rc()
 
@@ -144,7 +144,7 @@ def finalize_figure(fig, *, legend_space: bool = False) -> None:
 
 def save_figure(fig, path, *, dpi: int = 160, pdf: bool = False, strict: bool = False) -> list[str]:
     """Write PNG only by default. Returns written paths."""
-    from src.reporting.figures.validate import run_figure_validators
+    from mascotrl.reporting.figures.validate import run_figure_validators
 
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -362,7 +362,7 @@ def build_manifest(
     """Assemble the ``stamp_footer`` manifest once per report, so every page
     in the book carries an identical footer without re-deriving git/config
     hashes per figure."""
-    from src.reporting.provenance import _git, config_hash
+    from mascotrl.reporting.provenance import _git, config_hash
 
     return {
         "git_sha": _git("rev-parse", "--short", "HEAD"),
@@ -505,6 +505,6 @@ def PdfBook(path: str | Path) -> Iterator[Any]:
         pdf.close()
 
 
-from src.reporting.figures.validate import (  # noqa: E402
+from mascotrl.reporting.figures.validate import (  # noqa: E402
     assert_no_default_mpl_colors,
 )

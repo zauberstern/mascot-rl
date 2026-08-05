@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from src.eval.equity_substrate import (
+from mascotrl.eval.equity_substrate import (
     _wide_field,
     _wide_returns,
     _wide_returns_with_availability,
@@ -436,7 +436,7 @@ def _locked_mark_seed_complete(
     accessed_keys: Sequence[str] | None = None,
 ) -> None:
     """Update campaign_manifest.json under an exclusive flock (multi-worker safe)."""
-    from src.eval.campaign_manifest import (
+    from mascotrl.eval.campaign_manifest import (
         load_manifest,
         mark_cell_complete,
         save_manifest,
@@ -480,10 +480,10 @@ def _run_one_seed_cpcv(
     repo_root: Path | str | None = None,
 ) -> dict[str, Any]:
     """Train one CPCV seed cell; write ``cpcv_seed_{seed}.json`` + locked manifest."""
-    from src.eval.campaign_manifest import atomic_write_json
-    from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
-    from src.eval.yaml_honesty import TrackingDict
-    from src.eval.pbo_appendix import append_trial_ledger_entry
+    from mascotrl.eval.campaign_manifest import atomic_write_json
+    from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
+    from mascotrl.eval.yaml_honesty import TrackingDict
+    from mascotrl.eval.pbo_appendix import append_trial_ledger_entry
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -547,7 +547,7 @@ def _seed_worker_main(payload: dict) -> dict:
     os.environ["TORCH_NUM_THREADS"] = str(threads_per)
     os.environ["OMP_NUM_THREADS"] = str(threads_per)
 
-    from src.eval.cpcv import CPCVConfig
+    from mascotrl.eval.cpcv import CPCVConfig
 
     pack_dir = Path(payload["pack_dir"])
     panel = np.load(pack_dir / "panel.npy", allow_pickle=False)
@@ -584,7 +584,7 @@ def _collect_seed_art_paths(
 
 
 def _load_cfg(path: Path) -> "TrackingDict":
-    from src.eval.yaml_honesty import TrackingDict
+    from mascotrl.eval.yaml_honesty import TrackingDict
 
     return TrackingDict(yaml.safe_load(path.read_text()) or {})
 
@@ -593,7 +593,7 @@ def _estimate_campaign_dsr_trials(
     ledger_path: Path, *, cfg: dict
 ) -> tuple[int, dict[str, Any]]:
     """Estimate DSR N from the persisted executed-trial ledger."""
-    from src.eval.publication import estimate_n_trials
+    from mascotrl.eval.publication import estimate_n_trials
 
     try:
         ledger = json.loads(Path(ledger_path).read_text(encoding="utf-8"))
@@ -613,7 +613,7 @@ def _corr_adjacency(returns: np.ndarray, *, thr: float = 0.35) -> np.ndarray:
 
 def _densest_k(returns: np.ndarray, k: int) -> np.ndarray:
     """Diagnostic densest-subgraph control; never used as the selection arm."""
-    from src.reporting.figures.graph_helpers import densest_subgraph_greedy
+    from mascotrl.reporting.figures.graph_helpers import densest_subgraph_greedy
 
     x = np.nan_to_num(returns, nan=0.0)
     c = np.abs(np.corrcoef(x, rowvar=False))
@@ -751,7 +751,7 @@ def _load_crucible_adv_panel(
 
     # Equity dollar_volume fallback (not the return-vol proxy).
     try:
-        from src.data.equity_panel import load_sp500_security_returns
+        from mascotrl.data.equity_panel import load_sp500_security_returns
 
         pad_start = str((dates_idx.min() - pd.Timedelta(days=400)).date())
         raw = load_sp500_security_returns(
@@ -797,7 +797,7 @@ def _load_crucible_surface_panel(
     """Materialize surface signals; fail closed unless proxy panels allowed."""
     allow_proxy = bool(cfg.get("crucible_allow_proxy_panels"))
     try:
-        from src.data.surface_signals import materialize_surface_signals_from_lake
+        from mascotrl.data.surface_signals import materialize_surface_signals_from_lake
 
         start = str((dates_idx.min() - pd.DateOffset(months=2)).date())
         end = str(dates_idx.max().date())
@@ -868,7 +868,7 @@ def _stamp_selection_vs_sizing(
     path_pnls_all: dict | None = None,
 ) -> dict:
     """Attach selection vs sizing attribution when return series exist."""
-    from src.eval.policy_diagnostics import selection_vs_sizing_attribution
+    from mascotrl.eval.policy_diagnostics import selection_vs_sizing_attribution
 
     path_summary = dict(confirmatory.get("path_summary") or {})
     pol = path_summary.get("policy_returns")
@@ -916,18 +916,18 @@ def _build_crucible_universe(
     eval reselect has a full FF4 residual lookback — eval-only returns make
     residual_communities fail closed at EVAL_START.
     """
-    from src.data.crucible import CrucibleSpec, select_universe_crucible
-    from src.data.dynamic_universe import (
+    from mascotrl.data.crucible import CrucibleSpec, select_universe_crucible
+    from mascotrl.data.dynamic_universe import (
         build_slotted_panel,
         selection_turnover,
     )
-    from src.eval.cadence import (
+    from mascotrl.eval.cadence import (
         assert_universe_subset_of_policy,
         build_rebalance_mask,
         build_universe_cadence_mask,
     )
-    from src.eval.friction import friction_spec_from_cfg
-    from src.policy.cmdp_projector import make_cmdp_projector
+    from mascotrl.eval.friction import friction_spec_from_cfg
+    from mascotrl.policy.cmdp_projector import make_cmdp_projector
 
     cruc_cfg = dict(cfg.get("crucible") or {})
     quotas = cruc_cfg.get("quotas")
@@ -1067,7 +1067,7 @@ def _build_crucible_universe(
         "_crucible_schedule_freeze_path"
     )
     if freeze_path:
-        from src.data.crucible import load_universe_schedule
+        from mascotrl.data.crucible import load_universe_schedule
 
         frozen = load_universe_schedule(freeze_path)
         slots_rows = [
@@ -1207,7 +1207,7 @@ def _build_crucible_universe(
     if not slots_rows:
         raise SystemExit("CRUCIBLE produced empty slots_rows")
 
-    from src.data.crucible import schedule_fingerprint, write_universe_schedule
+    from mascotrl.data.crucible import schedule_fingerprint, write_universe_schedule
 
     sched_fp = schedule_fingerprint(slots_rows)
     crucible_block["schedule_fingerprint"] = sched_fp
@@ -1257,7 +1257,7 @@ def _build_crucible_universe(
     cfg["_slots_rows"] = slots_rows
     cfg["_crucible_result"] = crucible_block
     cfg["_universe_reselect_mask"] = np.asarray(u_mask, dtype=bool)
-    from src.eval.cpcv import stamp_reselect_purge_meta
+    from mascotrl.eval.cpcv import stamp_reselect_purge_meta
 
     purge_meta = stamp_reselect_purge_meta(
         list(dates_idx),
@@ -1313,7 +1313,7 @@ def _build_dynamic_arm_universe(
             dates_hist=dates_w,
         )
 
-    from src.data.dynamic_universe import (
+    from mascotrl.data.dynamic_universe import (
         build_dynamic_universe,
         build_slotted_panel,
         select_universe_corr_cluster,
@@ -1363,8 +1363,8 @@ def _build_dynamic_arm_universe(
 
 def _stamp_dynamic_arm_pit(info: dict, *, cfg: dict, dates: list) -> None:
     """Stamp rolling slot-masked selection as PIT-clean."""
-    from src.data.pit_guards import selection_pit_status
-    from src.features.pit_universe import ROLLING_TRAILING_PIT
+    from mascotrl.data.pit_guards import selection_pit_status
+    from mascotrl.features.pit_universe import ROLLING_TRAILING_PIT
 
     cfg["universe_mode"] = ROLLING_TRAILING_PIT
     info["pit"] = selection_pit_status(
@@ -1489,7 +1489,7 @@ def compute_eq_campaign_gates(
     independently guarded: one gate failing (or lacking enough data) never
     blanks out the others.
     """
-    from src.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
+    from mascotrl.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
 
     gates: dict = {}
 
@@ -1552,9 +1552,9 @@ def _plot_campaign(results: dict, out_dir: Path) -> list[str]:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    from src.reporting.book_style import FAMILY_PALETTE, family_color
-    from src.reporting.figures.labels import human
-    from src.reporting.figures.figure_style import (
+    from mascotrl.reporting.book_style import FAMILY_PALETTE, family_color
+    from mascotrl.reporting.figures.labels import human
+    from mascotrl.reporting.figures.figure_style import (
         FIGURE_DPI,
         FIGURE_HEIGHT_DEFAULT_IN,
         FIGURE_HEIGHT_TALL_IN,
@@ -1563,7 +1563,7 @@ def _plot_campaign(results: dict, out_dir: Path) -> list[str]:
         greyscale_safe_styles,
         style_axes,
     )
-    from src.reporting.figures.validate import run_figure_validators
+    from mascotrl.reporting.figures.validate import run_figure_validators
 
     apply_figure_rc()
     paths: list[str] = []
@@ -1848,7 +1848,7 @@ def main() -> None:
     ap = build_arg_parser()
     args = ap.parse_args()
 
-    from src.data.paths import assert_lake_mounted
+    from mascotrl.data.paths import assert_lake_mounted
 
     assert_lake_mounted()
 
@@ -1861,23 +1861,23 @@ def main() -> None:
     _install_diagnostic_signals(OUT)
     _write_heartbeat(OUT, phase="main_start")
 
-    from src.data.equity_panel import (
+    from mascotrl.data.equity_panel import (
         SELECTION_START,
         SELECTION_END,
         EVAL_START,
         EVAL_END,
         load_sp500_security_returns,
     )
-    from src.data.paths import LAKE_ROOT
-    from src.eval.kahn_breadth import selection_breadth_metrics
-    from src.eval.benchmark_panel import BENCHMARK_PANEL_NAMES
-    from src.eval.stats_rigor import annualized_sharpe
-    from src.eval.cpcv import CPCVConfig
-    from src.eval.research_alpha_cpcv import (
+    from mascotrl.data.paths import LAKE_ROOT
+    from mascotrl.eval.kahn_breadth import selection_breadth_metrics
+    from mascotrl.eval.benchmark_panel import BENCHMARK_PANEL_NAMES
+    from mascotrl.eval.stats_rigor import annualized_sharpe
+    from mascotrl.eval.cpcv import CPCVConfig
+    from mascotrl.eval.research_alpha_cpcv import (
         run_policy_level_negative_control,
         run_research_alpha_cpcv,
     )
-    from src.eval.campaign_manifest import (
+    from mascotrl.eval.campaign_manifest import (
         atomic_write_json,
         load_manifest,
         save_manifest,
@@ -1906,7 +1906,7 @@ def main() -> None:
 
     cfg = _load_cfg(Path(args.config))
     cfg["_out_dir"] = str(OUT)
-    from src.eval.yaml_honesty import assert_turnover_cap_honesty
+    from mascotrl.eval.yaml_honesty import assert_turnover_cap_honesty
 
     assert_turnover_cap_honesty(cfg)
     # A16: CLI --max-pool overrides YAML; otherwise YAML (511) then 400.
@@ -1932,7 +1932,7 @@ def main() -> None:
     cfg.setdefault("checkpoint_every_n_episodes", 1)
     # Stamp lake BEFORE any feature attach so attach_feature_net_extras cannot
     # silently no-op on lake=None (parity audit A4).
-    from src.data.paths import LAKE_ROOT as _LAKE_ROOT_EARLY
+    from mascotrl.data.paths import LAKE_ROOT as _LAKE_ROOT_EARLY
 
     cfg.setdefault("_lake_root", str(_LAKE_ROOT_EARLY))
     cfg.setdefault("lake_root", str(_LAKE_ROOT_EARLY))
@@ -1950,11 +1950,11 @@ def main() -> None:
         cfg["kelly_epochs"] = args.kelly_epochs
     # C1: fail closed on any unregistered spectrum axis value before any
     # data is touched (train_world / architecture / objective / algo).
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     validate_cfg(cfg)
     # C1: fail closed on any unregistered spectrum axis value.
-    from src.spectrum.registry import validate_cfg as _validate_spectrum_cfg
+    from mascotrl.spectrum.registry import validate_cfg as _validate_spectrum_cfg
 
     _validate_spectrum_cfg(cfg)
     if args.train_episodes is not None:
@@ -2030,7 +2030,7 @@ def main() -> None:
     # Phase B: month-end (default) / weekly / daily rebalance mask shared by
     # policy + peers. Computed before the universe-arm branch below because
     # dyn_* arms need it to know which days trigger re-selection.
-    from src.eval.cadence import build_rebalance_mask
+    from mascotrl.eval.cadence import build_rebalance_mask
 
     cadence = str(cfg.get("rebalance_cadence") or "monthly")
     cfg["rebalance_cadence"] = cadence
@@ -2097,7 +2097,7 @@ def main() -> None:
             extras["dollar_volume"] = dv
         elif dv is not None and cfg.get("_slots_rows") is not None:
             # Dyn arms: fingerprint ADV is (T, N>>K); slot-align onto the panel.
-            from src.features.blocks.liquidity import map_wide_to_slots
+            from mascotrl.features.blocks.liquidity import map_wide_to_slots
 
             extras["dollar_volume"] = map_wide_to_slots(
                 dv, secids=universe_secids, slots_rows=cfg["_slots_rows"]
@@ -2111,7 +2111,7 @@ def main() -> None:
     cfg.setdefault("use_feature_net_extras", False)
     if bool(cfg.get("use_feature_net_extras")):
         try:
-            from src.eval.feature_extras_loader import attach_feature_net_extras
+            from mascotrl.eval.feature_extras_loader import attach_feature_net_extras
 
             lake_for_feat = cfg.get("lake_root") or cfg.get("_lake_root")
             if lake_for_feat is None:
@@ -2180,7 +2180,7 @@ def main() -> None:
     cfg["dii_epochs"] = int(args.dii_epochs)
     cfg["max_pool"] = int(args.max_pool)
     cfg["_rebalance_mask"] = rb_mask
-    from src.eval.calendar_scaling import eval_panel_meta, periods_per_year_from_dates
+    from mascotrl.eval.calendar_scaling import eval_panel_meta, periods_per_year_from_dates
 
     ppy = float(periods_per_year_from_dates(dates))
     cfg["_periods_per_year"] = ppy
@@ -2219,11 +2219,11 @@ def main() -> None:
     # P1: dyn_* arms use slot-aware alignment so whichever secid occupies a
     # slot contributes that name's published signal (not a static column).
     if bool(cfg.get("use_surface_signals", False)):
-        from src.eval.signal_gate import (
+        from mascotrl.eval.signal_gate import (
             assert_allowlist_valid,
             assert_geometry_pack_valid,
         )
-        from src.data.surface_signals import (
+        from mascotrl.data.surface_signals import (
             align_signals_to_slots,
             materialize_surface_signals_from_lake,
         )
@@ -2314,7 +2314,7 @@ def main() -> None:
             "n_signal_secids": int(len(signal_secids)),
         }
         # Fail-closed when an admitted surface channel is mostly all-NaN.
-        from src.eval.equity_substrate import assert_surface_nan_ok
+        from mascotrl.eval.equity_substrate import assert_surface_nan_ok
 
         iv = extras.get("iv_surface") or {}
         if iv:
@@ -2335,7 +2335,7 @@ def main() -> None:
         )
 
     # Wave 3: fioracle macro on the observation cube (cfg feature_extras flag).
-    from src.data.macro_loader import attach_fioracle_macro_cube, fioracle_cfg_from_feature_extras
+    from mascotrl.data.macro_loader import attach_fioracle_macro_cube, fioracle_cfg_from_feature_extras
 
     fio_on, _, _ = fioracle_cfg_from_feature_extras(cfg)
     cfg["_lake_root"] = str(LAKE_ROOT)
@@ -2369,17 +2369,17 @@ def main() -> None:
     # Benchmarks on confirmatory universe — parity harness (dual scorecard).
     _write_heartbeat(OUT, phase="pre_seed_benchmarks")
     _log_event("pre_seed_benchmarks")
-    from src.arms import ArmSpec
-    from src.eval.friction import friction_spec_from_cfg
-    from src.eval.parity_harness import (
+    from mascotrl.arms import ArmSpec
+    from mascotrl.eval.friction import friction_spec_from_cfg
+    from mascotrl.eval.parity_harness import (
         assert_same_scorecard,
         estimand_hash,
         require_uniform_estimand_hashes,
         score_benchmark_panel,
         score_strategy,
     )
-    from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
-    from src.eval.olps import olps_claim_names, olps_weights
+    from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+    from mascotrl.eval.olps import olps_claim_names, olps_weights
 
     t2 = time.perf_counter()
     fac_for_bench = _load_ff4(dates, LAKE_ROOT)
@@ -2495,7 +2495,7 @@ def main() -> None:
     results["confirmatory"]["olps_estimand_hashes"] = olps_hashes
 
     # Phase G: non-RL ceiling arms on the same parity harness.
-    from src.eval.ceiling_arms import CEILING_ARM_NAMES, ceiling_arm_weight_fn
+    from mascotrl.eval.ceiling_arms import CEILING_ARM_NAMES, ceiling_arm_weight_fn
 
     ceiling_sharpes = {}
     ceiling_sharpes_residual = {}
@@ -2572,7 +2572,7 @@ def main() -> None:
     # as continuity fields only (market beta alone can breach abs floors).
     # Re-running the RL agent itself under each corruption is opt-in
     # (--neg-control-policy) because it multiplies campaign cost.
-    from src.eval.negative_controls import (
+    from mascotrl.eval.negative_controls import (
         date_shift_signals,
         permute_signals_across_names,
         run_negative_controls,
@@ -2974,7 +2974,7 @@ def main() -> None:
             # W7 / Wave 2: policy-behavior archetype harness (interpretation only).
             # Pass CRUCIBLE sleeves + fioracle regimes/macros when available.
             try:
-                from src.reporting.policy_behavior import (
+                from mascotrl.reporting.policy_behavior import (
                     build_policy_behavior,
                     extract_crucible_behaviour_inputs,
                     load_behaviour_macro_context,
@@ -3082,7 +3082,7 @@ def main() -> None:
 
             # W6: optional expanding-window WFO reported alongside CPCV.
             if _wfo_enabled(args):
-                from src.eval.equity_nested_wfo import run_equity_nested_wfo
+                from mascotrl.eval.equity_nested_wfo import run_equity_nested_wfo
 
                 wfo_seed = int(seeds[0]) if seeds else 0
                 results["nested_wfo_eq"] = run_equity_nested_wfo(
@@ -3096,9 +3096,9 @@ def main() -> None:
 
             # Lightweight DSR / SPA / Romano-Wolf table (policy as challenger; fail-closed).
             try:
-                from src.eval.stats_rigor import deflated_sharpe_ratio, hansen_spa_test
-                from src.eval.stats_inference import romano_wolf_stepdown, cscv_pbo_from_paths
-                from src.eval.olps import filter_olps_stubs_from_peers
+                from mascotrl.eval.stats_rigor import deflated_sharpe_ratio, hansen_spa_test
+                from mascotrl.eval.stats_inference import romano_wolf_stepdown, cscv_pbo_from_paths
+                from mascotrl.eval.olps import filter_olps_stubs_from_peers
 
                 pol = float(np.nanmean(sharpes))
                 bench_map = dict(results["confirmatory"].get("benchmark_sharpes") or {})
@@ -3163,7 +3163,7 @@ def main() -> None:
                     )
                     stats_tbl["hansen_spa_vs_ew"] = spa
                     try:
-                        from src.eval.ledoit_wolf_sharpe import sharpe_difference_test
+                        from mascotrl.eval.ledoit_wolf_sharpe import sharpe_difference_test
 
                         stats_tbl["sharpe_diff_vs_equal_weight"] = sharpe_difference_test(
                             series0[:n],
@@ -3271,7 +3271,7 @@ def main() -> None:
     # parquet (one file per strategy) plus a combined PortfolioAccountingLedger,
     # so the reporting book (D3/D4) reads holdings off disk instead of
     # re-deriving them from raw CPCV/parity-harness artifacts.
-    from src.reporting.strategy_persistence import (
+    from mascotrl.reporting.strategy_persistence import (
         build_accounting_ledger,
         persist_strategy_frames,
         strategy_frame,
@@ -3323,7 +3323,7 @@ def main() -> None:
         results["portfolio_ledger_parquet"] = str(ledger_path) if ledger_path else None
         # W5: single robust holdings book in report/ (Excel + CSV twin).
         try:
-            from src.reporting.strategy_persistence import write_holdings_book
+            from mascotrl.reporting.strategy_persistence import write_holdings_book
 
             report_dir = OUT / "report"
             report_dir.mkdir(parents=True, exist_ok=True)
@@ -3366,7 +3366,7 @@ def main() -> None:
         except (OSError, json.JSONDecodeError):
             signal_gate_result = None
     try:
-        from src.reporting.eq_alloc_book import render_eq_alloc_book
+        from mascotrl.reporting.eq_alloc_book import render_eq_alloc_book
 
         book_dir = OUT / "report" / "book"
         # Load learning curves if present so S7 is not silently skipped.
@@ -3413,7 +3413,7 @@ def main() -> None:
     # (not just documented as "should be read" in a hand-maintained list).
     # Only meaningful for a full run: --skip-rl deliberately never touches
     # the training-only keys.
-    from src.eval.yaml_honesty import assert_yaml_honesty_tracked, load_workflow_keys
+    from mascotrl.eval.yaml_honesty import assert_yaml_honesty_tracked, load_workflow_keys
 
     yaml_honesty_error: str | None = None
     if not args.skip_rl:

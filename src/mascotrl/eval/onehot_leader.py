@@ -5,7 +5,7 @@ import math
 
 import numpy as np
 
-from src.eval.regime_desk_metrics import sharpe_annualized
+from mascotrl.eval.regime_desk_metrics import sharpe_annualized
 
 
 def trailing_sharpe(

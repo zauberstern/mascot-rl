@@ -4,11 +4,11 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from src.aws_burst.budget_action import DEFAULT_BUDGET_NAME, read_actual_spend, spend_headroom
-from src.aws_burst.cost_model import refuse_submit_if_unsafe
+from mascotrl.aws_burst.budget_action import DEFAULT_BUDGET_NAME, read_actual_spend, spend_headroom
+from mascotrl.aws_burst.cost_model import refuse_submit_if_unsafe
 from pathlib import Path
 
-from src.aws_burst.profiles import (
+from mascotrl.aws_burst.profiles import (
     BURST_PROFILES,
     CREDIT_USD,
     SPEND_CAP_FRAC,

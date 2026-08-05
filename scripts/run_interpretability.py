@@ -14,14 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.reporting.interpretability import (
+from mascotrl.reporting.interpretability import (
     build_channel_groups_from_names,
     build_interpretability_artifact,
     channel_group_attribution,
     distill_policy_tree,
     mechanism_cards_from_behavior,
 )
-from src.reporting.policy_behavior import extract_crucible_behaviour_inputs
+from mascotrl.reporting.policy_behavior import extract_crucible_behaviour_inputs
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -103,7 +103,7 @@ def process_cell(
     artifact = _find_cell_artifact(behavior_path)
     cfg: dict[str, Any] = {}
     if artifact and artifact.get("config_path"):
-        from src.spectrum.yaml_loader import load_cell_yaml
+        from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
         cp = Path(str(artifact["config_path"]))
         if cp.is_file():

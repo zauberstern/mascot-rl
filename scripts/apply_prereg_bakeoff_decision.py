@@ -236,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-    from src.eval.pbo_appendix import append_trial_ledger_entry
+    from mascotrl.eval.pbo_appendix import append_trial_ledger_entry
 
     append_trial_ledger_entry(
         args.ledger,

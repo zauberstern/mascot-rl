@@ -91,7 +91,7 @@ def _load_equity_chars(
     """Best-effort wide panels from lake equity tables."""
     import pandas as pd
 
-    from src.data.paths import LAKE_ROOT
+    from mascotrl.data.paths import LAKE_ROOT
 
     lake = Path(lake_root or LAKE_ROOT)
     t, k = len(dates), len(secids)
@@ -159,7 +159,7 @@ def _load_fundamental_chars(
     t, k = len(dates), len(secids)
     empty = {"bm": np.full((t, k), np.nan), "roe": np.full((t, k), np.nan)}
     try:
-        from src.data.feature_panels import load_ibes_ratios_long
+        from mascotrl.data.feature_panels import load_ibes_ratios_long
 
         start = str(dates[0])[:10]
         end = str(dates[-1])[:10]
@@ -188,7 +188,7 @@ def _load_gics_onehot(
     """Return (K, S) one-hot (or soft) GICS sector membership."""
     k = len(secids)
     try:
-        from src.data.feature_panels import load_gics_map
+        from mascotrl.data.feature_panels import load_gics_map
 
         gics = load_gics_map(lake_root)
     except Exception:
@@ -229,7 +229,7 @@ def load_characteristic_panel(
     lake_root: Path | str | None = None,
 ) -> dict[str, np.ndarray]:
     """Return (T,K) characteristic panels + (T,K,S) GICS one-hot broadcast."""
-    from src.data.paths import LAKE_ROOT
+    from mascotrl.data.paths import LAKE_ROOT
 
     lake = Path(lake_root or LAKE_ROOT)
     dates = list(dates)

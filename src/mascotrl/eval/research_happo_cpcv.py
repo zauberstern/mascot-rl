@@ -9,17 +9,17 @@ import numpy as np
 import pandas as pd
 import torch
 
-from src.eval.collapse_guard import collapse_guard
-from src.eval.cpcv import CPCVConfig, CPCVFold, _CPCV_FOLD_AUX_KEY, run_cpcv
-from src.eval.cpcv_backend import resolve_use_purgedcv
-from src.eval.research_alpha_cpcv import (
+from mascotrl.eval.collapse_guard import collapse_guard
+from mascotrl.eval.cpcv import CPCVConfig, CPCVFold, _CPCV_FOLD_AUX_KEY, run_cpcv
+from mascotrl.eval.cpcv_backend import resolve_use_purgedcv
+from mascotrl.eval.research_alpha_cpcv import (
     _indices_for_windows,
     _reconstruct_path0_aux_series,
 )
-from src.policy.cmdp_config import build_step_costs, resolve_cmdp_cfg
-from src.policy.objective_factory import build_risk_objective
-from src.policy.trainer import HAPPOTrainer, TrainBatch
-from src.reporting.capital_gates import PROJECTION_K_CEILING
+from mascotrl.policy.cmdp_config import build_step_costs, resolve_cmdp_cfg
+from mascotrl.policy.objective_factory import build_risk_objective
+from mascotrl.policy.trainer import HAPPOTrainer, TrainBatch
+from mascotrl.reporting.capital_gates import PROJECTION_K_CEILING
 
 _COORD_SCALAR_KEYS = (
     "proj_gap",
@@ -374,8 +374,8 @@ def _happo_cfg_defaults(cfg: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def _build_surfaces(eq_rets: np.ndarray, cfg: Mapping[str, Any], arm: str) -> Any:
-    from src.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors
-    from src.simulator import get_surface_tensor
+    from mascotrl.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors
+    from mascotrl.simulator import get_surface_tensor
 
     train_world = str(cfg.get("train_world") or "historical").lower().strip()
     if arm == "eq" or train_world == "historical":
@@ -391,13 +391,13 @@ def _train_happo_on_panel(
     arm: str,
     seed: int,
 ) -> tuple[Any, list[float], list[dict[str, Any]]]:
-    from src.env.cmdp_env import CMDPEnv
-    from src.plugins.registry import build_feature_extractor, build_happo_engine
-    from src.plugins.resolve import resolve_plugins
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.plugins.registry import build_feature_extractor, build_happo_engine
+    from mascotrl.plugins.resolve import resolve_plugins
 
     cfg_local = _happo_cfg_defaults(cfg)
     torch.manual_seed(int(seed))
-    from src.policy.harl_adapter import resolve_use_harl
+    from mascotrl.policy.harl_adapter import resolve_use_harl
 
     use_harl = resolve_use_harl(cfg_local)
     if use_harl:
@@ -583,9 +583,9 @@ def _eval_happo_on_panel(
     arm: str,
     policy: Any,
 ) -> dict[str, Any]:
-    from src.env.cmdp_env import CMDPEnv
-    from src.plugins.registry import build_feature_extractor
-    from src.plugins.resolve import resolve_plugins
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.plugins.registry import build_feature_extractor
+    from mascotrl.plugins.resolve import resolve_plugins
 
     cfg_local = _happo_cfg_defaults(cfg)
     k = int(cfg_local["n_assets"])
@@ -735,7 +735,7 @@ def run_happo_cpcv(
     """Train/evaluate HAPPO under CPCV for narrative / full-budget cells."""
     try:
         from scripts.run_spectrum_campaign import _toy_research_panel, _try_om_research_panel
-        from src.eval.equity_substrate import load_lake_dyn_hrp_panel, stamp_equity_obs_defaults
+        from mascotrl.eval.equity_substrate import load_lake_dyn_hrp_panel, stamp_equity_obs_defaults
     except Exception as exc:  # noqa: BLE001
         return None, f"panel_import_failed: {exc}"
 
@@ -812,7 +812,7 @@ def run_happo_cpcv(
                 turnovers_out=fold_turnovers,
             )
 
-        from src.eval.cpcv_lib import run_cpcv_lib
+        from mascotrl.eval.cpcv_lib import run_cpcv_lib
 
         _cpcv_runner = run_cpcv_lib if use_purgedcv else run_cpcv
         print(

@@ -14,7 +14,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from src.policy.bodies import (
+from mascotrl.policy.bodies import (
     AssetTemporalPolicyBody,
     build_policy_body,
 )
@@ -112,7 +112,7 @@ def _apply_weight_head(
     if key == "raw":
         return raw
     if key in ("sparse_tilt", "sparse_tilt_tsallis"):
-        from src.policy.sparsemax import sparsemax
+        from mascotrl.policy.sparsemax import sparsemax
 
         temp = max(float(temperature), 1e-6)
         gain = max(float(tilt_gain), 1e-6)
@@ -125,7 +125,7 @@ def _apply_weight_head(
             logits = base_logits + logits
         return sparsemax(logits, dim=-1)
     if key == "entmax_15":
-        from src.policy.entmax import entmax
+        from mascotrl.policy.entmax import entmax
 
         temp = max(float(temperature), 1e-6)
         gain = max(float(tilt_gain), 1e-6)
@@ -138,14 +138,14 @@ def _apply_weight_head(
             logits = base_logits + logits
         return entmax(logits, alpha=1.5, dim=-1)
     if key == "dirichlet_tilt":
-        from src.policy.dirichlet_tilt import multiplicative_tilt
+        from mascotrl.policy.dirichlet_tilt import multiplicative_tilt
 
         return multiplicative_tilt(
             raw, w_base=w_base, mask=mask, kappa=float(tilt_gain)
         )
     if key in ("dirichlet_mean", "dirichlet_entropy"):
         # Deterministic / off-policy adapters: raw is logits → Dir mean → tilt.
-        from src.policy.dirichlet_tilt import (
+        from mascotrl.policy.dirichlet_tilt import (
             concentrations_from_logits,
             multiplicative_tilt,
         )
@@ -466,7 +466,7 @@ class PPOAgent(_BaseAgent):
         return torch.distributions.Normal(mean, std)
 
     def _dirichlet_alpha(self, obs: torch.Tensor) -> torch.Tensor:
-        from src.policy.dirichlet_tilt import concentrations_from_logits
+        from mascotrl.policy.dirichlet_tilt import concentrations_from_logits
 
         return concentrations_from_logits(self.net.mean(obs))
 
@@ -487,7 +487,7 @@ class PPOAgent(_BaseAgent):
     def act(self, obs: torch.Tensor, *, deterministic: bool = True) -> torch.Tensor:
         x = self._prep_obs(obs, update_rms=False)
         if self._dirichlet:
-            from src.policy.dirichlet_tilt import dirichlet_sample
+            from mascotrl.policy.dirichlet_tilt import dirichlet_sample
 
             alpha = self._dirichlet_alpha(x)
             u, _, _ = dirichlet_sample(alpha, deterministic=deterministic)
@@ -513,7 +513,7 @@ class PPOAgent(_BaseAgent):
         """
         x = self._prep_obs(obs, update_rms=True)
         if self._dirichlet:
-            from src.policy.dirichlet_tilt import dirichlet_sample
+            from mascotrl.policy.dirichlet_tilt import dirichlet_sample
 
             alpha = self._dirichlet_alpha(x)
             u, logp, _ = dirichlet_sample(alpha, deterministic=deterministic)
@@ -574,7 +574,7 @@ class PPOAgent(_BaseAgent):
             values = self.net.value(x)
             next_x = self._prep_obs(next_obs, update_rms=False)
             next_values = self.net.value(next_x)
-            from src.eval.scr_critic import build_scr_returns
+            from mascotrl.eval.scr_critic import build_scr_returns
 
             advantages, returns, scr_meta = build_scr_returns(
                 rewards=rewards,
@@ -625,7 +625,7 @@ class PPOAgent(_BaseAgent):
                 # else: leave all-zero advantages untouched
             if old_logprobs is None:
                 if self._dirichlet:
-                    from src.policy.dirichlet_tilt import dirichlet_log_prob
+                    from mascotrl.policy.dirichlet_tilt import dirichlet_log_prob
 
                     old_logprobs = dirichlet_log_prob(self._dirichlet_alpha(x), actions)
                 else:
@@ -652,7 +652,7 @@ class PPOAgent(_BaseAgent):
                     continue
                 xb = self._prep_obs(obs[idx], update_rms=False)
                 if self._dirichlet:
-                    from src.policy.dirichlet_tilt import (
+                    from mascotrl.policy.dirichlet_tilt import (
                         dirichlet_entropy,
                         dirichlet_log_prob,
                     )
@@ -667,7 +667,7 @@ class PPOAgent(_BaseAgent):
                     # RC6_HEADS: Tsallis-2 over executed weights isolates the
                     # entropy-bonus effect; projection stays sparsemax.
                     if self.weight_head == "sparse_tilt_tsallis":
-                        from src.policy.entmax import tsallis_entropy
+                        from mascotrl.policy.entmax import tsallis_entropy
 
                         w_exec = self.raw_to_weights(actions[idx])
                         entropy = tsallis_entropy(w_exec, alpha=2.0).mean()
@@ -857,14 +857,14 @@ class SACAgent(_BaseAgent):
         """Return (weights, log_prob, entropy) under the configured action law."""
         mean = self.actor(obs)
         if self._dirichlet:
-            from src.policy.dirichlet_tilt import (
+            from mascotrl.policy.dirichlet_tilt import (
                 concentrations_from_logits,
                 dirichlet_sample,
             )
 
             alpha = concentrations_from_logits(mean)
             u, logp, ent = dirichlet_sample(alpha, deterministic=deterministic)
-            from src.policy.dirichlet_tilt import multiplicative_tilt
+            from mascotrl.policy.dirichlet_tilt import multiplicative_tilt
 
             # Score Dir(u); critic / env see the tilted simplex proposal.
             w = multiplicative_tilt(u, kappa=1.0)
@@ -1456,7 +1456,7 @@ class RRLAgent(_BaseAgent):
         next_obs: torch.Tensor,
         dones: torch.Tensor,
     ) -> dict[str, float]:
-        from src.eval.differential_sharpe import DifferentialSharpe
+        from mascotrl.eval.differential_sharpe import DifferentialSharpe
 
         ds = DifferentialSharpe(eta=self.eta)
         signal = torch.zeros_like(rewards)
@@ -1625,13 +1625,13 @@ _REGISTRY: dict[str, type[_BaseAgent]] = {
 def _registry_with_cppo() -> dict[str, type[_BaseAgent]]:
     out = dict(_REGISTRY)
     try:
-        from src.policy.cppo import CPPOAgent
+        from mascotrl.policy.cppo import CPPOAgent
 
         out["cppo"] = CPPOAgent
     except ImportError:
         pass
     try:
-        from src.policy.omnisafe_adapter import OmniSafeCPPOAgent
+        from mascotrl.policy.omnisafe_adapter import OmniSafeCPPOAgent
 
         out["cppo_omnisafe"] = OmniSafeCPPOAgent
     except ImportError:
@@ -1654,7 +1654,7 @@ def make_single_agent(
     # supported. Set rl_backend="custom" to force hand-rolled PyTorch.
     raw_backend = rl_backend if rl_backend is not None else kwargs.pop("rl_backend", None)
     if raw_backend is None:
-        from src.policy.sb3_adapter import resolve_rl_backend
+        from mascotrl.policy.sb3_adapter import resolve_rl_backend
 
         backend = resolve_rl_backend(None)
     else:
@@ -1664,7 +1664,7 @@ def make_single_agent(
     temporal = arch in {"gru", "lstm", "mamba", "mamba2", "transformer"}
 
     if backend == "sb3":
-        from src.logging_utils import get_logger
+        from mascotrl.logging_utils import get_logger
 
         _log = get_logger("mascotrl.policy.single_agent")
         # RecurrentPPO train_epoch is stubbed; fall back to custom temporal body.
@@ -1680,7 +1680,7 @@ def make_single_agent(
             not temporal or key == "dqn"
         ):
             try:
-                from src.policy.sb3_adapter import make_sb3_agent
+                from mascotrl.policy.sb3_adapter import make_sb3_agent
 
                 return make_sb3_agent(
                     key, obs_dim=obs_dim, action_dim=action_dim, lr=lr, **kwargs

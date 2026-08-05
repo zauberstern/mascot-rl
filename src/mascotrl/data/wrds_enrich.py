@@ -12,8 +12,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from src.data.paths import LAKE_ROOT
-from src.logging_utils import get_logger
+from mascotrl.data.paths import LAKE_ROOT
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.wrds_enrich")
 
@@ -122,9 +122,11 @@ FUNDQ_FULL_COLUMNS: tuple[str, ...] = (
     "dvpsxq",
 )
 
+from mascotrl._root import REPO_ROOT
+
 
 def _load_dotenv_files() -> None:
-    root = Path(__file__).resolve().parents[2]
+    root = REPO_ROOT
     candidates = [
         root / ".env",
         root.parent / "VolSurf_PY_prototype" / ".env",

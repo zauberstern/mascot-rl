@@ -8,7 +8,7 @@ python3 - <<'PY'
 import json
 import sys
 from pathlib import Path
-from src.aws_burst.waves import WAVES
+from mascotrl.aws_burst.waves import WAVES
 
 root = Path(".").resolve()
 

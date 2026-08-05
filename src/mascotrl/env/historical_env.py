@@ -13,9 +13,9 @@ from typing import Any, Callable
 import numpy as np
 import torch
 
-from src.data.slot_mask import apply_slot_mask
-from src.eval.friction import FrictionSpec, apply_costs
-from src.eval.residualization import (
+from mascotrl.data.slot_mask import apply_slot_mask
+from mascotrl.eval.friction import FrictionSpec, apply_costs
+from mascotrl.eval.residualization import (
     ResidualizerState,
     residualize_step,
     rolling_portfolio_ff4_beta,

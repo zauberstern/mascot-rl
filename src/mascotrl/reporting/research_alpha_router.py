@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Mapping, overload
 
-from src.eval.friction import FrictionSpec, friction_spec_from_cfg
+from mascotrl.eval.friction import FrictionSpec, friction_spec_from_cfg
 
 RESEARCH_PRIMARY_HIST = "historical_arm_env"
 # Spectrum-relaxed allowlist (hist remains the research default).

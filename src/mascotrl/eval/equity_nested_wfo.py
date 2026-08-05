@@ -10,9 +10,9 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.eval.friction import friction_spec_from_cfg
-from src.eval.research_alpha_train import train_research_hist
-from src.eval.stats_rigor import annualized_sharpe
+from mascotrl.eval.friction import friction_spec_from_cfg
+from mascotrl.eval.research_alpha_train import train_research_hist
+from mascotrl.eval.stats_rigor import annualized_sharpe
 
 
 def _expanding_folds(
@@ -69,9 +69,9 @@ def run_equity_nested_wfo(
     oos_pnls: list[float] = []
 
     # Import locally to avoid circular imports at module load.
-    from src.eval.research_alpha_cpcv import _roll_test_pnl, _slice_feature_extras
-    from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
-    from src.eval.yaml_honesty import track_copy
+    from mascotrl.eval.research_alpha_cpcv import _roll_test_pnl, _slice_feature_extras
+    from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+    from mascotrl.eval.yaml_honesty import track_copy
 
     cfg_local = track_copy(cfg)
     fric = friction_spec_from_cfg(cfg_local)

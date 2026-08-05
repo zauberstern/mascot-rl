@@ -12,13 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.budget_action import (
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.budget_action import (
     DEFAULT_BUDGET_NAME,
     ensure_budget_action,
     stamp_armed_flag,
 )
-from src.aws_burst.profiles import BURST_PROFILES, REGION
+from mascotrl.aws_burst.profiles import BURST_PROFILES, REGION
 
 TARGET_ROLE = "volsurf-burst-BatchJobRole"
 EXEC_ROLE_NAME = "volsurf-burst-budgets-action-exec"

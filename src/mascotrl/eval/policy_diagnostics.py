@@ -10,7 +10,7 @@ from typing import Any, Sequence
 
 import numpy as np
 
-from src.eval.collapse_guard import collapse_guard, equal_weight_collapse_guard
+from mascotrl.eval.collapse_guard import collapse_guard, equal_weight_collapse_guard
 
 
 def summarize_policy_diagnostics(

@@ -19,7 +19,7 @@ from typing import Any
 
 import numpy as np
 
-from src.eval.stats_rigor import annualized_sharpe, stationary_bootstrap_indices
+from mascotrl.eval.stats_rigor import annualized_sharpe, stationary_bootstrap_indices
 
 
 def sharpe_difference_test(

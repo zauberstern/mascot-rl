@@ -7,9 +7,11 @@ import tarfile
 from pathlib import Path
 from typing import Any
 
-from src.data.feature_panels import collect_panel_bundle_paths, required_panel_families
+from mascotrl.data.feature_panels import collect_panel_bundle_paths, required_panel_families
 
-ROOT = Path(__file__).resolve().parents[2]
+from mascotrl._root import REPO_ROOT
+
+ROOT = REPO_ROOT
 
 
 def _sha256_file(path: Path) -> str:

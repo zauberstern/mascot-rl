@@ -21,11 +21,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.policy.rasp_locks import apply_rasp_defaults, assert_rasp_locks
-from src.spectrum.capacity_probe import probe_universe_capacity
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.protocol_tiers import apply_protocol_tier
-from src.spectrum.registry import (
+from mascotrl.policy.rasp_locks import apply_rasp_defaults, assert_rasp_locks
+from mascotrl.spectrum.capacity_probe import probe_universe_capacity
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.protocol_tiers import apply_protocol_tier
+from mascotrl.spectrum.registry import (
     ALGO_HEADS,
     PORTFOLIO_ARM_IDS,
     _axis_id_to_weight_head,

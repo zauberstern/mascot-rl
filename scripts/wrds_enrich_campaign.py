@@ -20,9 +20,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.paths import LAKE_ROOT, MASCOTRL_ROOT  # noqa: E402
-from src.data.wrds_enrich import _load_dotenv_files, connect_wrds  # noqa: E402
-from src.logging_utils import setup_logging  # noqa: E402
+from mascotrl.data.paths import LAKE_ROOT, MASCOTRL_ROOT  # noqa: E402
+from mascotrl.data.wrds_enrich import _load_dotenv_files, connect_wrds  # noqa: E402
+from mascotrl.logging_utils import setup_logging  # noqa: E402
 
 STATUS = MASCOTRL_ROOT / "logs" / "artifacts" / "wrds_campaign_status.json"
 README = """# WRDS enrichments (lake)

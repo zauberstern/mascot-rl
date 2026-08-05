@@ -14,13 +14,13 @@ from typing import Any, Mapping, MutableMapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.data.equity_panel import (
+from mascotrl.data.equity_panel import (
     EVAL_END,
     EVAL_START,
     SELECTION_END,
     SELECTION_START,
 )
-from src.data.paths import CANONICAL_LAKE
+from mascotrl.data.paths import CANONICAL_LAKE
 
 
 GEOMETRY_LITE_CHANNELS: tuple[str, ...] = (
@@ -95,7 +95,7 @@ def apply_feature_net_extras_if_enabled(
     if not bool(cfg.get("use_feature_net_extras")):
         return cfg
 
-    from src.eval.feature_extras_loader import attach_feature_net_extras
+    from mascotrl.eval.feature_extras_loader import attach_feature_net_extras
 
     lake_for_feat = cfg.get("lake_root") or cfg.get("_lake_root")
     if lake_for_feat is None:
@@ -191,7 +191,7 @@ def assert_surface_nan_ok(
     max_all_nan_frac: float = 0.20,
 ) -> dict[str, Any]:
     """Fail-closed when admitted surface channels are mostly all-NaN."""
-    from src.eval.feature_nan_diagnostics import (
+    from mascotrl.eval.feature_nan_diagnostics import (
         assert_feature_nan_ok,
         feature_nan_diagnostics,
     )
@@ -215,7 +215,7 @@ def assert_surface_nan_ok(
 def _geometry_lite_channel_names(cfg: Mapping[str, Any]) -> list[str]:
     pack_path = cfg.get("obs_pack_path") or "config/obs_packs/surf_geometry_lite.yaml"
     try:
-        from src.eval.signal_gate import assert_geometry_pack_valid
+        from mascotrl.eval.signal_gate import assert_geometry_pack_valid
 
         pack = assert_geometry_pack_valid(pack_path)
         names = list(pack.get("channels") or [])
@@ -297,7 +297,7 @@ def attach_equity_obs_substrate(
                     meta["surface_cache"] = str(cand)
                     break
         if long_df is None and (lake / "vol_surface").exists():
-            from src.data.surface_signals import materialize_surface_signals_from_lake
+            from mascotrl.data.surface_signals import materialize_surface_signals_from_lake
 
             signal_secids = sorted(
                 {
@@ -330,7 +330,7 @@ def attach_equity_obs_substrate(
                 raise ValueError(
                     "use_surface_signals=true requires slots_rows for slot alignment"
                 )
-            from src.data.surface_signals import align_signals_to_slots
+            from mascotrl.data.surface_signals import align_signals_to_slots
 
             iv_surface = align_signals_to_slots(
                 long_df,
@@ -514,14 +514,14 @@ def load_lake_dyn_hrp_panel(
     Returns ``(dates, slotted_rets, factors, meta)`` and stamps cfg with
     ``_slots_rows``, ``_slot_valid_mask``, ``_universe_secids``, ``_rebalance_mask``.
     """
-    from src.data.dynamic_universe import (
+    from mascotrl.data.dynamic_universe import (
         build_dynamic_universe,
         build_slotted_panel,
         select_universe_corr_cluster,
         selection_turnover,
     )
-    from src.data.equity_panel import load_sp500_security_returns
-    from src.eval.cadence import (
+    from mascotrl.data.equity_panel import load_sp500_security_returns
+    from mascotrl.eval.cadence import (
         assert_universe_subset_of_policy,
         build_rebalance_mask,
         build_universe_cadence_mask,
@@ -607,7 +607,7 @@ def load_lake_dyn_hrp_panel(
         )
     dollar_volume = None
     if dv_wide is not None:
-        from src.features.blocks.liquidity import map_wide_to_slots
+        from mascotrl.features.blocks.liquidity import map_wide_to_slots
 
         dollar_volume = map_wide_to_slots(
             dv_wide, secids=fingerprint, slots_rows=slots_rows
@@ -707,7 +707,7 @@ def load_lake_dyn_hrp_panel(
         factor_names = ["mkt", "smb", "hml", "umd"]
     cfg["_factor_names"] = list(factor_names)
 
-    from src.eval.universe_fingerprint import read_panel_bundle_sha256
+    from mascotrl.eval.universe_fingerprint import read_panel_bundle_sha256
 
     panel_fp = read_panel_bundle_sha256()
     meta = {

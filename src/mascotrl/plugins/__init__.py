@@ -1,7 +1,7 @@
 """Config-gated plugin factories. Omit ``plugins:`` → status-quo defaults."""
 from __future__ import annotations
 
-from src.plugins.resolve import (
+from mascotrl.plugins.resolve import (
     STATUS_QUO_PLUGINS,
     dump_resolved_plugins,
     is_status_quo,
@@ -27,7 +27,7 @@ def __getattr__(name: str):
         "env_drag_kwargs",
         "oos_friction_kwargs",
     }:
-        from src.plugins import registry as _reg
+        from mascotrl.plugins import registry as _reg
 
         return getattr(_reg, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

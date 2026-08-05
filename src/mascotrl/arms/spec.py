@@ -182,7 +182,7 @@ def arm_spec_from_cfg(cfg: Mapping[str, Any] | None) -> ArmSpec:
     arm = cfg.get("arm")
     n_assets = int(cfg.get("n_assets") or 50)
     if not arm:
-        from src.arms.training import resolve_portfolio_arm
+        from mascotrl.arms.training import resolve_portfolio_arm
 
         return resolve_portfolio_arm(cfg)
     arm = dict(arm)

@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
 
-from src.spectrum.protocol_tiers import PROTOCOL_TIERS
-from src.spectrum.registry import PORTFOLIO_ARM_IDS
+from mascotrl.spectrum.protocol_tiers import PROTOCOL_TIERS
+from mascotrl.spectrum.registry import PORTFOLIO_ARM_IDS
 
 ALLOWED_WEIGHT_HEADS = frozenset(
     {

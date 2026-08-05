@@ -12,12 +12,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.eval.spectrum_multiple_testing import (
+from mascotrl.eval.spectrum_multiple_testing import (
     n_trials_breakdown,
     paired_mde,
     romano_wolf_stepdown,
 )
-from src.spectrum.registry import metric_orientation
+from mascotrl.spectrum.registry import metric_orientation
 
 
 def load_cells(art_dir: Path) -> list[dict]:

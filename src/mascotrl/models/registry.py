@@ -11,7 +11,9 @@ from typing import Any, Mapping
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[2]
+from mascotrl._root import REPO_ROOT
+
+ROOT = REPO_ROOT
 DEFAULT_ZOO = ROOT / "logs" / "artifacts" / "models"
 
 

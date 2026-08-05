@@ -5,12 +5,12 @@ from typing import Any
 
 import numpy as np
 
-from src.eval.regime_desk_metrics import sharpe_annualized
+from mascotrl.eval.regime_desk_metrics import sharpe_annualized
 
 
 def hrp_weights(cov: np.ndarray) -> np.ndarray:
     """Public thin wrapper around industry HRP on a covariance matrix."""
-    from src.eval import industry_baselines as ib
+    from mascotrl.eval import industry_baselines as ib
 
     # Reconstruct via returns proxy: use cov as if from unit history is awkward;
     # call private bisection path with synthetic corr from cov.
@@ -74,7 +74,7 @@ def causal_rolling_panel_returns(
                     cov = cov + np.eye(cov.shape[0]) * 1e-8
                     w_sub = hrp_weights(cov)
             else:
-                from src.eval.olps import eg_weights, olps_weights
+                from mascotrl.eval.olps import eg_weights, olps_weights
 
                 try:
                     w_sub = olps_weights("eg", H)

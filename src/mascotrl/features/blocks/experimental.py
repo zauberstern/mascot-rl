@@ -5,8 +5,8 @@ from typing import Mapping, Sequence
 
 import numpy as np
 
-from src.features.blocks.range_volatility import parkinson_var_daily, _causal_mean
-from src.features.blocks.volatility_vrp import trailing_hv_panel
+from mascotrl.features.blocks.range_volatility import parkinson_var_daily, _causal_mean
+from mascotrl.features.blocks.volatility_vrp import trailing_hv_panel
 
 
 def _as_tk(arr: np.ndarray, name: str) -> np.ndarray:
@@ -116,7 +116,7 @@ def build_experimental_block(
             names.append("x_vrp_term")
 
     if microstructure is not None and "eff_spread" in microstructure and amihud is not None:
-        from src.features.blocks.microstructure import _causal_mean as _cm
+        from mascotrl.features.blocks.microstructure import _causal_mean as _cm
 
         eff21 = _cm(_as_tk(microstructure["eff_spread"], "eff_spread"), 21)
         channels.append(eff21 * _as_tk(amihud, "amihud"))

@@ -9,10 +9,10 @@ import pandas as pd
 import pyarrow as pa
 import torch
 
-from src.data.arctic_store import ArcticStateStore
-from src.data.duckdb_engine import DuckDBFeatureEngine
-from src.data.paths import ARCTIC_ROOT
-from src.logging_utils import get_logger
+from mascotrl.data.arctic_store import ArcticStateStore
+from mascotrl.data.duckdb_engine import DuckDBFeatureEngine
+from mascotrl.data.paths import ARCTIC_ROOT
+from mascotrl.logging_utils import get_logger
 
 log = get_logger("volsurf.l5.macro")
 
@@ -153,7 +153,7 @@ def _maybe_join_fioracle(
     """
     if not fioracle_enabled:
         return df
-    from src.data.fioracle_macro import (
+    from mascotrl.data.fioracle_macro import (
         DEFAULT_SERIES,
         build_fioracle_feature_frame,
         load_fioracle_macro,
@@ -425,11 +425,11 @@ def attach_fioracle_macro_cube(
     if out_dir is not None:
         out_path = Path(out_dir)
         out_path.mkdir(parents=True, exist_ok=True)
-        from src.data.fioracle_macro import (
+        from mascotrl.data.fioracle_macro import (
             build_fioracle_feature_frame,
             load_fioracle_macro,
         )
-        from src.data.regime_labels import label_regimes
+        from mascotrl.data.regime_labels import label_regimes
 
         levels = load_fioracle_macro(
             lake_root=lake_base_dir,

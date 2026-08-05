@@ -19,7 +19,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from src.eval.walk_forward_hmm import (
+from mascotrl.eval.walk_forward_hmm import (
     MarkovCheckpoint,
     apply_hmm_checkpoint_filter,
     apply_markov_checkpoint_filter,
@@ -295,8 +295,8 @@ def scorecard_from_seal(
     schema = int(manifest.get("schema_version") or 1)
     hard = frame["hmm_hard"].to_numpy(dtype=np.int32)
     valid = hard >= 0
-    from src.eval.walk_forward_hmm import jaccard_turbulent
-    from src.eval.regime_scorecard import run_duration_stats
+    from mascotrl.eval.walk_forward_hmm import jaccard_turbulent
+    from mascotrl.eval.regime_scorecard import run_duration_stats
 
     # Schema 3: turbulent = operational; Jaccard uses q75 comparator column.
     if "turbulent_q75" in frame.columns and schema >= 3:

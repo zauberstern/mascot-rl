@@ -13,9 +13,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.data.lake_source_audit import run_coverage_audit  # noqa: E402
-from src.data.wrds_enrich import _load_dotenv_files  # noqa: E402
-from src.logging_utils import setup_logging  # noqa: E402
+from mascotrl.data.lake_source_audit import run_coverage_audit  # noqa: E402
+from mascotrl.data.wrds_enrich import _load_dotenv_files  # noqa: E402
+from mascotrl.logging_utils import setup_logging  # noqa: E402
 
 
 def main() -> None:

@@ -7,7 +7,7 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from src.reporting.behavior_metrics import SLEEVE_IDS, sleeve_tilt_series
+from mascotrl.reporting.behavior_metrics import SLEEVE_IDS, sleeve_tilt_series
 
 
 def build_decision_trace_rows(

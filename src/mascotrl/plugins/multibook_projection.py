@@ -4,7 +4,7 @@ from __future__ import annotations
 import torch
 import torch.nn as nn
 
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 
 def partition_indices(

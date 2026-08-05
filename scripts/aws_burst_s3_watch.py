@@ -17,8 +17,8 @@ if str(ROOT) not in sys.path:
 
 from scripts.validate_remote_cell import validate_remote_cell
 from scripts.validate_val_subset import HYBRID_STEM, validate_hybrid_error
-from src.aws_burst.profiles import BURST_PROFILES
-from src.aws_burst.waves import discover_wave_cells
+from mascotrl.aws_burst.profiles import BURST_PROFILES
+from mascotrl.aws_burst.waves import discover_wave_cells
 
 PROFILE_ACCOUNT_IDS = {p["profile"]: p["account_id"] for p in BURST_PROFILES}
 

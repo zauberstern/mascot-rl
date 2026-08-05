@@ -10,7 +10,7 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 
 # Import seed weights for naming; keep names aligned with policy_behavior.
-from src.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
+from mascotrl.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
 
 DEFAULT_K = 5
 

@@ -23,7 +23,7 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from src.reporting.book_style import (
+from mascotrl.reporting.book_style import (
     C_ACCENT,
     C_GRAY,
     C_NAVY,
@@ -47,7 +47,7 @@ from src.reporting.book_style import (
     stamp_n,
     table_figure,
 )
-from src.reporting.book_style import save_pdf_png, use_agg
+from mascotrl.reporting.book_style import save_pdf_png, use_agg
 
 SECTION_TITLES: tuple[str, ...] = (
     "Provenance",
@@ -155,7 +155,7 @@ def _finite(x: Any) -> float:
 
 
 def _annualized_sharpe(r: np.ndarray, periods: int = 252) -> float:
-    from src.eval.stats_rigor import annualized_sharpe
+    from mascotrl.eval.stats_rigor import annualized_sharpe
 
     return float(annualized_sharpe(np.asarray(r, dtype=np.float64)))
 
@@ -764,7 +764,7 @@ def _section4_cost_capacity(
         entries.append(_entry("S4.4", "Gate1 break-even multiplier", status="skipped", note="gate1 undefined"))
 
     if df is not None and {"total_net", "turnover"}.issubset(df.columns) and df["total_net"].notna().any():
-        from src.reporting.capital_gates import capacity_curve_from_daily
+        from mascotrl.reporting.capital_gates import capacity_curve_from_daily
 
         cap = capacity_curve_from_daily(
             df["total_net"].fillna(0.0).to_numpy(), df["turnover"].fillna(0.0).to_numpy()
@@ -807,7 +807,7 @@ def _hac_ols_full(y: np.ndarray, X: np.ndarray) -> dict[str, Any]:
     ``src.eval.signal_gate.ff_alpha``, generalized to report every
     coefficient's t-stat (not only the intercept).
     """
-    from src.eval.stats_inference import newey_west_lag
+    from mascotrl.eval.stats_inference import newey_west_lag
 
     yy = np.asarray(y, dtype=np.float64).reshape(-1)
     xx = np.asarray(X, dtype=np.float64)
@@ -1017,7 +1017,7 @@ def _section6_signals(
         entries.append(_entry("S6.3", "Effective breadth", status="skipped", note="no breadth data in results"))
 
     if signal_panels:
-        from src.eval.signal_gate import effective_breadth, _signal_corr_matrix  # type: ignore
+        from mascotrl.eval.signal_gate import effective_breadth, _signal_corr_matrix  # type: ignore
 
         names = list(signal_panels.keys())
         corr = _signal_corr_matrix(signal_panels)
@@ -1208,7 +1208,7 @@ def _section9_spectrum(
     entries: list[dict[str, Any]] = []
 
     if arms_root is not None:
-        from src.reporting.figures.core_suite import plot_f01_sharpe_ladder, plot_f26_attrition_funnel
+        from mascotrl.reporting.figures.core_suite import plot_f01_sharpe_ladder, plot_f26_attrition_funnel
 
         f01 = plot_f01_sharpe_ladder(arms_root=arms_root, out_dir=out_dir, artifacts_flat=artifacts_flat)
         entries.append({**f01, "id": "S9.1"})
@@ -1248,7 +1248,7 @@ def _section10_limitations(
     results: Mapping[str, Any],
     known_limitations: Sequence[str] | None,
 ) -> list[dict[str, Any]]:
-    from src.reporting.capital_gates import KNOWN_UNMODELED_RISKS
+    from mascotrl.reporting.capital_gates import KNOWN_UNMODELED_RISKS
 
     entries: list[dict[str, Any]] = []
 

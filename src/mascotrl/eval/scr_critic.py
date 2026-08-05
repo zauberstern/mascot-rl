@@ -9,7 +9,7 @@ from typing import Any, Callable, Mapping
 
 import torch
 
-from src.policy.single_agent import compute_gae
+from mascotrl.policy.single_agent import compute_gae
 
 SCR_MODES = frozenset({"off", "nocf", "full", "speculative"})
 

@@ -37,10 +37,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.budget_action import read_actual_spend
-from src.aws_burst.image_digest import pinned_image_uri
-from src.aws_burst.profiles import REGION
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.budget_action import read_actual_spend
+from mascotrl.aws_burst.image_digest import pinned_image_uri
+from mascotrl.aws_burst.profiles import REGION
 
 
 GUARDRAILS_TEMPLATE = ROOT / "deploy/aws_burst/cloudformation/00_guardrails.yaml"
@@ -135,7 +135,7 @@ def run_smoke(
 
     # Arm budget action via the existing operator script entrypoint logic.
     from scripts.aws_arm_budget_action import _resolve_arns
-    from src.aws_burst.budget_action import (
+    from mascotrl.aws_burst.budget_action import (
         DEFAULT_BUDGET_NAME,
         ensure_budget_action,
         stamp_armed_flag,

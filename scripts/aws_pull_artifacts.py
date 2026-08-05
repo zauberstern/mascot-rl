@@ -13,12 +13,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.validate_remote_cell import validate_remote_cell
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.image_digest import load_digest_record
-from src.aws_burst.profiles import REGION, armed_profiles, artifact_bucket
-from src.aws_burst.waves import WAVES, discover_wave_cells
-from src.eval.universe_fingerprint import EQ_BURST_WAVES, read_panel_bundle_sha256
-from src.reporting.policy_behavior import validate_policy_behavior_payload
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.image_digest import load_digest_record
+from mascotrl.aws_burst.profiles import REGION, armed_profiles, artifact_bucket
+from mascotrl.aws_burst.waves import WAVES, discover_wave_cells
+from mascotrl.eval.universe_fingerprint import EQ_BURST_WAVES, read_panel_bundle_sha256
+from mascotrl.reporting.policy_behavior import validate_policy_behavior_payload
 
 
 def _default_dest(wave: str) -> str:
