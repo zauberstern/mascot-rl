@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from src.eval.trial_ledger import TrialLedger, append_trial, load_ledger
+from mascotrl.eval.trial_ledger import TrialLedger, append_trial, load_ledger
 
 
 def test_append_baseline_seed_fold_even_on_failure(tmp_path: Path):

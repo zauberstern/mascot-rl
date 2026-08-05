@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.desk_gap_diagnosis import lag1_hit_rate, oracle_segments
+from mascotrl.eval.desk_gap_diagnosis import lag1_hit_rate, oracle_segments
 
 
 def test_oracle_segments_two_runs() -> None:

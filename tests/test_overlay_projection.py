@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.convex_projection import ConvexProjectionLayer
-from src.policy.overlay_projection import OverlayProjectionLayer
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.overlay_projection import OverlayProjectionLayer
 
 
 def _rand_batch(k: int, B: int = 2, seed: int = 0):

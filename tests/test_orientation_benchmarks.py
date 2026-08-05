@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.baselines import BASELINE_NAMES
-from src.eval.orientation_benchmarks import (
+from mascotrl.eval.baselines import BASELINE_NAMES
+from mascotrl.eval.orientation_benchmarks import (
     ORIENTATION_NAMES,
     align_to_dates,
     run_and_attach_orientation_benchmarks,

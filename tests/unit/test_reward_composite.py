@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.policy.objective_factory import sdr_composite_reward
+from mascotrl.policy.objective_factory import sdr_composite_reward
 from tests.conftest import FLOAT_TOL
 
 

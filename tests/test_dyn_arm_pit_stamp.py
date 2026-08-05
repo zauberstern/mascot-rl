@@ -4,7 +4,7 @@ from __future__ import annotations
 import pandas as pd
 
 from scripts.run_eq_alloc_campaign import _stamp_dynamic_arm_pit
-from src.features.pit_universe import ROLLING_TRAILING_PIT
+from mascotrl.features.pit_universe import ROLLING_TRAILING_PIT
 
 
 def test_dynamic_arm_stamps_slot_masked_pit_and_universe_mode() -> None:

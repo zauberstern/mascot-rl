@@ -4,15 +4,15 @@ from __future__ import annotations
 import pytest
 import torch
 
-from src.arms.spec import ALLOWED_TRAIN_DISTRIBUTIONS, ArmSpec
-from src.env.cmdp_env import ALLOWED_TRANSITION_SOURCES, CMDPEnv
-from src.features.extractor import AlphaFeatureExtractor
-from src.policy.happo import HAPPOEngine
-from src.reporting.research_alpha_router import (
+from mascotrl.arms.spec import ALLOWED_TRAIN_DISTRIBUTIONS, ArmSpec
+from mascotrl.env.cmdp_env import ALLOWED_TRANSITION_SOURCES, CMDPEnv
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.policy.happo import HAPPOEngine
+from mascotrl.reporting.research_alpha_router import (
     RESEARCH_PRIMARY_ALLOWED,
     resolve_research_primary_train,
 )
-from src.spectrum.registry import allowed_ids
+from mascotrl.spectrum.registry import allowed_ids
 
 
 def test_arm_spec_allows_spectrum_train_worlds() -> None:

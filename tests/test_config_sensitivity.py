@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from src.policy.objective_factory import (
+from mascotrl.policy.objective_factory import (
     episode_weights,
     objective_gradient_path_for,
 )

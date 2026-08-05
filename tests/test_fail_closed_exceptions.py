@@ -12,9 +12,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import src.eval.research_alpha_cpcv as racpcv
-from src.eval.cpcv import CPCVConfig
-from src.eval.research_alpha_train import build_research_hist_env
+import mascotrl.eval.research_alpha_cpcv as racpcv
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.research_alpha_train import build_research_hist_env
 
 
 def test_arm_spec_fail_on_load_propagates_not_swallowed() -> None:
@@ -78,7 +78,7 @@ def test_cpcv_fold_failure_raises_instead_of_silent_hole(
 
 
 def test_bkm_moment_failure_is_counted_not_silently_dropped() -> None:
-    from src.data import surface_signals as ss
+    from mascotrl.data import surface_signals as ss
 
     ss.reset_bkm_moment_failure_counter()
     assert ss.bkm_moment_failure_count() == 0

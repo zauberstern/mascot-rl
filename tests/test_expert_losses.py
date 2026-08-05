@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.expert_losses import expanding_unit_interval, log_wealth_loss
+from mascotrl.eval.expert_losses import expanding_unit_interval, log_wealth_loss
 
 
 def test_log_wealth_loss_zero_return() -> None:

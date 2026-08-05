@@ -7,7 +7,7 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.aws_burst.waves import WAVES, discover_wave_cells, shard_cells
+from mascotrl.aws_burst.waves import WAVES, discover_wave_cells, shard_cells
 
 
 ROOT = Path(__file__).resolve().parents[1]

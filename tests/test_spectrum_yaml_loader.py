@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.spectrum.yaml_loader import load_cell_yaml, load_cell_yaml_text
+from mascotrl.spectrum.yaml_loader import load_cell_yaml, load_cell_yaml_text
 
 
 def test_scr_mix_off_stays_string_from_file(tmp_path: Path) -> None:

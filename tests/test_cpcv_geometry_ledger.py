@@ -5,9 +5,9 @@ from pathlib import Path
 
 import numpy as np
 
-from src.eval.cpcv import CPCVConfig, assign_paths
-from src.eval.pbo_appendix import append_trial_ledger_entry
-from src.eval.stats_rigor import deflated_sharpe_ratio
+from mascotrl.eval.cpcv import CPCVConfig, assign_paths
+from mascotrl.eval.pbo_appendix import append_trial_ledger_entry
+from mascotrl.eval.stats_rigor import deflated_sharpe_ratio
 
 
 def test_cpcv_geometry_6_2_has_15_splits_and_5_paths():

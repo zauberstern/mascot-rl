@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.turbulence import classify_regime, turbulence_index
+from mascotrl.eval.turbulence import classify_regime, turbulence_index
 
 
 def test_turbulence_causal_window_ignores_future_spike() -> None:

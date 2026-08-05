@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.owl_hysteresis import owl_hysteresis
+from mascotrl.eval.owl_hysteresis import owl_hysteresis
 
 
 def test_owl_hysteresis_requires_owl() -> None:

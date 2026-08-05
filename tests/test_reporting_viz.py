@@ -10,8 +10,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.reporting.institutional_tearsheet import render_tearsheet
-from src.reporting.viz_ingest import (
+from mascotrl.reporting.institutional_tearsheet import render_tearsheet
+from mascotrl.reporting.viz_ingest import (
     REGIME_IS,
     REGIME_OOS,
     build_nav_series,

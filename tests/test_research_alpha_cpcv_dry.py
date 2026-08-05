@@ -5,14 +5,14 @@ import math
 
 import numpy as np
 
-from src.eval.research_alpha_baselines import (
+from mascotrl.eval.research_alpha_baselines import (
     equal_weight_sharpe,
     random_baseline_sharpe,
     research_baselines_from_returns,
     sign_lag_return_sharpe,
 )
-from src.eval.research_alpha_cpcv import dry_run_research_alpha_cpcv
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.eval.research_alpha_cpcv import dry_run_research_alpha_cpcv
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 
 def test_baselines_finite_on_toy_panel() -> None:
@@ -83,7 +83,7 @@ def test_dry_run_stamp_path_does_not_unlock_capital() -> None:
 
 
 def test_kill_when_policy_not_above_random() -> None:
-    from src.eval.research_alpha_baselines import policy_beats_random
+    from mascotrl.eval.research_alpha_baselines import policy_beats_random
 
     assert policy_beats_random(0.1, 0.2) is False
     assert policy_beats_random(0.3, 0.2) is True

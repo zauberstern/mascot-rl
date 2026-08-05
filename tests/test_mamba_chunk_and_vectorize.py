@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import torch
 
-from src.features.extractor import AlphaFeatureExtractor
-from src.features.mamba2 import PureTorchMamba2
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.features.mamba2 import PureTorchMamba2
 
 
 def test_chunk_size_clamped_to_seqlen_matches_chunk1():

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.raw_state import (
+from mascotrl.features.raw_state import (
     build_raw_states,
     build_raw_states_from_feature_tensor,
     encode_scalar_series_legacy_sinusoid,

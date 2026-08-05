@@ -4,7 +4,7 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-from src.data.paths import DATA_ROOT, LSEG_RAW, RAW_ROOT, TIER_A, TIER_A_DIR, TIER_B, UNIVERSE_IDENTIFIERS, MASCOTRL_ROOT
+from mascotrl.data.paths import DATA_ROOT, LSEG_RAW, RAW_ROOT, TIER_A, TIER_A_DIR, TIER_B, UNIVERSE_IDENTIFIERS, MASCOTRL_ROOT
 
 SKIP_DIRS = {
     ".venv",

@@ -24,7 +24,7 @@ def _fixture_panel(*, n_dates: int = 12, n_names: int = 20) -> pd.DataFrame:
 
 
 def test_wide_returns_max_row_nan_frac_puncture_mode() -> None:
-    from src.eval.equity_substrate import _wide_returns_with_availability
+    from mascotrl.eval.equity_substrate import _wide_returns_with_availability
 
     df = _fixture_panel()
     dates = pd.bdate_range("2020-01-02", periods=12)
@@ -44,7 +44,7 @@ def test_wide_returns_max_row_nan_frac_puncture_mode() -> None:
 
 
 def test_wide_returns_keep_partial_rows_preserves_sparse_rows() -> None:
-    from src.eval.equity_substrate import _wide_returns_with_availability
+    from mascotrl.eval.equity_substrate import _wide_returns_with_availability
 
     df = _fixture_panel()
     dates = pd.bdate_range("2020-01-02", periods=12)
@@ -68,7 +68,7 @@ def test_eq_alloc_reexports_match_equity_substrate(keep_partial_rows: bool) -> N
     from scripts.run_eq_alloc_campaign import (
         _wide_returns_with_availability as eq_wide,
     )
-    from src.eval.equity_substrate import (
+    from mascotrl.eval.equity_substrate import (
         _wide_returns_with_availability as sub_wide,
     )
 

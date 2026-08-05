@@ -5,7 +5,7 @@ from pathlib import Path
 
 import yaml
 
-from src.reporting.capital_gates import assert_protocol_provenance
+from mascotrl.reporting.capital_gates import assert_protocol_provenance
 
 
 ROOT = Path(__file__).resolve().parents[1]

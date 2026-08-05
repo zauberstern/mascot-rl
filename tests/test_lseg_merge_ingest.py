@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from src.data.lseg_overlay import (
+from mascotrl.data.lseg_overlay import (
     RIC_MAP_P4_COLS,
     copy_lseg_dataset_dir,
     ingest_lseg_overlays,

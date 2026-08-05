@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 import yaml
-from src.data.crucible import CrucibleSpec, assert_ofat_cells_share_schedule_fingerprint, crucible_fingerprint, load_universe_schedule, schedule_fingerprint, write_universe_schedule
+from mascotrl.data.crucible import CrucibleSpec, assert_ofat_cells_share_schedule_fingerprint, crucible_fingerprint, load_universe_schedule, schedule_fingerprint, write_universe_schedule
 
 def _base_result_like(secids):
     return {'secids': list(secids), 'ff4_fit_hash': 'abc123', 'sleeve_defs_hash': 'sleevedefs01'}

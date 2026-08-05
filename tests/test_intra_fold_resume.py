@@ -5,7 +5,7 @@ from pathlib import Path
 
 import torch
 
-from src.eval.research_alpha_train import _discover_latest_checkpoint
+from mascotrl.eval.research_alpha_train import _discover_latest_checkpoint
 
 
 def _write_checkpoint(

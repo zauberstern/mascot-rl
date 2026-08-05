@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 import torch
 
-from src.models.inference import HAPPO_OOS_REPLAY_SUPPORTED, act_weights, load_policy
-from src.models.registry import (
+from mascotrl.models.inference import HAPPO_OOS_REPLAY_SUPPORTED, act_weights, load_policy
+from mascotrl.models.registry import (
     ModelCard,
     list_models,
     make_model_id,
@@ -16,12 +16,12 @@ from src.models.registry import (
     verify_bundle,
     write_model_zoo_index,
 )
-from src.policy.single_agent import make_single_agent
-from src.spectrum.registry import allowed_ids
+from mascotrl.policy.single_agent import make_single_agent
+from mascotrl.spectrum.registry import allowed_ids
 
 
 def _payload_for(agent) -> dict:
-    from src.eval.research_alpha_train import _agent_policy_module
+    from mascotrl.eval.research_alpha_train import _agent_policy_module
 
     net = _agent_policy_module(agent)
     assert net is not None, f"no policy module on {type(agent)}"
@@ -59,7 +59,7 @@ def test_save_load_roundtrip_preserves_weights(tmp_path: Path):
     save_model_bundle(_payload_for(agent), card, root=tmp_path)
     loaded, card2 = load_policy(mid, root=tmp_path)
     assert card2.model_id == mid
-    from src.eval.research_alpha_train import _agent_policy_module
+    from mascotrl.eval.research_alpha_train import _agent_policy_module
 
     net0 = _agent_policy_module(agent).state_dict()
     net1 = _agent_policy_module(loaded).state_dict()
@@ -127,8 +127,8 @@ def test_act_weights_matches_direct_agent(tmp_path: Path):
 def test_all_registry_algos_can_roundtrip_bundle(tmp_path: Path):
     for algo in allowed_ids("algo"):
         if algo == "happo":
-            from src.policy.happo import HAPPOEngine
-            from src.models.inference import HAPPOInferenceAgent
+            from mascotrl.policy.happo import HAPPOEngine
+            from mascotrl.models.inference import HAPPOInferenceAgent
 
             k, d_model, macro = 3, 8, 4
             engine = HAPPOEngine(k, enriched_dim=d_model, macro_dim=macro)
@@ -212,7 +212,7 @@ def test_list_and_index(tmp_path: Path):
 def test_happo_oos_replay_supported(tmp_path: Path):
     """HAPPO zoo bundles rebuild via deploy_config for act_weights."""
     assert HAPPO_OOS_REPLAY_SUPPORTED is True
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.policy.happo import HAPPOEngine
 
     k, d_model, macro = 2, 8, 4
     engine = HAPPOEngine(k, enriched_dim=d_model, macro_dim=macro)

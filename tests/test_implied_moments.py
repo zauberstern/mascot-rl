@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.implied_moments import compute_mf_moments
+from mascotrl.data.implied_moments import compute_mf_moments
 
 
 def _synthetic_otm_slice():

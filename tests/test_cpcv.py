@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.cpcv import (
+from mascotrl.eval.cpcv import (
     CPCVConfig,
     assign_paths,
     build_cpcv_folds,

@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.liquidity import build_liquidity_block, map_wide_to_slots
+from mascotrl.features.blocks.liquidity import build_liquidity_block, map_wide_to_slots
 
 
 def test_map_wide_to_slots_time_varying_occupancy():

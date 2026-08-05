@@ -5,15 +5,15 @@ import numpy as np
 import pytest
 import torch
 
-from src.policy.cmdp_projector import turnover_cap_project
-from src.policy.dirichlet_tilt import (
+from mascotrl.policy.cmdp_projector import turnover_cap_project
+from mascotrl.policy.dirichlet_tilt import (
     concentrations_from_logits,
     dirichlet_entropy,
     dirichlet_log_prob,
     dirichlet_sample,
     multiplicative_tilt,
 )
-from src.policy.single_agent import PPOAgent, _apply_weight_head
+from mascotrl.policy.single_agent import PPOAgent, _apply_weight_head
 
 
 def test_log_prob_matches_torch_dirichlet() -> None:

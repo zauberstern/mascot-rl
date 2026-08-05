@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.research_alpha_train import train_research_hist
+from mascotrl.eval.research_alpha_train import train_research_hist
 
 
 def test_eq_diffsharpe_train_smoke() -> None:

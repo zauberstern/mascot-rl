@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.pit_universe import (
+from mascotrl.features.pit_universe import (
     build_equity_pit_returns,
     compound_equity_return,
     validate_delist_handling,

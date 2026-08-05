@@ -6,16 +6,16 @@ import hashlib
 import numpy as np
 import pytest
 
-from src.arms import ArmSpec
-from src.eval.friction import FrictionSpec
-from src.eval.parity_harness import (
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.parity_harness import (
     ESTIMAND_FIELDS,
     assert_estimand_hash,
     estimand_hash,
     score_equal_weight,
     score_strategy,
 )
-from src.eval.residualization import ResidualizerState, fit_ff4_residualizer, freeze_residualizer
+from mascotrl.eval.residualization import ResidualizerState, fit_ff4_residualizer, freeze_residualizer
 
 
 def _toy_panel(t: int = 80, k: int = 4, seed: int = 0):
@@ -170,7 +170,7 @@ def test_assert_estimand_hash_fail_closed_on_mismatch():
 
 def test_no_trade_weight_fn_yields_zero_pnl_not_equal_weight():
     """A4: an intentional zero-weight vector must not become equal-weight."""
-    from src.eval.benchmark_panel import get_weight_fn
+    from mascotrl.eval.benchmark_panel import get_weight_fn
 
     rets, fac = _toy_panel(t=60, k=4, seed=3)
     k = rets.shape[1]
@@ -250,7 +250,7 @@ def test_policy_and_benchmark_hash_recipes_align_on_total_net():
 
 def test_campaign_stats_require_matching_estimand_hash():
     """Fail-closed helper used before writing stats_table.json."""
-    from src.eval.parity_harness import require_uniform_estimand_hashes
+    from mascotrl.eval.parity_harness import require_uniform_estimand_hashes
 
     friction = FrictionSpec(equity_bps=5.0)
     h = estimand_hash(friction=friction, residualize=True, cadence="monthly")

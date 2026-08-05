@@ -8,7 +8,7 @@ pytest.importorskip("cpp_rbergomi")
 
 
 def test_garch_world_generates_finite_bundle():
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     bundle = get_world_bundle(
         {
@@ -34,7 +34,7 @@ def test_garch_world_generates_finite_bundle():
 
 
 def test_garch_stationarity_fail_closed():
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     with pytest.raises(Exception):
         get_world_bundle(
@@ -58,7 +58,7 @@ def test_garch_stationarity_fail_closed():
 
 def test_garch_table_vs_mc():
     """Table prices should be positive and ordered by moneyness on a fixed grid."""
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     bundle = get_world_bundle(
         {

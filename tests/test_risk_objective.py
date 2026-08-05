@@ -6,7 +6,7 @@ from tests.conftest import FLOAT_TOL
 
 import torch
 
-from src.policy.risk_objective import RiskObjective
+from mascotrl.policy.risk_objective import RiskObjective
 
 
 def test_coef_zero_is_zero_loss():

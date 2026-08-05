@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.aws_burst.jobdef import (
+from mascotrl.aws_burst.jobdef import (
     build_container_env,
     build_job_definition,
     build_retry_strategy,
@@ -31,7 +31,7 @@ def test_job_definition_timeout_and_resources() -> None:
 
 
 def test_job_memory_sanity_locked_to_free_tier() -> None:
-    from src.aws_burst.jobdef import assert_job_memory_fits_instance
+    from mascotrl.aws_burst.jobdef import assert_job_memory_fits_instance
     import pytest
 
     assert_job_memory_fits_instance(6912)

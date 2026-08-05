@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.cppo import CPPOAgent
-from src.policy.omnisafe_adapter import OmniSafeCPPOAgent
-from src.policy.single_agent import make_single_agent
-from src.policy.vendor.omnisafe import PIDLagrangian
+from mascotrl.policy.cppo import CPPOAgent
+from mascotrl.policy.omnisafe_adapter import OmniSafeCPPOAgent
+from mascotrl.policy.single_agent import make_single_agent
+from mascotrl.policy.vendor.omnisafe import PIDLagrangian
 
 
 def _batch(n: int = 64, obs_dim: int = 8, act_dim: int = 3):

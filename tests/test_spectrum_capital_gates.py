@@ -1,7 +1,7 @@
 """Capital hygiene gates for spectrum objective / transfer / DSR honesty."""
 from __future__ import annotations
 
-from src.reporting.capital_gates import assert_protocol_provenance
+from mascotrl.reporting.capital_gates import assert_protocol_provenance
 
 
 def _base_report(**kwargs):

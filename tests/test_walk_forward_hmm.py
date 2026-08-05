@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.walk_forward_hmm import jaccard_turbulent, walk_forward_hmm_regimes
+from mascotrl.eval.walk_forward_hmm import jaccard_turbulent, walk_forward_hmm_regimes
 
 
 def test_walk_forward_hmm_no_lookahead_on_prefix() -> None:
@@ -75,7 +75,7 @@ def test_viterbi_on_block_has_intra_block_lookahead() -> None:
 def test_filter_no_intra_block_lookahead() -> None:
     """Filtered P(s_t|data through t) at day t unchanged if later OOS days are deleted."""
     pytest.importorskip("hmmlearn")
-    from src.eval.walk_forward_hmm import walk_forward_hmm_filter
+    from mascotrl.eval.walk_forward_hmm import walk_forward_hmm_filter
 
     x = _planted_turbulence_series()
     window, step = 400, 21
@@ -102,8 +102,8 @@ def test_filter_no_intra_block_lookahead() -> None:
 def test_filter_agrees_with_turbulence_better_than_return_mean_hmm() -> None:
     """KPT: HMM on turbulence should Jaccard-agree with threshold more than return-mean HMM."""
     pytest.importorskip("hmmlearn")
-    from src.eval.turbulence import classify_regime, turbulence_index
-    from src.eval.walk_forward_hmm import (
+    from mascotrl.eval.turbulence import classify_regime, turbulence_index
+    from mascotrl.eval.walk_forward_hmm import (
         hmm_turbulent_mask,
         jaccard_turbulent,
         walk_forward_hmm_filter,
@@ -144,7 +144,7 @@ def test_filter_agrees_with_turbulence_better_than_return_mean_hmm() -> None:
 
 def test_markov_filter_k_regimes_must_be_two() -> None:
     pytest.importorskip("statsmodels")
-    from src.eval.walk_forward_hmm import walk_forward_markov_filter
+    from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
     y = np.random.default_rng(0).normal(0, 1, size=400)
     with pytest.raises(ValueError, match="k_regimes must be 2"):
@@ -153,7 +153,7 @@ def test_markov_filter_k_regimes_must_be_two() -> None:
 
 def test_markov_filter_no_intra_block_lookahead() -> None:
     pytest.importorskip("statsmodels")
-    from src.eval.walk_forward_hmm import walk_forward_markov_filter
+    from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
     rng = np.random.default_rng(3)
     t = 500
@@ -175,8 +175,8 @@ def test_markov_filter_no_intra_block_lookahead() -> None:
 
 def test_markov_piger_more_persistent_than_hard() -> None:
     pytest.importorskip("statsmodels")
-    from src.eval.regime_scorecard import run_duration_stats
-    from src.eval.walk_forward_hmm import walk_forward_markov_filter
+    from mascotrl.eval.regime_scorecard import run_duration_stats
+    from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
     rng = np.random.default_rng(4)
     t = 600
@@ -204,7 +204,7 @@ def test_markov_failed_fit_reuses_last_checkpoint(monkeypatch: pytest.MonkeyPatc
     pytest.importorskip("statsmodels")
     import statsmodels.api as sm
 
-    from src.eval.walk_forward_hmm import walk_forward_markov_filter
+    from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
     rng = np.random.default_rng(7)
     t = 520

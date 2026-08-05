@@ -5,7 +5,7 @@ import math
 
 import numpy as np
 
-from src.eval.onehot_leader import onehot, pick_leader, trailing_sharpe
+from mascotrl.eval.onehot_leader import onehot, pick_leader, trailing_sharpe
 
 
 def test_trailing_sharpe_constant_positive() -> None:

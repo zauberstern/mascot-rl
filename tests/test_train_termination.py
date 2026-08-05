@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.single_agent import compute_gae
+from mascotrl.policy.single_agent import compute_gae
 
 
 def test_gae_bootstraps_on_truncation_not_terminal():

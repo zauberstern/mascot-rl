@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 
-from src.data.oos_panel import (
+from mascotrl.data.oos_panel import (
     EQUITY_LABEL_STEM,
     FEATURE_STEMS,
     LABEL_STEM,
@@ -57,7 +57,7 @@ def test_post_coverage_ffill_preserves_stk_ret_nan():
     pivot_long_marks_to_wide already skips label stems; materialize_oos_panel
     then ffills remaining columns. Equity stems must stay in the exclusion set.
     """
-    from src.data.oos_panel import no_ffill_label_columns
+    from mascotrl.data.oos_panel import no_ffill_label_columns
 
     idx = pd.date_range("2020-01-02", periods=3, freq="B")
     wide = pd.DataFrame(
@@ -108,7 +108,7 @@ def test_duckdb_sql_emits_stk_ret_under_label_ok_lag():
     """Static guard: marks SQL must gate stk_ret on label_ok_lag like dh_ret_lagdelta."""
     from pathlib import Path
 
-    src = Path(__file__).resolve().parents[1] / "src" / "data" / "duckdb_engine.py"
+    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "data" / "duckdb_engine.py"
     text = src.read_text()
     assert "END AS stk_ret" in text
     assert "WHEN label_ok_lag AND spot > 0" in text

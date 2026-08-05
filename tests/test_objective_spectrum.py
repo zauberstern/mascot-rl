@@ -5,9 +5,9 @@ import numpy as np
 import pytest
 import torch
 
-from src.eval.collapse_guard import assert_collapse_guard_ok, collapse_guard
-from src.policy.risk_objective import ALLOWED_MODES, RiskObjective
-from src.spectrum.registry import allowed_ids
+from mascotrl.eval.collapse_guard import assert_collapse_guard_ok, collapse_guard
+from mascotrl.policy.risk_objective import ALLOWED_MODES, RiskObjective
+from mascotrl.spectrum.registry import allowed_ids
 
 
 def test_spectrum_objective_ids_in_allowed_modes() -> None:

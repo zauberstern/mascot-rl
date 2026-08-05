@@ -10,8 +10,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.features.blocks.assemble import assemble_equity_feature_cube
-from src.features.blocks.obs_builder import PanelObservationBuilder
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
 
 
 def _fixture_panel(T: int = 40, K: int = 4, seed: int = 0):
@@ -83,7 +83,7 @@ def test_feature_net_keys_inflate_channel_count() -> None:
 
 def test_spectrum_and_eq_alloc_defaults_produce_identical_26ch_obs() -> None:
     """G0 identity: shared substrate attach (no feature-net) matches both campaigns."""
-    from src.eval.equity_substrate import (
+    from mascotrl.eval.equity_substrate import (
         attach_equity_obs_substrate,
         stamp_equity_obs_defaults,
     )
@@ -158,7 +158,7 @@ def test_spectrum_and_eq_alloc_defaults_produce_identical_26ch_obs() -> None:
 
 def test_spectrum_refuses_feature_net_opt_in_without_schema_support() -> None:
     """Cell YAML cannot legally express feature_extras; runtime opt-in must fail closed."""
-    from src.spectrum.cell_schema import validate_cell_cfg
+    from mascotrl.spectrum.cell_schema import validate_cell_cfg
 
     cfg = {
         "spectrum_cell_id": "eq_K4_single_ppo_mlp_softmax_mean_std_cao",

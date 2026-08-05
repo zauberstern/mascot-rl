@@ -4,17 +4,17 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.normalize import (
+from mascotrl.features.blocks.normalize import (
     normalize_cross_section_panel,
     winsorize_cross_section,
     winsorize_panel,
 )
-from src.features.blocks.obs_builder import PanelObservationBuilder
-from src.features.blocks.returns_momentum import (
+from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
+from mascotrl.features.blocks.returns_momentum import (
     build_returns_momentum_block,
     residual_momentum_12_1,
 )
-from src.features.blocks.volatility_vrp import variance_risk_premium
+from mascotrl.features.blocks.volatility_vrp import variance_risk_premium
 
 
 def test_winsorize_is_per_date_not_global() -> None:
@@ -60,7 +60,7 @@ def test_residual_momentum_uses_only_past_factors() -> None:
 
 
 def test_vrp_is_variance_difference_not_vol_difference() -> None:
-    from src.features.blocks.volatility_vrp import variance_risk_premium as vrp_fn
+    from mascotrl.features.blocks.volatility_vrp import variance_risk_premium as vrp_fn
 
     r = np.zeros((80, 2))
     r[20:] = 0.01  # after burn-in HV becomes positive
@@ -85,7 +85,7 @@ def test_panel_observation_builder_rank_and_shape() -> None:
 
 
 def test_build_research_hist_env_uses_feature_cube_when_enabled() -> None:
-    from src.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
 
     rng = np.random.default_rng(3)
     t, k = 80, 4

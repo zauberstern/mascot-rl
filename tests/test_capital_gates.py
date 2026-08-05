@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from src.reporting.capital_gates import (
+from mascotrl.reporting.capital_gates import (
     assert_protocol_provenance,
     capacity_curve_from_daily,
     default_estimand_residuals,

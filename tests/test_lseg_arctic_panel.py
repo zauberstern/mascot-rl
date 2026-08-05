@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from src.data.arctic_store import ArcticStateStore
+from mascotrl.data.arctic_store import ArcticStateStore
 
 
 def test_persist_panel_keeps_two_secids_same_date(tmp_path: Path) -> None:

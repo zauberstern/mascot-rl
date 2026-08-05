@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.eval.equity_substrate import (
+from mascotrl.eval.equity_substrate import (
     apply_feature_net_extras_if_enabled,
     stamp_equity_obs_defaults,
 )

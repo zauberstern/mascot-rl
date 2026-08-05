@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.surface_signals import (
+from mascotrl.data.surface_signals import (
     SURFACE_SIGNAL_NAMES,
     compute_surface_signals_panel,
 )
@@ -80,7 +80,7 @@ def test_vrp_30_is_mfiv_minus_hv_and_nan_when_hv_missing():
 
 
 def test_vrp_30_level_helper_matches_catalog_definition():
-    from src.features.blocks.volatility_vrp import vrp_30_level
+    from mascotrl.features.blocks.volatility_vrp import vrp_30_level
 
     mfiv = np.array([[0.25, np.nan], [0.30, 0.40]])
     hv = np.array([[0.10, 0.10], [0.20, np.nan]])

@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from src.data.lseg_overlay import (
+from mascotrl.data.lseg_overlay import (
     P3_REFUSED,
     overlay_interest_rate,
     overlay_sp500_sec,

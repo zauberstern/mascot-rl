@@ -5,8 +5,8 @@ import pyarrow as pa
 import pytest
 from tests.conftest import FLOAT_TOL
 from pathlib import Path
-from src.data.arctic_store import ArcticStateStore, get_pit_macro_features
-from src.data.oos_panel import SIGNALS_SYMBOL, load_oos_panel, pivot_long_marks_to_wide
+from mascotrl.data.arctic_store import ArcticStateStore, get_pit_macro_features
+from mascotrl.data.oos_panel import SIGNALS_SYMBOL, load_oos_panel, pivot_long_marks_to_wide
 
 def test_duckdb_arrow_roundtrip(tmp_path: Path):
     con = duckdb.connect(':memory:')
@@ -20,8 +20,8 @@ def test_duckdb_arrow_roundtrip(tmp_path: Path):
 
 def test_macro_read_ffill_bday_union_length():
     """5561 arctic rows → 5741 after B-day∪CBOE expand; no leading invent fill."""
-    from src.data.paths import ARCTIC_ROOT, LAKE_ROOT
-    from src.data.arctic_store import ArcticStateStore
+    from mascotrl.data.paths import ARCTIC_ROOT, LAKE_ROOT
+    from mascotrl.data.arctic_store import ArcticStateStore
     if not (LAKE_ROOT / 'macro' / 'cboe_vix.parquet').is_file():
         pytest.skip('lake not mounted')
     store = ArcticStateStore(db_path=ARCTIC_ROOT, library_name='hyper_volanet_features')
@@ -40,8 +40,8 @@ def test_macro_read_ffill_bday_union_length():
 
 def test_duckdb_macro_dedupes_vix_duplicate_dates():
     """Lake VIX has known dup calendar rows; compute_macro_state must emit unique dates."""
-    from src.data.duckdb_engine import DuckDBFeatureEngine
-    from src.data.paths import LAKE_ROOT
+    from mascotrl.data.duckdb_engine import DuckDBFeatureEngine
+    from mascotrl.data.paths import LAKE_ROOT
     if not (LAKE_ROOT / 'macro' / 'cboe_vix.parquet').is_file():
         pytest.skip('lake not mounted')
     eng = DuckDBFeatureEngine(lake_base_dir=LAKE_ROOT)
@@ -91,7 +91,7 @@ def test_get_pit_macro_features_ffill(tmp_path: Path):
 
 def test_macro_loader_refuses_randn_fallback(tmp_path: Path, monkeypatch):
     """If lake + Arctic fail, raise — do not return torch.randn synthetic macro."""
-    from src.data import macro_loader
+    from mascotrl.data import macro_loader
 
     def boom(*_a, **_k):
         raise RuntimeError('duckdb down')

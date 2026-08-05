@@ -9,7 +9,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.factor_alpha import (
+from mascotrl.eval.factor_alpha import (
     FEASIBLE_CHARACTERISTICS,
     UNAVAILABLE_CHARACTERISTICS,
     attach_factor_alpha,

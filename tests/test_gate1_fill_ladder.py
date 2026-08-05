@@ -10,8 +10,8 @@ import math
 
 import pytest
 
-from src.eval.friction import FrictionSpec
-from src.eval.research_alpha_cpcv import _fill_ladder_specs
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.research_alpha_cpcv import _fill_ladder_specs
 
 
 def test_eq_arm_ladder_varies_equity_bps_even_with_om_touch() -> None:

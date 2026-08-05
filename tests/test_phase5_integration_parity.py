@@ -9,7 +9,7 @@ import pytest
 pytestmark = pytest.mark.plumbing
 import torch
 
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 _ARTIFACT_KEYS = (
     "mean_reward",
@@ -38,7 +38,7 @@ def _objective(algo: str) -> str:
 
 def _make(algo: str, backend: str, *, obs_dim: int = 8, action_dim: int = 2):
     if algo == "cppo_omnisafe":
-        pytest.importorskip("src.policy.omnisafe_adapter")
+        pytest.importorskip("mascotrl.policy.omnisafe_adapter")
     kw: dict = {"hidden": 8, "lr": 1e-3}
     if algo == "dqn" and backend == "sb3":
         kw["n_bins"] = 3
@@ -137,7 +137,7 @@ def test_phase5_train_research_hist_smoke(algo: str, backend: str):
         pytest.importorskip("stable_baselines3")
         pytest.importorskip("gymnasium")
 
-    from src.eval.research_alpha_train import train_research_hist
+    from mascotrl.eval.research_alpha_train import train_research_hist
 
     rets, fac = _toy_panel(t=24, k=2)
     if algo in ("ppo", "cppo"):
@@ -173,7 +173,7 @@ def test_phase5_train_research_hist_smoke(algo: str, backend: str):
 
 def test_phase5_cppo_omnisafe_train_epoch_smoke():
     """cppo_omnisafe is not a spectrum registry algo; smoke train_epoch instead."""
-    pytest.importorskip("src.policy.omnisafe_adapter")
+    pytest.importorskip("mascotrl.policy.omnisafe_adapter")
     agent = _make("cppo_omnisafe", "custom")
     t, od, ad = 24, 8, 2
     stats = agent.train_epoch(
@@ -191,8 +191,8 @@ def test_phase5_cppo_omnisafe_train_epoch_smoke():
 
 def test_phase5_happo_construction_only():
     """HAPPO is multi-agent; assert construction, skip full train_research_hist."""
-    from src.policy.happo import HAPPOEngine
-    from src.policy.trainer import HAPPOTrainer
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.policy.trainer import HAPPOTrainer
 
     eng = HAPPOEngine(num_assets=2, enriched_dim=4, macro_dim=2, turnover_limit=0.15)
     trainer = HAPPOTrainer(eng, use_compile=False)

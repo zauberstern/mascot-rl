@@ -46,7 +46,7 @@ def test_run_happo_arm_eq_routes_through_equity_cmdp_bridge(monkeypatch) -> None
     1x1 strike/maturity placeholder), not get_surface_tensor's option-smile
     generator, so train_world='historical' (unsupported by
     get_surface_tensor) works for the eq arm."""
-    import src.eval.equity_substrate as es
+    import mascotrl.eval.equity_substrate as es
     from scripts.run_spectrum_campaign import _run_happo_arm
 
     # Keep this unit test on the OM→toy bridge path; lake parity is covered

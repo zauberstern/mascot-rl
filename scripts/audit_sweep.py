@@ -21,10 +21,10 @@ SCAN_GLOBS = (
     "scripts/campaign_sprint_finalize.sh",
     "scripts/aws_pull_artifacts.py",
     "scripts/aws_submit_wave.py",
-    "src/eval/**/*.py",
-    "src/data/**/*.py",
-    "src/features/**/*.py",
-    "src/reporting/**/*.py",
+    "src/mascotrl/eval/**/*.py",
+    "src/mascotrl/data/**/*.py",
+    "src/mascotrl/features/**/*.py",
+    "src/mascotrl/reporting/**/*.py",
 )
 
 PATTERNS: list[tuple[str, re.Pattern[str]]] = [

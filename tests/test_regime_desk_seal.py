@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.regime_desk_seal import align_sealed_operational_mask
+from mascotrl.eval.regime_desk_seal import align_sealed_operational_mask
 
 
 def _write_seal(

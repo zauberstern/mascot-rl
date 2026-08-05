@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 
 from scripts.run_eq_alloc_campaign import _wfo_enabled
-from src.eval.cadence import build_rebalance_mask
-from src.eval.equity_nested_wfo import _expanding_folds, run_equity_nested_wfo
+from mascotrl.eval.cadence import build_rebalance_mask
+from mascotrl.eval.equity_nested_wfo import _expanding_folds, run_equity_nested_wfo
 
 
 def test_expanding_folds_are_causal():

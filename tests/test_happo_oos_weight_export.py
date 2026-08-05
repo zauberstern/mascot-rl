@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.cpcv import _CPCV_FOLD_AUX_KEY
-from src.eval.research_happo_cpcv import (
+from mascotrl.eval.cpcv import _CPCV_FOLD_AUX_KEY
+from mascotrl.eval.research_happo_cpcv import (
     _aggregate_happo_learning_curves,
     _eval_happo_panel_payload,
 )
@@ -90,7 +90,7 @@ def test_aggregate_happo_learning_curves(tmp_path) -> None:
 
 def test_run_happo_cpcv_toy_emits_weights(monkeypatch, tmp_path) -> None:
     """Integration: narrative toy CPCV artifact must hoistable weights."""
-    from src.eval import research_happo_cpcv as rh
+    from mascotrl.eval import research_happo_cpcv as rh
 
     def _fake_train(train_rets, cfg, *, arm, seed):
         class _Pol:

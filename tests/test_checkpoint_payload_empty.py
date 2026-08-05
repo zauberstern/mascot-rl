@@ -11,7 +11,7 @@ class _NoCheckpointAgent:
 
 
 def test_save_checkpoint_stamps_empty_when_no_payload(tmp_path: Path) -> None:
-    from src.eval.research_alpha_train import _save_checkpoint
+    from mascotrl.eval.research_alpha_train import _save_checkpoint
 
     cfg: dict = {"_checkpoint_dir": str(tmp_path / "ckpt")}
     _save_checkpoint(_NoCheckpointAgent(), cfg, seed=0, episode=1, optimizer_steps=0)
@@ -20,7 +20,7 @@ def test_save_checkpoint_stamps_empty_when_no_payload(tmp_path: Path) -> None:
 
 
 def test_save_checkpoint_raises_when_explicit_every_and_no_payload(tmp_path: Path) -> None:
-    from src.eval.research_alpha_train import _save_checkpoint
+    from mascotrl.eval.research_alpha_train import _save_checkpoint
 
     cfg = {
         "_checkpoint_dir": str(tmp_path / "ckpt"),

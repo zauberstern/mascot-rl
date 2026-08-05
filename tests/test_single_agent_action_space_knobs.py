@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.single_agent import (
+from mascotrl.policy.single_agent import (
     PPOAgent,
     SACAgent,
     TD3Agent,

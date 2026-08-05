@@ -4,10 +4,10 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.arms import ArmSpec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec
-from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+from mascotrl.arms import ArmSpec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
 
 
 def test_mtm_pnl_reward_equals_gross_minus_costs_not_residual() -> None:

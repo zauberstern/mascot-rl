@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.data.paths import MOUNT_ROOT, TIER_B, UNIVERSE_IDENTIFIERS
+from mascotrl.data.paths import MOUNT_ROOT, TIER_B, UNIVERSE_IDENTIFIERS
 
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "universe_identifiers_gold.json"
 GOLD = json.loads(FIXTURE.read_text(encoding="utf-8"))

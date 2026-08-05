@@ -7,8 +7,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pytest
 
-from src.reporting.book_style import FAMILY_PALETTE
-from src.reporting.figures.validate import (
+from mascotrl.reporting.book_style import FAMILY_PALETTE
+from mascotrl.reporting.figures.validate import (
     assert_axis_labels_human,
     assert_greyscale_separable,
     assert_legend_present,

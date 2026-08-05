@@ -1,8 +1,8 @@
 """TDD: falsify delta-hedged option allocator research; refuse hedge-arm alpha language."""
 from __future__ import annotations
 
-from src.eval.research_alpha_baselines import policy_beats_random
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.eval.research_alpha_baselines import policy_beats_random
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 
 def test_kill_path_when_not_above_random() -> None:

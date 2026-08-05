@@ -4,14 +4,14 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.benchmark_panel import (
+from mascotrl.eval.benchmark_panel import (
     BENCHMARK_PANEL_NAMES,
     PANEL_EXTRA_NAMES,
     get_weight_fn,
     run_benchmark_on_fold,
     run_panel,
 )
-from src.eval.industry_baselines import INDUSTRY_BASELINE_NAMES
+from mascotrl.eval.industry_baselines import INDUSTRY_BASELINE_NAMES
 
 
 def _toy_returns(t: int = 80, k: int = 5, seed: int = 0) -> np.ndarray:
@@ -139,7 +139,7 @@ def test_attach_fold_benchmark_panel_keys_on_tiny_data():
 
     import pandas as pd
 
-    from src.eval.benchmark_panel import attach_fold_benchmark_panel
+    from mascotrl.eval.benchmark_panel import attach_fold_benchmark_panel
 
     dates = list(pd.bdate_range("2020-01-01", periods=40))
     rets = _toy_returns(40, 3)

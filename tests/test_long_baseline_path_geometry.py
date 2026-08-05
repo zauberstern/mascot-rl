@@ -4,9 +4,9 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-import src.eval.research_alpha_cpcv as module
-from src.eval.cpcv import CPCVConfig, build_cpcv_folds
-from src.eval.friction import FrictionSpec
+import mascotrl.eval.research_alpha_cpcv as module
+from mascotrl.eval.cpcv import CPCVConfig, build_cpcv_folds
+from mascotrl.eval.friction import FrictionSpec
 
 
 def test_long_baseline_scores_concatenated_cpcv_test_indices(monkeypatch) -> None:

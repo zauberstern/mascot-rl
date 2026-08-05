@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import pytest
 
-from src.eval.alpha_gates import (
+from mascotrl.eval.alpha_gates import (
     NONSENSE_PEERS,
     apply_rich_baseline_alpha_gate,
     pick_best_baseline,
     rich_baseline_alpha_ok,
 )
-from src.reporting.capital_gates import (
+from mascotrl.reporting.capital_gates import (
     assert_protocol_provenance,
     default_estimand_residuals,
 )

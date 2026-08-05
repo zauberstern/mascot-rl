@@ -6,16 +6,16 @@ import pandas as pd
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.arms import ArmSpec
-from src.eval.cadence import (
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.cadence import (
     annualized_turnover,
     build_rebalance_mask,
     month_end_mask,
     week_end_mask,
 )
-from src.eval.friction import FrictionSpec
-from src.eval.parity_harness import score_equal_weight
-from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.parity_harness import score_equal_weight
+from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
 
 
 def _dates(n: int = 252, start: str = "2015-01-01") -> pd.DatetimeIndex:

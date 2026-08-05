@@ -23,8 +23,8 @@ def test_core_libraries_import_together():
     for name in mods:
         importlib.import_module(name if name != "sklearn" else "sklearn")
     # Vendored OmniSafe duals (no pip omnisafe / Safety-Gymnasium)
-    from src.policy.vendor.omnisafe.lagrange import Lagrange
-    from src.policy.vendor.omnisafe.pid_lagrange import PIDLagrangian
+    from mascotrl.policy.vendor.omnisafe.lagrange import Lagrange
+    from mascotrl.policy.vendor.omnisafe.pid_lagrange import PIDLagrangian
 
     assert Lagrange is not None and PIDLagrangian is not None
     # HARL optional but expected in research envs
@@ -33,8 +33,8 @@ def test_core_libraries_import_together():
 
 
 def test_purgedcv_io_contract():
-    from src.eval.cpcv import CPCVConfig
-    from src.eval.cpcv_lib import build_cpcv_folds_lib
+    from mascotrl.eval.cpcv import CPCVConfig
+    from mascotrl.eval.cpcv_lib import build_cpcv_folds_lib
 
     n = 40
     dates = list(pd.bdate_range("2020-01-01", periods=n))
@@ -51,7 +51,7 @@ def test_purgedcv_io_contract():
 
 
 def test_sb3_flatten_reshape_io_contract():
-    from src.policy.sb3_adapter import PortfolioFeaturesExtractor
+    from mascotrl.policy.sb3_adapter import PortfolioFeaturesExtractor
 
     k, seq, c = 2, 3, 4
     flat_dim = k * seq * c
@@ -69,7 +69,7 @@ def test_sb3_flatten_reshape_io_contract():
 
 def test_recurrent_ppo_extractor_shape():
     pytest.importorskip("sb3_contrib")
-    from src.policy.sb3_adapter import make_sb3_agent
+    from mascotrl.policy.sb3_adapter import make_sb3_agent
 
     agent = make_sb3_agent(
         "ppo_recurrent", obs_dim=12, action_dim=2, num_assets=2, seq_len=2
@@ -81,7 +81,7 @@ def test_recurrent_ppo_extractor_shape():
 
 def test_harl_io_contract():
     pytest.importorskip("harl")
-    from src.policy.harl_adapter import HistoricalArmHARLEnv, default_happo_args
+    from mascotrl.policy.harl_adapter import HistoricalArmHARLEnv, default_happo_args
 
     class _StubEnv:
         K = 2
@@ -114,7 +114,7 @@ def test_harl_io_contract():
 
 
 def test_omnisafe_vendor_io_contract():
-    from src.policy.omnisafe_adapter import CostShaper, OmniSafeCPPOAgent
+    from mascotrl.policy.omnisafe_adapter import CostShaper, OmniSafeCPPOAgent
 
     shaper = CostShaper(cvar_alpha=0.95)
     rewards = torch.tensor([0.1, -0.2, 0.05, -0.5])
@@ -138,9 +138,9 @@ def test_feature_cube_routing_shapes():
 
 
 def test_friction_to_objective_no_sign_flip():
-    from src.arms import ArmSpec
-    from src.eval.friction import apply_costs
-    from src.policy.objective_factory import episode_weights
+    from mascotrl.arms import ArmSpec
+    from mascotrl.eval.friction import apply_costs
+    from mascotrl.policy.objective_factory import episode_weights
 
     w = torch.tensor([[0.6, 0.4]])
     out = apply_costs(
@@ -158,8 +158,8 @@ def test_friction_to_objective_no_sign_flip():
 
 
 def test_arch_and_cpcv_backend_resolvers():
-    from src.eval.arch_bootstrap import resolve_bootstrap_backend
-    from src.eval.cpcv_backend import resolve_use_purgedcv
+    from mascotrl.eval.arch_bootstrap import resolve_bootstrap_backend
+    from mascotrl.eval.cpcv_backend import resolve_use_purgedcv
 
     assert resolve_bootstrap_backend({}) == "custom"
     assert resolve_use_purgedcv({"use_purgedcv": False}) is False
@@ -169,4 +169,4 @@ def test_omnisafe_pip_not_required():
     """Full omnisafe package must not be required (pandas/gymnasium pin conflict)."""
     import importlib.util
 
-    assert importlib.util.find_spec("src.policy.vendor.omnisafe.lagrange") is not None
+    assert importlib.util.find_spec("mascotrl.policy.vendor.omnisafe.lagrange") is not None

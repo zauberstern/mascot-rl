@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.policy.sb3_adapter import resolve_rl_backend
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.sb3_adapter import resolve_rl_backend
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def test_resolve_rl_backend_default_sb3():

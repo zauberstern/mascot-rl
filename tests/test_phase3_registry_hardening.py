@@ -48,14 +48,14 @@ def test_spectrum_resume_hash_includes_container_digest(monkeypatch):
 
 
 def test_validate_cfg_refuses_cppo_with_mtm_pnl():
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     with pytest.raises(ValueError, match="requires_episode_returns|cppo"):
         validate_cfg({"algo": "cppo", "objective": "mtm_pnl", "architecture": "mlp"})
 
 
 def test_validate_cfg_refuses_rrl_differential_sharpe_reward():
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     with pytest.raises(ValueError, match="rrl|differential_sharpe"):
         validate_cfg(
@@ -69,7 +69,7 @@ def test_validate_cfg_refuses_rrl_differential_sharpe_reward():
 
 
 def test_validate_cfg_refuses_illegal_weight_head_for_algo():
-    from src.spectrum.registry import ALGO_HEADS, validate_cfg
+    from mascotrl.spectrum.registry import ALGO_HEADS, validate_cfg
 
     assert "dirichlet_entropy" not in ALGO_HEADS["ppo"]
     with pytest.raises(ValueError, match="weight_head|illegal"):
@@ -85,7 +85,7 @@ def test_validate_cfg_refuses_illegal_weight_head_for_algo():
 
 def test_validate_cfg_allows_cherrypick_ppo_dirichlet_mean():
     """Cherrypick Sweep C exception: ppo + dirichlet_mean is legal."""
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     out = validate_cfg(
         {
@@ -100,7 +100,7 @@ def test_validate_cfg_allows_cherrypick_ppo_dirichlet_mean():
 
 
 def test_validate_cfg_refuses_happo_screening_without_stamp():
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     with pytest.raises(ValueError, match="happo_screening_requires_dispatch_stamp"):
         validate_cfg(
@@ -116,7 +116,7 @@ def test_validate_cfg_refuses_happo_screening_without_stamp():
 
 
 def test_validate_cfg_accepts_happo_screening_with_stamp():
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     out = validate_cfg(
         {
@@ -158,7 +158,7 @@ def test_validate_cell_cfg_rejects_broken_generated_cell():
     import importlib.util
     from pathlib import Path
 
-    from src.spectrum.cell_schema import validate_cell_cfg
+    from mascotrl.spectrum.cell_schema import validate_cell_cfg
 
     path = Path(__file__).resolve().parents[1] / "scripts" / "generate_spectrum_grid.py"
     spec = importlib.util.spec_from_file_location("spectrum_grid_gen", path)
@@ -183,10 +183,10 @@ def test_load_policy_fail_closed_without_rl_backend(tmp_path):
     """Item 29: deploy_config.json without rl_backend raises."""
     import torch
 
-    from src.models.inference import load_policy
-    from src.models.registry import ModelCard, make_model_id, save_model_bundle
-    from src.policy.single_agent import make_single_agent
-    from src.eval.research_alpha_train import _agent_policy_module
+    from mascotrl.models.inference import load_policy
+    from mascotrl.models.registry import ModelCard, make_model_id, save_model_bundle
+    from mascotrl.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _agent_policy_module
 
     agent = make_single_agent(
         "ppo", obs_dim=4, action_dim=2, rl_backend="custom", hidden=8, normalize_obs=False
@@ -224,7 +224,7 @@ def test_train_research_hist_stamps_actual_rl_backend_for_dqn():
     """DQN always trains custom; artifact must not lie with cfg default sb3."""
     import numpy as np
 
-    from src.eval.research_alpha_train import train_research_hist
+    from mascotrl.eval.research_alpha_train import train_research_hist
 
     rng = np.random.default_rng(0)
     t, k = 24, 2

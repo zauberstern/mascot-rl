@@ -75,13 +75,13 @@ def test_run_research_arm_applies_crucible_foil_for_eq_lake(monkeypatch):
         return original_apply(cfg, dates=dates, rets=rets)
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", _fake_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", _fake_lake
     )
     monkeypatch.setattr(
-        "src.eval.equity_substrate.stamp_equity_obs_defaults", lambda cfg: None
+        "mascotrl.eval.equity_substrate.stamp_equity_obs_defaults", lambda cfg: None
     )
     monkeypatch.setattr(
-        "src.eval.equity_substrate.attach_equity_obs_substrate",
+        "mascotrl.eval.equity_substrate.attach_equity_obs_substrate",
         lambda *a, **k: None,
     )
     monkeypatch.setattr(camp, "_apply_spectrum_universe_arm", _spy_apply)
@@ -101,7 +101,7 @@ def test_run_research_arm_applies_crucible_foil_for_eq_lake(monkeypatch):
         }
 
     monkeypatch.setattr(
-        "src.eval.research_alpha_cpcv.run_research_alpha_cpcv", _fake_cpcv
+        "mascotrl.eval.research_alpha_cpcv.run_research_alpha_cpcv", _fake_cpcv
     )
 
     cfg = {

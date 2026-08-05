@@ -9,7 +9,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from src.data.fioracle_macro import (
+from mascotrl.data.fioracle_macro import (
     FIORACLE_FEATURE_COLUMNS,
     build_fioracle_feature_frame,
     load_fioracle_macro,

@@ -8,7 +8,7 @@ import pytest
 import yaml
 
 import scripts.generate_cherrypick_panel as gen
-from src.spectrum.registry import validate_cfg
+from mascotrl.spectrum.registry import validate_cfg
 
 ROOT = Path(__file__).resolve().parents[1]
 FULLGRID_DIR = ROOT / "config" / "spectrum" / "fullgrid"
@@ -106,7 +106,7 @@ def test_all_fullgrid_backed_a_to_f_ids_exist() -> None:
 
 
 def test_dirichlet_mean_clone_exists_and_validates(panel_dirs: dict[str, Path]) -> None:
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     for arm in gen.ARMS:
         cell_id = gen._cell_id(
@@ -130,7 +130,7 @@ def test_dirichlet_mean_clone_exists_and_validates(panel_dirs: dict[str, Path]) 
 
 
 def test_cppo_and_sdr_composite_clones(panel_dirs: dict[str, Path]) -> None:
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     for arm in gen.ARMS:
         cppo = gen._cell_id(
@@ -151,7 +151,7 @@ def test_cppo_and_sdr_composite_clones(panel_dirs: dict[str, Path]) -> None:
 
 
 def test_sweep_a_to_f_fullgrid_copies_match_except_grid_kind(panel_dirs: dict[str, Path]) -> None:
-    from src.spectrum.yaml_loader import load_cell_yaml
+    from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
     clone_set = set(gen.SWEEP_C_CLONE) | set(gen.SWEEP_A_CLONE) | set(gen.SWEEP_D_CLONE)
     for algo, body, head, objective in gen.SWEEP_A:

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.eval.performance_sleeping import performance_sleeping
+from mascotrl.eval.performance_sleeping import performance_sleeping
 
 
 def test_performance_sleeping_downweights_chronic_loser() -> None:
@@ -45,6 +45,7 @@ def test_performance_sleeping_no_turbulence_import() -> None:
     src = (
         Path(__file__).resolve().parents[1]
         / "src"
+        / "mascotrl"
         / "eval"
         / "performance_sleeping.py"
     )

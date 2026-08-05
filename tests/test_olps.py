@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.olps import (
+from mascotrl.eval.olps import (
     OLPS_REGISTRY,
     bah_weights,
     best_stock_weights,

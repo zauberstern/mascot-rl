@@ -13,8 +13,8 @@ import torch
 pytest.importorskip("stable_baselines3")
 pytest.importorskip("gymnasium")
 
-from src.eval.research_alpha_train import train_research_hist
-from src.policy.single_agent import make_single_agent
+from mascotrl.eval.research_alpha_train import train_research_hist
+from mascotrl.policy.single_agent import make_single_agent
 
 _COLLECT_TRAIN = ("act", "train_epoch")
 _ARTIFACT_KEYS = (
@@ -48,7 +48,7 @@ def test_sb3_hasattr_parity_collect_train_net(algo: str, extra: dict):
     """Research collect/train/checkpoint surface must exist on every SB3 algo."""
     if algo == "ppo_recurrent":
         pytest.importorskip("sb3_contrib")
-        from src.policy.sb3_adapter import make_sb3_agent
+        from mascotrl.policy.sb3_adapter import make_sb3_agent
 
         agent = make_sb3_agent("ppo_recurrent", obs_dim=12, action_dim=2, **extra)
     else:

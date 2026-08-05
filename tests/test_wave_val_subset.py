@@ -8,10 +8,10 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.aws_burst.profiles import PRODUCTION_WAVES
-from src.aws_burst.waves import WAVES, discover_wave_cells
-from src.eval.universe_fingerprint import EQ_BURST_WAVES
-from src.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.aws_burst.profiles import PRODUCTION_WAVES
+from mascotrl.aws_burst.waves import WAVES, discover_wave_cells
+from mascotrl.eval.universe_fingerprint import EQ_BURST_WAVES
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 VAL_DIR = ROOT / "config" / "spectrum" / "cherrypick_val"
@@ -81,7 +81,7 @@ def test_mamba_probes_only_change_k() -> None:
 
 def test_s3_watch_uses_all_burst_profiles() -> None:
     from scripts import aws_burst_s3_watch as watch_mod
-    from src.aws_burst.profiles import BURST_PROFILES
+    from mascotrl.aws_burst.profiles import BURST_PROFILES
 
     assert len(watch_mod.PROFILE_ACCOUNT_IDS) == len(BURST_PROFILES) == 4
     assert "volsurf-burst-4" in watch_mod.PROFILE_ACCOUNT_IDS

@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.research_alpha_train import (
+from mascotrl.eval.research_alpha_train import (
     _turnover_cap_project,
     build_research_hist_env,
 )

@@ -5,10 +5,10 @@ import numpy as np
 import pytest
 import torch
 
-from src.arms import ArmSpec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec, apply_costs
-from src.eval.residualization import (
+from mascotrl.arms import ArmSpec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec, apply_costs
+from mascotrl.eval.residualization import (
     fit_ff4_residualizer,
     freeze_residualizer,
     residualize_step,

@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from src.data.surface_signals import (
+from mascotrl.data.surface_signals import (
     _canonical_secid_key,
     align_signals_to_panel,
     align_signals_to_slots,

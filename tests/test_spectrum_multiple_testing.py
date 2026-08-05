@@ -6,7 +6,7 @@ import math
 import numpy as np
 import pytest
 
-from src.eval.spectrum_multiple_testing import (
+from mascotrl.eval.spectrum_multiple_testing import (
     n_trials_breakdown,
     paired_mde,
     romano_wolf_stepdown,

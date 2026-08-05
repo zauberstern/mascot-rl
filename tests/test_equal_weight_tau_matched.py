@@ -5,8 +5,8 @@ import numpy as np
 
 
 def test_equal_weight_tau_matched_respects_turnover_cap() -> None:
-    from src.eval.parity_harness import score_benchmark_panel
-    from src.eval.friction import FrictionSpec
+    from mascotrl.eval.parity_harness import score_benchmark_panel
+    from mascotrl.eval.friction import FrictionSpec
 
     rng = np.random.default_rng(0)
     t, k = 60, 4

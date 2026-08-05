@@ -12,8 +12,8 @@ import pandas as pd
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.data.macro_loader import _frame_to_tensor
-from src.data.pit_guards import (
+from mascotrl.data.macro_loader import _frame_to_tensor
+from mascotrl.data.pit_guards import (
     assert_headline_selection_pit,
     membership_filter,
     selection_pit_status,

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.reporting.research_alpha_router import (
+from mascotrl.reporting.research_alpha_router import (
     assert_train_claim_label_align,
     should_route_historical_arm_env,
 )

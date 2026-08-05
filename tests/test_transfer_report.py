@@ -5,7 +5,7 @@ import math
 
 import pytest
 
-from src.eval.transfer_report import build_transfer_report, refuse_promotion_without_real_arm
+from mascotrl.eval.transfer_report import build_transfer_report, refuse_promotion_without_real_arm
 
 
 def test_transfer_report_gap_fields() -> None:

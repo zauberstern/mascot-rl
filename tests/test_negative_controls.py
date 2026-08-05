@@ -5,10 +5,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import src.eval.research_alpha_cpcv as research_alpha_cpcv
-from src.eval.ceiling_arms import zscore_composite_weights
-from src.eval.cpcv import CPCVConfig
-from src.eval.negative_controls import (
+import mascotrl.eval.research_alpha_cpcv as research_alpha_cpcv
+from mascotrl.eval.ceiling_arms import zscore_composite_weights
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.negative_controls import (
     date_shift_signals,
     degradation_ratio,
     degradation_should_fail,

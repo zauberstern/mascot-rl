@@ -3,9 +3,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.data.fioracle_macro import DEFAULT_SERIES, FIORACLE_FEATURE_COLUMNS
-from src.data.paths import MASCOTRL_ROOT
-from src.eval.macro_lake_leverage import (
+from mascotrl.data.fioracle_macro import DEFAULT_SERIES, FIORACLE_FEATURE_COLUMNS
+from mascotrl.data.paths import MASCOTRL_ROOT
+from mascotrl.eval.macro_lake_leverage import (
     PRODUCTIVE_GAPS,
     build_macro_lake_leverage,
 )

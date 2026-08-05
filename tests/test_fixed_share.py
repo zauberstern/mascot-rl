@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.fixed_share import fixed_share, pre_register_alpha
+from mascotrl.eval.fixed_share import fixed_share, pre_register_alpha
 
 
 def _four_regime_losses(t_per: int = 200, n: int = 4) -> np.ndarray:
@@ -58,7 +58,7 @@ def test_fixed_share_no_turbulence_index_import() -> None:
     import ast
     from pathlib import Path
 
-    src = Path(__file__).resolve().parents[1] / "src" / "eval" / "fixed_share.py"
+    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "eval" / "fixed_share.py"
     tree = ast.parse(src.read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):

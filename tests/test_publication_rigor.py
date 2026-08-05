@@ -6,15 +6,15 @@ from tests.conftest import FLOAT_TOL
 from pathlib import Path
 import numpy as np
 import torch
-from src.eval.baselines import BASELINE_NAMES, baseline_weights_day, _garch11_forecast
-from src.eval.publication import plot_publication_figures, write_limitations_section
-from src.eval.stats_rigor import deflated_sharpe_ratio, expected_max_sharpe, probabilistic_sharpe_ratio, regime_performance_table
-from src.features.extractor import AlphaFeatureExtractor
-from src.policy.convex_projection import ConvexProjectionLayer
-from src.policy.happo import HAPPOEngine
+from mascotrl.eval.baselines import BASELINE_NAMES, baseline_weights_day, _garch11_forecast
+from mascotrl.eval.publication import plot_publication_figures, write_limitations_section
+from mascotrl.eval.stats_rigor import deflated_sharpe_ratio, expected_max_sharpe, probabilistic_sharpe_ratio, regime_performance_table
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.policy.happo import HAPPOEngine
 
 def test_hansen_spa_and_bootstrap_and_wilcoxon():
-    from src.eval.stats_rigor import block_bootstrap_metric_ci, hansen_spa_test, wilcoxon_paired_delta
+    from mascotrl.eval.stats_rigor import block_bootstrap_metric_ci, hansen_spa_test, wilcoxon_paired_delta
     rng = np.random.default_rng(0)
     bench = rng.normal(0.001, 0.01, size=300)
     weak = bench - 0.002
@@ -29,7 +29,7 @@ def test_hansen_spa_and_bootstrap_and_wilcoxon():
     assert w['mean_delta'] > 0
 
 def test_n_trials_breakdown_never_one_silently():
-    from src.eval.publication import estimate_n_trials
+    from mascotrl.eval.publication import estimate_n_trials
     n, br = estimate_n_trials({}, cfg={'eval_seeds': '0,1,2,3,4', 'publication_ablation_variants': 5})
     assert n > 1
     assert br['n_trials'] == n
@@ -76,7 +76,7 @@ def test_regime_length_mismatch_is_explicit_na():
     assert any(('mismatch' in w for w in tab['sanity']['warnings']))
 
 def test_attach_uses_historical_calendar_for_gfc():
-    from src.eval.publication import attach_publication_stats
+    from mascotrl.eval.publication import attach_publication_stats
     is_dates = [f'2008-10-{d:02d}' for d in range(1, 21)]
     oos_dates = [f'2022-06-{d:02d}' for d in range(1, 21)]
     report = {'historical_is': {'dates': is_dates}, 'historical_oos': {'dates': oos_dates, 'pnls': {'happo': [0.01] * len(oos_dates)}}, 'historical_calendar': {'is_dates': is_dates, 'is_pnls': [-0.02] * len(is_dates), 'oos_dates': oos_dates, 'oos_pnls': [0.01] * len(oos_dates)}}
@@ -87,7 +87,7 @@ def test_attach_uses_historical_calendar_for_gfc():
     assert np.isfinite(gfc['sharpe'])
 
 def test_attach_dual_series_dsr_and_spa_role():
-    from src.eval.publication import attach_publication_stats
+    from mascotrl.eval.publication import attach_publication_stats
     rng = np.random.default_rng(0)
     is_n, oos_n = (40, 60)
     is_pnls = rng.normal(0.001, 0.01, size=is_n).tolist()
@@ -109,7 +109,7 @@ def test_attach_dual_series_dsr_and_spa_role():
     assert 'SPA proves' in str(spa.get('do_not_claim') or '')
 
 def test_pbo_appendix_and_trial_ledger():
-    from src.eval.pbo_appendix import build_trial_ledger, probability_of_backtest_overfitting
+    from mascotrl.eval.pbo_appendix import build_trial_ledger, probability_of_backtest_overfitting
     sharpes = [0.5, 1.2, -0.3, 0.8, 0.1, 2.0, 0.4, -0.1]
     pbo = probability_of_backtest_overfitting(sharpes, n_partitions=32, seed=1)
     assert pbo['n_trials'] == 8
@@ -141,7 +141,7 @@ def test_baseline_weights_project():
         assert torch.isfinite(w).all()
 
 def test_literature_baseline_sign_conventions():
-    from src.eval.baselines import _baseline_raw_signal, rolling_hv_from_returns
+    from mascotrl.eval.baselines import _baseline_raw_signal, rolling_hv_from_returns
     k = 4
     deltas = np.zeros(k)
     atm_low = np.full(k, 0.15)
@@ -170,7 +170,7 @@ def test_literature_baseline_sign_conventions():
     assert rolling_hv_from_returns.__doc__ and 'never ΔIV' in rolling_hv_from_returns.__doc__
 
 def test_baseline_suite_eight_modes_synthetic():
-    from src.eval.baselines import run_baseline_suite_on_panel
+    from mascotrl.eval.baselines import run_baseline_suite_on_panel
     rng = np.random.default_rng(0)
     n, k = (80, 6)
     atm = 0.2 + 0.05 * rng.random((n, k))
@@ -219,9 +219,9 @@ def test_limitations_and_plots(tmp_path: Path):
 
 def test_cmdp_env_macro_is_integer_indexed():
     """Functional: ``_macro_at`` returns row-position values, not calendar/as_of lookups."""
-    from src.env.cmdp_env import CMDPEnv
-    from src.features.extractor import AlphaFeatureExtractor
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.features.extractor import AlphaFeatureExtractor
+    from mascotrl.policy.happo import HAPPOEngine
     torch.manual_seed(0)
     k, t_steps, d, mdim = (4, 16, 8, 4)
     surfaces = torch.rand(2, k, t_steps, 5, 3) * 0.2 + 0.1
@@ -246,9 +246,9 @@ def test_cmdp_env_macro_is_integer_indexed():
 
 def test_macro_window_seed_sync_across_rng_divergence():
     """Same episode_seed → same macro window even after unequal global RNG draws."""
-    from src.env.cmdp_env import CMDPEnv
-    from src.features.extractor import AlphaFeatureExtractor
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.features.extractor import AlphaFeatureExtractor
+    from mascotrl.policy.happo import HAPPOEngine
     k, t_steps, d, mdim = (4, 16, 8, 4)
     surfaces = torch.rand(2, k, t_steps, 5, 3) * 0.2 + 0.1
     macro = torch.randn(80, mdim)
@@ -266,9 +266,9 @@ def test_macro_window_seed_sync_across_rng_divergence():
 
 def test_episode_env_noise_sync_across_rng_divergence():
     """Same episode_seed → same spot Brownian path despite global RNG divergence."""
-    from src.env.cmdp_env import CMDPEnv
-    from src.features.extractor import AlphaFeatureExtractor
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.features.extractor import AlphaFeatureExtractor
+    from mascotrl.policy.happo import HAPPOEngine
     k, t_steps, d, mdim = (4, 20, 8, 4)
     torch.manual_seed(1)
     surfaces = torch.rand(1, k, t_steps, 5, 3) * 0.2 + 0.1
@@ -294,9 +294,9 @@ def test_episode_env_noise_sync_across_rng_divergence():
 
 def test_macro_window_held_for_full_episode():
     """macro_start_idx must not be resampled mid-episode (stable regime context)."""
-    from src.env.cmdp_env import CMDPEnv
-    from src.features.extractor import AlphaFeatureExtractor
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.features.extractor import AlphaFeatureExtractor
+    from mascotrl.policy.happo import HAPPOEngine
     k, t_steps, d, mdim = (4, 20, 8, 4)
     surfaces = torch.rand(1, k, t_steps, 5, 3) * 0.2 + 0.1
     macro = torch.randn(100, mdim)

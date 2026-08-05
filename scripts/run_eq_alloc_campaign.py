@@ -158,12 +158,12 @@ def _code_identity_payload() -> dict:
     except (OSError, subprocess.CalledProcessError):
         pass
     sources = [
-        "src/eval/parity_harness.py",
-        "src/eval/research_alpha_cpcv.py",
-        "src/eval/research_alpha_train.py",
-        "src/env/historical_env.py",
-        "src/eval/stats_rigor.py",
-        "src/eval/calendar_scaling.py",
+        "src/mascotrl/eval/parity_harness.py",
+        "src/mascotrl/eval/research_alpha_cpcv.py",
+        "src/mascotrl/eval/research_alpha_train.py",
+        "src/mascotrl/env/historical_env.py",
+        "src/mascotrl/eval/stats_rigor.py",
+        "src/mascotrl/eval/calendar_scaling.py",
     ]
     h = hashlib.sha256()
     for rel in sources:

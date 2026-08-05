@@ -6,13 +6,13 @@ import pytest
 pytestmark = pytest.mark.plumbing
 import torch
 
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def test_sb3_recurrent_train_epoch_raises_not_implemented():
     """Direct SB3 RecurrentPPO must refuse stub training."""
     pytest.importorskip("sb3_contrib")
-    from src.policy.sb3_adapter import make_sb3_agent
+    from mascotrl.policy.sb3_adapter import make_sb3_agent
 
     agent = make_sb3_agent(
         "ppo_recurrent", obs_dim=12, action_dim=2, num_assets=2, seq_len=2
@@ -91,7 +91,7 @@ def test_sb3_ppo_optimizer_steps_are_per_call():
 
 
 def test_is_ppo_style_includes_cppo_omnisafe_and_ppo_recurrent():
-    from src.eval.research_alpha_train import _is_ppo_style
+    from mascotrl.eval.research_alpha_train import _is_ppo_style
 
     class _A:
         def __init__(self, name):
@@ -109,8 +109,8 @@ def test_mcpg_train_epoch_called_once_despite_n_minibatches(monkeypatch):
     """MCPG must not re-score the same on-policy batch n_minibatches times."""
     import numpy as np
 
-    from src.eval.research_alpha_train import train_research_hist
-    from src.policy.single_agent import MCPGAgent
+    from mascotrl.eval.research_alpha_train import train_research_hist
+    from mascotrl.policy.single_agent import MCPGAgent
 
     calls = {"n": 0}
     real = MCPGAgent.train_epoch

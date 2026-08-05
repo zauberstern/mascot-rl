@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.data.lake_source_audit import (
+from mascotrl.data.lake_source_audit import (
     FileClass,
     alternate_subset_ok,
     classify_csv_file,
@@ -172,7 +172,7 @@ def test_classify_hash_mismatch_not_duplicate(tmp_path: Path) -> None:
 
 
 def test_compare_year_counts_with_rejects_in_audit_module() -> None:
-    from src.data.lake_source_audit import compare_year_counts_with_rejects
+    from mascotrl.data.lake_source_audit import compare_year_counts_with_rejects
 
     ok, deltas = compare_year_counts_with_rejects(
         {2003: 100},
@@ -193,7 +193,7 @@ def test_header_fingerprint_stable(tmp_path: Path) -> None:
 
 
 def test_s6_empty_listing_is_fail() -> None:
-    from src.data.lake_source_audit import s6_listing_ok
+    from mascotrl.data.lake_source_audit import s6_listing_ok
 
     ok, reason = s6_listing_ok(files=[], unknown=[])
     assert ok is False
@@ -223,7 +223,7 @@ def test_classify_renamed_ibes_ratios_is_non_contract(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # Isolate from the real lake (which may already hold the disclosure parquet).
-    monkeypatch.setattr("src.data.lake_source_audit.LAKE_ROOT", tmp_path / "lake_empty")
+    monkeypatch.setattr("mascotrl.data.lake_source_audit.LAKE_ROOT", tmp_path / "lake_empty")
     p = tmp_path / "non_contract" / "wrds_ibes_financial_ratios_sp500.csv"
     p.parent.mkdir()
     p.write_text("ticker,date,ratio\nAAPL,2003-01-02,1\n", encoding="utf-8")
@@ -239,7 +239,7 @@ def test_classify_ibes_ratios_disclosure_ingested(
     lake = tmp_path / "lake"
     (lake / "macro").mkdir(parents=True)
     (lake / "macro" / "ibes_financial_ratios.parquet").write_bytes(b"PAR1")
-    monkeypatch.setattr("src.data.lake_source_audit.LAKE_ROOT", lake)
+    monkeypatch.setattr("mascotrl.data.lake_source_audit.LAKE_ROOT", lake)
     p = tmp_path / "non_contract" / "wrds_ibes_financial_ratios_sp500.csv"
     p.parent.mkdir()
     p.write_text("ticker,date,ratio\nAAPL,2003-01-02,1\n", encoding="utf-8")

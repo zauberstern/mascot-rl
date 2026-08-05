@@ -5,13 +5,13 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.eval.scr_critic import (
+from mascotrl.eval.scr_critic import (
     assert_psi_leak_safe,
     build_scr_returns,
     mix_critic_targets,
     resolve_scr_mix,
 )
-from src.policy.rasp_locks import assert_rasp_locks
+from mascotrl.policy.rasp_locks import assert_rasp_locks
 
 
 def _batch(n: int = 8) -> tuple[torch.Tensor, ...]:

@@ -6,10 +6,10 @@ from pathlib import Path
 
 import numpy as np
 
-from src.reporting.policy_behavior import build_policy_behavior, write_policy_behavior
+from mascotrl.reporting.policy_behavior import build_policy_behavior, write_policy_behavior
 
 ROOT = Path(__file__).resolve().parents[1]
-EVAL = ROOT / "src" / "eval"
+EVAL = ROOT / "src" / "mascotrl" / "eval"
 
 GATE_MODULES = (
     "gate_ladder.py",

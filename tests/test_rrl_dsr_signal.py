@@ -4,9 +4,9 @@ from __future__ import annotations
 import pytest
 import torch
 
-from src.eval.differential_sharpe import DifferentialSharpe
-from src.eval.yaml_honesty import refuse_rrl_double_dsr
-from src.policy.single_agent import RRLAgent
+from mascotrl.eval.differential_sharpe import DifferentialSharpe
+from mascotrl.eval.yaml_honesty import refuse_rrl_double_dsr
+from mascotrl.policy.single_agent import RRLAgent
 
 
 def test_rrl_signal_matches_standalone_dsr():

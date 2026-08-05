@@ -4,9 +4,9 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.data.crucible import CrucibleSpec, select_universe_crucible
-from src.eval.friction import FrictionSpec
-from src.policy.cmdp_projector import make_cmdp_projector
+from mascotrl.data.crucible import CrucibleSpec, select_universe_crucible
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.policy.cmdp_projector import make_cmdp_projector
 from tests.test_crucible_pipeline import _make_rich_panels
 
 

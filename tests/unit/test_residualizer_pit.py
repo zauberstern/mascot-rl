@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.residualization import (
+from mascotrl.eval.residualization import (
     ResidualizerState,
     fit_ff4_residualizer,
     fit_ipca3_residualizer,

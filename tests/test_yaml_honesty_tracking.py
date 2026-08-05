@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.eval.yaml_honesty import TrackingDict, assert_yaml_honesty_tracked, track_copy
+from mascotrl.eval.yaml_honesty import TrackingDict, assert_yaml_honesty_tracked, track_copy
 
 
 def test_tracking_dict_records_getitem_and_get() -> None:
@@ -73,7 +73,7 @@ def test_assert_yaml_honesty_tracked_reflects_nested_copy_reads() -> None:
 def test_friction_spec_from_cfg_preserves_tracking() -> None:
     """D1: bare dict(cfg) inside friction_spec_from_cfg must not drop
     TrackingDict; reading plugins must mark it accessed."""
-    from src.eval.friction import friction_spec_from_cfg
+    from mascotrl.eval.friction import friction_spec_from_cfg
 
     cfg = TrackingDict({"plugins": {"om_touch": {"enabled": True}}, "arm": {}})
     friction_spec_from_cfg(cfg)
@@ -82,7 +82,7 @@ def test_friction_spec_from_cfg_preserves_tracking() -> None:
 
 def test_assert_yaml_honesty_tracked_plugins_via_friction() -> None:
     """D1: config with plugins + friction_spec_from_cfg must pass tracked honesty."""
-    from src.eval.friction import friction_spec_from_cfg
+    from mascotrl.eval.friction import friction_spec_from_cfg
 
     cfg = TrackingDict(
         {
@@ -101,6 +101,6 @@ def test_assert_yaml_honesty_tracked_plugins_via_friction() -> None:
 
 
 def test_plugins_in_research_read_keys() -> None:
-    from src.eval.yaml_honesty import RESEARCH_READ_KEYS
+    from mascotrl.eval.yaml_honesty import RESEARCH_READ_KEYS
 
     assert "plugins" in RESEARCH_READ_KEYS

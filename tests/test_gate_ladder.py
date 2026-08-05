@@ -5,7 +5,7 @@ import copy
 
 import pytest
 
-from src.eval.gate_ladder import run_gate_ladder
+from mascotrl.eval.gate_ladder import run_gate_ladder
 
 
 def _pass_bundle() -> dict:

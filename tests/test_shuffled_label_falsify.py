@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.stats_rigor import annualized_sharpe
+from mascotrl.eval.stats_rigor import annualized_sharpe
 
 
 def test_shuffled_labels_collapse_sharpe() -> None:

@@ -61,8 +61,8 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
         "status": "closed",
         "summary": "CLOSED: VIX/HY OAS/term in y_t with windowed z-score (scale-safe)",
         "target_files": [
-            "src/eval/turbulence.py",
-            "src/eval/regime_dual_source.py",
+            "src/mascotrl/eval/turbulence.py",
+            "src/mascotrl/eval/regime_dual_source.py",
         ],
     },
     {
@@ -71,7 +71,7 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
         "status": "closed",
         "summary": "CLOSED: optional EPU/GPRI lag-1 in macro_tilt_sensitivity",
         "target_files": [
-            "src/reporting/behavior_metrics.py",
+            "src/mascotrl/reporting/behavior_metrics.py",
         ],
     },
     {
@@ -80,8 +80,8 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
         "status": "closed_superseded",
         "summary": "CLOSED/superseded: KPT filtered-Markov on turbulence (not a second return clusterer)",
         "target_files": [
-            "src/eval/walk_forward_hmm.py",
-            "src/eval/regime_scorecard.py",
+            "src/mascotrl/eval/walk_forward_hmm.py",
+            "src/mascotrl/eval/regime_scorecard.py",
         ],
     },
     {
@@ -90,7 +90,7 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
         "status": "closed",
         "summary": "CLOSED: H.15 lag-1 fallback for term/OAS via regime_dual_source",
         "target_files": [
-            "src/eval/regime_dual_source.py",
+            "src/mascotrl/eval/regime_dual_source.py",
         ],
     },
     {
@@ -99,8 +99,8 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
         "status": "closed",
         "summary": "CLOSED: causal_per_regime_sharpe beside calendar_stress_windows in scorecard",
         "target_files": [
-            "src/eval/regime_scorecard.py",
-            "src/spectrum/policy_mode.py",
+            "src/mascotrl/eval/regime_scorecard.py",
+            "src/mascotrl/spectrum/policy_mode.py",
         ],
     },
     {
@@ -112,7 +112,7 @@ PRODUCTIVE_GAPS: tuple[dict[str, Any], ...] = (
             "happo_usb_macro / fioracle_macro.enabled false by honesty lock"
         ),
         "target_files": [
-            "src/spectrum/happo_macro_inject.py",
+            "src/mascotrl/spectrum/happo_macro_inject.py",
             "scripts/run_spectrum_campaign.py",
         ],
     },

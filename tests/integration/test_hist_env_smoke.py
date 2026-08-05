@@ -4,10 +4,10 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.arms import ArmSpec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec
-from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+from mascotrl.arms import ArmSpec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
 
 
 def _toy_panel(T: int = 40, K: int = 5, seed: int = 0):

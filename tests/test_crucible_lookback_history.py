@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.crucible import CrucibleSpec, residual_communities, select_universe_crucible
-from src.eval.friction import FrictionSpec
+from mascotrl.data.crucible import CrucibleSpec, residual_communities, select_universe_crucible
+from mascotrl.eval.friction import FrictionSpec
 
 
 def _softmax_project(a):

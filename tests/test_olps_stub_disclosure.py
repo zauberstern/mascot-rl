@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.kahn_breadth import kahn_pack
-from src.eval.olps import (
+from mascotrl.eval.kahn_breadth import kahn_pack
+from mascotrl.eval.olps import (
     olps_claim_names,
     olps_stub_names,
     olps_weights,
 )
-from src.eval.spectrum_gates import compute_gate3
+from mascotrl.eval.spectrum_gates import compute_gate3
 
 
 _EXPECTED_STUBS = frozenset({"corn", "bnn", "ons", "anticor", "cwmr", "rmr"})

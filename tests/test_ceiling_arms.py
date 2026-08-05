@@ -6,7 +6,7 @@ import torch
 
 import pytest
 
-from src.eval.ceiling_arms import (
+from mascotrl.eval.ceiling_arms import (
     CEILING_ARM_NAMES,
     KellyEnsemble,
     KellySurfaceCNN,

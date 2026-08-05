@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.oos_panel import extract_om_marks
+from mascotrl.data.oos_panel import extract_om_marks
 
 
 def _mix_panel_df(*, T: int = 4, n_opt: int = 2, n_eq: int = 3) -> pd.DataFrame:
@@ -56,13 +56,13 @@ def test_try_load_om_panel_stamps_pit_as_of_and_factors_source() -> None:
     mock_arm.option_label_stem = "dh_ret"
 
     with (
-        patch("src.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
-        patch("src.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
-        patch("src.data.oos_panel.label_matrix", return_value=rets),
-        patch("src.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
-        patch("src.arms.training.resolve_portfolio_arm", return_value=mock_arm),
-        patch("src.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
-        patch("src.eval.equity_factors._try_load_ff_panel", return_value=None),
+        patch("mascotrl.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
+        patch("mascotrl.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
+        patch("mascotrl.data.oos_panel.label_matrix", return_value=rets),
+        patch("mascotrl.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
+        patch("mascotrl.arms.training.resolve_portfolio_arm", return_value=mock_arm),
+        patch("mascotrl.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
+        patch("mascotrl.eval.equity_factors._try_load_ff_panel", return_value=None),
     ):
         loaded = _try_load_om_panel(cfg, k)
 
@@ -89,13 +89,13 @@ def test_try_load_om_panel_stamps_factors_source_ff4() -> None:
     mock_arm.option_label_stem = "dh_ret"
 
     with (
-        patch("src.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
-        patch("src.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
-        patch("src.data.oos_panel.label_matrix", return_value=rets),
-        patch("src.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
-        patch("src.arms.training.resolve_portfolio_arm", return_value=mock_arm),
-        patch("src.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
-        patch("src.eval.equity_factors._try_load_ff_panel", return_value=ff),
+        patch("mascotrl.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
+        patch("mascotrl.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
+        patch("mascotrl.data.oos_panel.label_matrix", return_value=rets),
+        patch("mascotrl.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
+        patch("mascotrl.arms.training.resolve_portfolio_arm", return_value=mock_arm),
+        patch("mascotrl.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
+        patch("mascotrl.eval.equity_factors._try_load_ff_panel", return_value=ff),
     ):
         _try_load_om_panel(cfg, k)
 
@@ -119,13 +119,13 @@ def test_try_load_om_panel_allows_dispatch_only_for_opt() -> None:
     mock_arm.option_label_stem = "dh_ret"
 
     with (
-        patch("src.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
-        patch("src.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
-        patch("src.data.oos_panel.label_matrix", return_value=rets),
-        patch("src.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
-        patch("src.arms.training.resolve_portfolio_arm", return_value=mock_arm),
-        patch("src.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
-        patch("src.eval.equity_factors._try_load_ff_panel", return_value=None),
+        patch("mascotrl.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
+        patch("mascotrl.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
+        patch("mascotrl.data.oos_panel.label_matrix", return_value=rets),
+        patch("mascotrl.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
+        patch("mascotrl.arms.training.resolve_portfolio_arm", return_value=mock_arm),
+        patch("mascotrl.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
+        patch("mascotrl.eval.equity_factors._try_load_ff_panel", return_value=None),
     ):
         loaded = _try_load_om_panel(cfg, k)
     assert loaded is not None
@@ -148,13 +148,13 @@ def test_try_load_om_panel_refuses_capital_claim_tier_for_opt() -> None:
     mock_arm.option_label_stem = "dh_ret"
 
     with (
-        patch("src.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
-        patch("src.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
-        patch("src.data.oos_panel.label_matrix", return_value=rets),
-        patch("src.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
-        patch("src.arms.training.resolve_portfolio_arm", return_value=mock_arm),
-        patch("src.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
-        patch("src.eval.equity_factors._try_load_ff_panel", return_value=None),
+        patch("mascotrl.data.arctic_store.ArcticStateStore", return_value=MagicMock()),
+        patch("mascotrl.data.oos_panel.load_oos_panel", return_value=(panel, [1, 2])),
+        patch("mascotrl.data.oos_panel.label_matrix", return_value=rets),
+        patch("mascotrl.data.oos_panel.extract_om_marks", return_value={"half_spread": rets}),
+        patch("mascotrl.arms.training.resolve_portfolio_arm", return_value=mock_arm),
+        patch("mascotrl.arms.training.resolve_claim_label_stem", return_value="dh_ret"),
+        patch("mascotrl.eval.equity_factors._try_load_ff_panel", return_value=None),
     ):
         with pytest.raises(ValueError, match="rematerialize|claim_tier"):
             _try_load_om_panel(cfg, k)
@@ -162,8 +162,8 @@ def test_try_load_om_panel_refuses_capital_claim_tier_for_opt() -> None:
 
 def test_run_research_alpha_cpcv_propagates_om_honesty_stamps() -> None:
     """A-7: cfg honesty stamps must appear on CPCV artifacts."""
-    from src.eval.cpcv import CPCVConfig
-    from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
+    from mascotrl.eval.cpcv import CPCVConfig
+    from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
 
     t, k = 90, 4
     rng = np.random.default_rng(0)

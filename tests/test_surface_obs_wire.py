@@ -5,9 +5,9 @@ import numpy as np
 import pytest
 import torch
 
-from src.features.blocks.assemble import assemble_equity_feature_cube
-from src.features.blocks.obs_builder import PanelObservationBuilder
-from src.features.surface_cnn import SurfaceImageEncoder
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
+from mascotrl.features.surface_cnn import SurfaceImageEncoder
 
 
 def test_iv_surface_dict_channels_enter_cube():
@@ -77,7 +77,7 @@ def test_asset_temporal_actor_critic_surface_image_encoder_gets_gradient():
     pixels flow through the encoder inside the autograd graph rather than
     being precomputed and detached.
     """
-    from src.policy.single_agent import _AssetTemporalActorCritic
+    from mascotrl.policy.single_agent import _AssetTemporalActorCritic
 
     num_assets, seq_len, base_channels, embed_dim = 3, 2, 5, 4
     image_channels = 11 * 34
@@ -103,7 +103,7 @@ def test_asset_temporal_actor_critic_surface_image_encoder_gets_gradient():
 
 
 def test_asset_temporal_actor_critic_rejects_wrong_image_channels():
-    from src.policy.single_agent import _AssetTemporalActorCritic
+    from mascotrl.policy.single_agent import _AssetTemporalActorCritic
 
     with pytest.raises(ValueError, match="374"):
         _AssetTemporalActorCritic(

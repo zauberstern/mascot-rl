@@ -7,28 +7,28 @@ import pytest
 
 
 def test_resolve_substrate_secids_toy_allows_range_fallback() -> None:
-    from src.eval.equity_substrate import resolve_substrate_secids
+    from mascotrl.eval.equity_substrate import resolve_substrate_secids
 
     out = resolve_substrate_secids({}, panel_source="toy", k=4)
     assert out == [0, 1, 2, 3]
 
 
 def test_resolve_substrate_secids_lake_raises_without_stamp() -> None:
-    from src.eval.equity_substrate import resolve_substrate_secids
+    from mascotrl.eval.equity_substrate import resolve_substrate_secids
 
     with pytest.raises(RuntimeError, match="_universe_secids"):
         resolve_substrate_secids({}, panel_source="lake_sp500_sec", k=4)
 
 
 def test_resolve_substrate_secids_optionmetrics_raises_without_stamp() -> None:
-    from src.eval.equity_substrate import resolve_substrate_secids
+    from mascotrl.eval.equity_substrate import resolve_substrate_secids
 
     with pytest.raises(RuntimeError, match="_universe_secids"):
         resolve_substrate_secids({}, panel_source="optionmetrics", k=4)
 
 
 def test_stamp_lake_universe_secids_for_featnet_noop_when_present() -> None:
-    from src.eval.equity_substrate import stamp_lake_universe_secids_for_featnet
+    from mascotrl.eval.equity_substrate import stamp_lake_universe_secids_for_featnet
 
     cfg = {"_universe_secids": ["A", "B"]}
     out = stamp_lake_universe_secids_for_featnet(cfg, k=2)
@@ -38,7 +38,7 @@ def test_stamp_lake_universe_secids_for_featnet_noop_when_present() -> None:
 def test_stamp_lake_universe_secids_for_featnet_loads_when_missing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from src.eval import equity_substrate as es
+    from mascotrl.eval import equity_substrate as es
 
     def _fake_load(cfg, *, k: int, lake_root=None, max_pool: int = 400):
         cfg["_universe_secids"] = [f"S{i}" for i in range(int(k))]
@@ -56,7 +56,7 @@ def test_stamp_lake_universe_secids_for_featnet_loads_when_missing(
 
 
 def test_resolve_substrate_secids_lake_uses_stamp() -> None:
-    from src.eval.equity_substrate import resolve_substrate_secids
+    from mascotrl.eval.equity_substrate import resolve_substrate_secids
 
     secids = [101, 102, 103]
     out = resolve_substrate_secids(
@@ -66,7 +66,7 @@ def test_resolve_substrate_secids_lake_uses_stamp() -> None:
 
 
 def test_attach_surface_nan_fail_closed_above_threshold() -> None:
-    from src.eval.equity_substrate import attach_equity_obs_substrate
+    from mascotrl.eval.equity_substrate import attach_equity_obs_substrate
 
     T, K = 100, 4
     rng = np.random.default_rng(0)
@@ -124,10 +124,10 @@ def test_run_research_arm_cube_attach_failure_raises_on_lake(monkeypatch) -> Non
         raise RuntimeError("substrate attach boom")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
     )
     monkeypatch.setattr(
-        "src.eval.equity_substrate.attach_equity_obs_substrate", boom_attach
+        "mascotrl.eval.equity_substrate.attach_equity_obs_substrate", boom_attach
     )
 
     cfg = {
@@ -158,17 +158,17 @@ def test_run_research_arm_cube_attach_failure_soft_on_toy(monkeypatch) -> None:
         raise RuntimeError("substrate attach boom")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", boom_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", boom_lake
     )
     monkeypatch.setattr(
-        "src.eval.equity_substrate.attach_equity_obs_substrate", boom_attach
+        "mascotrl.eval.equity_substrate.attach_equity_obs_substrate", boom_attach
     )
 
     def fake_cpcv(*_a, **_k):
         return {"path_summary": {"sharpe_mean": 0.1}, "panel_source": "toy"}
 
     monkeypatch.setattr(
-        "src.eval.research_alpha_cpcv.run_research_alpha_cpcv", fake_cpcv
+        "mascotrl.eval.research_alpha_cpcv.run_research_alpha_cpcv", fake_cpcv
     )
 
     cfg = {

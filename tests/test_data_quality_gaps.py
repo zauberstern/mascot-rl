@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.duckdb_engine import OptionFilterConfig, quote_quality_audit_counts
-from src.data.surface_signals import (
+from mascotrl.data.duckdb_engine import OptionFilterConfig, quote_quality_audit_counts
+from mascotrl.data.surface_signals import (
     KELLY_DELTAS_CALL,
     KELLY_DELTAS_PUT,
     KELLY_TENORS,
@@ -71,7 +71,7 @@ def test_kelly_constants_stable():
 
 def test_marks_base_sql_includes_last_date_for_fresh_quotes():
     """require_fresh_quotes screen needs last_date in the marks CTE SELECT."""
-    from src.data.duckdb_engine import DuckDBFeatureEngine
+    from mascotrl.data.duckdb_engine import DuckDBFeatureEngine
 
     eng = DuckDBFeatureEngine.__new__(DuckDBFeatureEngine)
     eng.lake_base_dir = type("P", (), {"as_posix": lambda self: "/tmp"})()
@@ -116,7 +116,7 @@ def test_require_fresh_quotes_duckdb_inmemory_no_raise():
 
 
 def test_build_kelly_iv_images_validates_schema():
-    from src.data.surface_signals import build_kelly_iv_images
+    from mascotrl.data.surface_signals import build_kelly_iv_images
 
     empty = pd.DataFrame(
         columns=["date", "secid", "days", "delta", "cp_flag", "impl_volatility"]

@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.surface_signals import (
+from mascotrl.data.surface_signals import (
     materialize_kelly_iv_images_from_lake,
     materialize_surface_signals_from_lake,
 )
@@ -135,7 +135,7 @@ def test_load_vol_surface_raw_bounds_duckdb_memory_and_threads(
 
     monkeypatch.setattr(real_duckdb, "connect", _tracking_connect)
 
-    from src.data.surface_signals import _load_vol_surface_raw
+    from mascotrl.data.surface_signals import _load_vol_surface_raw
 
     _load_vol_surface_raw(tmp_path, secids=[7], start="2020-01-01", end="2020-12-31")
 

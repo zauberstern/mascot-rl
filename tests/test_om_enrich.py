@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.data.om_enrich import build_option_adv_from_opvold, median_borrow_bps
+from mascotrl.data.om_enrich import build_option_adv_from_opvold, median_borrow_bps
 
 
 def test_build_option_adv_prefers_aggregate_rows() -> None:

@@ -6,7 +6,7 @@ from typing import Any
 import numpy as np
 import torch
 
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def run_toy_train(

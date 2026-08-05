@@ -5,7 +5,7 @@ import numpy as np
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.eval.reward_noise import concentrated_vs_ew_gap, reward_to_noise_diagnostic
+from mascotrl.eval.reward_noise import concentrated_vs_ew_gap, reward_to_noise_diagnostic
 
 
 def test_concentrated_vs_ew_gap_zero_turnover():

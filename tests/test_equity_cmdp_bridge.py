@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 import torch
-from src.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors, should_route_eq_via_cmdp
+from mascotrl.env.equity_cmdp_bridge import equity_panel_to_cmdp_tensors, should_route_eq_via_cmdp
 
 def test_equity_panel_to_cmdp_tensors_shapes() -> None:
     rng = np.random.default_rng(0)
@@ -41,10 +41,10 @@ def test_bridge_output_builds_a_real_cmdpenv_and_steps() -> None:
     """C6: the bridge's (surfaces, spot_paths) must be directly consumable by
     CMDPEnv -- the real HAPPO+CMDP spine, not a schema-only shape check --
     including a genuine HAPPOTrainer.update on the resulting transition."""
-    from src.env.cmdp_env import CMDPEnv
-    from src.features.extractor import AlphaFeatureExtractor
-    from src.policy.happo import HAPPOEngine
-    from src.policy.trainer import HAPPOTrainer, TrainBatch
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.features.extractor import AlphaFeatureExtractor
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.policy.trainer import HAPPOTrainer, TrainBatch
     rng = np.random.default_rng(1)
     t, k = (40, 3)
     rets = rng.normal(0.0003, 0.01, size=(t, k))

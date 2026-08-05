@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.obs_builder import PanelObservationBuilder
+from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
 
 
 def test_w_base_channel_equals_ew_on_mask() -> None:

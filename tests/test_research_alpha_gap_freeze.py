@@ -2,8 +2,8 @@
 from __future__ import annotations
 from pathlib import Path
 import yaml
-from src.data.oos_panel import LABEL_STEM
-from src.reporting.claim_stamps import CLAIM_RETURN_DEFINITION, stamp_research_positive_alpha
+from mascotrl.data.oos_panel import LABEL_STEM
+from mascotrl.reporting.claim_stamps import CLAIM_RETURN_DEFINITION, stamp_research_positive_alpha
 ROOT = Path(__file__).resolve().parents[1]
 
 def test_estimand_strings_frozen() -> None:

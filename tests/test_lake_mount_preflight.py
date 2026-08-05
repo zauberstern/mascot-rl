@@ -7,7 +7,7 @@ import pytest
 
 
 def test_assert_lake_mounted_raises_when_missing(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    from src.data import paths as P
+    from mascotrl.data import paths as P
 
     missing = tmp_path / "no_lake"
     monkeypatch.setattr(P, "LAKE_ROOT", missing)
@@ -19,7 +19,7 @@ def test_assert_lake_mounted_raises_when_missing(tmp_path: Path, monkeypatch: py
 def test_ensure_lake_dirs_does_not_create_canonical_on_unmounted(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from src.data import paths as P
+    from mascotrl.data import paths as P
 
     fake_mount = tmp_path / "not_mounted"
     fake_lake = fake_mount / "volsurf_data_lake"

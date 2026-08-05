@@ -49,14 +49,14 @@ def test_no_dii_te_selector_calls_under_src_scripts() -> None:
 
 
 def test_densest_subgraph_greedy_lives_in_graph_helpers() -> None:
-    from src.reporting.figures.graph_helpers import densest_subgraph_greedy
+    from mascotrl.reporting.figures.graph_helpers import densest_subgraph_greedy
 
     assert callable(densest_subgraph_greedy)
 
 
 def test_src_data_does_not_import_graph_helpers() -> None:
     """densest-subgraph helper is plot/diagnostic only; data layer must not select with it."""
-    data_root = ROOT / "src" / "data"
+    data_root = ROOT / "src" / "mascotrl" / "data"
     hits: list[str] = []
     for path in _iter_text_files(data_root):
         try:

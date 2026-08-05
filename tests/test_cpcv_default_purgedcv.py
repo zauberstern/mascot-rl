@@ -8,9 +8,9 @@ import pytest
 
 pytest.importorskip("purgedcv")
 
-from src.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY
-from src.eval.cpcv_backend import resolve_use_purgedcv
-from src.eval.cpcv_lib import build_cpcv_folds_lib, run_cpcv_lib
+from mascotrl.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY
+from mascotrl.eval.cpcv_backend import resolve_use_purgedcv
+from mascotrl.eval.cpcv_lib import build_cpcv_folds_lib, run_cpcv_lib
 
 
 def test_resolve_use_purgedcv_defaults_true():
@@ -20,7 +20,7 @@ def test_resolve_use_purgedcv_defaults_true():
 
 
 def test_lib_and_legacy_fold_ids_match():
-    from src.eval.cpcv import build_cpcv_folds
+    from mascotrl.eval.cpcv import build_cpcv_folds
 
     dates = list(pd.bdate_range("2020-01-01", periods=120))
     cfg = CPCVConfig(n_splits=5, n_test_groups=2, purge_days=3, embargo_days=2)

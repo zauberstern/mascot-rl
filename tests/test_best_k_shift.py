@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.best_k_shift import best_k_shift, theoretical_regret_bound
+from mascotrl.eval.best_k_shift import best_k_shift, theoretical_regret_bound
 
 
 def test_k0_recovers_best_single_expert() -> None:

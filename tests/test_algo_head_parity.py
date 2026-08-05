@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.dirichlet_tilt import concentrations_from_logits, multiplicative_tilt
-from src.policy.single_agent import (
+from mascotrl.policy.dirichlet_tilt import concentrations_from_logits, multiplicative_tilt
+from mascotrl.policy.single_agent import (
     DDPGAgent,
     MCPGAgent,
     PPOAgent,
@@ -61,7 +61,7 @@ def test_ddpg_dirichlet_mean_adapter() -> None:
     agent = DDPGAgent(obs_dim=4, action_dim=3, weight_head="dirichlet_mean")
     raw = agent.actor(torch.randn(1, 4))
     # dirichlet_mean head path: concentrations -> mean -> tilt
-    from src.policy.dirichlet_tilt import dirichlet_sample
+    from mascotrl.policy.dirichlet_tilt import dirichlet_sample
 
     alpha = concentrations_from_logits(raw)
     u, _, _ = dirichlet_sample(alpha, deterministic=True)

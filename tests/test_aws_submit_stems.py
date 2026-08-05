@@ -10,7 +10,7 @@ import pytest
 pytestmark = pytest.mark.plumbing
 
 from scripts import aws_submit_wave as submit_mod
-from src.aws_burst.job_routing import (
+from mascotrl.aws_burst.job_routing import (
     JOB_DEFINITION_HIMEM56,
     himem_job_definition_for_memory,
 )
@@ -130,7 +130,7 @@ def test_himem112_routes_to_himem56_jd() -> None:
 
 def test_out_uri_prefix_equals_wave_name() -> None:
     """Stem-filtered submit must keep MASCOTRL_OUT_URI on the real wave."""
-    from src.aws_burst.jobdef import build_container_env
+    from mascotrl.aws_burst.jobdef import build_container_env
 
     env = build_container_env(
         {

@@ -7,8 +7,8 @@ import pytest
 import pyarrow as pa
 import torch
 
-from src.eval.residualization import fit_ipca3_residualizer
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.eval.residualization import fit_ipca3_residualizer
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 
 def test_sklearn_truncated_svd_residualizer_output_shape():
@@ -35,7 +35,7 @@ def test_ipca_instrumentedpca_adapter_output_shape():
 
 def test_arch_stationary_bootstrap_index_distribution_sanity():
     pytest.importorskip("arch")
-    from src.eval.arch_bootstrap import stationary_bootstrap_indices_arch
+    from mascotrl.eval.arch_bootstrap import stationary_bootstrap_indices_arch
 
     idx = stationary_bootstrap_indices_arch(120, block_mean=8, seed=7)
     assert idx.shape == (120,)
@@ -63,7 +63,7 @@ def test_cvxpy_qp_elastic_slack_fail_closed_finite_under_extreme_proposal():
 
 
 def test_arctic_schema_drift_triggers_rewrite(tmp_path):
-    from src.data.arctic_store import ArcticStateStore
+    from mascotrl.data.arctic_store import ArcticStateStore
 
     store = ArcticStateStore(db_path=tmp_path / "arctic", library_name="test_lib")
     t1 = pa.table({"date": pa.array(["2020-01-01"]), "vix": [12.0]})
@@ -83,7 +83,7 @@ def test_arctic_schema_drift_triggers_rewrite(tmp_path):
 
 def test_duckdb_option_filter_screens_match_attrition_source():
     """Marks SQL and attrition counters share one screen registry (no drift)."""
-    from src.data.duckdb_engine import OptionFilterConfig
+    from mascotrl.data.duckdb_engine import OptionFilterConfig
 
     cfg = OptionFilterConfig(require_fresh_quotes=True)
     names = {n for n, _ in cfg.screens()}

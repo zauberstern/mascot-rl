@@ -5,7 +5,7 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.plugins.funding_drag import FundingDrag
+from mascotrl.plugins.funding_drag import FundingDrag
 
 
 def test_funding_drag_disabled_is_zero() -> None:

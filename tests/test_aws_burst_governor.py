@@ -7,8 +7,8 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.aws_burst.governor import check_submit_allowed, projected_wave_cost
-from src.aws_burst.profiles import BURST_PROFILES, BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC, armed_profiles
+from mascotrl.aws_burst.governor import check_submit_allowed, projected_wave_cost
+from mascotrl.aws_burst.profiles import BURST_PROFILES, BUDGET_USD, CREDIT_USD, SPEND_CAP_FRAC, armed_profiles
 
 
 ROOT = Path(__file__).resolve().parents[1]

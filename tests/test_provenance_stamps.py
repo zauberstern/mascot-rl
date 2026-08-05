@@ -5,13 +5,13 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.eval.arch_bootstrap import log as arch_log
-from src.eval.cpcv_backend import resolve_use_purgedcv
-from src.eval.residualization import ResidualizerState, fit_ipca3_residualizer
-from src.logging_utils import get_logger
-from src.policy.harl_adapter import log as harl_log
-from src.policy.omnisafe_adapter import log as omnisafe_log
-from src.policy.sb3_adapter import log as sb3_log, resolve_rl_backend
+from mascotrl.eval.arch_bootstrap import log as arch_log
+from mascotrl.eval.cpcv_backend import resolve_use_purgedcv
+from mascotrl.eval.residualization import ResidualizerState, fit_ipca3_residualizer
+from mascotrl.logging_utils import get_logger
+from mascotrl.policy.harl_adapter import log as harl_log
+from mascotrl.policy.omnisafe_adapter import log as omnisafe_log
+from mascotrl.policy.sb3_adapter import log as sb3_log, resolve_rl_backend
 
 
 def test_adapter_loggers_named():

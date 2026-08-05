@@ -5,7 +5,7 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import numpy as np
 import torch
-from src.eval.friction import apply_costs
+from mascotrl.eval.friction import apply_costs
 
 def test_hedge_impact_adds_to_hedge_leg_when_adv_set() -> None:
     w = torch.tensor([[0.5, -0.5]])

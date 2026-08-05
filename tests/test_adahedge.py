@@ -4,13 +4,13 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.adahedge import (
+from mascotrl.eval.adahedge import (
     adahedge,
     adahedge_fixed_share,
     flipflop,
     follow_the_leader,
 )
-from src.eval.fixed_share import fixed_share, share_update
+from mascotrl.eval.fixed_share import fixed_share, share_update
 from tests.test_variable_share import _four_regime_losses_01
 
 

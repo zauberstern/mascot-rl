@@ -1,8 +1,8 @@
 import torch
 
-from src.features.dhgnn import SpatialDHGNN
-from src.features.mamba2 import PureTorchMamba2
-from src.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.features.dhgnn import SpatialDHGNN
+from mascotrl.features.mamba2 import PureTorchMamba2
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
 
 
 def test_mamba_shapes():
@@ -13,7 +13,7 @@ def test_mamba_shapes():
 
 
 def test_hippo_legs_init():
-    from src.features.mamba2 import hippo_legs_diagonal
+    from mascotrl.features.mamba2 import hippo_legs_diagonal
 
     legs = hippo_legs_diagonal(8)
     assert torch.allclose(legs, -torch.arange(1, 9, dtype=torch.float32))
@@ -23,8 +23,8 @@ def test_hippo_legs_init():
 
 
 def test_teamtr_kl_bounds():
-    from src.policy.happo import HAPPOEngine
-    from src.policy.trainer import HAPPOTrainer
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.policy.trainer import HAPPOTrainer
 
     eng = HAPPOEngine(num_assets=4, enriched_dim=8, macro_dim=4, turnover_limit=0.15)
     tr = HAPPOTrainer(
@@ -40,8 +40,8 @@ def test_teamtr_kl_bounds():
 
 
 def test_teamtr_shuffle_flag():
-    from src.policy.happo import HAPPOEngine
-    from src.policy.trainer import HAPPOTrainer
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.policy.trainer import HAPPOTrainer
 
     eng = HAPPOEngine(num_assets=4, enriched_dim=8, macro_dim=4, turnover_limit=0.15)
     tr = HAPPOTrainer(eng, teamtr_shuffle_order=False, use_compile=False)
@@ -118,8 +118,8 @@ def test_copula_tail_selection_prefers_joint_shocks():
 
 def test_proj_penalty_pulls_mean_toward_exec_delta():
     """Projection-gap regularizer reduces ||μ_Δw − Δw_exec|| over a few steps."""
-    from src.policy.happo import HAPPOEngine
-    from src.policy.trainer import HAPPOTrainer, TrainBatch
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.policy.trainer import HAPPOTrainer, TrainBatch
 
     torch.manual_seed(0)
     K = 4

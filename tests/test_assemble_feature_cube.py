@@ -4,9 +4,9 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.assemble import assemble_equity_feature_cube
-from src.features.blocks.iv_surface import DEFAULT_SURFACE_CHANNELS
-from src.data.surface_signals import SURFACE_SIGNAL_NAMES
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.blocks.iv_surface import DEFAULT_SURFACE_CHANNELS
+from mascotrl.data.surface_signals import SURFACE_SIGNAL_NAMES
 
 
 def test_default_surface_channels_covers_every_gate_admissible_signal() -> None:

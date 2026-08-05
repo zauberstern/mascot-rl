@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.reporting.policy_behavior import (
+from mascotrl.reporting.policy_behavior import (
     ARCHETYPE_IDS,
     ARCHETYPE_SCORE_WEIGHTS,
     build_policy_behavior,

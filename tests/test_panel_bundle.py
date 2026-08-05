@@ -13,7 +13,7 @@ pytestmark = pytest.mark.plumbing
 
 
 def test_required_panel_families_lists_eleven_plus_gics() -> None:
-    from src.data.feature_panels import (
+    from mascotrl.data.feature_panels import (
         FAMILY_LOADERS,
         FAMILY_RAW_FALLBACKS,
         GICS_RAW_PATHS,
@@ -34,7 +34,7 @@ def test_required_panel_families_lists_eleven_plus_gics() -> None:
 
 
 def test_collect_panel_bundle_paths_mirror_first(tmp_path: Path) -> None:
-    from src.data.feature_panels import collect_panel_bundle_paths
+    from mascotrl.data.feature_panels import collect_panel_bundle_paths
 
     lake = tmp_path / "lake"
     (lake / "_panels").mkdir(parents=True)
@@ -63,7 +63,7 @@ def test_collect_panel_bundle_paths_mirror_first(tmp_path: Path) -> None:
 
 
 def test_collect_panel_bundle_paths_require_complete_fails(tmp_path: Path) -> None:
-    from src.data.feature_panels import collect_panel_bundle_paths
+    from mascotrl.data.feature_panels import collect_panel_bundle_paths
 
     lake = tmp_path / "lake"
     lake.mkdir()
@@ -72,8 +72,8 @@ def test_collect_panel_bundle_paths_require_complete_fails(tmp_path: Path) -> No
 
 
 def test_build_panel_bundle_writes_manifest(tmp_path: Path) -> None:
-    from src.aws_burst.panel_bundle import build_panel_bundle
-    from src.data.feature_panels import required_panel_families
+    from mascotrl.aws_burst.panel_bundle import build_panel_bundle
+    from mascotrl.data.feature_panels import required_panel_families
 
     lake = tmp_path / "lake"
     arctic = tmp_path / "arctic"
@@ -119,7 +119,7 @@ def test_build_panel_bundle_writes_manifest(tmp_path: Path) -> None:
 
 def test_collect_panel_bundle_paths_require_substrate(tmp_path: Path) -> None:
     """require_complete fails closed when sp500_sec / geometry_lite absent."""
-    from src.data.feature_panels import (
+    from mascotrl.data.feature_panels import (
         collect_panel_bundle_paths,
         required_panel_families,
     )

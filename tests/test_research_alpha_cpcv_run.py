@@ -6,9 +6,9 @@ import math
 import numpy as np
 import pandas as pd
 
-from src.eval.cpcv import CPCVConfig
-from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 
 def _panel(t: int = 120, k: int = 4, seed: int = 0, mu: float = 0.001):

@@ -10,7 +10,7 @@ def test_research_alpha_cpcv_fold_runner_does_not_shadow_path() -> None:
     when ``_learning_curves_dir`` was unset but ``_checkpoint_dir`` was set —
     every CPCV fold then failed with UnboundLocalError after training.
     """
-    src = Path("src/eval/research_alpha_cpcv.py").read_text(encoding="utf-8")
+    src = Path("src/mascotrl/eval/research_alpha_cpcv.py").read_text(encoding="utf-8")
     tree = ast.parse(src)
     # Find nested function fold_runner and assert it has no local Path import.
     for node in ast.walk(tree):

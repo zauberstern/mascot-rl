@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.features.pit_universe import (
+from mascotrl.features.pit_universe import (
     FOLD_SPECIFIC_RESELECT,
     FROZEN_AT_2021_END,
     ROLLING_TRAILING_PIT,
@@ -42,7 +42,7 @@ def test_frozen_mode_unaffected_by_new_mode():
 
 
 def test_rolling_trailing_pit_selection_pit_status_uses_slot_masked_protocol():
-    from src.data.pit_guards import selection_pit_status
+    from mascotrl.data.pit_guards import selection_pit_status
 
     status = selection_pit_status(
         universe_end="2019-06-30",

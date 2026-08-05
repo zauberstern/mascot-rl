@@ -7,14 +7,14 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.crucible import (
+from mascotrl.data.crucible import (
     feasible_action_diversity_probe,
     lottery_risk_budget_trim,
     ridge_residual_signal,
     transfer_coefficient_probe,
 )
-from src.eval.cpcv import CPCVConfig, build_cpcv_folds, stamp_reselect_purge_meta
-from src.policy.cmdp_projector import make_cmdp_projector, soft_simplex_project
+from mascotrl.eval.cpcv import CPCVConfig, build_cpcv_folds, stamp_reselect_purge_meta
+from mascotrl.policy.cmdp_projector import make_cmdp_projector, soft_simplex_project
 
 
 def test_g1_default_n_draws_is_512():

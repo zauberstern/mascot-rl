@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.liquidity import amihud_illiquidity, build_liquidity_block
+from mascotrl.features.blocks.liquidity import amihud_illiquidity, build_liquidity_block
 
 WINDOW = 3  # small window for hand-check; production default is 21
 

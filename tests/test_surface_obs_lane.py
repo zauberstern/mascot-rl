@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from src.eval.signal_gate import assert_geometry_pack_valid, load_obs_pack
+from mascotrl.eval.signal_gate import assert_geometry_pack_valid, load_obs_pack
 
 
 ROOT = Path(__file__).resolve().parents[1]

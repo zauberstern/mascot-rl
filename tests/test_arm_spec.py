@@ -5,7 +5,7 @@ import numpy as np
 import pytest
 import yaml
 
-from src.arms import ArmSpec, arm_spec_from_cfg, default_arm_spec
+from mascotrl.arms import ArmSpec, arm_spec_from_cfg, default_arm_spec
 
 
 def test_default_arm_matches_status_quo_options_only():

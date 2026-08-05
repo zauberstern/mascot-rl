@@ -1,7 +1,7 @@
 """WP-S1: portfolio_arm must resolve eq/mix instead of silently defaulting to opt."""
 from __future__ import annotations
 
-from src.arms.spec import arm_spec_from_cfg
+from mascotrl.arms.spec import arm_spec_from_cfg
 
 
 def test_portfolio_arm_eq_resolves() -> None:

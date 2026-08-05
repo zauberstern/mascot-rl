@@ -53,7 +53,7 @@ def test_happo_trainbatch_w_prev_is_lagged() -> None:
 
 
 def test_happo_arm_refuses_cost_in_decision_with_zero_spread(monkeypatch) -> None:
-    import src.eval.equity_substrate as es
+    import mascotrl.eval.equity_substrate as es
 
     monkeypatch.setattr(
         es,
@@ -82,7 +82,7 @@ def test_happo_arm_refuses_cost_in_decision_with_zero_spread(monkeypatch) -> Non
 
 
 def test_screening_happo_smoke_stamps_no_real_reference(monkeypatch) -> None:
-    import src.eval.equity_substrate as es
+    import mascotrl.eval.equity_substrate as es
 
     monkeypatch.setattr(
         es,
@@ -115,7 +115,7 @@ def test_screening_happo_smoke_stamps_no_real_reference(monkeypatch) -> None:
 
 
 def test_narrative_happo_runs_cpcv_not_smoke(monkeypatch) -> None:
-    from src.eval import research_happo_cpcv
+    from mascotrl.eval import research_happo_cpcv
 
     called = {"cpcv": False, "smoke": False}
 
@@ -157,8 +157,8 @@ def test_narrative_happo_runs_cpcv_not_smoke(monkeypatch) -> None:
 
 
 def test_run_happo_cpcv_toy_geometry(monkeypatch) -> None:
-    import src.eval.equity_substrate as es
-    from src.eval.research_happo_cpcv import run_happo_cpcv
+    import mascotrl.eval.equity_substrate as es
+    from mascotrl.eval.research_happo_cpcv import run_happo_cpcv
 
     # Force the toy-panel branch (lake parity covered elsewhere).
     monkeypatch.setattr(

@@ -7,12 +7,12 @@ from pathlib import Path
 import pytest
 import torch
 
-from src.plugins.admm_projection import ADMMProjectionLayer
-from src.plugins.registry import build_happo_engine
-from src.policy.convex_projection import ConvexProjectionLayer
-from src.reporting.capital_gates import PROJECTION_K_CEILING
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.plugins.admm_projection import ADMMProjectionLayer
+from mascotrl.plugins.registry import build_happo_engine
+from mascotrl.policy.convex_projection import ConvexProjectionLayer
+from mascotrl.reporting.capital_gates import PROJECTION_K_CEILING
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -73,7 +73,7 @@ def test_convex_projection_passes_scs_max_iters():
 
 
 def test_happo_progress_line_format():
-    from src.eval.research_happo_cpcv import happo_progress_line
+    from mascotrl.eval.research_happo_cpcv import happo_progress_line
 
     s = happo_progress_line(
         "cpcv_train_start", seed=0, n_splits=3, n_test_groups=1

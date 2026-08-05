@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.surface_signals import align_signals_to_panel
+from mascotrl.data.surface_signals import align_signals_to_panel
 
 
 def _signals_df() -> pd.DataFrame:

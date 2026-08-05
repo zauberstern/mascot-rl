@@ -2,9 +2,9 @@
 from __future__ import annotations
 from pathlib import Path
 import yaml
-from src.arms.spec import EQUITY_LABEL_STEM
-from src.reporting.claim_language import CLAIM_CATEGORY_RANK1
-from src.reporting.claim_stamps import CLAIM_CATEGORY_EQ_STK, stamp_research_positive_alpha
+from mascotrl.arms.spec import EQUITY_LABEL_STEM
+from mascotrl.reporting.claim_language import CLAIM_CATEGORY_RANK1
+from mascotrl.reporting.claim_stamps import CLAIM_CATEGORY_EQ_STK, stamp_research_positive_alpha
 ROOT = Path(__file__).resolve().parents[1]
 EQ_YAML = ROOT / 'config' / 'workflows' / 'research_alpha_eq_stk.yaml'
 

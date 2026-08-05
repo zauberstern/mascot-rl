@@ -6,8 +6,8 @@ import json
 import numpy as np
 import pytest
 
-from src.reporting.behavior_explain import explain_behaviour
-from src.reporting.interpretability import (
+from mascotrl.reporting.behavior_explain import explain_behaviour
+from mascotrl.reporting.interpretability import (
     build_interpretability_artifact,
     channel_group_attribution,
     distill_policy_tree,

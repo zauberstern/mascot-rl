@@ -11,8 +11,8 @@ import pytest
 pytestmark = pytest.mark.plumbing
 from tests.conftest import FLOAT_TOL
 
-import src.eval.research_alpha_cpcv as research_alpha_cpcv
-from src.eval.campaign_manifest import (
+import mascotrl.eval.research_alpha_cpcv as research_alpha_cpcv
+from mascotrl.eval.campaign_manifest import (
     cell_key,
     is_cell_complete,
     load_manifest,
@@ -20,7 +20,7 @@ from src.eval.campaign_manifest import (
     purge_orphan_fold_cells,
     save_manifest,
 )
-from src.eval.cpcv import CPCVConfig, CPCVFold, run_cpcv
+from mascotrl.eval.cpcv import CPCVConfig, CPCVFold, run_cpcv
 
 
 def test_cell_key_stable() -> None:

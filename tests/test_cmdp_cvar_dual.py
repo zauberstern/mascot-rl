@@ -5,7 +5,7 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.policy.cmdp_config import build_step_costs, resolve_cmdp_cfg
+from mascotrl.policy.cmdp_config import build_step_costs, resolve_cmdp_cfg
 
 
 def test_resolve_cmdp_cfg_from_yaml_block():

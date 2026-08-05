@@ -6,8 +6,8 @@ import math
 import pytest
 
 from scripts.run_eq_alloc_campaign import compute_eq_campaign_gates
-from src.eval.spectrum_gates import compute_gate1
-from src.reporting.capital_gates import assert_protocol_provenance
+from mascotrl.eval.spectrum_gates import compute_gate1
+from mascotrl.reporting.capital_gates import assert_protocol_provenance
 
 
 def _break_even_from_ladder(mid: float, pct75: float) -> float:

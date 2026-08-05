@@ -5,12 +5,12 @@ import numpy as np
 import pytest
 import torch
 
-from src.features.mask_tokens import (
+from mascotrl.features.mask_tokens import (
     MaskTokenEncoder,
     apply_mask_token,
     refuse_logit_only_masking,
 )
-from src.policy.rasp_locks import assert_mask_honesty
+from mascotrl.policy.rasp_locks import assert_mask_honesty
 
 
 def test_all_true_mask_refused_with_availability() -> None:

@@ -180,6 +180,6 @@ def test_live_fioracle_optional_smoke():
     with tempfile.TemporaryDirectory() as td:
         dest = Path(td) / "macro" / "fioracle"
         # Copy only needed files would be huge; rely on fixture tests for logic.
-        # Smoke: ensure SERIES_SPECS paths resolve under live src.
+        # Smoke: ensure SERIES_SPECS paths resolve under live mascotrl.
         for spec in SERIES_SPECS.values():
             assert (live / spec["source_file"]).is_file(), spec["source_file"]

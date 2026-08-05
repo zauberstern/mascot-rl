@@ -5,7 +5,7 @@ import math
 
 import numpy as np
 
-from src.eval.research_alpha_baselines import (
+from mascotrl.eval.research_alpha_baselines import (
     equal_weight_sharpe,
     policy_beats_random,
     random_baseline_sharpe,
@@ -43,7 +43,7 @@ def test_kill_polarity() -> None:
 
 def test_friction_matched_ew_differs_from_gross() -> None:
     """W1.2: with factors+friction, EW Sharpe must use parity harness (after-cost)."""
-    from src.eval.friction import FrictionSpec
+    from mascotrl.eval.friction import FrictionSpec
 
     rng = np.random.default_rng(0)
     rets = rng.normal(0.0005, 0.01, size=(120, 6))
@@ -61,7 +61,7 @@ def test_friction_matched_ew_differs_from_gross() -> None:
 
 
 def test_baselines_accept_explicit_cadence_with_rebalance_mask() -> None:
-    from src.eval.friction import FrictionSpec
+    from mascotrl.eval.friction import FrictionSpec
 
     rng = np.random.default_rng(4)
     rets = rng.normal(0.0005, 0.01, size=(40, 4))

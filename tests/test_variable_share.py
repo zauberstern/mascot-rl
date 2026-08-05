@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.eval.fixed_share import fixed_share
-from src.eval.variable_share import variable_share
+from mascotrl.eval.fixed_share import fixed_share
+from mascotrl.eval.variable_share import variable_share
 
 
 def _four_regime_losses_01(t_per: int = 200, n: int = 4) -> np.ndarray:
@@ -59,7 +59,7 @@ def test_variable_share_rejects_out_of_range() -> None:
 def test_variable_share_no_turbulence_import() -> None:
     import ast
 
-    src = Path(__file__).resolve().parents[1] / "src" / "eval" / "variable_share.py"
+    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "eval" / "variable_share.py"
     tree = ast.parse(src.read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):

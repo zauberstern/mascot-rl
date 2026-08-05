@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.reporting.claim_stamps import (
+from mascotrl.reporting.claim_stamps import (
     CLAIM_CATEGORY_EQ_STK,
     CLAIM_CATEGORY_RANK1,
     stamp_research_positive_alpha,

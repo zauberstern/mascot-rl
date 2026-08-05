@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.research_alpha_cpcv import _training_policy_diagnostics
-from src.eval.policy_diagnostics import summarize_policy_diagnostics
+from mascotrl.eval.research_alpha_cpcv import _training_policy_diagnostics
+from mascotrl.eval.policy_diagnostics import summarize_policy_diagnostics
 
 
 def test_summarize_policy_diagnostics_returns_expected_keys() -> None:

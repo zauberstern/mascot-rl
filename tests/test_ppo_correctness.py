@@ -8,7 +8,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from src.policy.single_agent import PPOAgent, make_single_agent
+from mascotrl.policy.single_agent import PPOAgent, make_single_agent
 
 
 def test_ppo_ratio_not_identically_one_after_update():

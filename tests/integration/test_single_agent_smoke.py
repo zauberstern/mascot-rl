@@ -4,7 +4,7 @@ from __future__ import annotations
 import torch
 import pytest
 
-from src.policy.single_agent import (
+from mascotrl.policy.single_agent import (
     DDPGAgent,
     DQNAgent,
     MCPGAgent,

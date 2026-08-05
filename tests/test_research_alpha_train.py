@@ -4,10 +4,10 @@ from __future__ import annotations
 import pytest
 from tests.conftest import FLOAT_TOL
 import numpy as np
-from src.arms import ArmSpec
-from src.eval.friction import assert_friction_parity
-from src.eval.research_alpha_train import SYNTHETIC_TRAIN_WORLDS, build_research_hist_env, synthetic_train_panel, train_research_hist
-from src.reporting.research_alpha_router import research_train_friction_pair
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import assert_friction_parity
+from mascotrl.eval.research_alpha_train import SYNTHETIC_TRAIN_WORLDS, build_research_hist_env, synthetic_train_panel, train_research_hist
+from mascotrl.reporting.research_alpha_router import research_train_friction_pair
 
 def _toy_panel(t: int=60, k: int=4, seed: int=0):
     rng = np.random.default_rng(seed)
@@ -91,7 +91,7 @@ def test_train_research_hist_mcpg_softmax_uses_raw_logits() -> None:
     # accumulate optimizer_steps rather than n_minibatches repeats.
     cfg = {'primary_train': 'historical_arm_env', 'portfolio_arm': 'eq', 'n_assets': 3, 'train_epochs': 1, 'n_minibatches': 4, 'train_episodes': 2, 'train_updates_per_fold': 4, 'min_optimizer_steps': 4, 'policy': 'single_agent', 'projection_mode': 'soft', 'algo': 'mcpg', 'weight_head': 'softmax', 'weight_head_temperature': 0.5, 'objective': 'differential_sharpe', 'objective_primary': True, 'use_equity_feature_cube': True, 'architecture': 'transformer', 'feature_seq_len': 4}
     out = train_research_hist(rets, fac, cfg, seed=0)
-    from src.policy.single_agent import MCPGAgent
+    from mascotrl.policy.single_agent import MCPGAgent
     assert isinstance(out['agent'], MCPGAgent)
     assert out['agent'].weight_head == 'softmax'
     assert float(out['agent'].weight_head_temperature) == pytest.approx(0.5, **FLOAT_TOL)
@@ -141,7 +141,7 @@ def test_train_research_hist_every_algo_axis_value_actually_trains() -> None:
     registered algo id must reach a real agent.train_epoch call, not
     silently fall back to the PPO default."""
     import pytest
-    from src.policy.single_agent import DDPGAgent, DQNAgent, MCPGAgent, PPOAgent, RRLAgent, SACAgent, TD3Agent
+    from mascotrl.policy.single_agent import DDPGAgent, DQNAgent, MCPGAgent, PPOAgent, RRLAgent, SACAgent, TD3Agent
     expected = {'ppo': PPOAgent, 'sac': SACAgent, 'td3': TD3Agent, 'ddpg': DDPGAgent, 'mcpg': MCPGAgent, 'rrl': RRLAgent, 'dqn': DQNAgent}
     for algo, cls in expected.items():
         rets, fac = _toy_panel(t=30, k=3)
@@ -180,7 +180,7 @@ def test_train_research_hist_architecture_gru_routes_through_extractor() -> None
     rets, fac = _toy_panel(t=40, k=3)
     cfg = {'primary_train': 'historical_arm_env', 'portfolio_arm': 'eq', 'n_assets': 3, 'train_epochs': 1, 'policy': 'single_agent', 'projection_mode': 'soft', 'use_equity_feature_cube': True, 'architecture': 'gru', 'rl_backend': 'custom'}
     out = train_research_hist(rets, fac, cfg, seed=0)
-    from src.policy.single_agent import _AssetTemporalActorCritic
+    from mascotrl.policy.single_agent import _AssetTemporalActorCritic
     assert isinstance(out['agent'].net, _AssetTemporalActorCritic)
     assert out['agent'].net.extractor.temporal_backend == 'gru'
     assert out['n_steps'] > 0
@@ -195,7 +195,7 @@ def test_train_research_hist_surface_image_encoder_reaches_actor_critic() -> Non
     kelly_images = rng.normal(0.2, 0.05, size=(t, k, 11, 34))
     cfg = {'primary_train': 'historical_arm_env', 'portfolio_arm': 'eq', 'n_assets': k, 'train_epochs': 1, 'policy': 'single_agent', 'projection_mode': 'soft', 'use_equity_feature_cube': True, 'architecture': 'gru', 'use_surface_image_encoder': True, 'feature_extras': {'kelly_images': kelly_images}, 'rl_backend': 'custom'}
     out = train_research_hist(rets, fac, cfg, seed=0)
-    from src.policy.single_agent import _AssetTemporalActorCritic
+    from mascotrl.policy.single_agent import _AssetTemporalActorCritic
     net = out['agent'].net
     assert isinstance(net, _AssetTemporalActorCritic)
     assert net.use_surface_image_encoder is True
@@ -207,7 +207,7 @@ def test_train_research_hist_architecture_mlp_default_unchanged() -> None:
     rets, fac = _toy_panel(t=30, k=3)
     cfg = {'primary_train': 'historical_arm_env', 'portfolio_arm': 'eq', 'n_assets': 3, 'train_epochs': 1, 'policy': 'single_agent', 'projection_mode': 'soft', 'rl_backend': 'custom'}
     out = train_research_hist(rets, fac, cfg, seed=0)
-    from src.policy.single_agent import _ActorCritic
+    from mascotrl.policy.single_agent import _ActorCritic
     assert isinstance(out['agent'].net, _ActorCritic)
 
 def test_train_research_hist_architecture_non_mlp_without_feature_cube_raises() -> None:
@@ -277,8 +277,8 @@ def test_ppo_agent_checkpoint_roundtrip(tmp_path) -> None:
     """W3.2: save/load roundtrip of a tiny PPOAgent state_dict via the same
     helpers train_research_hist uses (_save_checkpoint / _maybe_resume_checkpoint)."""
     import torch
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+    from mascotrl.policy.single_agent import make_single_agent
     src_agent = make_single_agent('ppo', obs_dim=6, action_dim=3, hidden=8, rl_backend='custom')
     cfg_save = {'_checkpoint_dir': str(tmp_path / 'ckpt'), '_fold_id': 4, '_run_config_hash': 'hash_ok'}
     _save_checkpoint(src_agent, cfg_save, seed=0, episode=1, optimizer_steps=5)
@@ -303,8 +303,8 @@ def test_ppo_agent_checkpoint_roundtrip(tmp_path) -> None:
 def test_ppo_agent_checkpoint_refuses_hash_mismatch(tmp_path) -> None:
     """W3.2: a run_config_hash mismatch must fail closed instead of silently
     loading weights trained under a different config."""
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+    from mascotrl.policy.single_agent import make_single_agent
     src_agent = make_single_agent('ppo', obs_dim=6, action_dim=3, hidden=8, rl_backend='custom')
     _save_checkpoint(src_agent, {'_checkpoint_dir': str(tmp_path / 'ckpt'), '_fold_id': 0, '_run_config_hash': 'hash_a'}, seed=0, episode=1, optimizer_steps=1)
     ckpt = next((tmp_path / 'ckpt').glob('*.pt'))
@@ -317,8 +317,8 @@ def test_ppo_agent_checkpoint_refuses_hash_mismatch(tmp_path) -> None:
     assert raised, 'hash mismatch must refuse to resume'
 
 def test_maybe_resume_checkpoint_missing_path_is_noop() -> None:
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint
+    from mascotrl.policy.single_agent import make_single_agent
     agent = make_single_agent('ppo', obs_dim=4, action_dim=2, hidden=4, rl_backend='custom')
     assert _maybe_resume_checkpoint(agent, {'_resume_checkpoint': '/no/such/path.pt'}) is None
     assert _maybe_resume_checkpoint(agent, {}) is None
@@ -327,12 +327,12 @@ def test_maybe_resume_checkpoint_missing_path_is_noop() -> None:
 def test_sb3_ppo_checkpoint_roundtrip(tmp_path) -> None:
     """SB3 agents expose ``net`` so _save/_maybe_resume preserve policy keys."""
     import torch
-    from src.eval.research_alpha_train import (
+    from mascotrl.eval.research_alpha_train import (
         _agent_policy_module,
         _maybe_resume_checkpoint,
         _save_checkpoint,
     )
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.policy.single_agent import make_single_agent
 
     src_agent = make_single_agent('ppo', obs_dim=6, action_dim=3, lr=1e-3, rl_backend='sb3')
     assert _agent_policy_module(src_agent) is not None
@@ -369,7 +369,7 @@ def test_train_research_hist_raises_on_nan_obs() -> None:
     import pytest
     from unittest.mock import patch
 
-    from src.eval.research_alpha_train import build_research_hist_env, train_research_hist
+    from mascotrl.eval.research_alpha_train import build_research_hist_env, train_research_hist
 
     rets, fac = _toy_panel(t=20, k=3)
     cfg = {
@@ -392,7 +392,7 @@ def test_train_research_hist_raises_on_nan_obs() -> None:
 
     env.reset = reset_nan
 
-    with patch("src.eval.research_alpha_train.build_research_hist_env", return_value=env):
+    with patch("mascotrl.eval.research_alpha_train.build_research_hist_env", return_value=env):
         with pytest.raises(ValueError, match="non-finite|NaN|inf"):
             train_research_hist(rets, fac, cfg, seed=0)
 
@@ -401,9 +401,9 @@ def test_sb3_agent_policy_module_for_ppo_sac_recurrent() -> None:
     """Checkpoint bridge must resolve net for SB3 PPO, SAC, and RecurrentPPO."""
     import pytest
     import torch
-    from src.eval.research_alpha_train import _agent_policy_module
-    from src.policy.sb3_adapter import make_sb3_agent
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _agent_policy_module
+    from mascotrl.policy.sb3_adapter import make_sb3_agent
+    from mascotrl.policy.single_agent import make_single_agent
 
     agents = [
         make_single_agent('ppo', obs_dim=8, action_dim=2, lr=1e-3, rl_backend='sb3'),

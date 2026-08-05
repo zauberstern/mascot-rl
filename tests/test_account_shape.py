@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.aws_burst.profiles import (
+from mascotrl.aws_burst.profiles import (
     DEFAULT_ACCOUNT_SHAPE,
     MAX_VCPUS_PER_ACCOUNT,
     allowed_instance_types_for_profile,

@@ -6,7 +6,7 @@ pytest.importorskip("cpp_rbergomi")
 
 def test_generate_surfaces_smoke():
     import cpp_rbergomi
-    from src.simulator import get_surface_tensor
+    from mascotrl.simulator import get_surface_tensor
 
     cfg = {
         "n_paths": 2,

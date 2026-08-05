@@ -8,7 +8,7 @@ import math
 
 import torch
 
-from src.policy.objective_factory import episode_weights
+from mascotrl.policy.objective_factory import episode_weights
 
 
 def test_cvar_ru_uses_tail_not_zero():

@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.arms.spec import ArmSpec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec
+from mascotrl.arms.spec import ArmSpec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec
 
 
 def test_mix_env_charges_both_blocks():
@@ -51,7 +51,7 @@ def test_mix_env_charges_both_blocks():
     _, _, _, _, info = env.step(w)
     assert info["cost"] > 0.0
     # Direct apply_costs breakdown via a second step from nonzero w_prev.
-    from src.eval.friction import apply_costs
+    from mascotrl.eval.friction import apply_costs
     import torch
 
     out = apply_costs(

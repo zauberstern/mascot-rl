@@ -13,7 +13,7 @@ SCRIPT = ROOT / "scripts" / "assign_behavior_codenames.py"
 sys.path.insert(0, str(ROOT))
 
 from scripts.assign_behavior_codenames import cluster_behaviours, main  # noqa: E402
-from src.reporting.behavior_metrics import BEHAVIOUR_MEASURE_IDS  # noqa: E402
+from mascotrl.reporting.behavior_metrics import BEHAVIOUR_MEASURE_IDS  # noqa: E402
 
 
 def _write_behavior(path: Path, measures: dict[str, float] | None = None) -> None:

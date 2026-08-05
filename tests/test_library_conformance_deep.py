@@ -5,9 +5,9 @@ import numpy as np
 import pytest
 import torch
 
-from src.policy.single_agent import compute_gae
-from src.policy.vendor.omnisafe.lagrange import Lagrange
-from src.policy.vendor.omnisafe.pid_lagrange import PIDLagrangian
+from mascotrl.policy.single_agent import compute_gae
+from mascotrl.policy.vendor.omnisafe.lagrange import Lagrange
+from mascotrl.policy.vendor.omnisafe.pid_lagrange import PIDLagrangian
 
 
 def test_gae_matches_manual_lambda_one():
@@ -83,7 +83,7 @@ def test_naive_lagrange_nonnegative():
 
 def test_harl_env_contract_reset_step():
     pytest.importorskip("harl")
-    from src.policy.harl_adapter import HistoricalArmHARLEnv
+    from mascotrl.policy.harl_adapter import HistoricalArmHARLEnv
 
     class _Stub:
         K = 2

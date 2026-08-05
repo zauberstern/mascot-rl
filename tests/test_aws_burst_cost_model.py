@@ -5,7 +5,7 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.aws_burst.cost_model import affordable_frontier, refuse_submit_if_unsafe
+from mascotrl.aws_burst.cost_model import affordable_frontier, refuse_submit_if_unsafe
 
 
 def test_affordable_frontier_picks_cheapest() -> None:

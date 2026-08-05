@@ -6,7 +6,7 @@ import tracemalloc
 import pytest
 import torch
 
-from src.features.mamba2 import PureTorchMamba2
+from mascotrl.features.mamba2 import PureTorchMamba2
 
 
 def test_mamba2_spectrum_grid_peak_memory_cpu():

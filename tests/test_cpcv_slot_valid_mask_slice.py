@@ -7,7 +7,7 @@ import pytest
 
 
 def test_slice_feature_extras_slices_full_panel_slot_mask() -> None:
-    from src.eval.research_alpha_cpcv import _slice_feature_extras
+    from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
 
     t, k = 40, 5
     mask = np.arange(t * k, dtype=float).reshape(t, k) > 0
@@ -23,7 +23,7 @@ def test_slice_feature_extras_slices_full_panel_slot_mask() -> None:
 
 
 def test_slice_feature_extras_raises_on_slot_mask_t_mismatch() -> None:
-    from src.eval.research_alpha_cpcv import _slice_feature_extras
+    from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
 
     t, k = 22, 4
     mask = np.ones((t, k), dtype=bool)
@@ -33,7 +33,7 @@ def test_slice_feature_extras_raises_on_slot_mask_t_mismatch() -> None:
 
 
 def test_slice_feature_extras_leaves_none_slot_mask() -> None:
-    from src.eval.research_alpha_cpcv import _slice_feature_extras
+    from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
 
     idx = np.arange(0, 10)
     out = _slice_feature_extras({}, idx)

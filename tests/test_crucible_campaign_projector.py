@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.policy.cmdp_projector import make_cmdp_projector, soft_simplex_project
+from mascotrl.policy.cmdp_projector import make_cmdp_projector, soft_simplex_project
 
 
 def test_make_cmdp_projector_hard_caps_turnover_from_ew():

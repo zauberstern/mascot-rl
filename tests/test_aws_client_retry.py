@@ -8,8 +8,8 @@ pytestmark = pytest.mark.plumbing
 from botocore.exceptions import ClientError
 from moto import mock_aws
 
-from src.aws_burst import aws_client as aws_client_mod
-from src.aws_burst.aws_client import BurstClient, _RETRY
+from mascotrl.aws_burst import aws_client as aws_client_mod
+from mascotrl.aws_burst.aws_client import BurstClient, _RETRY
 
 _RealSession = boto3.Session
 

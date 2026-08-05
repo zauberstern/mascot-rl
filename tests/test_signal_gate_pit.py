@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.eval.signal_gate import (
+from mascotrl.eval.signal_gate import (
     assert_allowlist_valid,
     assert_geometry_pack_valid,
     decile_long_short,

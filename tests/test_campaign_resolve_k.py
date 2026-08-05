@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import yaml
-from src.eval.yaml_honesty import TrackingDict, assert_yaml_honesty_tracked, load_workflow_keys
+from mascotrl.eval.yaml_honesty import TrackingDict, assert_yaml_honesty_tracked, load_workflow_keys
 ROOT = Path(__file__).resolve().parents[1]
 CRUCIBLE_YAML = ROOT / 'config' / 'workflows' / 'eq_alloc_crucible_k100.yaml'
 

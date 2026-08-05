@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.short_interest import build_short_interest_ratio
+from mascotrl.data.short_interest import build_short_interest_ratio
 
 
 def test_short_interest_disabled_by_default_returns_empty():

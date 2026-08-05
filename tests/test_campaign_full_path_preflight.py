@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _lake_ready() -> bool:
-    from src.data.paths import LAKE_ROOT
+    from mascotrl.data.paths import LAKE_ROOT
 
     return Path(LAKE_ROOT).exists()
 

@@ -24,7 +24,7 @@ def _tiny_cfg(**overrides):
 
 
 def test_generate_world_gbm_shapes():
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     bundle = get_world_bundle(_tiny_cfg(train_world="gbm", gbm_sigma=0.2))
     assert bundle["world"] == "gbm"
@@ -37,7 +37,7 @@ def test_generate_world_gbm_shapes():
 
 
 def test_generate_world_heston_and_sabr_finite():
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     for world in ("heston", "sabr"):
         bundle = get_world_bundle(_tiny_cfg(train_world=world))
@@ -61,7 +61,7 @@ def test_heston_cf_vs_mc():
     loose band, and that CF prices are monotone in strike.
     """
     import cpp_rbergomi
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     # Smoke: heston world produces ATM IV near sqrt(theta)=0.2
     bundle = get_world_bundle(
@@ -84,7 +84,7 @@ def test_heston_cf_vs_mc():
 
 
 def test_worlds_differ_at_fixed_seed():
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     spots = {}
     for world in ("gbm", "heston", "sabr"):

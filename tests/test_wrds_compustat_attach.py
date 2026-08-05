@@ -9,7 +9,7 @@ from types import SimpleNamespace
 
 import pandas as pd
 
-from src.data.wrds_enrich import attach_episode_compustat
+from mascotrl.data.wrds_enrich import attach_episode_compustat
 
 
 def test_attach_compustat_tags_dvc(tmp_path: Path) -> None:

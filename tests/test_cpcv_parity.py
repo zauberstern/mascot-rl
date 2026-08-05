@@ -11,8 +11,8 @@ import pytest
 
 pytest.importorskip("purgedcv")
 
-from src.eval.cpcv import CPCVConfig, build_cpcv_folds, reconstruct_paths
-from src.eval.cpcv_lib import build_cpcv_folds_lib, run_cpcv_lib
+from mascotrl.eval.cpcv import CPCVConfig, build_cpcv_folds, reconstruct_paths
+from mascotrl.eval.cpcv_lib import build_cpcv_folds_lib, run_cpcv_lib
 
 
 def _fold_train_test_index_sets(

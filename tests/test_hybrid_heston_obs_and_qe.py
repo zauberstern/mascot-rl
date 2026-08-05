@@ -5,9 +5,9 @@ import numpy as np
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.arms import ArmSpec
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.friction import FrictionSpec
+from mascotrl.arms import ArmSpec
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.friction import FrictionSpec
 
 
 def _raw_env(rets: np.ndarray, factors: np.ndarray) -> HistoricalArmEnv:
@@ -38,7 +38,7 @@ def test_historical_env_raw_obs_zero_fills_missing_slots() -> None:
 
 def test_assert_obs_finite_accepts_hybrid_style_panel_after_env() -> None:
     """Reproduce hybrid_heston fail-closed path: raw NaN returns through env.reset."""
-    from src.eval.research_alpha_train import _assert_obs_finite
+    from mascotrl.eval.research_alpha_train import _assert_obs_finite
 
     rng = np.random.default_rng(0)
     T, K = 16, 8
@@ -53,7 +53,7 @@ def test_assert_obs_finite_accepts_hybrid_style_panel_after_env() -> None:
 
 
 def test_feller_helper_reports_violation_without_forcing() -> None:
-    from src.sim.heston_qe import feller_satisfied, feller_gap
+    from mascotrl.sim.heston_qe import feller_satisfied, feller_gap
 
     assert feller_satisfied(kappa=2.0, theta=0.04, xi=0.3)
     assert not feller_satisfied(kappa=1.0, theta=0.04, xi=0.8)
@@ -61,7 +61,7 @@ def test_feller_helper_reports_violation_without_forcing() -> None:
 
 
 def test_numpy_qe_m_variance_nonnegative_under_feller_violation() -> None:
-    from src.sim.heston_qe import simulate_heston_qe_m
+    from mascotrl.sim.heston_qe import simulate_heston_qe_m
 
     spots, vars_ = simulate_heston_qe_m(
         n_paths=512,
@@ -88,7 +88,7 @@ def test_numpy_qe_m_variance_nonnegative_under_feller_violation() -> None:
 @pytest.mark.parametrize("scheme", ["qe", "qe_martingale", "full_truncation"])
 def test_cpp_heston_scheme_finite(scheme: str) -> None:
     pytest.importorskip("cpp_rbergomi")
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
     import torch
 
     bundle = get_world_bundle(
@@ -124,7 +124,7 @@ def test_cpp_heston_default_scheme_is_qe_martingale() -> None:
 
 def test_hybrid_fold_allows_cube_false_finetune_with_nan_slots(monkeypatch) -> None:
     """_train_agent_for_fold hybrid path must not die on NaN historical finetune obs."""
-    from src.eval import research_alpha_cpcv as mod
+    from mascotrl.eval import research_alpha_cpcv as mod
 
     calls: list[str] = []
 
@@ -136,7 +136,7 @@ def test_hybrid_fold_allows_cube_false_finetune_with_nan_slots(monkeypatch) -> N
     def fake_train(rets, fac, cfg, seed=0, agent=None):
         phase = "ft" if agent is not None else "pt"
         calls.append(phase)
-        from src.eval.research_alpha_train import _assert_obs_finite
+        from mascotrl.eval.research_alpha_train import _assert_obs_finite
 
         env = _raw_env(rets, fac)
         obs, _ = env.reset()
@@ -192,7 +192,7 @@ def test_quantlib_heston_qe_m_optional_parity() -> None:
     assert float(opt.NPV()) > 0.0
 
     pytest.importorskip("cpp_rbergomi")
-    from src.simulator import get_world_bundle
+    from mascotrl.simulator import get_world_bundle
 
     bundle = get_world_bundle(
         {

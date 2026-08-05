@@ -9,7 +9,7 @@ import pytest
 
 
 def test_stamp_equity_obs_defaults_enables_cube_and_surface_lane() -> None:
-    from src.eval.equity_substrate import stamp_equity_obs_defaults
+    from mascotrl.eval.equity_substrate import stamp_equity_obs_defaults
 
     cfg: dict = {"architecture": "mlp", "use_surface_signals": True}
     out = stamp_equity_obs_defaults(cfg)
@@ -40,7 +40,7 @@ def test_resolve_spectrum_budget_uses_train_env_steps() -> None:
 
 
 def test_schema_allows_surface_obs_lane_and_obs_pack_path() -> None:
-    from src.spectrum.cell_schema import validate_cell_cfg
+    from mascotrl.spectrum.cell_schema import validate_cell_cfg
 
     cfg = {
         "spectrum_cell_id": "eq_K4_single_ppo_mlp_softmax_mean_std_cao",
@@ -75,8 +75,8 @@ def test_schema_allows_surface_obs_lane_and_obs_pack_path() -> None:
 
 
 def test_attach_obs_substrate_injects_iv_surface_and_dollar_volume() -> None:
-    from src.eval.equity_substrate import attach_equity_obs_substrate
-    from src.features.blocks.obs_builder import PanelObservationBuilder
+    from mascotrl.eval.equity_substrate import attach_equity_obs_substrate
+    from mascotrl.features.blocks.obs_builder import PanelObservationBuilder
 
     T, K = 40, 4
     rng = np.random.default_rng(0)
@@ -134,7 +134,7 @@ def test_attach_obs_substrate_injects_iv_surface_and_dollar_volume() -> None:
 def test_attach_obs_substrate_fail_closed_without_surface_when_requested(
     tmp_path: Path,
 ) -> None:
-    from src.eval.equity_substrate import attach_equity_obs_substrate
+    from mascotrl.eval.equity_substrate import attach_equity_obs_substrate
 
     T, K = 20, 3
     rets = np.zeros((T, K))
@@ -164,7 +164,7 @@ def test_attach_obs_substrate_fail_closed_without_surface_when_requested(
 
 
 def test_lake_root_alias_prefers_lake_base_env(monkeypatch) -> None:
-    from src.eval import equity_substrate as es
+    from mascotrl.eval import equity_substrate as es
 
     monkeypatch.delenv("MASCOTRL_LAKE_DIR", raising=False)
     monkeypatch.setenv("MASCOTRL_LAKE_BASE", "/tmp/fake_lake_base_for_parity")
@@ -186,7 +186,7 @@ def test_run_happo_cpcv_eq_historical_uses_lake_substrate(monkeypatch) -> None:
     """HAPPO narrative CPCV must not silently keep Arctic OM for eq historical."""
     import numpy as np
     import pandas as pd
-    from src.eval import research_happo_cpcv as hap
+    from mascotrl.eval import research_happo_cpcv as hap
 
     calls: list[str] = []
 
@@ -206,7 +206,7 @@ def test_run_happo_cpcv_eq_historical_uses_lake_substrate(monkeypatch) -> None:
         raise AssertionError("OM panel must not be used for eq historical HAPPO")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
     )
     # Patch the import site used inside run_happo_cpcv.
     import scripts.run_spectrum_campaign as camp
@@ -271,7 +271,7 @@ def test_run_happo_arm_eq_historical_prefers_lake(monkeypatch) -> None:
         raise AssertionError("OM must not win over lake for eq historical")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", fake_lake
     )
     monkeypatch.setattr(camp, "_try_om_research_panel", boom_om)
 

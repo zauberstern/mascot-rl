@@ -51,11 +51,11 @@ def test_run_research_arm_passes_out_dir_and_resume(tmp_path: Path, monkeypatch:
 
     monkeypatch.setattr(camp, "_try_om_research_panel", lambda *_a, **_k: None)
     monkeypatch.setattr(
-        "src.eval.research_alpha_cpcv.run_research_alpha_cpcv",
+        "mascotrl.eval.research_alpha_cpcv.run_research_alpha_cpcv",
         _fake_cpcv,
     )
     # Import path used inside _run_research_arm
-    import src.eval.research_alpha_cpcv as rac
+    import mascotrl.eval.research_alpha_cpcv as rac
 
     monkeypatch.setattr(rac, "run_research_alpha_cpcv", _fake_cpcv)
     monkeypatch.setattr(rac, "dry_run_research_alpha_cpcv", lambda *_a, **_k: {"dry_run": True})
@@ -114,7 +114,7 @@ def test_run_research_arm_passes_out_dir_and_resume(tmp_path: Path, monkeypatch:
 
 
 def test_discover_latest_happo_checkpoint(tmp_path: Path) -> None:
-    from src.eval.research_happo_cpcv import _discover_latest_happo_checkpoint
+    from mascotrl.eval.research_happo_cpcv import _discover_latest_happo_checkpoint
 
     def _write(path: Path, *, seed: int, fold_id: int, run_hash: str, episode: int) -> None:
         torch.save(
@@ -139,7 +139,7 @@ def test_discover_latest_happo_checkpoint(tmp_path: Path) -> None:
 
 
 def test_maybe_resume_happo_checkpoint_loads_policy(tmp_path: Path) -> None:
-    from src.eval.research_happo_cpcv import (
+    from mascotrl.eval.research_happo_cpcv import (
         _maybe_resume_happo_checkpoint,
         _save_happo_checkpoint,
     )
@@ -171,7 +171,7 @@ def test_maybe_resume_happo_checkpoint_loads_policy(tmp_path: Path) -> None:
 
 
 def test_run_happo_cpcv_forwards_out_dir_resume(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    from src.eval import research_happo_cpcv as hap
+    from mascotrl.eval import research_happo_cpcv as hap
 
     captured: dict = {}
 
@@ -181,7 +181,7 @@ def test_run_happo_cpcv_forwards_out_dir_resume(tmp_path: Path, monkeypatch: pyt
 
     monkeypatch.setattr(hap, "run_cpcv", _fake_run_cpcv)
     # HAPPO now defaults to purgedcv; stub that path too.
-    import src.eval.cpcv_lib as cpcv_lib
+    import mascotrl.eval.cpcv_lib as cpcv_lib
 
     monkeypatch.setattr(cpcv_lib, "run_cpcv_lib", _fake_run_cpcv, raising=False)
     monkeypatch.setattr(
@@ -203,7 +203,7 @@ def test_run_happo_cpcv_forwards_out_dir_resume(tmp_path: Path, monkeypatch: pyt
             __import__("numpy").zeros((40, 3)),
         ),
     )
-    import src.eval.equity_substrate as es
+    import mascotrl.eval.equity_substrate as es
 
     monkeypatch.setattr(
         es,
@@ -337,8 +337,8 @@ def test_cell_runner_pull_push_resume_state(tmp_path: Path, monkeypatch: pytest.
 
 def test_fold_manifest_resume_skips_completed(tmp_path: Path) -> None:
     """Tiny CPCV: completed fold in manifest is not re-run on resume=True."""
-    from src.eval.campaign_manifest import mark_cell_complete, save_manifest
-    from src.eval.cpcv import CPCVConfig, run_cpcv
+    from mascotrl.eval.campaign_manifest import mark_cell_complete, save_manifest
+    from mascotrl.eval.cpcv import CPCVConfig, run_cpcv
 
     dates = list(pd.bdate_range("2015-01-01", periods=40))
     cfg = CPCVConfig(n_splits=2, n_test_groups=1, purge_days=0, embargo_days=0)

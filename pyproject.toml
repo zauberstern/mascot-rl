@@ -1,15 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "mascotrl"
 version = "0.1.0"
 description = "RL portfolio allocation with CPCV and nested WFO evaluation"
 requires-python = ">=3.12"
 license = { text = "MIT" }
+dependencies = [
+  "numpy>=1.26",
+  "pyarrow>=14",
+  "torch>=2.2",
+  "pyyaml>=6",
+  "duckdb>=0.10",
+  "arcticdb>=4.0",
+  "cvxpy>=1.4",
+  "cvxpylayers>=0.1.6",
+  "pandas>=2.0",
+  "scipy>=1.11",
+  "pybind11>=2.12",
+  "boto3>=1.34",
+  "ipca>=0.3",
+  "wrds>=3.1",
+  "scikit-learn>=1.3",
+  "purgedcv>=0.1.4",
+  "arch>=7",
+  "matplotlib>=3.8",
+  "seaborn>=0.13",
+  "openpyxl>=3.1.5",
+  "gymnasium>=0.29",
+  "stable-baselines3>=2.3",
+  "sb3-contrib>=2.3",
+  "onnx>=1.16",
+  "onnxruntime>=1.18",
+  "onnxscript>=0.1",
+  "hmmlearn>=0.3.2",
+  "statsmodels>=0.14",
+  "archetypes>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "moto[s3,batch,budgets,cloudformation,iam,sts,sns]>=5.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mascotrl"]
 
 # Phase 3 baseline (2026-09-02): 2024 collected, 80% coverage, CI floors 1974 tests / 80% cov
 
 [tool.pytest.ini_options]
 minversion = "8.0"
-pythonpath = ["."]
 testpaths = ["tests"]
 addopts = ["-ra", "--strict-markers", "--strict-config", "--tb=short"]
 markers = [

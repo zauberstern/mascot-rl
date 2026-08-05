@@ -8,8 +8,8 @@ import pyarrow.parquet as pq
 import pytest
 import torch
 import yaml
-from src.data.fioracle_macro import FIORACLE_FEATURE_COLUMNS
-from src.data.macro_loader import attach_fioracle_macro_cube, fioracle_cfg_from_feature_extras, load_macro_tensor, load_macro_tensor_with_fioracle
+from mascotrl.data.fioracle_macro import FIORACLE_FEATURE_COLUMNS
+from mascotrl.data.macro_loader import attach_fioracle_macro_cube, fioracle_cfg_from_feature_extras, load_macro_tensor, load_macro_tensor_with_fioracle
 ROOT = Path(__file__).resolve().parents[1]
 CRUCIBLE_YAML = ROOT / 'config' / 'workflows' / 'eq_alloc_crucible_k100.yaml'
 CRUCIBLE_NOFIO_YAML = ROOT / 'config' / 'workflows' / 'eq_alloc_crucible_k100_nofioracle.yaml'
@@ -37,7 +37,7 @@ def _base_macro_frame(start: str, end: str) -> pd.DataFrame:
     return pd.DataFrame({'vix': np.linspace(12.0, 18.0, len(idx)), 'sofr': np.zeros(len(idx))}, index=idx)
 
 def test_fioracle_enabled_gains_feature_columns(lake_with_fioracle: Path, monkeypatch):
-    from src.data import macro_loader
+    from mascotrl.data import macro_loader
     start, end = ('2018-06-01', '2019-03-01')
     base = _base_macro_frame(start, end)
     monkeypatch.setattr(macro_loader, 'ArcticStateStore', lambda *a, **k: (_ for _ in ()).throw(RuntimeError('no arctic')))
@@ -54,7 +54,7 @@ def test_fioracle_enabled_gains_feature_columns(lake_with_fioracle: Path, monkey
     assert meta_on['macro_column_order'] == meta_on2['macro_column_order']
 
 def test_disabled_matches_baseline(lake_with_fioracle: Path, monkeypatch):
-    from src.data import macro_loader
+    from mascotrl.data import macro_loader
     start, end = ('2018-06-01', '2019-03-01')
     base = _base_macro_frame(start, end)
     monkeypatch.setattr(macro_loader, 'ArcticStateStore', lambda *a, **k: (_ for _ in ()).throw(RuntimeError('no arctic')))
@@ -64,7 +64,7 @@ def test_disabled_matches_baseline(lake_with_fioracle: Path, monkeypatch):
     assert torch.equal(a, b)
 
 def test_with_fioracle_helper(lake_with_fioracle: Path, monkeypatch):
-    from src.data import macro_loader
+    from mascotrl.data import macro_loader
     start, end = ('2018-06-01', '2019-03-01')
     base = _base_macro_frame(start, end)
     monkeypatch.setattr(macro_loader, 'ArcticStateStore', lambda *a, **k: (_ for _ in ()).throw(RuntimeError('no arctic')))
@@ -74,8 +74,8 @@ def test_with_fioracle_helper(lake_with_fioracle: Path, monkeypatch):
     assert torch.isfinite(tensor).all()
 
 def test_attach_fioracle_macro_cube_records_order_and_regimes(lake_with_fioracle: Path, tmp_path: Path, monkeypatch):
-    from src.data import macro_loader
-    from src.features.blocks.assemble import assemble_equity_feature_cube
+    from mascotrl.data import macro_loader
+    from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
     start, end = ('2018-06-01', '2019-03-01')
     base = _base_macro_frame(start, end)
     monkeypatch.setattr(macro_loader, 'ArcticStateStore', lambda *a, **k: (_ for _ in ()).throw(RuntimeError('no arctic')))
@@ -101,7 +101,7 @@ def test_attach_fioracle_macro_cube_records_order_and_regimes(lake_with_fioracle
     assert cube.shape[1] == 4
 
 def test_attach_ablation_skips_fioracle_columns(lake_with_fioracle: Path, tmp_path: Path, monkeypatch):
-    from src.data import macro_loader
+    from mascotrl.data import macro_loader
     start, end = ('2018-06-01', '2019-03-01')
     base = _base_macro_frame(start, end)
     monkeypatch.setattr(macro_loader, 'ArcticStateStore', lambda *a, **k: (_ for _ in ()).throw(RuntimeError('no arctic')))

@@ -9,7 +9,7 @@ from __future__ import annotations
 import duckdb
 import pytest
 
-from src.data.duckdb_engine import OptionFilterConfig
+from mascotrl.data.duckdb_engine import OptionFilterConfig
 
 EXPECTED_SCREENS = {
     "iv_present",

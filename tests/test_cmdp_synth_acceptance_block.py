@@ -4,9 +4,9 @@ from __future__ import annotations
 import pytest
 import torch
 
-from src.env.cmdp_env import ALLOWED_TRANSITION_SOURCES, CMDPEnv
-from src.features.extractor import AlphaFeatureExtractor
-from src.policy.happo import HAPPOEngine
+from mascotrl.env.cmdp_env import ALLOWED_TRANSITION_SOURCES, CMDPEnv
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.policy.happo import HAPPOEngine
 
 
 def _tiny_env_kwargs():

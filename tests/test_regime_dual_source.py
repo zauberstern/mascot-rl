@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.regime_dual_source import load_h15_term_oas, resolve_macro_yt_cols
-from src.reporting import behavior_metrics as bm
+from mascotrl.eval.regime_dual_source import load_h15_term_oas, resolve_macro_yt_cols
+from mascotrl.reporting import behavior_metrics as bm
 
 
 def test_h15_lag1_value_equals_yesterday(tmp_path: Path) -> None:
@@ -126,11 +126,11 @@ def test_overlay_macro_cols_preserve_inflationary(monkeypatch: pytest.MonkeyPatc
         ["calm", "inflationary", "calm"] + ["calm"] * 9, dtype=object
     )
     monkeypatch.setattr(
-        "src.eval.turbulence.turbulence_index",
+        "mascotrl.eval.turbulence.turbulence_index",
         lambda r, **kwargs: np.ones(t),
     )
     monkeypatch.setattr(
-        "src.eval.turbulence.classify_regime",
+        "mascotrl.eval.turbulence.classify_regime",
         lambda turb, **kwargs: np.array([True, True, False] + [False] * 9),
     )
     macro = np.ones((t, 2))

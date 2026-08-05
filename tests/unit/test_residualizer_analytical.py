@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.residualization import residualize_step
+from mascotrl.eval.residualization import residualize_step
 from tests.conftest import FLOAT_TOL
 
 

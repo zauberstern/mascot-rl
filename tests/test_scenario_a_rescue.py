@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.reporting.policy_behavior import (
+from mascotrl.reporting.policy_behavior import (
     PERSONALITY_DESIGN_MAP,
     build_policy_behavior,
     designed_personality,

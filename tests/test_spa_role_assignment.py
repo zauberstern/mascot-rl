@@ -1,7 +1,7 @@
 """SPA role assignment helper: HAPPO-as-benchmark vs claim-path claimant."""
 from __future__ import annotations
 
-from src.eval.publication import hansen_spa_with_roles, spa_role_assignment
+from mascotrl.eval.publication import hansen_spa_with_roles, spa_role_assignment
 
 
 def test_spa_role_assignment_default_benchmark() -> None:

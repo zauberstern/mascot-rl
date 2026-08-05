@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.arms import ArmSpec
-from src.data.slot_mask import coverage_masks_for_arm, coverage_masks_from_features
+from mascotrl.arms import ArmSpec
+from mascotrl.data.slot_mask import coverage_masks_for_arm, coverage_masks_from_features
 
 
 def test_opt_coverage_matches_legacy():

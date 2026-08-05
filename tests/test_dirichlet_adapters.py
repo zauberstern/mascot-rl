@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.single_agent import DDPGAgent, SACAgent, TD3Agent
+from mascotrl.policy.single_agent import DDPGAgent, SACAgent, TD3Agent
 
 
 def test_td3_ddpg_dirichlet_mean_action_law() -> None:

@@ -1,4 +1,4 @@
-"""D1: src.reporting.book_style aesthetic-system unit tests."""
+"""D1: mascotrl.reporting.book_style aesthetic-system unit tests."""
 from __future__ import annotations
 
 import matplotlib
@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pytest
 
-from src.reporting.book_style import (
+from mascotrl.reporting.book_style import (
     FAMILY_ORDER,
     FAMILY_PALETTE,
     PdfBook,

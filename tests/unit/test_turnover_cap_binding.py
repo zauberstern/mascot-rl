@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.cpcv import CPCVConfig
-from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
-from src.eval.research_alpha_train import _turnover_cap_project
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
+from mascotrl.eval.research_alpha_train import _turnover_cap_project
 
 
 def test_turnover_projection_counts_binding_steps() -> None:

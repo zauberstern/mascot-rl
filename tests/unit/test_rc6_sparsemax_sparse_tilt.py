@@ -8,7 +8,7 @@ import torch
 
 
 def test_sparsemax_exact_zeros_and_simplex():
-    from src.policy.sparsemax import sparsemax
+    from mascotrl.policy.sparsemax import sparsemax
 
     # Support size 1: mass concentrates on the max coordinate.
     z = torch.tensor([2.0, 1.0, 0.0, -1.0])
@@ -30,7 +30,7 @@ def test_sparsemax_exact_zeros_and_simplex():
 
 
 def test_sparsemax_batch_and_backward():
-    from src.policy.sparsemax import sparsemax
+    from mascotrl.policy.sparsemax import sparsemax
 
     z = torch.randn(4, 8, requires_grad=True)
     w = sparsemax(z)
@@ -43,7 +43,7 @@ def test_sparsemax_batch_and_backward():
 
 
 def test_sparse_tilt_head_with_base():
-    from src.policy.single_agent import _apply_weight_head
+    from mascotrl.policy.single_agent import _apply_weight_head
 
     raw = torch.tensor([[1.0, -1.0, 0.5, -0.5]])
     w_base = torch.full((4,), 0.25)
@@ -57,7 +57,7 @@ def test_sparse_tilt_head_with_base():
 
 
 def test_ppo_sparse_tilt_smoke():
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     agent = PPOAgent(
         obs_dim=8,
@@ -76,7 +76,7 @@ def test_ppo_sparse_tilt_smoke():
 
 @pytest.mark.parametrize("agent_cls_name", ["SACAgent", "TD3Agent"])
 def test_sac_td3_sparse_tilt_uses_tilt_gain(agent_cls_name):
-    from src.policy import single_agent as sa
+    from mascotrl.policy import single_agent as sa
 
     cls = getattr(sa, agent_cls_name)
     agent = cls(
@@ -134,7 +134,7 @@ def test_gates_from_runner_policy_returns_key():
 
 
 def test_gate2_returns_annualized_alpha():
-    from src.eval.spectrum_gates import compute_gate2
+    from mascotrl.eval.spectrum_gates import compute_gate2
 
     rng = np.random.default_rng(0)
     T = 200

@@ -22,7 +22,7 @@ def _fixture_path() -> np.ndarray:
 
 
 def test_support_measures_hand_computed() -> None:
-    from src.reporting.behavior_metrics import (
+    from mascotrl.reporting.behavior_metrics import (
         SUPPORT_EPS,
         measure_support_exit_rate,
         measure_support_jaccard_lag1,
@@ -39,7 +39,7 @@ def test_support_measures_hand_computed() -> None:
 
 
 def test_equal_weight_path_full_support() -> None:
-    from src.reporting.behavior_metrics import (
+    from mascotrl.reporting.behavior_metrics import (
         measure_support_exit_rate,
         measure_support_jaccard_lag1,
         measure_support_reentry_rate,
@@ -55,7 +55,7 @@ def test_equal_weight_path_full_support() -> None:
 
 
 def test_single_row_nan_lag_measures() -> None:
-    from src.reporting.behavior_metrics import (
+    from mascotrl.reporting.behavior_metrics import (
         measure_support_exit_rate,
         measure_support_jaccard_lag1,
         measure_support_reentry_rate,

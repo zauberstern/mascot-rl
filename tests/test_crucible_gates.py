@@ -4,14 +4,14 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.data.crucible import (
+from mascotrl.data.crucible import (
     CrucibleSpec,
     feasible_action_diversity_probe,
     select_universe_crucible,
     structure_participation_gate,
     transfer_coefficient_probe,
 )
-from src.eval.friction import FrictionSpec
+from mascotrl.eval.friction import FrictionSpec
 
 
 def _uniform_projector(a):
@@ -125,7 +125,7 @@ def test_g3_fails_when_5pct_below_floor():
 
 
 def test_g3_fails_when_10pct_negative_even_if_5pct_ok():
-    from src.data.crucible import _g3_pass_from_ladder
+    from mascotrl.data.crucible import _g3_pass_from_ladder
 
     assert (
         _g3_pass_from_ladder(

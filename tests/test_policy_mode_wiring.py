@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.spectrum.policy_mode import apply_risk_aversion, risk_aversion_multiplier
+from mascotrl.spectrum.policy_mode import apply_risk_aversion, risk_aversion_multiplier
 
 
 @pytest.mark.parametrize(
@@ -29,8 +29,8 @@ def test_research_train_scales_cao_c_for_carry(monkeypatch) -> None:
     """archetype_carry must pass cao_c*0.5 into episode_weights."""
     import numpy as np
 
-    import src.eval.research_alpha_train as rat
-    from src.policy.objective_factory import episode_weights as real_ew
+    import mascotrl.eval.research_alpha_train as rat
+    from mascotrl.policy.objective_factory import episode_weights as real_ew
 
     captured: list[float] = []
 
@@ -77,8 +77,8 @@ def test_research_train_scales_cao_c_for_carry(monkeypatch) -> None:
 def test_research_train_scales_cao_c_for_crisis(monkeypatch) -> None:
     import numpy as np
 
-    import src.eval.research_alpha_train as rat
-    from src.policy.objective_factory import episode_weights as real_ew
+    import mascotrl.eval.research_alpha_train as rat
+    from mascotrl.policy.objective_factory import episode_weights as real_ew
 
     captured: list[float] = []
 
@@ -121,8 +121,8 @@ def test_research_train_scales_cao_c_for_crisis(monkeypatch) -> None:
 def test_research_train_inflation_uses_term_spread_z(monkeypatch) -> None:
     import numpy as np
 
-    import src.eval.research_alpha_train as rat
-    from src.policy.objective_factory import episode_weights as real_ew
+    import mascotrl.eval.research_alpha_train as rat
+    from mascotrl.policy.objective_factory import episode_weights as real_ew
 
     captured: list[float] = []
 

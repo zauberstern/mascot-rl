@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.range_volatility import (
+from mascotrl.features.blocks.range_volatility import (
     GK_CONST,
     build_range_volatility_block,
     garman_klass_var_daily,

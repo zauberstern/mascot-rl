@@ -8,8 +8,8 @@ pytestmark = pytest.mark.plumbing
 import json
 from pathlib import Path
 
-from src.aws_burst.manifest import build_manifest, manifest_sha256
-from src.aws_burst.waves import discover_wave_cells
+from mascotrl.aws_burst.manifest import build_manifest, manifest_sha256
+from mascotrl.aws_burst.waves import discover_wave_cells
 
 
 ROOT = Path(__file__).resolve().parents[1]

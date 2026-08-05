@@ -8,7 +8,7 @@ from tests.conftest import FLOAT_TOL
 
 
 def test_fit_rbsa_recovers_known_loadings():
-    from src.eval.rbsa import fit_rbsa
+    from mascotrl.eval.rbsa import fit_rbsa
 
     rng = np.random.default_rng(0)
     t, k = 200, 3
@@ -26,7 +26,7 @@ def test_fit_rbsa_recovers_known_loadings():
 
 
 def test_fit_rbsa_missing_inputs_return_nan():
-    from src.eval.rbsa import fit_rbsa
+    from mascotrl.eval.rbsa import fit_rbsa
 
     loadings, r2 = fit_rbsa(None, np.ones((10, 2)))
     assert np.isnan(r2)

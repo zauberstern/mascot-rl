@@ -4,14 +4,14 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.stats_inference import (
+from mascotrl.eval.stats_inference import (
     cscv_pbo_from_paths,
     hac_mean_tstat,
     hac_sharpe_se,
     newey_west_lag,
     romano_wolf_stepdown,
 )
-from src.eval.publication import estimate_n_trials, executed_trial_count
+from mascotrl.eval.publication import estimate_n_trials, executed_trial_count
 
 
 # ------------------------------------------------------------------------- HAC
@@ -71,7 +71,7 @@ def test_hac_sharpe_reports_inflation_factor():
 
 
 def test_white_reality_check_rejects_clear_winner():
-    from src.eval.stats_inference import white_reality_check
+    from mascotrl.eval.stats_inference import white_reality_check
 
     rng = np.random.default_rng(10)
     n = 300
@@ -136,7 +136,7 @@ def test_romano_wolf_skips_misaligned_rivals():
 
 
 def test_romano_wolf_over_panel_uses_happo_minus_bench_diffs():
-    from src.eval.stats_inference import romano_wolf_over_panel
+    from mascotrl.eval.stats_inference import romano_wolf_over_panel
 
     rng = np.random.default_rng(11)
     n = 200

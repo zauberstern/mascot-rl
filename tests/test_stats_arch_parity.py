@@ -6,11 +6,11 @@ import pytest
 
 pytest.importorskip("arch")
 
-from src.eval.arch_bootstrap import (
+from mascotrl.eval.arch_bootstrap import (
     block_bootstrap_metric_ci_arch,
     stationary_bootstrap_indices_arch,
 )
-from src.eval.stats_rigor import block_bootstrap_metric_ci, stationary_bootstrap_indices
+from mascotrl.eval.stats_rigor import block_bootstrap_metric_ci, stationary_bootstrap_indices
 
 
 def test_arch_indices_length_and_range():
@@ -63,7 +63,7 @@ def test_backend_stamp_custom_and_arch():
 
 
 def test_resolve_bootstrap_backend():
-    from src.eval.arch_bootstrap import resolve_bootstrap_backend
+    from mascotrl.eval.arch_bootstrap import resolve_bootstrap_backend
 
     assert resolve_bootstrap_backend({}) == "custom"
     assert resolve_bootstrap_backend({"bootstrap_backend": "arch"}) == "arch"

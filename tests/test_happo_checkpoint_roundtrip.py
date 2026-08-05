@@ -55,7 +55,7 @@ def _optimizer_tensors(trainer: _ToyTrainer) -> list[torch.Tensor]:
 
 
 def test_happo_checkpoint_v2_roundtrip_policy_and_optimizer(tmp_path: Path) -> None:
-    from src.eval.research_happo_cpcv import (
+    from mascotrl.eval.research_happo_cpcv import (
         _maybe_resume_happo_checkpoint,
         _save_happo_checkpoint,
     )
@@ -102,7 +102,7 @@ def test_happo_checkpoint_v2_roundtrip_policy_and_optimizer(tmp_path: Path) -> N
 
 
 def test_happo_checkpoint_v1_formatless_stamps_fresh_optimizer(tmp_path: Path) -> None:
-    from src.eval.research_happo_cpcv import _maybe_resume_happo_checkpoint
+    from mascotrl.eval.research_happo_cpcv import _maybe_resume_happo_checkpoint
 
     src = _ToyPolicy()
     with torch.no_grad():
@@ -133,7 +133,7 @@ def test_happo_checkpoint_v1_formatless_stamps_fresh_optimizer(tmp_path: Path) -
 
 
 def test_happo_checkpoint_v1_bare_state_dict_stamps_fresh_optimizer(tmp_path: Path) -> None:
-    from src.eval.research_happo_cpcv import _maybe_resume_happo_checkpoint
+    from mascotrl.eval.research_happo_cpcv import _maybe_resume_happo_checkpoint
 
     src = _ToyPolicy()
     with torch.no_grad():

@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.arms.spec import ArmSpec
-from src.arms.training import (
+from mascotrl.arms.spec import ArmSpec
+from mascotrl.arms.training import (
     arm_training_manifest,
     build_arm_coverage,
     projection_backend_for_arm,

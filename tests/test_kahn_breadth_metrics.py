@@ -6,7 +6,7 @@ from tests.conftest import FLOAT_TOL
 
 import numpy as np
 
-from src.eval.kahn_breadth import (
+from mascotrl.eval.kahn_breadth import (
     effective_breadth,
     effective_number_of_bets_entropy,
     kahn_ir_components,
@@ -14,7 +14,7 @@ from src.eval.kahn_breadth import (
     signal_refresh_rate,
     turnover_normalized_mean,
 )
-from src.reporting.capital_gates import PROJECTION_K_CEILING
+from mascotrl.reporting.capital_gates import PROJECTION_K_CEILING
 
 
 def test_effective_breadth_perfect_corr() -> None:

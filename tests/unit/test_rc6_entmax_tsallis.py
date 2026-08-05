@@ -9,7 +9,7 @@ from tests.conftest import FLOAT_TOL
 
 
 def test_entmax_alpha1_matches_softmax():
-    from src.policy.entmax import entmax
+    from mascotrl.policy.entmax import entmax
 
     z = torch.tensor([[1.0, 0.0, -1.0, 0.5]])
     got = entmax(z, alpha=1.0)
@@ -18,8 +18,8 @@ def test_entmax_alpha1_matches_softmax():
 
 
 def test_entmax_alpha2_matches_sparsemax():
-    from src.policy.entmax import entmax
-    from src.policy.sparsemax import sparsemax
+    from mascotrl.policy.entmax import entmax
+    from mascotrl.policy.sparsemax import sparsemax
 
     z = torch.tensor([[1.0, 0.5, -2.0, -3.0]])
     got = entmax(z, alpha=2.0)
@@ -28,8 +28,8 @@ def test_entmax_alpha2_matches_sparsemax():
 
 
 def test_entmax_15_between_softmax_and_sparsemax_support():
-    from src.policy.entmax import entmax
-    from src.policy.sparsemax import sparsemax
+    from mascotrl.policy.entmax import entmax
+    from mascotrl.policy.sparsemax import sparsemax
 
     z = torch.tensor([[2.0, 1.0, 0.0, -1.0, -2.0]])
     soft = torch.softmax(z, dim=-1)
@@ -44,7 +44,7 @@ def test_entmax_15_between_softmax_and_sparsemax_support():
 
 
 def test_entmax_batch_and_backward():
-    from src.policy.entmax import entmax
+    from mascotrl.policy.entmax import entmax
 
     z = torch.randn(4, 8, requires_grad=True)
     w = entmax(z, alpha=1.5)
@@ -57,7 +57,7 @@ def test_entmax_batch_and_backward():
 
 
 def test_tsallis_entropy_alpha2_uniform_and_onehot():
-    from src.policy.entmax import tsallis_entropy
+    from mascotrl.policy.entmax import tsallis_entropy
 
     k = 100
     uniform = torch.full((1, k), 1.0 / k)
@@ -70,7 +70,7 @@ def test_tsallis_entropy_alpha2_uniform_and_onehot():
 
 
 def test_tsallis_entropy_zeros_safe():
-    from src.policy.entmax import tsallis_entropy
+    from mascotrl.policy.entmax import tsallis_entropy
 
     p = torch.tensor([[0.5, 0.5, 0.0, 0.0]])
     h = tsallis_entropy(p, alpha=2.0)
@@ -79,7 +79,7 @@ def test_tsallis_entropy_zeros_safe():
 
 
 def test_apply_weight_head_entmax_15_allows_zeros():
-    from src.policy.single_agent import _apply_weight_head
+    from mascotrl.policy.single_agent import _apply_weight_head
 
     raw = torch.tensor([[2.0, -2.0, 1.0, -3.0]])
     w_base = torch.full((4,), 0.25)
@@ -92,7 +92,7 @@ def test_apply_weight_head_entmax_15_allows_zeros():
 
 
 def test_apply_weight_head_sparse_tilt_tsallis_matches_sparse_tilt():
-    from src.policy.single_agent import _apply_weight_head
+    from mascotrl.policy.single_agent import _apply_weight_head
 
     raw = torch.tensor([[1.0, -1.0, 0.5, -0.5]])
     w_base = torch.full((4,), 0.25)
@@ -106,7 +106,7 @@ def test_apply_weight_head_sparse_tilt_tsallis_matches_sparse_tilt():
 
 
 def test_ppo_sparse_tilt_tsallis_entropy_gate_differs():
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     torch.manual_seed(0)
     agent_gauss = PPOAgent(
@@ -165,7 +165,7 @@ def test_ppo_sparse_tilt_tsallis_entropy_gate_differs():
 
 
 def test_registry_allows_new_heads():
-    from src.spectrum.registry import allowed_weight_heads, validate_cfg
+    from mascotrl.spectrum.registry import allowed_weight_heads, validate_cfg
 
     allowed = allowed_weight_heads("ppo")
     assert "entmax_15" in allowed
@@ -197,7 +197,7 @@ def test_registry_allows_new_heads():
 
 
 def test_cell_schema_allows_new_heads():
-    from src.spectrum.cell_schema import ALLOWED_WEIGHT_HEADS, validate_cell_cfg
+    from mascotrl.spectrum.cell_schema import ALLOWED_WEIGHT_HEADS, validate_cell_cfg
 
     assert "entmax_15" in ALLOWED_WEIGHT_HEADS
     assert "sparse_tilt_tsallis" in ALLOWED_WEIGHT_HEADS

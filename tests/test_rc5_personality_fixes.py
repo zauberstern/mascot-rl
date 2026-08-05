@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_actor_final_gain_default_is_point_one() -> None:
     """PPOAgent default actor_final_gain is 0.1 (RC5 Fix 7)."""
     import inspect
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     sig = inspect.signature(PPOAgent.__init__)
     assert float(sig.parameters["actor_final_gain"].default) == 0.1
@@ -45,8 +45,8 @@ def test_cherrypick_ppo_cells_force_custom_backend() -> None:
 
 def test_historical_env_reset_starts_at_equal_weight() -> None:
     """RC5 Fix 2: cold-start w must be EW so turnover budget tilts from 1/K."""
-    from src.env.historical_env import HistoricalArmEnv
-    from src.eval.friction import FrictionSpec
+    from mascotrl.env.historical_env import HistoricalArmEnv
+    from mascotrl.eval.friction import FrictionSpec
 
     T, K = 30, 10
     rets = np.zeros((T, K), dtype=np.float64)
@@ -72,7 +72,7 @@ def test_sample_weight_applied_before_advantage_normalization() -> None:
     """RC5 Fix 5: episode_weights must scale GAE before z-normalization."""
     import inspect
 
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     # Behavioral: constant GAE + unequal weights → weight-then-norm keeps a
     # signed split; norm-then-weight collapses constant GAE to ~0 first.
@@ -112,7 +112,7 @@ def test_sample_weight_applied_before_advantage_normalization() -> None:
 
 def test_policy_step_mask_zeros_non_rebalance_advantages() -> None:
     """RC5 Fix 3: non-rebalance steps must not contribute to the PPO surrogate."""
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     agent = PPOAgent(obs_dim=8, action_dim=4, actor_final_gain=0.1, entropy_coef=0.0)
     n = 21  # one month of daily steps
@@ -137,7 +137,7 @@ def test_policy_step_mask_zeros_non_rebalance_advantages() -> None:
 
     # Instrument by wrapping train_epoch internals: call and check via hook
     # on the advantages after mask by reimplementing the mask contract.
-    from src.eval.scr_critic import build_scr_returns
+    from mascotrl.eval.scr_critic import build_scr_returns
 
     x = agent._prep_obs(obs, update_rms=False)
     with torch.no_grad():

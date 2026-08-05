@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.normalize import (
+from mascotrl.features.blocks.normalize import (
     cross_sectional_zscore,
     expanding_causal_zscore,
     winsorize_panel,

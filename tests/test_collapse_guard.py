@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.collapse_guard import equal_weight_collapse_guard
+from mascotrl.eval.collapse_guard import equal_weight_collapse_guard
 
 
 def test_equal_weight_collapse_guard_fails_on_pure_ew_weights() -> None:

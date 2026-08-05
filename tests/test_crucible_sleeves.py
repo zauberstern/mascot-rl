@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.data.crucible import (
+from mascotrl.data.crucible import (
     SLEEVE_FILL_ORDER,
     SLEEVE_IDS,
     SLEEVE_QUOTAS,
@@ -74,7 +74,7 @@ def test_sleeve_primary_is_argmax_of_z_matrix():
 
 
 def test_sleeve_matrix_column_order_equals_sleeve_ids():
-    from src.data.crucible import build_sleeve_matrix
+    from mascotrl.data.crucible import build_sleeve_matrix
 
     primary = {1001: "trend", 1002: "core", 1003: "lottery"}
     membership = {

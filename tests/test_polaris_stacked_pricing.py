@@ -7,7 +7,7 @@ import time
 import pytest
 import torch
 
-from src.pricing.interface import get_portfolio_greeks, opencl_available, polaris_pricer_cpp
+from mascotrl.pricing.interface import get_portfolio_greeks, opencl_available, polaris_pricer_cpp
 
 
 pytestmark = pytest.mark.skipif(

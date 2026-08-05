@@ -6,8 +6,8 @@ import re
 
 import pytest
 
-from src.eval.benchmark_panel import BENCHMARK_PANEL_NAMES
-from src.reporting.figures.labels import (
+from mascotrl.eval.benchmark_panel import BENCHMARK_PANEL_NAMES
+from mascotrl.reporting.figures.labels import (
     ARCHETYPE_LABELS,
     AXIS_LABELS,
     METRIC_LABELS,
@@ -31,7 +31,7 @@ def test_every_benchmark_panel_id_has_strategy_label() -> None:
 
 
 def test_every_sleeve_and_archetype_has_label() -> None:
-    from src.data.crucible import SLEEVE_IDS
+    from mascotrl.data.crucible import SLEEVE_IDS
 
     for s in SLEEVE_IDS:
         assert s in SLEEVE_LABELS
@@ -61,7 +61,7 @@ def test_human_soft_fallback_without_strict(monkeypatch: pytest.MonkeyPatch) -> 
 
 
 def test_stem_short_label_under_25_chars() -> None:
-    from src.reporting.figures.labels import figure_cell_label, stem_short_label
+    from mascotrl.reporting.figures.labels import figure_cell_label, stem_short_label
 
     cases = {
         "eq_K100_single_ppo_mlp_sparse_tilt_smse": "PPO sparse SMSE",
@@ -79,7 +79,7 @@ def test_stem_short_label_under_25_chars() -> None:
 
 
 def test_parse_eval_dates_avoids_1970_epoch() -> None:
-    from src.reporting.figures.labels import parse_eval_dates
+    from mascotrl.reporting.figures.labels import parse_eval_dates
 
     idx = parse_eval_dates(list(range(5)))
     assert str(idx[0].year) == "2014"
@@ -87,7 +87,7 @@ def test_parse_eval_dates_avoids_1970_epoch() -> None:
 
 
 def test_expert_display_maps_child_keys() -> None:
-    from src.reporting.figures.labels import expert_display_name
+    from mascotrl.reporting.figures.labels import expert_display_name
 
     names = ["fox", "cheetah", "owl"]
     assert expert_display_name("child0", expert_names=names) == "Fox"

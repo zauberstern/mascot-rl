@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import torch
 
-from src.features.extractor import AlphaFeatureExtractor
-from src.plugins.resolve import _ALLOWED_ACTOR, resolve_plugins
-from src.spectrum.registry import allowed_ids, validate_choice
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.plugins.resolve import _ALLOWED_ACTOR, resolve_plugins
+from mascotrl.spectrum.registry import allowed_ids, validate_choice
 
 
 def test_temporal_backends_from_registry() -> None:

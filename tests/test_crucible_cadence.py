@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.eval.cadence import (
+from mascotrl.eval.cadence import (
     assert_universe_subset_of_policy,
     build_rebalance_mask,
     build_universe_cadence_mask,
@@ -61,7 +61,7 @@ def test_unknown_universe_cadence_raises():
 
 
 def test_reselect_churn_never_exceeds_cap():
-    from src.data.crucible import apply_reselect_churn_cap
+    from mascotrl.data.crucible import apply_reselect_churn_cap
 
     incumbent = list(range(100))
     proposed = list(range(50, 150))  # 50% churn if taken raw
@@ -72,7 +72,7 @@ def test_reselect_churn_never_exceeds_cap():
 
 
 def test_incumbents_win_ties_hysteresis():
-    from src.data.crucible import apply_reselect_churn_cap
+    from mascotrl.data.crucible import apply_reselect_churn_cap
 
     incumbent = [1, 2, 3, 4]
     proposed = [1, 2, 5, 6]
@@ -85,7 +85,7 @@ def test_incumbents_win_ties_hysteresis():
 
 
 def test_selection_and_policy_turnover_are_separate_keys():
-    from src.data.crucible import separate_turnover_keys
+    from mascotrl.data.crucible import separate_turnover_keys
 
     diag = separate_turnover_keys(selection_turnover=0.12, policy_turnover=0.45)
     assert "selection_turnover" in diag

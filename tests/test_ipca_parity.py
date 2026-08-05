@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.residualization import fit_ipca3_residualizer
+from mascotrl.eval.residualization import fit_ipca3_residualizer
 
 
 def _align_signs(a: np.ndarray, b: np.ndarray) -> np.ndarray:

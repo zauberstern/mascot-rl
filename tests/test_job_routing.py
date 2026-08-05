@@ -8,7 +8,7 @@ import pytest
 pytestmark = pytest.mark.plumbing
 from tests.conftest import FLOAT_TOL
 
-from src.aws_burst.job_routing import (
+from mascotrl.aws_burst.job_routing import (
     JOB_DEFINITION_HIMEM,
     JOB_DEFINITION_HIMEM56,
     JOB_DEFINITION_STANDARD,
@@ -100,7 +100,7 @@ def test_featnet_mlp_requires_himem() -> None:
 
 def test_feature_net_extras_flag_routes_himem(tmp_path: Path) -> None:
     """use_feature_net_extras alone must force himem (RC4 FEATNET OOM)."""
-    from src.aws_burst.job_routing import estimate_peak_memory
+    from mascotrl.aws_burst.job_routing import estimate_peak_memory
 
     cfg = {
         "n_assets": 100,

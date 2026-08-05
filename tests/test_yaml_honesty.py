@@ -8,7 +8,7 @@ import pytest
 pytestmark = pytest.mark.plumbing
 import yaml
 
-from src.eval.yaml_honesty import (
+from mascotrl.eval.yaml_honesty import (
     KNOWN_UNUSED_EQ_ALLOC,
     RESEARCH_READ_KEYS,
     TrackingDict,

@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.bodies import (
+from mascotrl.policy.bodies import (
     AssetTemporalPolicyBody,
     MLPPolicyBody,
     body_backend_name,
     build_policy_body,
 )
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def _obs_spec(architecture: str, *, k: int = 4, d_model: int = 8, seq: int = 2):
@@ -104,7 +104,7 @@ def test_temporal_bodies_under_mcpg_rrl() -> None:
 
 
 def test_dqn_requires_discrete_refuses_non_mlp() -> None:
-    from src.spectrum.registry import get_option, validate_cfg
+    from mascotrl.spectrum.registry import get_option, validate_cfg
     import pytest
 
     opt = get_option("algo", "dqn")

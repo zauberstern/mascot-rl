@@ -42,8 +42,8 @@ def _base_cfg(**extra):
 
 
 def test_gym_env_step_passes_through_zero_weights():
-    from src.eval.research_alpha_train import build_research_hist_env
-    from src.policy.sb3_adapter import GymnasiumHistoricalEnv
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.policy.sb3_adapter import GymnasiumHistoricalEnv
 
     rets, fac = _toy_panel(t=20, k=3)
     inner = build_research_hist_env(rets, fac, _base_cfg())
@@ -63,7 +63,7 @@ def test_gym_env_step_passes_through_zero_weights():
 
 
 def test_dqn_all_zero_levels_yield_zero_portfolio_weights():
-    from src.policy.single_agent import DQNAgent
+    from mascotrl.policy.single_agent import DQNAgent
 
     agent = DQNAgent(obs_dim=4, action_dim=3, lr=1e-3)
     w = agent.raw_to_weights(torch.zeros(1, 3))
@@ -71,8 +71,8 @@ def test_dqn_all_zero_levels_yield_zero_portfolio_weights():
 
 
 def test_train_collect_passes_zero_weights_to_env(monkeypatch):
-    from src.eval.research_alpha_train import build_research_hist_env, train_research_hist
-    from src.policy.single_agent import DQNAgent
+    from mascotrl.eval.research_alpha_train import build_research_hist_env, train_research_hist
+    from mascotrl.policy.single_agent import DQNAgent
 
     rets, fac = _toy_panel(t=16, k=3)
     steps: list[np.ndarray] = []
@@ -86,7 +86,7 @@ def test_train_collect_passes_zero_weights_to_env(monkeypatch):
     obs_dim = int(np.asarray(env0.reset(seed=0)[0]).reshape(-1).size)
     agent = ZeroDQN(obs_dim=obs_dim, action_dim=3)
 
-    import src.eval.research_alpha_train as rat
+    import mascotrl.eval.research_alpha_train as rat
 
     real_build = rat.build_research_hist_env
 
@@ -112,9 +112,9 @@ def test_train_collect_passes_zero_weights_to_env(monkeypatch):
 
 
 def test_agent_policy_module_prefers_actor_over_q():
-    from src.eval.research_alpha_train import _agent_policy_module
-    from src.models.inference import _agent_policy_module as inf_mod
-    from src.policy.single_agent import DDPGAgent
+    from mascotrl.eval.research_alpha_train import _agent_policy_module
+    from mascotrl.models.inference import _agent_policy_module as inf_mod
+    from mascotrl.policy.single_agent import DDPGAgent
 
     agent = DDPGAgent(obs_dim=6, action_dim=3, hidden=8)
     assert _agent_policy_module(agent) is agent.actor
@@ -122,8 +122,8 @@ def test_agent_policy_module_prefers_actor_over_q():
 
 
 def test_ddpg_checkpoint_roundtrip_preserves_actor(tmp_path: Path):
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-    from src.policy.single_agent import DDPGAgent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+    from mascotrl.policy.single_agent import DDPGAgent
 
     src = DDPGAgent(obs_dim=6, action_dim=3, hidden=8)
     with torch.no_grad():
@@ -149,8 +149,8 @@ def test_ddpg_checkpoint_roundtrip_preserves_actor(tmp_path: Path):
 
 
 def test_sac_checkpoint_roundtrip_preserves_critic(tmp_path: Path):
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-    from src.policy.single_agent import SACAgent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+    from mascotrl.policy.single_agent import SACAgent
 
     src = SACAgent(obs_dim=6, action_dim=3, hidden=8)
     with torch.no_grad():
@@ -178,8 +178,8 @@ def test_sac_checkpoint_roundtrip_preserves_critic(tmp_path: Path):
 
 
 def test_rrl_checkpoint_roundtrip_preserves_log_std(tmp_path: Path):
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-    from src.policy.single_agent import RRLAgent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+    from mascotrl.policy.single_agent import RRLAgent
 
     src = RRLAgent(obs_dim=6, action_dim=3, hidden=8)
     with torch.no_grad():
@@ -203,7 +203,7 @@ def test_rrl_checkpoint_roundtrip_preserves_log_std(tmp_path: Path):
 
 
 def test_td3_checkpoint_state_roundtrip():
-    from src.policy.single_agent import TD3Agent
+    from mascotrl.policy.single_agent import TD3Agent
 
     src = TD3Agent(obs_dim=6, action_dim=3, hidden=8)
     with torch.no_grad():
@@ -220,12 +220,12 @@ def test_td3_checkpoint_state_roundtrip():
 
 
 def test_intra_fold_resume_skips_completed_episodes(monkeypatch, tmp_path: Path):
-    from src.eval.research_alpha_train import (
+    from mascotrl.eval.research_alpha_train import (
         _save_checkpoint,
         build_research_hist_env,
         train_research_hist,
     )
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.policy.single_agent import make_single_agent
 
     rets, fac = _toy_panel(t=20, k=3)
     env = build_research_hist_env(rets, fac, _base_cfg())
@@ -247,7 +247,7 @@ def test_intra_fold_resume_skips_completed_episodes(monkeypatch, tmp_path: Path)
         optimizer_steps=1,
     )
     resets: list[int] = []
-    import src.eval.research_alpha_train as rat
+    import mascotrl.eval.research_alpha_train as rat
 
     real_build = rat.build_research_hist_env
 
@@ -281,8 +281,8 @@ def test_intra_fold_resume_skips_completed_episodes(monkeypatch, tmp_path: Path)
 
 
 def test_warm_started_agent_skips_resume(monkeypatch, tmp_path: Path):
-    from src.eval.research_alpha_train import build_research_hist_env, train_research_hist
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import build_research_hist_env, train_research_hist
+    from mascotrl.policy.single_agent import make_single_agent
 
     rets, fac = _toy_panel(t=16, k=3)
     env = build_research_hist_env(rets, fac, _base_cfg())
@@ -291,7 +291,7 @@ def test_warm_started_agent_skips_resume(monkeypatch, tmp_path: Path):
         "ppo", obs_dim=obs_dim, action_dim=3, hidden=8, rl_backend="custom"
     )
     called = {"n": 0}
-    import src.eval.research_alpha_train as rat
+    import mascotrl.eval.research_alpha_train as rat
 
     def spy(agent, cfg):
         called["n"] += 1
@@ -314,14 +314,14 @@ def test_warm_started_agent_skips_resume(monkeypatch, tmp_path: Path):
 
 
 def test_refuse_rrl_double_dsr_checks_reward_key():
-    from src.eval.yaml_honesty import refuse_rrl_double_dsr
+    from mascotrl.eval.yaml_honesty import refuse_rrl_double_dsr
 
     with pytest.raises(ValueError, match="double-DSR"):
         refuse_rrl_double_dsr({"algo": "rrl", "reward": "differential_sharpe"})
 
 
 def test_validate_cfg_refuses_rrl_differential_sharpe_reward():
-    from src.spectrum.registry import validate_cfg
+    from mascotrl.spectrum.registry import validate_cfg
 
     with pytest.raises(ValueError, match="double-DSR|rrl"):
         validate_cfg(
@@ -330,7 +330,7 @@ def test_validate_cfg_refuses_rrl_differential_sharpe_reward():
 
 
 def test_dsr_reward_plus_episode_weight_raises():
-    from src.eval.research_alpha_train import train_research_hist
+    from mascotrl.eval.research_alpha_train import train_research_hist
 
     with pytest.raises(ValueError, match="differential_sharpe|episode_weight|stack"):
         train_research_hist(
@@ -348,7 +348,7 @@ def test_dsr_reward_plus_episode_weight_raises():
 
 
 def test_unknown_policy_raises():
-    from src.eval.research_alpha_train import train_research_hist
+    from mascotrl.eval.research_alpha_train import train_research_hist
 
     with pytest.raises(ValueError, match="unknown policy"):
         train_research_hist(
@@ -359,8 +359,8 @@ def test_unknown_policy_raises():
 
 
 def test_resolve_reward_mode_propagates_non_import_errors(monkeypatch):
-    from src.eval.research_alpha_train import _resolve_reward_mode
-    import src.policy.objective_factory as of
+    from mascotrl.eval.research_alpha_train import _resolve_reward_mode
+    import mascotrl.policy.objective_factory as of
 
     monkeypatch.setattr(
         of,
@@ -377,7 +377,7 @@ def test_resolve_reward_mode_propagates_non_import_errors(monkeypatch):
 
 
 def test_prune_fold_checkpoints_scopes_to_fold_seed(tmp_path: Path):
-    from src.eval.research_alpha_train import prune_fold_checkpoints
+    from mascotrl.eval.research_alpha_train import prune_fold_checkpoints
     import time
 
     for name in (
@@ -402,7 +402,7 @@ def test_prune_fold_checkpoints_scopes_to_fold_seed(tmp_path: Path):
 
 
 def test_misaligned_feature_extras_raise_at_env_build():
-    from src.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
 
     with pytest.raises(ValueError, match="feature_extras|dollar_volume|mismatch"):
         build_research_hist_env(
@@ -415,7 +415,7 @@ def test_misaligned_feature_extras_raise_at_env_build():
 
 
 def test_slice_feature_extras_raises_on_short_array():
-    from src.eval.research_alpha_cpcv import _slice_feature_extras
+    from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
 
     with pytest.raises(ValueError, match="feature_extras|iv|mismatch"):
         _slice_feature_extras(
@@ -428,8 +428,8 @@ def test_slice_feature_extras_raises_on_short_array():
 
 
 def test_oos_residualizer_requires_train_frozen():
-    from src.eval.friction import FrictionSpec
-    from src.models.inference import roll_oos_with_agent
+    from mascotrl.eval.friction import FrictionSpec
+    from mascotrl.models.inference import roll_oos_with_agent
 
     rets, fac = _toy_panel(t=30, k=3)
     dates = list(pd.bdate_range("2020-01-01", periods=30))
@@ -451,10 +451,10 @@ def test_oos_residualizer_requires_train_frozen():
 
 
 def test_oos_uses_train_residualizer_betas():
-    from src.eval.friction import FrictionSpec
-    from src.eval.research_alpha_train import build_research_hist_env
-    from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
-    from src.models.inference import roll_oos_with_agent
+    from mascotrl.eval.friction import FrictionSpec
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+    from mascotrl.models.inference import roll_oos_with_agent
 
     rets, fac = _toy_panel(t=80, k=3, seed=1)
     dates = list(pd.bdate_range("2020-01-01", periods=80))
@@ -491,7 +491,7 @@ def test_oos_uses_train_residualizer_betas():
         captured["betas"] = np.asarray(env.residualizer.betas).copy()
         return env
 
-    with patch("src.eval.research_alpha_train.build_research_hist_env", capture):
+    with patch("mascotrl.eval.research_alpha_train.build_research_hist_env", capture):
         roll_oos_with_agent(
             returns=rets,
             factors=fac,
@@ -510,7 +510,7 @@ def test_oos_uses_train_residualizer_betas():
 
 
 def test_rebalance_cadence_without_mask_raises():
-    from src.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
 
     with pytest.raises(ValueError, match="rebalance"):
         build_research_hist_env(
@@ -520,7 +520,7 @@ def test_rebalance_cadence_without_mask_raises():
 
 
 def test_rebalance_cadence_with_mask_ok():
-    from src.eval.research_alpha_train import build_research_hist_env
+    from mascotrl.eval.research_alpha_train import build_research_hist_env
 
     mask = np.zeros(20, dtype=bool)
     mask[::5] = True
@@ -535,8 +535,8 @@ def test_rebalance_cadence_with_mask_ok():
 
 
 def test_resume_without_run_config_hash_raises(tmp_path: Path):
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint
-    from src.policy.single_agent import make_single_agent
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint
+    from mascotrl.policy.single_agent import make_single_agent
 
     agent = make_single_agent(
         "ppo", obs_dim=4, action_dim=2, hidden=4, rl_backend="custom"
@@ -551,8 +551,8 @@ def test_resume_without_run_config_hash_raises(tmp_path: Path):
 
 
 def test_explicit_zero_mikkila_xi_honored(monkeypatch):
-    from src.eval.research_alpha_train import train_research_hist
-    import src.policy.objective_factory as of
+    from mascotrl.eval.research_alpha_train import train_research_hist
+    import mascotrl.policy.objective_factory as of
 
     seen = {}
 
@@ -561,7 +561,7 @@ def test_explicit_zero_mikkila_xi_honored(monkeypatch):
         return r
 
     monkeypatch.setattr(of, "mikkila_asym_reward", fake_mikkila)
-    import src.eval.research_alpha_train as rat
+    import mascotrl.eval.research_alpha_train as rat
 
     monkeypatch.setattr(rat, "mikkila_asym_reward", fake_mikkila)
     train_research_hist(

@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.regime_desk_metrics import (
+from mascotrl.eval.regime_desk_metrics import (
     best_solo_expert,
     book_table_row,
     max_drawdown,
@@ -12,7 +12,7 @@ from src.eval.regime_desk_metrics import (
     sharpe_annualized,
     weight_turnover_l1,
 )
-from src.eval.regime_desk_peers import causal_rolling_panel_returns, hrp_weights
+from mascotrl.eval.regime_desk_peers import causal_rolling_panel_returns, hrp_weights
 
 
 def test_max_drawdown_and_turnover() -> None:

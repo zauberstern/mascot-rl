@@ -3,12 +3,12 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.data.crucible import (
+from mascotrl.data.crucible import (
     CrucibleSpec,
     effective_g1_entropy_gap_floor,
     feasible_action_diversity_probe,
 )
-from src.policy.cmdp_projector import make_cmdp_projector
+from mascotrl.policy.cmdp_projector import make_cmdp_projector
 
 
 def test_g1_hard_turnover_passes_with_configured_soft_floor():

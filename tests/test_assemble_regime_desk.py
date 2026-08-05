@@ -314,7 +314,7 @@ def test_roster_lock_roundtrip_and_require(tmp_path: Path) -> None:
 def test_assemble_with_synthetic_seal_timeline(tmp_path: Path) -> None:
     import datetime as dt
 
-    from src.eval.regime_desk_seal import align_sealed_operational_mask
+    from mascotrl.eval.regime_desk_seal import align_sealed_operational_mask
 
     t, n = 220, 6
     start = dt.date(2018, 1, 2)

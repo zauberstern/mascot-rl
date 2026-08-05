@@ -25,7 +25,7 @@ def remote_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
 
 def test_remote_dry_run_stamps_provenance(remote_env: None) -> None:
     with patch(
-        "src.reporting.provenance_stamp.fetch_imds_instance_type",
+        "mascotrl.reporting.provenance_stamp.fetch_imds_instance_type",
         return_value="c5.large",
     ):
         art = run_cell(CELL, dry_run=True)

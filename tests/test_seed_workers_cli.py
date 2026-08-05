@@ -57,7 +57,7 @@ def test_seed_pack_roundtrip_and_worker_main(tmp_path: Path, monkeypatch: pytest
         "cpcv_n_splits": 4,
         "cpcv_n_test_groups": 1,
     }
-    from src.eval.cpcv import CPCVConfig
+    from mascotrl.eval.cpcv import CPCVConfig
 
     cpcv = CPCVConfig(n_splits=4, n_test_groups=1, purge_days=1, embargo_days=1)
     run_config_hash = "deadbeefcafe0001"
@@ -100,7 +100,7 @@ def test_seed_pack_roundtrip_and_worker_main(tmp_path: Path, monkeypatch: pytest
         }
 
     monkeypatch.setenv("MASCOTRL_THREADS_PER_WORKER", "2")
-    with patch("src.eval.research_alpha_cpcv.run_research_alpha_cpcv", _fake_cpcv):
+    with patch("mascotrl.eval.research_alpha_cpcv.run_research_alpha_cpcv", _fake_cpcv):
         payload = {
             **payload_base,
             "seed": 7,

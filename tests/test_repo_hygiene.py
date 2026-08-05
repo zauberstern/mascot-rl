@@ -7,10 +7,10 @@ import re
 import subprocess
 from pathlib import Path
 
-from src.aws_burst.profiles import BURST_PROFILES, armed_profiles
-from src.aws_burst.waves import WAVES
-from src.data.paths import MASCOTRL_ROOT
-from src.eval.cpcv import CPCVConfig
+from mascotrl.aws_burst.profiles import BURST_PROFILES, armed_profiles
+from mascotrl.aws_burst.waves import WAVES
+from mascotrl.data.paths import MASCOTRL_ROOT
+from mascotrl.eval.cpcv import CPCVConfig
 
 SCAN_ROOTS = ("src", "scripts", "tests")
 SKIP_DIRS = {".venv", ".git", "graveyard", "authority", "logs", "node_modules"}

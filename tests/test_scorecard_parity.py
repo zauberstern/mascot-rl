@@ -10,10 +10,10 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.parity_harness import assert_same_scorecard, score_strategy
-from src.eval.friction import FrictionSpec
-from src.eval.residualization import fit_ff4_residualizer, freeze_residualizer
-from src.arms import ArmSpec
+from mascotrl.eval.parity_harness import assert_same_scorecard, score_strategy
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.residualization import fit_ff4_residualizer, freeze_residualizer
+from mascotrl.arms import ArmSpec
 
 
 def test_assert_same_scorecard_passes_when_matching() -> None:
@@ -55,8 +55,8 @@ def test_research_cpcv_headline_paths_are_total_net(monkeypatch: pytest.MonkeyPa
     """run_research_alpha_cpcv's headline `paths` must carry total_net PnL."""
     import pandas as pd
 
-    from src.eval.cpcv import CPCVConfig
-    from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
+    from mascotrl.eval.cpcv import CPCVConfig
+    from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
 
     rng = np.random.default_rng(3)
     t, k = 220, 4

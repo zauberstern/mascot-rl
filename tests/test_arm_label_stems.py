@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.arms.spec import EQUITY_LABEL_STEM, OPTION_LABEL_STEM
-from src.arms.training import resolve_claim_label_stem
-from src.data.oos_panel import label_matrix
+from mascotrl.arms.spec import EQUITY_LABEL_STEM, OPTION_LABEL_STEM
+from mascotrl.arms.training import resolve_claim_label_stem
+from mascotrl.data.oos_panel import label_matrix
 
 
 def test_eq_resolves_stk_ret():

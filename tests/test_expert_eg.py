@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.expert_eg import boa_experts, eg_experts
+from mascotrl.eval.expert_eg import boa_experts, eg_experts
 from tests.test_variable_share import _four_regime_losses_01
 
 

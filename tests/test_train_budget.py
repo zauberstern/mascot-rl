@@ -7,8 +7,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.eval.research_alpha_train import train_research_hist
-from src.eval.train_budget import (
+from mascotrl.eval.research_alpha_train import train_research_hist
+from mascotrl.eval.train_budget import (
     assert_optimizer_step_floor,
     write_learning_curve,
 )

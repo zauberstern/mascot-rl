@@ -6,7 +6,7 @@ import math
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.eval.differential_sharpe import DifferentialSharpe
+from mascotrl.eval.differential_sharpe import DifferentialSharpe
 
 
 def test_differential_sharpe_finite_on_stream() -> None:

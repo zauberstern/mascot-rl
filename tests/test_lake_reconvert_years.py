@@ -6,8 +6,8 @@ from pathlib import Path
 import duckdb
 import pytest
 
-from src.data.lake_builder import ParquetDataLakeBuilder
-from src.data.lake_source_audit import compare_year_counts_with_rejects, reject_year_counts
+from mascotrl.data.lake_builder import ParquetDataLakeBuilder
+from mascotrl.data.lake_source_audit import compare_year_counts_with_rejects, reject_year_counts
 
 
 def _write_seed_parquet(year_dir: Path, rows: list[dict]) -> None:

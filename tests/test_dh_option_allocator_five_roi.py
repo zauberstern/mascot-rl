@@ -1,9 +1,9 @@
 """delta-hedged option allocator five-ROI stamps: estimand hire, friction XOR, transfer, pack, arm lock."""
 from __future__ import annotations
-from src.data.oos_panel import LABEL_STEM
-from src.reporting.capital_gates import assert_protocol_provenance, default_estimand_residuals
-from src.reporting.claim_language import CLAIM_CATEGORY_RANK1
-from src.reporting.claim_stamps import assert_rank1_arm_lock, stamp_rank1_estimand_and_transfer
+from mascotrl.data.oos_panel import LABEL_STEM
+from mascotrl.reporting.capital_gates import assert_protocol_provenance, default_estimand_residuals
+from mascotrl.reporting.claim_language import CLAIM_CATEGORY_RANK1
+from mascotrl.reporting.claim_stamps import assert_rank1_arm_lock, stamp_rank1_estimand_and_transfer
 from tests.conftest import capital_gate_pass_extras
 
 def _lake() -> dict:
@@ -71,6 +71,6 @@ def test_protocol_hygiene_ok_with_full_rank1_stamps():
     assert out['protocol_gate']['protocol_hygiene_ok'] is True
 
 def test_spa_families_exclude_nonsense_peers():
-    from src.eval.alpha_gates import NONSENSE_PEERS
-    from src.eval.publication import SPA_FAMILIES
+    from mascotrl.eval.alpha_gates import NONSENSE_PEERS
+    from mascotrl.eval.publication import SPA_FAMILIES
     assert not set(SPA_FAMILIES) & set(NONSENSE_PEERS)

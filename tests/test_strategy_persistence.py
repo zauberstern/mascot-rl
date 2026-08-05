@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.reporting.strategy_persistence import (
+from mascotrl.reporting.strategy_persistence import (
     build_accounting_ledger,
     persist_strategy_frames,
     strategy_frame,

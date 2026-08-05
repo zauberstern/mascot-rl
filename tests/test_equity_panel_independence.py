@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.equity_panel import (
+from mascotrl.data.equity_panel import (
     EVAL_END,
     EVAL_START,
     SELECTION_END,

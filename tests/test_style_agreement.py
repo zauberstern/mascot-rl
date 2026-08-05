@@ -10,7 +10,7 @@ from tests.conftest import FLOAT_TOL
 
 
 def test_style_agreement_perfect_alignment() -> None:
-    from src.reporting.style_agreement import style_agreement
+    from mascotrl.reporting.style_agreement import style_agreement
 
     exposures = {
         "exposure_size": 1.0,
@@ -32,7 +32,7 @@ def test_style_agreement_perfect_alignment() -> None:
 
 
 def test_style_agreement_opposite_flag() -> None:
-    from src.reporting.style_agreement import style_agreement
+    from mascotrl.reporting.style_agreement import style_agreement
 
     exposures = {
         "exposure_size": -1.0,
@@ -50,7 +50,7 @@ def test_style_agreement_opposite_flag() -> None:
 
 
 def test_style_agreement_missing_rbsa_nan() -> None:
-    from src.reporting.style_agreement import style_agreement
+    from mascotrl.reporting.style_agreement import style_agreement
 
     out = style_agreement(
         {"exposure_size": 1.0, "exposure_value": 0.0, "exposure_momentum": 0.0},
@@ -62,7 +62,7 @@ def test_style_agreement_missing_rbsa_nan() -> None:
 
 
 def test_umd_alias_for_mom() -> None:
-    from src.reporting.style_agreement import style_agreement
+    from mascotrl.reporting.style_agreement import style_agreement
 
     exposures = {
         "exposure_size": 0.0,

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.reporting.behavior_explain import explain_behaviour, shuffle_null_band
+from mascotrl.reporting.behavior_explain import explain_behaviour, shuffle_null_band
 
 
 def _cvar_cfg(**extra):

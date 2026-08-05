@@ -13,9 +13,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.reporting import eq_alloc_book as book_mod
-from src.reporting.eq_alloc_book import render_eq_alloc_book
-from src.reporting.strategy_persistence import strategy_frame
+from mascotrl.reporting import eq_alloc_book as book_mod
+from mascotrl.reporting.eq_alloc_book import render_eq_alloc_book
+from mascotrl.reporting.strategy_persistence import strategy_frame
 
 N = 80
 K = 8

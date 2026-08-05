@@ -7,7 +7,7 @@ from tests.conftest import FLOAT_TOL
 import json
 from pathlib import Path
 
-from src.reporting.policy_behavior import write_policy_behavior
+from mascotrl.reporting.policy_behavior import write_policy_behavior
 
 
 def test_write_policy_behavior_uses_null_not_nan(tmp_path: Path) -> None:

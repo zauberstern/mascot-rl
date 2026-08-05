@@ -8,7 +8,7 @@ import pytest
 
 
 def test_surface_fingerprint_stable_under_secid_reorder() -> None:
-    from src.data.surface_signals import surface_signals_cache_fingerprint
+    from mascotrl.data.surface_signals import surface_signals_cache_fingerprint
 
     a = surface_signals_cache_fingerprint(
         secids=[3, 1, 2], start="2020-01-01", end="2020-12-31"
@@ -23,7 +23,7 @@ def test_surface_fingerprint_stable_under_secid_reorder() -> None:
 def test_shared_surface_cache_hit_skips_duckdb(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from src.data import surface_signals as ss
+    from mascotrl.data import surface_signals as ss
 
     cache_dir = tmp_path / "shared"
     monkeypatch.setenv("MASCOTRL_SURFACE_CACHE_DIR", str(cache_dir))
@@ -89,7 +89,7 @@ def test_shared_surface_cache_hit_skips_duckdb(
 def test_shared_surface_cache_corrupt_fail_closed(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from src.data.surface_signals import (
+    from mascotrl.data.surface_signals import (
         materialize_surface_signals_from_lake,
         surface_signals_cache_fingerprint,
     )
@@ -120,7 +120,7 @@ def test_duckdb_threads_default_is_four(
     """Unset MASCOTRL_DUCKDB_THREADS must default to 4 (not 2)."""
     import duckdb as real_duckdb
 
-    from src.data.surface_signals import _load_vol_surface_raw
+    from mascotrl.data.surface_signals import _load_vol_surface_raw
 
     part = tmp_path / "vol_surface" / "year=2020" / "month=01"
     part.mkdir(parents=True)

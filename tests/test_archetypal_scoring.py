@@ -11,7 +11,7 @@ from tests.conftest import FLOAT_TOL
 
 
 def test_fit_composition_rows_sum_to_one_aa_and_fallbacks():
-    from src.reporting.archetypal_scoring import fit_composition
+    from mascotrl.reporting.archetypal_scoring import fit_composition
 
     rng = np.random.default_rng(0)
     x = rng.normal(size=(20, 8))
@@ -25,13 +25,13 @@ def test_fit_composition_rows_sum_to_one_aa_and_fallbacks():
 
 
 def test_no_mixed_string_in_archetypal_scoring_source():
-    src = Path("src/reporting/archetypal_scoring.py").read_text(encoding="utf-8")
+    src = Path("src/mascotrl/reporting/archetypal_scoring.py").read_text(encoding="utf-8")
     assert "mixed" not in src.lower()
 
 
 def test_name_archetypes_extreme_panel():
-    from src.reporting.archetypal_scoring import name_archetypes
-    from src.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
+    from mascotrl.reporting.archetypal_scoring import name_archetypes
+    from mascotrl.reporting.policy_behavior import ARCHETYPE_SCORE_WEIGHTS
 
     # Build synthetic archetype rows that match seed weight directions.
     feature_names = sorted(
@@ -47,7 +47,7 @@ def test_name_archetypes_extreme_panel():
 
 
 def test_choose_k_returns_finite_table():
-    from src.reporting.archetypal_scoring import choose_k
+    from mascotrl.reporting.archetypal_scoring import choose_k
 
     rng = np.random.default_rng(1)
     x = rng.normal(size=(30, 6))
@@ -59,7 +59,7 @@ def test_choose_k_returns_finite_table():
 
 
 def test_stamp_composition_fields():
-    from src.reporting.archetypal_scoring import composition_for_rows
+    from mascotrl.reporting.archetypal_scoring import composition_for_rows
 
     rng = np.random.default_rng(2)
     feature_names = [
@@ -89,7 +89,7 @@ def test_stamp_composition_fields():
 
 
 def test_select_k_from_table_prefers_min_bic():
-    from src.reporting.archetypal_scoring import select_k_from_table
+    from mascotrl.reporting.archetypal_scoring import select_k_from_table
 
     table = {
         3: {"rss": 10.0, "bic": 100.0},
@@ -100,7 +100,7 @@ def test_select_k_from_table_prefers_min_bic():
 
 
 def test_select_k_from_table_fallback_locked_five():
-    from src.reporting.archetypal_scoring import select_k_from_table
+    from mascotrl.reporting.archetypal_scoring import select_k_from_table
 
     table = {
         3: {"rss": 10.0, "bic": float("nan")},
@@ -111,7 +111,7 @@ def test_select_k_from_table_fallback_locked_five():
 
 
 def test_bootstrap_ari_high_on_separated_blobs():
-    from src.reporting.archetypal_scoring import bootstrap_ari
+    from mascotrl.reporting.archetypal_scoring import bootstrap_ari
 
     rng = np.random.default_rng(0)
     a = rng.normal(loc=0.0, scale=0.2, size=(10, 2))
@@ -124,7 +124,7 @@ def test_bootstrap_ari_high_on_separated_blobs():
 
 
 def test_bootstrap_ari_too_small_panel():
-    from src.reporting.archetypal_scoring import bootstrap_ari
+    from mascotrl.reporting.archetypal_scoring import bootstrap_ari
 
     x = np.random.default_rng(0).normal(size=(4, 3))
     out = bootstrap_ari(x, k=2)

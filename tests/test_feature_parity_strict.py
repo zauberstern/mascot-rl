@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.pandas_rolling import (
+from mascotrl.features.blocks.pandas_rolling import (
     amihud_illiquidity_pandas,
     trailing_hv_panel_pandas,
 )
@@ -68,8 +68,8 @@ def test_amihud_pandas_matches_numpy_on_clean_panel():
 
 
 def test_public_api_uses_pandas_path():
-    from src.features.blocks.liquidity import amihud_illiquidity
-    from src.features.blocks.volatility_vrp import trailing_hv_panel
+    from mascotrl.features.blocks.liquidity import amihud_illiquidity
+    from mascotrl.features.blocks.volatility_vrp import trailing_hv_panel
 
     rng = np.random.default_rng(2)
     r = rng.normal(0, 0.01, size=(50, 2))

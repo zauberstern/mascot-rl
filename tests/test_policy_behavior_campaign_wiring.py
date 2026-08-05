@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.reporting.policy_behavior import (
+from mascotrl.reporting.policy_behavior import (
     ARCHETYPE_IDS,
     build_policy_behavior,
     extract_crucible_behaviour_inputs,

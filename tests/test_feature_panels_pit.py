@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.feature_panels import (
+from mascotrl.data.feature_panels import (
     COMPUSTAT_LAG_DAYS,
     SHORT_INTEREST_LAG_DAYS,
     load_compustat_long,

@@ -8,8 +8,8 @@ import pytest
 
 pytest.importorskip("purgedcv")
 
-from src.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY
-from src.eval.cpcv_lib import run_cpcv_lib
+from mascotrl.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY
+from mascotrl.eval.cpcv_lib import run_cpcv_lib
 
 
 def test_resume_restores_oos_aux_purgedcv(tmp_path: Path):

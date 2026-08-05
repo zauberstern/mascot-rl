@@ -5,7 +5,7 @@ import numpy as np
 
 
 def test_feature_health_report_flags_dead_channel() -> None:
-    from src.eval.equity_substrate import feature_health_report
+    from mascotrl.eval.equity_substrate import feature_health_report
 
     rng = np.random.default_rng(0)
     cube = rng.normal(0, 1, size=(20, 5, 3))
@@ -18,7 +18,7 @@ def test_feature_health_report_flags_dead_channel() -> None:
 
 
 def test_explanation_quality_metrics_sparsity() -> None:
-    from src.reporting.interpretability import explanation_quality_metrics
+    from mascotrl.reporting.interpretability import explanation_quality_metrics
 
     attribution = {
         "groups": {
@@ -35,7 +35,7 @@ def test_explanation_quality_metrics_sparsity() -> None:
 
 
 def test_personality_alignment_match_and_divergence() -> None:
-    from src.reporting.policy_behavior import (
+    from mascotrl.reporting.policy_behavior import (
         compute_personality_alignment,
         designed_personality,
     )

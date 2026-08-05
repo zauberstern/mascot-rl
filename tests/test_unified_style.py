@@ -6,9 +6,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from src.reporting.book_style import apply_academic_rc
-from src.reporting.figures.figure_style import apply_figure_rc
-from src.reporting.figures.validate import (
+from mascotrl.reporting.book_style import apply_academic_rc
+from mascotrl.reporting.figures.figure_style import apply_figure_rc
+from mascotrl.reporting.figures.validate import (
     assert_no_default_mpl_colors,
     run_figure_validators,
 )
@@ -23,8 +23,8 @@ def test_academic_and_figure_share_prop_cycle() -> None:
 
 
 def test_sample_figure_passes_validators_non_strict() -> None:
-    from src.reporting.book_style import FAMILY_PALETTE
-    from src.reporting.figures.figure_style import (
+    from mascotrl.reporting.book_style import FAMILY_PALETTE
+    from mascotrl.reporting.figures.figure_style import (
         FIGURE_HEIGHT_DEFAULT_IN,
         FIGURE_WIDTH_FULL_IN,
         apply_figure_rc,

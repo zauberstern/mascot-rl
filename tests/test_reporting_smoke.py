@@ -7,7 +7,7 @@ import pytest
 
 
 def test_book_style_academic_figure_smoke(tmp_path: Path):
-    from src.reporting.book_style import academic_figure, apply_academic_rc, save_figure, use_agg
+    from mascotrl.reporting.book_style import academic_figure, apply_academic_rc, save_figure, use_agg
 
     use_agg()
     apply_academic_rc()

@@ -7,14 +7,14 @@ import numpy as np
 import pytest
 import torch
 
-from src.models.registry import ModelCard, save_model_bundle, zoo_root
-from src.policy.single_agent import make_single_agent
+from mascotrl.models.registry import ModelCard, save_model_bundle, zoo_root
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def test_happo_act_weights_no_not_implemented(tmp_path, monkeypatch):
     monkeypatch.setenv("MASCOTRL_MODEL_ZOO", str(tmp_path))
-    from src.policy.happo import HAPPOEngine
-    from src.models.inference import act_weights, HAPPO_OOS_REPLAY_SUPPORTED
+    from mascotrl.policy.happo import HAPPOEngine
+    from mascotrl.models.inference import act_weights, HAPPO_OOS_REPLAY_SUPPORTED
 
     assert HAPPO_OOS_REPLAY_SUPPORTED is True
     k, d_model, macro = 3, 8, 4
@@ -40,7 +40,7 @@ def test_export_onnx_single_agent(tmp_path, monkeypatch):
     pytest.importorskip("onnx")
     pytest.importorskip("onnxruntime")
     monkeypatch.setenv("MASCOTRL_MODEL_ZOO", str(tmp_path))
-    from src.models.export import export_onnx
+    from mascotrl.models.export import export_onnx
 
     agent = make_single_agent(
         "ppo", obs_dim=10, action_dim=2, rl_backend="custom", hidden=16, normalize_obs=False
@@ -70,7 +70,7 @@ def test_ship_model_writes_complete_dir(tmp_path, monkeypatch):
     pytest.importorskip("onnxruntime")
     monkeypatch.setenv("MASCOTRL_MODEL_ZOO", str(tmp_path))
     from scripts.ship_model import ship_model
-    from src.models.export import export_onnx
+    from mascotrl.models.export import export_onnx
 
     agent = make_single_agent(
         "ppo", obs_dim=6, action_dim=2, rl_backend="custom", hidden=8, normalize_obs=False

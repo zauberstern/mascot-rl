@@ -1,7 +1,7 @@
 """Toy / dry panels must not seal research_positive_alpha as OM evidence."""
 from __future__ import annotations
 
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 
 def _green(**kw):

@@ -4,7 +4,7 @@ from __future__ import annotations
 import pytest
 import torch
 
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 
 @pytest.mark.integration

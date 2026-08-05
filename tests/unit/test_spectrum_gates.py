@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
+from mascotrl.eval.spectrum_gates import compute_gate1, compute_gate2, compute_gate3
 from tests.conftest import FLOAT_TOL
 
 

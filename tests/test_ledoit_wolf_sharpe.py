@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.ledoit_wolf_sharpe import sharpe_difference_test
+from mascotrl.eval.ledoit_wolf_sharpe import sharpe_difference_test
 
 
 def test_identical_series_delta_near_zero_high_pvalue() -> None:

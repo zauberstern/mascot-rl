@@ -5,7 +5,7 @@ import pytest
 import torch
 import torch.nn as nn
 
-from src.policy.objective_factory import (
+from mascotrl.policy.objective_factory import (
     OBJECTIVE_GRADIENT_PATH,
     episode_weights,
     objective_gradient_path_for,

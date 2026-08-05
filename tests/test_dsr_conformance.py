@@ -6,7 +6,7 @@ import math
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.eval.differential_sharpe import DifferentialSharpe
+from mascotrl.eval.differential_sharpe import DifferentialSharpe
 
 
 def _moody_dt(A: float, B: float, x: float) -> float:

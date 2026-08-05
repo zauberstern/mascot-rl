@@ -131,7 +131,7 @@ def test_figures_smoke_f01_f02_f26(tmp_path: Path):
         },
     )
 
-    from src.reporting.figures.core_suite import render_spectrum_figures
+    from mascotrl.reporting.figures.core_suite import render_spectrum_figures
 
     manifest = render_spectrum_figures(
         arms_root,

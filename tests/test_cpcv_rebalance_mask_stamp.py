@@ -7,8 +7,8 @@ import pandas as pd
 
 def test_cpcv_stamps_rebalance_mask_when_monthly_and_missing():
     """Mirror the preamble in run_research_alpha_cpcv without full CPCV."""
-    from src.eval.cadence import build_rebalance_mask
-    from src.eval.yaml_honesty import track_copy
+    from mascotrl.eval.cadence import build_rebalance_mask
+    from mascotrl.eval.yaml_honesty import track_copy
 
     dates = list(pd.bdate_range("2020-01-01", periods=40))
     cfg = track_copy({"rebalance_cadence": "monthly"})
@@ -21,7 +21,7 @@ def test_cpcv_stamps_rebalance_mask_when_monthly_and_missing():
     assert m.any()
     # Fold slice must preserve length of the train window (mask may be all-False
     # on a short window that never hits a month boundary; length is the contract).
-    from src.eval.research_alpha_cpcv import _slice_feature_extras
+    from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
 
     train_idx = np.arange(0, 22)
     sliced = _slice_feature_extras(cfg, train_idx)

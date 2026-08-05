@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.reporting.policy_behavior import (
+from mascotrl.reporting.policy_behavior import (
     ARCHETYPE_IDS,
     ARCHETYPE_SCORE_WEIGHTS,
     assign_archetype,

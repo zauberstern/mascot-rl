@@ -5,7 +5,7 @@ import numpy as np
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.data.slot_mask import (
+from mascotrl.data.slot_mask import (
     apply_slot_mask,
     masked_pnl,
     select_slots_for_date,
@@ -31,7 +31,7 @@ def test_mask_zeros_inactive_weights_and_pnl():
 
 
 def test_future_eligibility_shuffle_does_not_change_past_masks():
-    from src.data.slot_mask import build_slot_masks_over_dates
+    from mascotrl.data.slot_mask import build_slot_masks_over_dates
 
     dates = ["2020-01-02", "2020-01-03", "2020-01-06"]
     eligible = {
@@ -49,7 +49,7 @@ def test_future_eligibility_shuffle_does_not_change_past_masks():
 
 
 def test_coverage_masks_require_finite_atm_and_label():
-    from src.data.slot_mask import coverage_masks_from_features
+    from mascotrl.data.slot_mask import coverage_masks_from_features
 
     atm = np.array([[0.2, np.nan], [0.1, 0.3]])
     lab = np.array([[0.01, 0.02], [np.nan, 0.03]])
@@ -58,7 +58,7 @@ def test_coverage_masks_require_finite_atm_and_label():
 
 
 def test_membership_masks_gate_non_members():
-    from src.data.slot_mask import membership_masks_for_fixed_slots
+    from mascotrl.data.slot_mask import membership_masks_for_fixed_slots
 
     dates = ["2020-01-02", "2020-01-03"]
     secids = [1, 2, 3]
@@ -75,7 +75,7 @@ def test_membership_masks_gate_non_members():
 
 def test_membership_intersect_coverage_for_equity_arm():
     """Name occupies a slot only while an index member (coverage ∩ membership)."""
-    from src.data.slot_mask import membership_masks_for_fixed_slots
+    from mascotrl.data.slot_mask import membership_masks_for_fixed_slots
 
     dates = ["2020-01-02", "2020-01-03"]
     secids = [10, 20]

@@ -6,9 +6,9 @@ import math
 import numpy as np
 import pandas as pd
 
-from src.eval.cpcv import CPCVConfig
-from src.eval.research_alpha_cpcv import run_research_alpha_cpcv
-from src.reporting.claim_stamps import CLAIM_CATEGORY_EQ_STK
+from mascotrl.eval.cpcv import CPCVConfig
+from mascotrl.eval.research_alpha_cpcv import run_research_alpha_cpcv
+from mascotrl.reporting.claim_stamps import CLAIM_CATEGORY_EQ_STK
 
 
 def test_eq_cpcv_emits_zhang_peer_fields() -> None:

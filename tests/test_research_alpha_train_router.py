@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.eval.friction import FrictionSpec, assert_friction_parity, friction_spec_from_cfg
-from src.reporting.research_alpha_router import (
+from mascotrl.eval.friction import FrictionSpec, assert_friction_parity, friction_spec_from_cfg
+from mascotrl.reporting.research_alpha_router import (
     RESEARCH_PRIMARY_HIST,
     resolve_research_primary_train,
     research_train_friction_pair,

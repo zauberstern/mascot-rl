@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from src.data.regime_labels import REGIME_IDS, label_regimes
+from mascotrl.data.regime_labels import REGIME_IDS, label_regimes
 
 
 def _macro_frame(n: int = 900, *, vix=None, oas=None, infl=None) -> pd.DataFrame:

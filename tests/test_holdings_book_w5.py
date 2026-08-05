@@ -3,9 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from src.reporting.book_style import save_pdf_png, use_agg
-from src.reporting.book_style import FAMILY_ORDER
-from src.reporting.strategy_persistence import write_holdings_book
+from mascotrl.reporting.book_style import save_pdf_png, use_agg
+from mascotrl.reporting.book_style import FAMILY_ORDER
+from mascotrl.reporting.strategy_persistence import write_holdings_book
 
 def test_save_pdf_png_defaults_to_png_only(tmp_path: Path):
     use_agg()

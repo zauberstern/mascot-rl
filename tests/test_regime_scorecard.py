@@ -8,16 +8,16 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.regime_labels import label_regimes
-from src.eval.regime_scorecard import (
+from mascotrl.data.regime_labels import label_regimes
+from mascotrl.eval.regime_scorecard import (
     build_regime_scorecard,
     event_alignment,
     hygiene_prefix_stability,
     occupancy_stats,
 )
-from src.eval.stats_rigor import DEFAULT_REGIMES
-from src.eval.turbulence import classify_regime, turbulence_index
-from src.eval.walk_forward_hmm import hmm_turbulent_mask, jaccard_turbulent, walk_forward_hmm_regimes
+from mascotrl.eval.stats_rigor import DEFAULT_REGIMES
+from mascotrl.eval.turbulence import classify_regime, turbulence_index
+from mascotrl.eval.walk_forward_hmm import hmm_turbulent_mask, jaccard_turbulent, walk_forward_hmm_regimes
 
 
 def _macro_frame(n: int = 900) -> pd.DataFrame:
@@ -142,7 +142,7 @@ def test_agreement_unavailable_without_returns(tmp_path: Path) -> None:
 
 
 def test_run_duration_stats_basic() -> None:
-    from src.eval.regime_scorecard import run_duration_stats
+    from mascotrl.eval.regime_scorecard import run_duration_stats
 
     mask = np.array([0, 1, 1, 0, 1, 1, 1, 0], dtype=bool)
     out = run_duration_stats(mask)

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.surface_signals import (
+from mascotrl.data.surface_signals import (
     build_kelly_iv_images,
     cache_surface_signals,
     compute_surface_signals_panel,

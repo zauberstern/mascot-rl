@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.turbulence import turbulence_index
+from mascotrl.eval.turbulence import turbulence_index
 
 
 def test_desk_panel_nan_not_identical_to_zero_fill() -> None:

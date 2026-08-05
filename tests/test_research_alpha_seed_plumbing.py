@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.env.historical_env import HistoricalArmEnv
-from src.eval.research_alpha_train import train_research_hist
+from mascotrl.env.historical_env import HistoricalArmEnv
+from mascotrl.eval.research_alpha_train import train_research_hist
 
 
 def _toy_panel(t: int = 30, k: int = 3, seed: int = 0):
@@ -40,8 +40,8 @@ def test_different_seeds_before_init_yield_different_initial_params() -> None:
 
 
 def test_historical_arm_env_reset_with_seed_does_not_raise() -> None:
-    from src.arms import ArmSpec
-    from src.eval.friction import FrictionSpec
+    from mascotrl.arms import ArmSpec
+    from mascotrl.eval.friction import FrictionSpec
 
     rets, fac = _toy_panel(t=20, k=2)
     arm = ArmSpec(id='eq', option_slots=0, equity_slots=2, delta_mode='off')

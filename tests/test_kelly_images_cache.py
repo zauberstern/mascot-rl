@@ -9,7 +9,7 @@ import pytest
 
 
 def test_kelly_images_cache_hit_skips_lake(tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
-    from src.data import surface_signals as ss
+    from mascotrl.data import surface_signals as ss
 
     dates = pd.date_range("2014-01-01", periods=5, freq="B")
     secids = [101, 102]

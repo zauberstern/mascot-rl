@@ -23,8 +23,8 @@ class _DummyPolicy:
 
 
 def _env_for_world(world: str, seed: int = 0):
-    from src.env.cmdp_env import CMDPEnv
-    from src.simulator import get_world_bundle
+    from mascotrl.env.cmdp_env import CMDPEnv
+    from mascotrl.simulator import get_world_bundle
 
     cfg = {
         "n_paths": 2,
@@ -91,7 +91,7 @@ def _reward_traj(env, seed: int = 0) -> np.ndarray:
 
 def test_transition_source_requires_spot_paths():
     """Declared gbm is allowed at construction; reset/step fail closed without paths."""
-    from src.env.cmdp_env import CMDPEnv
+    from mascotrl.env.cmdp_env import CMDPEnv
 
     surfaces = torch.rand(1, 2, 8, 3, 2)
     env = CMDPEnv(

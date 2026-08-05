@@ -10,14 +10,14 @@ import pytest
 pytestmark = pytest.mark.plumbing
 from moto import mock_aws
 
-from src.aws_burst.budget_action import (
+from mascotrl.aws_burst.budget_action import (
     ensure_budget_action,
     read_actual_spend,
     spend_headroom,
     stamp_armed_flag,
 )
-from src.aws_burst.governor import check_submit_allowed
-from src.aws_burst.profiles import BURST_PROFILES, CREDIT_USD, SPEND_CAP_FRAC
+from mascotrl.aws_burst.governor import check_submit_allowed
+from mascotrl.aws_burst.profiles import BURST_PROFILES, CREDIT_USD, SPEND_CAP_FRAC
 
 
 class _FakeBudgets:

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.eval.universe_fingerprint import read_panel_bundle_sha256
+from mascotrl.eval.universe_fingerprint import read_panel_bundle_sha256
 
 
 def test_read_panel_bundle_sha256_from_logs(tmp_path: Path) -> None:

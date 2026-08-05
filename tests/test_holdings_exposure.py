@@ -8,7 +8,7 @@ from tests.conftest import FLOAT_TOL
 
 
 def test_holdings_exposures_hand_computed():
-    from src.reporting.holdings_exposure import holdings_exposures
+    from mascotrl.reporting.holdings_exposure import holdings_exposures
 
     # T=2, K=2
     weights = np.array([[1.0, 0.0], [0.5, 0.5]], dtype=np.float64)
@@ -35,7 +35,7 @@ def test_holdings_exposures_hand_computed():
 
 
 def test_load_characteristic_panel_shape_and_finite(monkeypatch):
-    from src.reporting import holdings_exposure as he
+    from mascotrl.reporting import holdings_exposure as he
 
     dates = ["2020-01-02", "2020-01-03"]
     secids = ["101", "202"]

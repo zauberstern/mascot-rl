@@ -12,8 +12,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import src.eval.research_alpha_cpcv as racpcv
-from src.eval.cpcv import CPCVConfig
+import mascotrl.eval.research_alpha_cpcv as racpcv
+from mascotrl.eval.cpcv import CPCVConfig
 
 
 def _toy_dates_panel(t: int = 260, k: int = 4, seed: int = 0):

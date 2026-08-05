@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.regime_scorecard import build_regime_scorecard
-from src.eval.regime_seal import (
+from mascotrl.eval.regime_scorecard import build_regime_scorecard
+from mascotrl.eval.regime_seal import (
     apply_sealed_checkpoint,
     load_sealed_series,
     scorecard_from_seal,
@@ -127,8 +127,8 @@ def test_refuse_backward_checkpoint_application(tmp_path: Path) -> None:
 
 def test_from_seal_skips_gaussian_hmm_fit(tmp_path: Path) -> None:
     dest, report, _series, _r = _live_seal_payload(tmp_path)
-    with mock.patch("src.eval.walk_forward_hmm.walk_forward_hmm_filter") as filt_mock:
-        with mock.patch("src.eval.walk_forward_hmm.walk_forward_markov_filter") as mk_mock:
+    with mock.patch("mascotrl.eval.walk_forward_hmm.walk_forward_hmm_filter") as filt_mock:
+        with mock.patch("mascotrl.eval.walk_forward_hmm.walk_forward_markov_filter") as mk_mock:
             with mock.patch("hmmlearn.hmm.GaussianHMM.fit") as fit_mock:
                 out = scorecard_from_seal(dest, base_scorecard=report)
                 fit_mock.assert_not_called()

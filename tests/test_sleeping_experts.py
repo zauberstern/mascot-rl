@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.sleeping_experts import variable_share_sleeping
+from mascotrl.eval.sleeping_experts import variable_share_sleeping
 
 
 def test_sleeping_weights_sum_and_shape() -> None:

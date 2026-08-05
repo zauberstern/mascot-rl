@@ -7,8 +7,8 @@ from unittest import mock
 import pandas as pd
 import pytest
 
-from src.eval.campaign_manifest import load_manifest, manifest_path
-from src.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY, run_cpcv
+from mascotrl.eval.campaign_manifest import load_manifest, manifest_path
+from mascotrl.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY, run_cpcv
 
 
 def test_manifest_flush_batches_disk_writes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
@@ -24,7 +24,7 @@ def test_manifest_flush_batches_disk_writes(tmp_path: Path, monkeypatch: pytest.
 
     save_calls: list[Path] = []
     real_save = __import__(
-        "src.eval.campaign_manifest", fromlist=["save_manifest"]
+        "mascotrl.eval.campaign_manifest", fromlist=["save_manifest"]
     ).save_manifest
 
     def counting_save(out_dir, manifest):
@@ -32,7 +32,7 @@ def test_manifest_flush_batches_disk_writes(tmp_path: Path, monkeypatch: pytest.
         return real_save(out_dir, manifest)
 
     with mock.patch(
-        "src.eval.campaign_manifest.save_manifest", side_effect=counting_save
+        "mascotrl.eval.campaign_manifest.save_manifest", side_effect=counting_save
     ):
         art = run_cpcv(
             dates,
@@ -54,7 +54,7 @@ def test_manifest_flush_batches_disk_writes(tmp_path: Path, monkeypatch: pytest.
     # Second run skips all folds (resume intact after batched flush).
     calls["n"] = 0
     with mock.patch(
-        "src.eval.campaign_manifest.save_manifest", side_effect=counting_save
+        "mascotrl.eval.campaign_manifest.save_manifest", side_effect=counting_save
     ):
         art2 = run_cpcv(
             dates,
@@ -72,7 +72,7 @@ def test_manifest_flush_batches_disk_writes(tmp_path: Path, monkeypatch: pytest.
 def test_manifest_flush_preserves_oos_aux(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("MASCOTRL_MANIFEST_FLUSH_EVERY", "3")
     pytest.importorskip("purgedcv")
-    from src.eval.cpcv_lib import run_cpcv_lib
+    from mascotrl.eval.cpcv_lib import run_cpcv_lib
 
     dates = list(pd.bdate_range("2020-01-01", periods=180))
     cfg = CPCVConfig(n_splits=6, n_test_groups=2, purge_days=5, embargo_days=5)

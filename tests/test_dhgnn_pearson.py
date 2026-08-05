@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import torch
 
-from src.features.dhgnn import SpatialDHGNN, _pearson_tail_incidence
-from src.features.extractor import AlphaFeatureExtractor
+from mascotrl.features.dhgnn import SpatialDHGNN, _pearson_tail_incidence
+from mascotrl.features.extractor import AlphaFeatureExtractor
 
 
 def test_pearson_and_copula_incidence_differ() -> None:
@@ -108,7 +108,7 @@ def test_observe_iv_step_increments_history() -> None:
 
 
 def test_spatial_mode_none_skips_dhgnn_attachment() -> None:
-    from src.plugins.registry import build_feature_extractor
+    from mascotrl.plugins.registry import build_feature_extractor
 
     cfg = {
         "spatial_mode": "none",

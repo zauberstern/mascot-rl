@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.reporting.deskorg import build_deskorg_artifact, write_deskorg
+from mascotrl.reporting.deskorg import build_deskorg_artifact, write_deskorg
 
 
 def test_deskorg_artifact_honesty_locks(tmp_path: Path) -> None:

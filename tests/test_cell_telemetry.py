@@ -9,9 +9,9 @@ from pathlib import Path
 
 import numpy as np
 
-from src.reporting.decision_trace import build_decision_trace_rows, write_decision_trace
-from src.reporting.policy_behavior import build_policy_behavior
-from src.reporting.training_telemetry import (
+from mascotrl.reporting.decision_trace import build_decision_trace_rows, write_decision_trace
+from mascotrl.reporting.policy_behavior import build_policy_behavior
+from mascotrl.reporting.training_telemetry import (
     training_rows_from_diagnostics,
     write_training_jsonl,
 )
@@ -70,7 +70,7 @@ def test_training_jsonl_schema(tmp_path: Path) -> None:
 
 
 def test_training_keys_cover_cppo_happo_sb3_emitters() -> None:
-    from src.reporting.training_telemetry import _TRAINING_KEYS, normalize_training_row
+    from mascotrl.reporting.training_telemetry import _TRAINING_KEYS, normalize_training_row
 
     required = {
         "policy_grad_norm",
@@ -98,7 +98,7 @@ def test_training_keys_cover_cppo_happo_sb3_emitters() -> None:
 
 
 def test_training_keys_cover_reward_decomposition() -> None:
-    from src.reporting.training_telemetry import _TRAINING_KEYS, normalize_training_row
+    from mascotrl.reporting.training_telemetry import _TRAINING_KEYS, normalize_training_row
 
     required = [
         "reward_return_term",
@@ -123,7 +123,7 @@ def test_training_keys_cover_reward_decomposition() -> None:
 
 
 def test_reward_decomp_from_step_info() -> None:
-    from src.reporting.training_telemetry import reward_decomp_from_step_info
+    from mascotrl.reporting.training_telemetry import reward_decomp_from_step_info
 
     info = {"gross": 0.012, "cost": 0.0015, "turnover": 0.08, "borrow": 0.0002}
     decomp = reward_decomp_from_step_info(
@@ -141,7 +141,7 @@ def test_reward_decomp_from_step_info() -> None:
 
 
 def test_alias_grad_norm_to_policy_grad_norm() -> None:
-    from src.reporting.training_telemetry import alias_grad_norm
+    from mascotrl.reporting.training_telemetry import alias_grad_norm
 
     stats = {"grad_norm": 1.5, "policy_loss": 0.2}
     out = alias_grad_norm(stats)

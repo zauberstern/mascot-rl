@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.eval.industry_baselines import (
+from mascotrl.eval.industry_baselines import (
     INDUSTRY_BASELINE_NAMES,
     INDUSTRY_BASELINE_REGISTRY,
     industry_baseline_weights,

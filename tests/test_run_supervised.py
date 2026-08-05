@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from src.aws_burst.jobdef import (
+from mascotrl.aws_burst.jobdef import (
     assert_job_memory_fits_instance,
     build_job_definition,
 )

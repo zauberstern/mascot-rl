@@ -4,8 +4,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from src.data.equity_panel import _rolling_hv
-from src.features.blocks.volatility_vrp import trailing_hv_panel
+from mascotrl.data.equity_panel import _rolling_hv
+from mascotrl.features.blocks.volatility_vrp import trailing_hv_panel
 
 
 def test_equity_panel_hv_matches_cube_annualized_stdev_on_toy_series():

@@ -5,8 +5,8 @@ import numpy as np
 import pytest
 import torch
 
-from src.policy.cmdp_projector import turnover_cap_project
-from src.policy.single_agent import _apply_weight_head
+from mascotrl.policy.cmdp_projector import turnover_cap_project
+from mascotrl.policy.single_agent import _apply_weight_head
 from tests.conftest import FLOAT_TOL
 
 _LONG_ONLY = ("softmax", "sparse_tilt", "sparse_tilt_tsallis", "entmax_15", "dirichlet_tilt")
@@ -68,8 +68,8 @@ def test_turnover_non_negative(rng):
 @pytest.mark.unit
 def test_friction_cost_non_negative(rng):
     """Equity spread cost on a weight transition must be non-negative."""
-    from src.arms import ArmSpec
-    from src.eval.friction import apply_costs
+    from mascotrl.arms import ArmSpec
+    from mascotrl.eval.friction import apply_costs
 
     arm = ArmSpec(id="eq", option_slots=0, equity_slots=5, delta_mode="off")
     for _ in range(30):

@@ -4,8 +4,8 @@ from __future__ import annotations
 import pytest
 import torch
 
-from src.arms import ArmSpec
-from src.eval.friction import apply_costs
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import apply_costs
 from tests.conftest import FLOAT_TOL
 
 

@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from tests.conftest import FLOAT_TOL
 
-from src.data.dynamic_universe import (
+from mascotrl.data.dynamic_universe import (
     build_dynamic_universe,
     build_slotted_panel,
     option_eligibility_screen,

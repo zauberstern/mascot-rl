@@ -7,7 +7,7 @@ import torch
 
 def test_tilt_gain_sharpens_softmax() -> None:
     """weight_head_tilt_gain > 1 must produce more concentrated softmax output."""
-    from src.policy.single_agent import _apply_weight_head
+    from mascotrl.policy.single_agent import _apply_weight_head
 
     raw = torch.randn(1, 100)
     w_base = _apply_weight_head(raw, "softmax", tilt_gain=1.0)
@@ -17,7 +17,7 @@ def test_tilt_gain_sharpens_softmax() -> None:
 
 def test_actor_final_gain_from_config() -> None:
     """actor_final_gain=0.1 must produce larger initial logits than 0.01."""
-    from src.policy.single_agent import PPOAgent
+    from mascotrl.policy.single_agent import PPOAgent
 
     agent_small = PPOAgent(obs_dim=20, action_dim=10, actor_final_gain=0.01)
     agent_large = PPOAgent(obs_dim=20, action_dim=10, actor_final_gain=0.1)
@@ -30,7 +30,7 @@ def test_actor_final_gain_from_config() -> None:
 
 def test_softmax_tilt_gain_changes_entropy() -> None:
     """Behavioral contract: larger tilt_gain lowers softmax entropy (sharper)."""
-    from src.policy.single_agent import _apply_weight_head
+    from mascotrl.policy.single_agent import _apply_weight_head
 
     raw = torch.linspace(-1.0, 1.0, 100).unsqueeze(0)
     w1 = _apply_weight_head(raw, "softmax", tilt_gain=1.0).numpy().reshape(-1)

@@ -7,8 +7,8 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.spectrum.cell_schema import validate_cell_cfg
-from src.spectrum.yaml_loader import load_cell_yaml
+from mascotrl.spectrum.cell_schema import validate_cell_cfg
+from mascotrl.spectrum.yaml_loader import load_cell_yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]

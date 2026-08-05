@@ -4,12 +4,12 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from src.data.arbitrage_screens import (
+from mascotrl.data.arbitrage_screens import (
     butterfly_violations,
     calendar_violations,
     filter_long_marks,
 )
-from src.data.duckdb_engine import OptionFilterConfig
+from mascotrl.data.duckdb_engine import OptionFilterConfig
 
 
 def test_calendar_flags_decreasing_total_variance():

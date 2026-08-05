@@ -6,9 +6,9 @@ import pathlib
 import numpy as np
 import pytest
 
-from src.eval.research_alpha_cpcv import _slice_feature_extras
-from src.features.blocks.assemble import assemble_equity_feature_cube
-from src.features.groups import FEATURE_GROUPS, resolve_excludes
+from mascotrl.eval.research_alpha_cpcv import _slice_feature_extras
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.groups import FEATURE_GROUPS, resolve_excludes
 
 
 def test_resolve_excludes_unknown_group_fails() -> None:
@@ -94,7 +94,7 @@ def test_slot_mask_nan_before_normalize_with_new_blocks() -> None:
 
 
 def test_no_nan_to_num_in_new_blocks() -> None:
-    root = pathlib.Path("src/features/blocks")
+    root = pathlib.Path("src/mascotrl/features/blocks")
     new_blocks = {
         "range_volatility.py",
         "microstructure.py",

@@ -1,6 +1,8 @@
 """Universe fingerprint helpers (panel bundle sha256 continuity)."""
 from __future__ import annotations
 
+from pathlib import Path
+
 from mascotrl._root import REPO_ROOT
 
 ROOT = REPO_ROOT

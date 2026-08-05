@@ -20,8 +20,8 @@ def test_asarray_none_bool_is_length_one_trap():
 
 
 def test_load_lake_dyn_hrp_daily_policy_uses_universe_cadence(monkeypatch, tmp_path):
-    from src.eval import equity_substrate as es
-    from src.eval.cadence import build_universe_cadence_mask, quarterly_63d_mask
+    from mascotrl.eval import equity_substrate as es
+    from mascotrl.eval.cadence import build_universe_cadence_mask, quarterly_63d_mask
 
     n_dates = 200
     n_names = 12
@@ -39,7 +39,7 @@ def test_load_lake_dyn_hrp_daily_policy_uses_universe_cadence(monkeypatch, tmp_p
 
     monkeypatch.setattr(es, "resolve_lake_root", lambda cfg: tmp_path)
     monkeypatch.setattr(
-        "src.data.equity_panel.load_sp500_security_returns",
+        "mascotrl.data.equity_panel.load_sp500_security_returns",
         lambda lake, start, end: raw,
     )
 
@@ -59,17 +59,17 @@ def test_load_lake_dyn_hrp_daily_policy_uses_universe_cadence(monkeypatch, tmp_p
         return slots, valid, []
 
     monkeypatch.setattr(
-        "src.data.dynamic_universe.build_dynamic_universe",
+        "mascotrl.data.dynamic_universe.build_dynamic_universe",
         _capture_build_dynamic_universe,
     )
     monkeypatch.setattr(
-        "src.data.dynamic_universe.build_slotted_panel",
+        "mascotrl.data.dynamic_universe.build_slotted_panel",
         lambda **kwargs: rets[:, : kwargs.get("k", n_names)]
         if False
         else np.asarray(kwargs.get("wide_returns"))[:, :10],
     )
     # build_slotted_panel needs a real callable; stub after import path used inside fn
-    import src.data.dynamic_universe as du
+    import mascotrl.data.dynamic_universe as du
 
     monkeypatch.setattr(
         du,
@@ -102,8 +102,8 @@ def test_load_lake_dyn_hrp_daily_policy_uses_universe_cadence(monkeypatch, tmp_p
 
 def test_load_lake_dyn_hrp_monthly_keeps_legacy_universe_coupling(monkeypatch, tmp_path):
     """When universe_cadence is unset, non-daily policy still drives universe days."""
-    from src.eval import equity_substrate as es
-    from src.eval.cadence import month_end_mask
+    from mascotrl.eval import equity_substrate as es
+    from mascotrl.eval.cadence import month_end_mask
 
     n_dates = 80
     n_names = 8
@@ -119,7 +119,7 @@ def test_load_lake_dyn_hrp_monthly_keeps_legacy_universe_coupling(monkeypatch, t
     )
     monkeypatch.setattr(es, "resolve_lake_root", lambda cfg: tmp_path)
     monkeypatch.setattr(
-        "src.data.equity_panel.load_sp500_security_returns",
+        "mascotrl.data.equity_panel.load_sp500_security_returns",
         lambda lake, start, end: raw,
     )
     monkeypatch.setattr(
@@ -140,7 +140,7 @@ def test_load_lake_dyn_hrp_monthly_keeps_legacy_universe_coupling(monkeypatch, t
         slots = [[secids[i % n_names] for i in range(k)] for _ in range(t)]
         return slots, np.ones((t, k), dtype=bool), []
 
-    import src.data.dynamic_universe as du
+    import mascotrl.data.dynamic_universe as du
 
     monkeypatch.setattr(du, "build_dynamic_universe", _capture)
     monkeypatch.setattr(

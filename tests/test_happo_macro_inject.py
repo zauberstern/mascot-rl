@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.spectrum.happo_macro_inject import (
+from mascotrl.spectrum.happo_macro_inject import (
     HAPPO_USB_COLS,
     happo_usb_macro_enabled,
     maybe_load_happo_macro,

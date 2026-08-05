@@ -7,7 +7,7 @@ import torch
 pytest.importorskip("stable_baselines3")
 pytest.importorskip("gymnasium")
 
-from src.policy.sb3_adapter import (
+from mascotrl.policy.sb3_adapter import (
     PortfolioFeaturesExtractor,
     make_sb3_agent,
     resolve_rl_backend,

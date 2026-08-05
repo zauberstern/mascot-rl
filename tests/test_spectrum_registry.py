@@ -5,7 +5,7 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.spectrum.registry import (
+from mascotrl.spectrum.registry import (
     AXES,
     SpectrumOption,
     allowed_ids,
@@ -63,7 +63,7 @@ def test_reference_defaults_are_simple_proven() -> None:
 
 
 def test_portfolio_arms_opt_eq_mix() -> None:
-    from src.spectrum.registry import PORTFOLIO_ARM_IDS, PORTFOLIO_ARMS, validate_portfolio_arm
+    from mascotrl.spectrum.registry import PORTFOLIO_ARM_IDS, PORTFOLIO_ARMS, validate_portfolio_arm
 
     assert PORTFOLIO_ARM_IDS == ("opt", "eq", "mix")
     assert {o.id for o in PORTFOLIO_ARMS} == {"opt", "eq", "mix"}

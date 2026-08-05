@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.arms import ArmSpec
-from src.eval.friction import FrictionSpec
-from src.eval.parity_harness import score_benchmark_panel
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import FrictionSpec
+from mascotrl.eval.parity_harness import score_benchmark_panel
 
 
 def _toy_panel(t: int = 80, k: int = 4, seed: int = 0):

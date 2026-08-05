@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.eval.page_hinkley_switch import page_hinkley_switch
+from mascotrl.eval.page_hinkley_switch import page_hinkley_switch
 
 
 def test_page_hinkley_switches_after_crash() -> None:
@@ -47,7 +47,7 @@ def test_page_hinkley_prefix_stable() -> None:
 def test_page_hinkley_no_turbulence_import() -> None:
     import ast
 
-    src = Path(__file__).resolve().parents[1] / "src" / "eval" / "page_hinkley_switch.py"
+    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "eval" / "page_hinkley_switch.py"
     tree = ast.parse(src.read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):

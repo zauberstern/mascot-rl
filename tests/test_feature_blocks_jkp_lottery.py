@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.features.blocks.jkp_lottery import (
+from mascotrl.features.blocks.jkp_lottery import (
     beta_asym,
     build_jkp_lottery_block,
     idio_vol_ff4,

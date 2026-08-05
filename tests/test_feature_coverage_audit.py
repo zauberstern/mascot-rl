@@ -6,13 +6,13 @@ from unittest import mock
 
 import pandas as pd
 
-from src.data.feature_coverage import (
+from mascotrl.data.feature_coverage import (
     CONSUMER_MAP,
     INTENTIONALLY_UNUSED,
     assert_coverage_ok,
     run_coverage_audit,
 )
-from src.data.lseg_overlay import copy_parallel_lseg, ingest_lseg_overlays
+from mascotrl.data.lseg_overlay import copy_parallel_lseg, ingest_lseg_overlays
 
 
 def test_consumer_map_and_unused_disjoint() -> None:
@@ -64,9 +64,9 @@ def test_coverage_audit_on_tmp_lake(tmp_path: Path) -> None:
             "lseg_quoted_spread": [0.01],
         }
     ).to_parquet(macro / "sp500_sec.parquet", index=False)
-    with mock.patch("src.data.feature_coverage.assert_lake_mounted", return_value=tmp_path):
-        with mock.patch("src.data.feature_coverage.FLAT_TABLES", ("macro/sp500_sec.parquet",)):
-            with mock.patch("src.data.feature_coverage.HIVE_TABLES", ()):
+    with mock.patch("mascotrl.data.feature_coverage.assert_lake_mounted", return_value=tmp_path):
+        with mock.patch("mascotrl.data.feature_coverage.FLAT_TABLES", ("macro/sp500_sec.parquet",)):
+            with mock.patch("mascotrl.data.feature_coverage.HIVE_TABLES", ()):
                 report = run_coverage_audit(tmp_path)
     assert report["ok"] is True
     assert report["n_missing"] == 0
@@ -74,7 +74,7 @@ def test_coverage_audit_on_tmp_lake(tmp_path: Path) -> None:
 
 def test_assert_coverage_ok_live_lake() -> None:
     """Live lake must classify every column (mount required)."""
-    from src.data.paths import LAKE_ROOT
+    from mascotrl.data.paths import LAKE_ROOT
 
     if not LAKE_ROOT.exists():
         return
@@ -187,7 +187,7 @@ def test_ingest_copies_corax_and_index_vol_rates(tmp_path: Path) -> None:
 
 
 def test_copy_parallel_lseg_roundtrip(tmp_path: Path) -> None:
-    src = tmp_path / "src.parquet"
+    src = tmp_path / "mascotrl.parquet"
     dest = tmp_path / "dest.parquet"
     pd.DataFrame({"a": [1]}).to_parquet(src, index=False)
     copy_parallel_lseg(src=src, dest=dest)

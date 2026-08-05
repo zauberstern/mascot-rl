@@ -6,7 +6,7 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.policy.single_agent import PPOAgent, compute_gae
+from mascotrl.policy.single_agent import PPOAgent, compute_gae
 
 
 def test_gae_multi_episode_done_blocks_backward_leakage():

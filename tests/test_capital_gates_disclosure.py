@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from src.reporting.capital_gates import KNOWN_UNMODELED_RISKS
+from mascotrl.reporting.capital_gates import KNOWN_UNMODELED_RISKS
 
 ROOT = Path(__file__).resolve().parents[1]
 _SCRIPT_RE = re.compile(r"(?:scripts|src)/[\w./-]+\.py")

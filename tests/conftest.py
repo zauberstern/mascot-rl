@@ -1,8 +1,5 @@
-"""Shared pytest fixtures and import-path bootstrap."""
+"""Shared pytest fixtures."""
 from __future__ import annotations
-
-import sys
-from pathlib import Path
 
 import matplotlib
 import numpy as np
@@ -10,10 +7,6 @@ import pytest
 import torch
 
 matplotlib.use("Agg")
-
-_ROOT = Path(__file__).resolve().parents[1]
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
 
 FLOAT_TOL = dict(abs=1e-6, rel=1e-5)
 """Default tolerance dict for pytest.approx on financial floats."""

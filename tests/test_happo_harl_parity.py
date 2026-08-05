@@ -7,7 +7,7 @@ import pytest
 pytest.importorskip("harl")
 pytest.importorskip("gymnasium")
 
-from src.policy.harl_adapter import (
+from mascotrl.policy.harl_adapter import (
     HARLHAPPOBundle,
     HistoricalArmHARLEnv,
     default_happo_args,

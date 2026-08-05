@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import torch
 
-from src.features.extractor import AlphaFeatureExtractor
-from src.plugins.resolve import _ALLOWED_ACTOR, resolve_plugins
-from src.policy.happo import HAPPOEngine
+from mascotrl.features.extractor import AlphaFeatureExtractor
+from mascotrl.plugins.resolve import _ALLOWED_ACTOR, resolve_plugins
+from mascotrl.policy.happo import HAPPOEngine
 
 
 def test_share_temporal_encoder_shapes_and_fewer_params():

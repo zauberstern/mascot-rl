@@ -41,7 +41,7 @@ def _armed_payload(action_id: str = "act-1") -> str:
 
 
 def test_pinned_image_uri_uses_per_profile_digest(tmp_path: Path) -> None:
-    from src.aws_burst.image_digest import pinned_image_uri
+    from mascotrl.aws_burst.image_digest import pinned_image_uri
 
     cfg = tmp_path / "deploy/aws_burst/config"
     cfg.mkdir(parents=True)
@@ -54,7 +54,7 @@ def test_pinned_image_uri_uses_per_profile_digest(tmp_path: Path) -> None:
 
 
 def test_pinned_image_uri_aborts_when_missing(tmp_path: Path) -> None:
-    from src.aws_burst.image_digest import pinned_image_uri
+    from mascotrl.aws_burst.image_digest import pinned_image_uri
 
     (tmp_path / "deploy/aws_burst/config").mkdir(parents=True)
     with pytest.raises(ValueError, match="image_digest_missing"):
@@ -141,7 +141,7 @@ def test_resume_digest_mismatch_raises() -> None:
 def test_checkpoint_digest_mismatch_raises(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     import torch
 
-    from src.eval.research_alpha_train import _maybe_resume_checkpoint
+    from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint
 
     class _Agent:
         def load_checkpoint_state(self, *_a, **_k):
@@ -181,7 +181,7 @@ def test_checkpoint_digest_mismatch_raises(tmp_path: Path, monkeypatch: pytest.M
 
 def test_sibling_archive_prefix_and_incomplete_ignores_it() -> None:
     from scripts.aws_submit_wave import _incomplete_cells
-    from src.aws_burst.image_digest import sibling_archive_prefix
+    from mascotrl.aws_burst.image_digest import sibling_archive_prefix
 
     ts = "20260825T120000Z"
     assert sibling_archive_prefix("PICK", ts) == f"_archive/PICK_{ts}/"
@@ -207,7 +207,7 @@ def test_sibling_archive_prefix_and_incomplete_ignores_it() -> None:
 
 
 def test_armed_unverified_refuses(tmp_path: Path) -> None:
-    from src.aws_burst.profiles import armed_profiles
+    from mascotrl.aws_burst.profiles import armed_profiles
 
     cfg = tmp_path / "deploy/aws_burst/config"
     cfg.mkdir(parents=True)

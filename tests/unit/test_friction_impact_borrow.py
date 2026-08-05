@@ -5,8 +5,8 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.arms import ArmSpec
-from src.eval.friction import FrictionSpec, apply_costs
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import FrictionSpec, apply_costs
 
 
 def test_impact_c_eq_increases_equity_costs():

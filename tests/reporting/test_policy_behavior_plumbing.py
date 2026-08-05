@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.reporting.policy_behavior import build_policy_behavior
+from mascotrl.reporting.policy_behavior import build_policy_behavior
 
 
 def test_export_populates_regime_fields_when_macro_available() -> None:

@@ -13,8 +13,8 @@ from moto import mock_aws
 
 from scripts import aws_pull_artifacts as pull_mod
 from scripts import aws_submit_wave as submit_mod
-from src.aws_burst.aws_client import BurstClient
-from src.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
+from mascotrl.aws_burst.aws_client import BurstClient
+from mascotrl.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +48,7 @@ def test_s3_put_get_roundtrip(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -
     def _session(profile_name=None, region_name=None):
         return real_session(region_name=region_name or "eu-central-1")
 
-    monkeypatch.setattr("src.aws_burst.aws_client.boto3.Session", _session)
+    monkeypatch.setattr("mascotrl.aws_burst.aws_client.boto3.Session", _session)
     client = BurstClient("volsurf-burst-1", "eu-central-1")
     bucket = "volsurf-burst-1-artifacts"
     client.ensure_bucket(bucket)

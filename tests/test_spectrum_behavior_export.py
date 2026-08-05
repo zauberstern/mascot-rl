@@ -16,7 +16,7 @@ from scripts.run_spectrum_campaign import (
     resolve_spectrum_budget,
     run_cell,
 )
-from src.reporting.policy_behavior import build_policy_behavior, write_policy_behavior
+from mascotrl.reporting.policy_behavior import build_policy_behavior, write_policy_behavior
 
 
 def test_hoist_runner_weights_from_path0() -> None:
@@ -159,7 +159,7 @@ def test_run_cell_hoists_weights_when_runner_nested(tmp_path: Path, monkeypatch)
 
 def test_panel_zscore_produces_nonzero_archetype_scores() -> None:
     """When scoring across 15+ cells, z-scores must be non-zero (RC5)."""
-    from src.reporting.policy_behavior import assign_archetype, score_archetypes
+    from mascotrl.reporting.policy_behavior import assign_archetype, score_archetypes
 
     rng = np.random.default_rng(42)
     rows = []
@@ -202,7 +202,7 @@ def test_panel_zscore_produces_nonzero_archetype_scores() -> None:
 def test_refresh_behavior_exports_panel_rescores(tmp_path: Path, monkeypatch) -> None:
     """refresh_behavior_exports must pass a multi-cell behaviour_panel (RC5)."""
     from scripts import run_spectrum_campaign as camp
-    from src.reporting import policy_behavior as pb
+    from mascotrl.reporting import policy_behavior as pb
 
     captured_panels: list[int] = []
     real = pb.build_policy_behavior
@@ -320,7 +320,7 @@ def test_behaviour_context_rehydrates_panel_and_sleeve(monkeypatch) -> None:
         return list(range(T)), lake_rets, np.zeros((T, 4)), {"panel_source": "lake_sp500_sec"}
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", _fake_lake
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", _fake_lake
     )
 
     art = {

@@ -19,10 +19,10 @@ from tests.conftest import FLOAT_TOL
 
 pytest.importorskip("torch")
 
-from src.policy.cppo import CPPOAgent
-from src.policy.omnisafe_adapter import OmniSafeCPPOAgent
-from src.policy.single_agent import PPOAgent
-from src.policy.sb3_adapter import SB3PPOAgent
+from mascotrl.policy.cppo import CPPOAgent
+from mascotrl.policy.omnisafe_adapter import OmniSafeCPPOAgent
+from mascotrl.policy.single_agent import PPOAgent
+from mascotrl.policy.sb3_adapter import SB3PPOAgent
 
 _SB3_SYNC_MAP = {
     "mlp_extractor.policy_net.0.weight": "actor.0.weight",
@@ -160,7 +160,7 @@ def test_omnisafe_cppo_dual_moves_on_positive_cost():
 
 def test_custom_happo_actor_forward_contract():
     """Custom HAPPO path: deterministic actor means from known weights."""
-    from src.policy.happo import HAPPOEngine
+    from mascotrl.policy.happo import HAPPOEngine
 
     k, d = 2, 4
     engine = HAPPOEngine(
@@ -182,7 +182,7 @@ def test_harl_happo_construction_and_act_when_installed():
     pytest.importorskip("gymnasium")
     import numpy as np
 
-    from src.policy.harl_adapter import HARLHAPPOBundle, default_happo_args
+    from mascotrl.policy.harl_adapter import HARLHAPPOBundle, default_happo_args
 
     bundle = HARLHAPPOBundle(2, obs_dim_per_agent=4, args=default_happo_args())
     obs = [np.ones(4, dtype=np.float32), np.ones(4, dtype=np.float32)]

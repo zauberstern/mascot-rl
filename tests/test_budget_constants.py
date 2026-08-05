@@ -8,8 +8,8 @@ import pytest
 pytestmark = pytest.mark.plumbing
 from tests.conftest import FLOAT_TOL
 
-from src.aws_burst.cost_model import affordable_frontier, refuse_submit_if_unsafe
-from src.aws_burst.profiles import (
+from mascotrl.aws_burst.cost_model import affordable_frontier, refuse_submit_if_unsafe
+from mascotrl.aws_burst.profiles import (
     BUDGET_USD,
     BURST_PROFILES,
     CREDIT_USD,
@@ -68,7 +68,7 @@ def test_guardrails_default_budget_180() -> None:
 
 
 def test_deploy_batch_default_maxvcpus_matches_sot() -> None:
-    from src.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
+    from mascotrl.aws_burst.profiles import MAX_VCPUS_PER_ACCOUNT
 
     text = (ROOT / "deploy/aws_burst/scripts/aws_deploy_batch.sh").read_text(
         encoding="utf-8"

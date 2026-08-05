@@ -4,7 +4,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from src.features.pit_universe import option_pit_filter_mask
+from mascotrl.features.pit_universe import option_pit_filter_mask
 
 
 def test_option_pit_filters_spread_and_liquidity():

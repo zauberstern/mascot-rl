@@ -4,13 +4,13 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.policy.rasp_locks import (
+from mascotrl.policy.rasp_locks import (
     MESSAGE_IDS,
     apply_rasp_defaults,
     assert_mask_honesty,
     assert_rasp_locks,
 )
-from src.spectrum.registry import validate_cfg
+from mascotrl.spectrum.registry import validate_cfg
 
 
 def _base(**overrides: object) -> dict:

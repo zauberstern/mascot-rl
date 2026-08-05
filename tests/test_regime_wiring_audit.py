@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.eval.regime_wiring_audit import (
+from mascotrl.eval.regime_wiring_audit import (
     FIGURE_CRITICAL_CONNECTED,
     audit_regime_wiring,
 )
@@ -84,7 +84,7 @@ def test_fioracle_enabled_yaml_none() -> None:
 
 
 def test_intentional_non_connections_match_audit() -> None:
-    from src.eval.regime_wiring_audit import INTENTIONAL_NON_CONNECTIONS
+    from mascotrl.eval.regime_wiring_audit import INTENTIONAL_NON_CONNECTIONS
 
     report = audit_regime_wiring(ROOT)
     by_id = {row["id"]: row for row in report["rows"]}

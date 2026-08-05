@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data.wrds_enrich import (
+from mascotrl.data.wrds_enrich import (
     build_adv_panel_from_crsp_and_link,
     load_adv_for_secid,
     write_enrichment_parquets,

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import torch
 
-from src.policy.cppo import CPPOAgent
+from mascotrl.policy.cppo import CPPOAgent
 
 
 def test_cppo_duals_update_after_train_epoch():

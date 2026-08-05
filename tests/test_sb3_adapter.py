@@ -7,8 +7,8 @@ import torch
 pytest.importorskip("stable_baselines3")
 pytest.importorskip("gymnasium")
 
-from src.policy.sb3_adapter import make_sb3_agent, resolve_rl_backend
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.sb3_adapter import make_sb3_agent, resolve_rl_backend
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def test_rl_backend_switch_custom_vs_sb3():

@@ -11,7 +11,7 @@ from math import comb
 import pandas as pd
 import pytest
 
-from src.eval.cpcv import CPCVConfig, assign_paths, build_cpcv_folds, group_bounds
+from mascotrl.eval.cpcv import CPCVConfig, assign_paths, build_cpcv_folds, group_bounds
 
 
 def _fold_index_sets(

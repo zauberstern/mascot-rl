@@ -5,8 +5,8 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.spectrum.capacity_probe import probe_universe_capacity
-from src.spectrum.protocol_tiers import apply_protocol_tier, resolve_protocol_tier
+from mascotrl.spectrum.capacity_probe import probe_universe_capacity
+from mascotrl.spectrum.protocol_tiers import apply_protocol_tier, resolve_protocol_tier
 
 
 def test_capacity_refuses_400_when_pool_small() -> None:

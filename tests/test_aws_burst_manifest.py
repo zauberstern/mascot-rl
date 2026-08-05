@@ -5,7 +5,7 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.aws_burst.manifest import build_manifest, manifest_sha256
+from mascotrl.aws_burst.manifest import build_manifest, manifest_sha256
 
 
 def test_manifest_sha_stable() -> None:

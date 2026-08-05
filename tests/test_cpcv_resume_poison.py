@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.eval.campaign_manifest import (
+from mascotrl.eval.campaign_manifest import (
     is_cell_complete,
     load_manifest,
     mark_cell_complete,
@@ -31,7 +31,7 @@ def test_resume_restores_oos_weight_aux(tmp_path: Path) -> None:
     import numpy as np
     import pandas as pd
 
-    from src.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY, group_bounds, run_cpcv
+    from mascotrl.eval.cpcv import CPCVConfig, _CPCV_FOLD_AUX_KEY, group_bounds, run_cpcv
 
     dates = list(pd.bdate_range("2020-01-01", periods=30))
     bounds = group_bounds(dates, 3)

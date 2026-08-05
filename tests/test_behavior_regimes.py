@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from src.reporting import behavior_metrics as bm
+from mascotrl.reporting import behavior_metrics as bm
 
 
 def test_conditional_counts_sum_to_total_days():
@@ -125,11 +125,11 @@ def test_overlay_markov_ignores_isolated_q75_spikes(monkeypatch: pytest.MonkeyPa
     q75_spikes[[5, 8, 12, 15, 20]] = True
 
     monkeypatch.setattr(
-        "src.eval.turbulence.turbulence_index",
+        "mascotrl.eval.turbulence.turbulence_index",
         lambda r, **kwargs: np.ones(t),
     )
     monkeypatch.setattr(
-        "src.eval.turbulence.classify_regime",
+        "mascotrl.eval.turbulence.classify_regime",
         lambda turb, **kwargs: q75_spikes,
     )
 
@@ -143,7 +143,7 @@ def test_overlay_markov_ignores_isolated_q75_spikes(monkeypatch: pytest.MonkeyPa
         }
 
     monkeypatch.setattr(
-        "src.eval.walk_forward_hmm.walk_forward_markov_filter",
+        "mascotrl.eval.walk_forward_hmm.walk_forward_markov_filter",
         _calm_markov,
     )
     out = bm.turbulence_regimes_from_returns(
@@ -159,11 +159,11 @@ def test_overlay_q75_mode_still_promotes(monkeypatch: pytest.MonkeyPatch) -> Non
     existing = np.array(["calm"] * t, dtype=object)
     turb_flags = np.array([True, False] + [False] * 10, dtype=bool)
     monkeypatch.setattr(
-        "src.eval.turbulence.turbulence_index",
+        "mascotrl.eval.turbulence.turbulence_index",
         lambda r, **kwargs: np.ones(t),
     )
     monkeypatch.setattr(
-        "src.eval.turbulence.classify_regime",
+        "mascotrl.eval.turbulence.classify_regime",
         lambda turb, **kwargs: turb_flags,
     )
     out = bm.turbulence_regimes_from_returns(

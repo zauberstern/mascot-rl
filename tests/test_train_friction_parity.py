@@ -4,7 +4,7 @@ import ast
 from pathlib import Path
 import pytest
 from tests.conftest import FLOAT_TOL
-from src.eval.friction import FrictionSpec, assert_friction_parity, friction_spec_from_cfg, scale_friction
+from mascotrl.eval.friction import FrictionSpec, assert_friction_parity, friction_spec_from_cfg, scale_friction
 
 def test_friction_parity_ok_when_multiplier_differs():
     train = FrictionSpec(spec_id='v2_quote_touch', cost_multiplier=1.0)

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.factor_alpha import (
+from mascotrl.eval.factor_alpha import (
     attach_factor_alpha_suite,
     bh_fdr,
     build_bcsz_factors,

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_semantic_tilt_metrics_hand_computed() -> None:
-    from src.eval.semantic_tilt import semantic_tilt_metrics
+    from mascotrl.eval.semantic_tilt import semantic_tilt_metrics
 
     E = np.array([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]], dtype=np.float64)
     W = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]], dtype=np.float64)
@@ -32,7 +32,7 @@ def test_semantic_tilt_metrics_hand_computed() -> None:
 
 
 def test_load_firm_text_map_fallback_chain(tmp_path: Path, monkeypatch) -> None:
-    from src.eval import semantic_tilt as st
+    from mascotrl.eval import semantic_tilt as st
 
     df = pd.DataFrame(
         {
@@ -57,7 +57,7 @@ def test_load_firm_text_map_fallback_chain(tmp_path: Path, monkeypatch) -> None:
 
 
 def test_embed_descriptions_sklearn_fallback() -> None:
-    from src.eval.semantic_tilt import _embed_tfidf_svd
+    from mascotrl.eval.semantic_tilt import _embed_tfidf_svd
 
     texts = ["alpha banking firm", "beta software cloud", "gamma energy utility"]
     mat = _embed_tfidf_svd(texts)
@@ -68,14 +68,14 @@ def test_embed_descriptions_sklearn_fallback() -> None:
 
 
 def test_semantic_tilt_source_not_in_train_cube() -> None:
-    src = (ROOT / "src" / "eval" / "semantic_tilt.py").read_text(encoding="utf-8")
+    src = (ROOT / "src" / "mascotrl" / "eval" / "semantic_tilt.py").read_text(encoding="utf-8")
     assert "interpretation only" in src.lower()
     if "feeds_capital_gates" in src:
         assert "feeds_capital_gates = False" in src or "feeds_capital_gates: False" in src
 
 
 def test_nan_when_empty_embeddings() -> None:
-    from src.eval.semantic_tilt import semantic_tilt_metrics
+    from mascotrl.eval.semantic_tilt import semantic_tilt_metrics
 
     W = np.full((4, 3), 1.0 / 3.0)
     out = semantic_tilt_metrics(W, np.zeros((0, 8)))

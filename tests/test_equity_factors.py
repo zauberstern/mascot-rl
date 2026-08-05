@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.equity_factors import attach_equity_factor_suite, build_equity_factors
+from mascotrl.eval.equity_factors import attach_equity_factor_suite, build_equity_factors
 
 
 def test_build_equity_factors_aligns_mkt_from_mocked_returns():
@@ -19,13 +19,13 @@ def test_build_equity_factors_aligns_mkt_from_mocked_returns():
     )
 
     with patch(
-        "src.eval.equity_factors.load_equity_daily_returns",
+        "mascotrl.eval.equity_factors.load_equity_daily_returns",
         return_value=mkt_raw,
     ), patch(
-        "src.eval.equity_factors.load_cash_daily_returns",
+        "mascotrl.eval.equity_factors.load_cash_daily_returns",
         side_effect=FileNotFoundError("no rf"),
     ), patch(
-        "src.eval.equity_factors._try_load_ff_panel",
+        "mascotrl.eval.equity_factors._try_load_ff_panel",
         return_value=None,
     ):
         df = build_equity_factors(dates, lake_or_path="/unused")

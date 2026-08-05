@@ -9,7 +9,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from src.policy.single_agent import DDPGAgent, DQNAgent, MCPGAgent, RRLAgent
+from mascotrl.policy.single_agent import DDPGAgent, DQNAgent, MCPGAgent, RRLAgent
 
 
 def test_ddpg_actor_head_emits_l1_normalized_weights() -> None:

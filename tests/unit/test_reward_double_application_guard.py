@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.eval.differential_sharpe import DifferentialSharpe
-from src.spectrum import cell_schema
+from mascotrl.eval.differential_sharpe import DifferentialSharpe
+from mascotrl.spectrum import cell_schema
 
 
 @pytest.mark.unit

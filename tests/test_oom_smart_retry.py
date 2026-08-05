@@ -1,8 +1,8 @@
 """Tests for OOM estimate and smart retry."""
 from __future__ import annotations
 
-from src.aws_burst.job_routing import estimate_peak_memory
-from src.aws_burst.smart_retry import classify_batch_failure
+from mascotrl.aws_burst.job_routing import estimate_peak_memory
+from mascotrl.aws_burst.smart_retry import classify_batch_failure
 
 
 def test_estimate_peak_memory_gru_higher_than_mlp() -> None:

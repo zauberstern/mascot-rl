@@ -6,7 +6,7 @@ import math
 import pytest
 import torch
 
-from src.policy.objective_factory import (
+from mascotrl.policy.objective_factory import (
     episode_weights,
     mikkila_asym_reward,
     sdr_composite_reward,

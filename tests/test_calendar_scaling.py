@@ -7,7 +7,7 @@ import pytest
 
 
 def test_periods_per_year_from_dates_matches_grid_density() -> None:
-    from src.eval.calendar_scaling import periods_per_year_from_dates
+    from mascotrl.eval.calendar_scaling import periods_per_year_from_dates
 
     # ~181 observations/year (punctured panel): 894 days over ~4.93 calendar years
     start = pd.Timestamp("2017-02-06")
@@ -21,7 +21,7 @@ def test_periods_per_year_from_dates_matches_grid_density() -> None:
 
 
 def test_periods_per_year_rejects_short_grids() -> None:
-    from src.eval.calendar_scaling import periods_per_year_from_dates
+    from mascotrl.eval.calendar_scaling import periods_per_year_from_dates
 
     dates = pd.date_range("2020-01-01", periods=10, freq="B")
     with pytest.raises(ValueError, match="at least 30"):
@@ -29,7 +29,7 @@ def test_periods_per_year_rejects_short_grids() -> None:
 
 
 def test_eval_panel_meta_reports_coverage_below_intended() -> None:
-    from src.eval.calendar_scaling import eval_panel_meta
+    from mascotrl.eval.calendar_scaling import eval_panel_meta
 
     dates = pd.date_range("2017-02-06", "2022-01-03", periods=894)
     meta = eval_panel_meta(

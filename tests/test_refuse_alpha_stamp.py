@@ -5,7 +5,7 @@ import copy
 
 import pytest
 
-from src.eval.gate_ladder import refuse_alpha_stamp
+from mascotrl.eval.gate_ladder import refuse_alpha_stamp
 
 
 def _ok_report() -> dict:

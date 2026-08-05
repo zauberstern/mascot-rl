@@ -254,7 +254,7 @@ def audit_regime_wiring(repo_root: Path | str) -> dict[str, Any]:
     fs_connected = fs_has_turb or assemble_has_turb
     fs_paths = []
     if fs_has_turb:
-        fs_paths.append("src/eval/fixed_share.py")
+        fs_paths.append("src/mascotrl/eval/fixed_share.py")
     if assemble_has_turb:
         fs_paths.append("scripts/assemble_regime_desk.py")
     rows.append(
@@ -331,7 +331,7 @@ def audit_regime_wiring(repo_root: Path | str) -> dict[str, Any]:
     ):
         seal_hits.append("scripts/assemble_regime_desk.py")
     if (root / "src" / "eval" / "regime_desk_seal.py").is_file():
-        seal_hits.append("src/eval/regime_desk_seal.py")
+        seal_hits.append("src/mascotrl/eval/regime_desk_seal.py")
     rows.append(
         _row(
             id="seal_to_regime_desk",

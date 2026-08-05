@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.eval.policy_diagnostics import selection_vs_sizing_attribution
+from mascotrl.eval.policy_diagnostics import selection_vs_sizing_attribution
 
 
 def test_three_legs_sum_to_total():

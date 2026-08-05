@@ -1,13 +1,13 @@
 """Plain-name claim category aliases and glossary."""
 from __future__ import annotations
 
-from src.reporting.claim_language import (
+from mascotrl.reporting.claim_language import (
     CLAIM_CATEGORY_DH_OPTION_ALLOCATOR,
     CLAIM_CATEGORY_RANK1,
     stamp_dh_option_allocator_claim_category,
     stamp_rank1_claim_category,
 )
-from src.reporting.claim_stamps import (
+from mascotrl.reporting.claim_stamps import (
     apply_dh_option_allocator_claim_gates,
     apply_rank1_claim_gates,
 )

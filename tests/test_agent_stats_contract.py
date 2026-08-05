@@ -6,7 +6,7 @@ import math
 import pytest
 import torch
 
-from src.policy.single_agent import make_single_agent
+from mascotrl.policy.single_agent import make_single_agent
 
 
 _REQUIRED = ("loss", "rl_backend", "optimizer_steps")
@@ -105,7 +105,7 @@ def test_sb3_recurrent_ppo_no_act_and_logp_raw():
     Construct via make_sb3_agent directly (make_single_agent falls back to custom).
     """
     pytest.importorskip("sb3_contrib")
-    from src.policy.sb3_adapter import make_sb3_agent
+    from mascotrl.policy.sb3_adapter import make_sb3_agent
 
     agent = make_sb3_agent(
         "ppo_recurrent", obs_dim=12, action_dim=2, num_assets=2, seq_len=2
@@ -121,7 +121,7 @@ def test_sb3_recurrent_train_research_hist_no_typeerror():
     """GRU under default sb3 falls back to custom (RecurrentPPO train stubbed)."""
     import numpy as np
 
-    from src.eval.research_alpha_train import train_research_hist
+    from mascotrl.eval.research_alpha_train import train_research_hist
 
     rng = np.random.default_rng(0)
     t, k = 24, 2

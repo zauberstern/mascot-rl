@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.reporting.provenance import (
+from mascotrl.reporting.provenance import (
     REQUIRED_CLAIM_FIELDS,
     REQUIRED_REPORT_FIELDS,
     RunManifest,

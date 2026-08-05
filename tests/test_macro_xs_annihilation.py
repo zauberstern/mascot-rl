@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.assemble import assemble_equity_feature_cube
+from mascotrl.features.blocks.assemble import assemble_equity_feature_cube
 
 
 def test_macro_survives_default_normalize() -> None:

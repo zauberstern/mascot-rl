@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.eval.hold_leader import hold_leader, rolling_leader
+from mascotrl.eval.hold_leader import hold_leader, rolling_leader
 
 
 def test_hold_leader_locks_dominant_after_review() -> None:
@@ -66,7 +66,7 @@ def test_rolling_leader_concentrates_on_dominant() -> None:
 def test_hold_leader_no_turbulence_import() -> None:
     import ast
 
-    src = Path(__file__).resolve().parents[1] / "src" / "eval" / "hold_leader.py"
+    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "eval" / "hold_leader.py"
     tree = ast.parse(src.read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):

@@ -6,7 +6,7 @@ import pytest
 
 
 def test_feature_nan_diagnostics_pass_at_threshold() -> None:
-    from src.eval.feature_nan_diagnostics import feature_nan_diagnostics
+    from mascotrl.eval.feature_nan_diagnostics import feature_nan_diagnostics
 
     # 100 dates, 5 names, 1 channel; exactly 20 all-NaN dates
     cube = np.ones((100, 5, 1), dtype=np.float64)
@@ -19,7 +19,7 @@ def test_feature_nan_diagnostics_pass_at_threshold() -> None:
 
 
 def test_feature_nan_diagnostics_fail_above_threshold() -> None:
-    from src.eval.feature_nan_diagnostics import (
+    from mascotrl.eval.feature_nan_diagnostics import (
         assert_feature_nan_ok,
         feature_nan_diagnostics,
     )

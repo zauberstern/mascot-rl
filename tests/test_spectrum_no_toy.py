@@ -13,7 +13,7 @@ def test_no_dry_run_refuses_toy_without_flag(monkeypatch) -> None:
         raise FileNotFoundError("lake missing in unit test")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", _boom
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", _boom
     )
     cfg = {
         "algo": "ppo",
@@ -38,7 +38,7 @@ def test_allow_toy_panel_stamps_artifact(monkeypatch) -> None:
         raise FileNotFoundError("lake missing in unit test")
 
     monkeypatch.setattr(
-        "src.eval.equity_substrate.load_lake_dyn_hrp_panel", _boom
+        "mascotrl.eval.equity_substrate.load_lake_dyn_hrp_panel", _boom
     )
 
     def fake_cpcv(*_a, **_k):
@@ -49,7 +49,7 @@ def test_allow_toy_panel_stamps_artifact(monkeypatch) -> None:
         }
 
     monkeypatch.setattr(
-        "src.eval.research_alpha_cpcv.run_research_alpha_cpcv", fake_cpcv
+        "mascotrl.eval.research_alpha_cpcv.run_research_alpha_cpcv", fake_cpcv
     )
     cfg = {
         "algo": "ppo",

@@ -7,7 +7,7 @@ import re
 import numpy as np
 import pytest
 
-from src.reporting import behavior_metrics as bm
+from mascotrl.reporting import behavior_metrics as bm
 
 
 def _fixture_5x4():

@@ -41,7 +41,7 @@ def test_arm_options_and_mix_exist():
 
 
 def test_arm_equity_passes_turnover_honesty() -> None:
-    from src.eval.yaml_honesty import assert_turnover_cap_honesty
+    from mascotrl.eval.yaml_honesty import assert_turnover_cap_honesty
 
     cfg = _load("arm_equity.yaml")
     out = assert_turnover_cap_honesty(cfg)
@@ -51,7 +51,7 @@ def test_arm_equity_passes_turnover_honesty() -> None:
 
 def test_eq_alloc_refuses_decorative_turnover_limit_under_soft():
     """turnover_limit may only be advertised when projection_mode is hard."""
-    from src.eval.yaml_honesty import assert_turnover_cap_honesty
+    from mascotrl.eval.yaml_honesty import assert_turnover_cap_honesty
 
     assert_turnover_cap_honesty({"projection_mode": "hard", "turnover_limit": 0.15})
     with pytest.raises(AssertionError, match="turnover_limit"):

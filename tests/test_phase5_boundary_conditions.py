@@ -13,8 +13,8 @@ import torch
 pytest.importorskip("stable_baselines3")
 pytest.importorskip("gymnasium")
 
-from src.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
-from src.policy.single_agent import make_single_agent
+from mascotrl.eval.research_alpha_train import _maybe_resume_checkpoint, _save_checkpoint
+from mascotrl.policy.single_agent import make_single_agent
 
 
 def _policy_params(agent) -> list[torch.Tensor]:
@@ -81,7 +81,7 @@ def test_act_batch_size_1_and_gt1(algo: str, backend: str, batch: int):
 
 
 def test_dqn_raw_to_weights_all_zero():
-    from src.policy.single_agent import DQNAgent
+    from mascotrl.policy.single_agent import DQNAgent
 
     agent = DQNAgent(obs_dim=4, action_dim=3, lr=1e-3)
     w = agent.raw_to_weights(torch.zeros(2, 3))

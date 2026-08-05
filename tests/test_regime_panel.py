@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.eval.regime_return_panel import (
+from mascotrl.eval.regime_return_panel import (
     GICS_SECTOR_TO_KPT10,
     KPT10_NAMES,
     SIC_TO_KPT10,
@@ -186,11 +186,11 @@ def test_gics_below_coverage_gate_returns_none(tmp_path: Path) -> None:
 
 def test_jaccard_sic_vs_gics_operational_report_only() -> None:
     """Report-only helper returns a finite Jaccard in [0, 1]; self-overlap is 1."""
-    from src.eval.regime_scorecard import (
+    from mascotrl.eval.regime_scorecard import (
         jaccard_sic_vs_gics_operational,
         operational_markov_mask_from_returns,
     )
-    from src.eval.walk_forward_hmm import jaccard_turbulent
+    from mascotrl.eval.walk_forward_hmm import jaccard_turbulent
 
     rng = np.random.default_rng(0)
     t, k = 400, 10

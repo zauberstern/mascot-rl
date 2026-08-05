@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.features.blocks.cross_section import apply_cross_section_normalize
-from src.features.blocks.normalize import expanding_causal_zscore, normalize_cross_section_panel
+from mascotrl.features.blocks.cross_section import apply_cross_section_normalize
+from mascotrl.features.blocks.normalize import expanding_causal_zscore, normalize_cross_section_panel
 
 
 def _truncation_invariant(fn, x: np.ndarray, *, min_obs: int = 2) -> None:

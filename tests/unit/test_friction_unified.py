@@ -6,8 +6,8 @@ import pytest
 from tests.conftest import FLOAT_TOL
 import torch
 
-from src.arms import ArmSpec
-from src.eval.friction import FrictionBreakdown, FrictionSpec, apply_costs
+from mascotrl.arms import ArmSpec
+from mascotrl.eval.friction import FrictionBreakdown, FrictionSpec, apply_costs
 
 
 def test_status_quo_arm_none_produces_finite_net():

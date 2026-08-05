@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def test_wide_returns_availability_keeps_full_calendar_span() -> None:
-    from src.eval.equity_substrate import _wide_returns_with_availability
+    from mascotrl.eval.equity_substrate import _wide_returns_with_availability
 
     dates = pd.bdate_range("2014-01-02", "2014-03-31")
     rows = []

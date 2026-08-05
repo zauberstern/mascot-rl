@@ -5,8 +5,8 @@ import pytest
 
 pytestmark = pytest.mark.plumbing
 
-from src.reporting.capital_gates import assert_protocol_provenance
-from src.reporting.claim_language import (
+from mascotrl.reporting.capital_gates import assert_protocol_provenance
+from mascotrl.reporting.claim_language import (
     CLAIM_CATEGORY_DH_OPTION_ALLOCATOR,
     CLAIM_CATEGORY_RANK1,
     PROTOCOL_NOTE_NESTED_WFO,
@@ -62,18 +62,18 @@ def test_spa_do_not_claim_constant() -> None:
 
 
 def test_publication_exports_spa_constant() -> None:
-    from src.eval import publication
+    from mascotrl.eval import publication
 
     assert hasattr(publication, "SPA_DO_NOT_CLAIM") or "SPA_DO_NOT_CLAIM" in dir(
         publication
     ) or SPA_DO_NOT_CLAIM
     # Behavioral: publication module can import the honesty constant.
-    from src.reporting.claim_language import SPA_DO_NOT_CLAIM as _spa
+    from mascotrl.reporting.claim_language import SPA_DO_NOT_CLAIM as _spa
 
     assert _spa == SPA_DO_NOT_CLAIM
 
 
 def test_no_deep_hedge_category_constant() -> None:
-    import src.reporting.claim_language as cl
+    import mascotrl.reporting.claim_language as cl
 
     assert not hasattr(cl, "CLAIM_CATEGORY_DEEP_HEDGE")

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import math
 
-from src.reporting.claim_stamps import stamp_research_positive_alpha
+from mascotrl.reporting.claim_stamps import stamp_research_positive_alpha
 
 
 def _green_report(**overrides):

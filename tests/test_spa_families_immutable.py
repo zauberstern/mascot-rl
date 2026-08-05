@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.eval.publication import SPA_FAMILIES
+from mascotrl.eval.publication import SPA_FAMILIES
 
 
 def test_spa_families_immutable_tuple_includes_best_single_agent_rl():

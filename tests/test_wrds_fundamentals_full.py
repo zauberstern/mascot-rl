@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from src.data.wrds_enrich import FUNDA_FULL_COLUMNS, project_spine_compustat_funda
+from mascotrl.data.wrds_enrich import FUNDA_FULL_COLUMNS, project_spine_compustat_funda
 
 
 def test_project_spine_compustat_funda_inner_join_secid() -> None:
