@@ -206,21 +206,19 @@ def test_markov_failed_fit_reuses_last_checkpoint(monkeypatch: pytest.MonkeyPatc
 
     from mascotrl.eval.walk_forward_hmm import walk_forward_markov_filter
 
-    rng = np.random.default_rng(7)
-    t = 520
-    x = rng.normal(1.0, 0.3, size=t)
-    x[260:380] = rng.normal(8.0, 1.5, size=120)
+    x = _planted_turbulence_series(t=520, seed=7)
+    t = x.shape[0]
     window, step = 250, 21
 
     real_fit = sm.tsa.MarkovRegression.fit
-    call_count = {"n": 0}
+    seen_success = {"ok": False}
 
     def _flaky_fit(self, *args, **kwargs):
-        call_count["n"] += 1
-        # First successful train window fits; subsequent window fits raise.
-        if call_count["n"] > 1:
+        if seen_success["ok"]:
             raise RuntimeError("planted_fit_failure")
-        return real_fit(self, *args, **kwargs)
+        res = real_fit(self, *args, **kwargs)
+        seen_success["ok"] = True
+        return res
 
     monkeypatch.setattr(sm.tsa.MarkovRegression, "fit", _flaky_fit)
     out = walk_forward_markov_filter(
