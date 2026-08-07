@@ -1,13 +1,4 @@
-"""
-Run provenance: seed/config manifest and artifact schema assertions.
-
-A referee (and a replication attempt) needs to know exactly what produced a
-number: the config, the seeds, the code version, the library versions, and the
-protocol switches that gate the claim. This module freezes that into one
-artifact per run and validates that the report carries the fields the paper's
-tables depend on, so a missing field fails loudly at write time instead of
-silently becoming a blank cell.
-"""
+"""Run provenance: config/seeds manifest and report schema checks."""
 from __future__ import annotations
 
 import hashlib
@@ -25,15 +16,12 @@ from mascotrl.logging_utils import get_logger
 
 log = get_logger("mascotrl.reporting.provenance")
 
-# Report fields the paper's headline tables read. Missing any of these means a
-# table cell would be blank or, worse, silently defaulted.
 REQUIRED_REPORT_FIELDS: tuple[str, ...] = (
     "eval_protocol",
     "train_distribution",
     "n_assets",
 )
 
-# Fields required specifically to support a published alpha claim.
 REQUIRED_CLAIM_FIELDS: tuple[str, ...] = (
     "deflated_sharpe_oos",
     "hac_inference_oos",
@@ -72,14 +60,14 @@ def _package_versions() -> dict[str, str]:
 
 
 def config_hash(cfg: dict[str, Any]) -> str:
-    """Stable SHA-256 over the config, so two runs can be proven identical."""
+    """SHA-256 over sorted config JSON."""
     payload = json.dumps(cfg, sort_keys=True, default=str)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 @dataclass
 class RunManifest:
-    """Everything needed to re-run and to audit what produced the numbers."""
+    """Per-run config, seeds, code, and environment stamp."""
 
     run_label: str
     cfg: dict[str, Any] = field(default_factory=dict)
@@ -165,14 +153,7 @@ def validate_report_schema(
     require_claim_fields: bool = False,
     strict: bool = False,
 ) -> dict[str, Any]:
-    """
-    Check the report carries the fields the paper's tables read.
-
-    ``require_claim_fields`` additionally demands the evidence needed to publish
-    an alpha claim. With ``strict`` the function raises; otherwise it returns the
-    result so the caller can record it and continue (useful for smoke runs that
-    intentionally skip publication stages).
-    """
+    """Validate required report fields; optional claim evidence with ``strict`` raise."""
     missing = [f for f in REQUIRED_REPORT_FIELDS if report.get(f) is None]
     missing_claim: list[str] = []
     if require_claim_fields:
