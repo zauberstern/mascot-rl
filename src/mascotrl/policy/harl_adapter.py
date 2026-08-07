@@ -1,13 +1,6 @@
-"""HARL HAPPO adapter for MascotRL multi-agent spectrum cells.
+"""HARL HAPPO adapter: multi-agent wrapper around HistoricalArmEnv.
 
-HARL (PKU-MARL) is the official HAPPO reference. This module:
-
-1. Builds one continuous-action HARL ``HAPPO`` actor per asset/agent.
-2. Exposes a Gymnasium-style multi-agent env wrapper around
-   ``HistoricalArmEnv`` matching HARL's ``reset`` / ``step`` contract.
-3. Preserves **sequential** per-agent updates (agent 0 before agent 1, …).
-
-Portfolio weight-head + cvxpy projection stay in MascotRL (outside HARL).
+Sequential per-agent updates; weight-head + cvxpy projection stay in MascotRL.
 Enable via cell YAML ``use_harl: true``.
 """
 from __future__ import annotations
