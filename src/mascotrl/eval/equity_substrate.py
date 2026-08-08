@@ -1,9 +1,7 @@
-"""Shared equity observation substrate (H0 / spectrum parity).
+"""Shared equity observation substrate for spectrum / H0 parity.
 
-Spectrum MLP cells historically fell back to raw returns while H0 ran a
-feature cube + geometry_lite surface on lake ``sp500_sec`` + ``dyn_hrp``.
-This module is the single attach/load contract both campaigns must use so
-those paths cannot silently diverge again.
+Single attach/load contract for feature cube + geometry_lite surface on
+``sp500_sec`` + ``dyn_hrp`` so campaigns cannot silently diverge.
 """
 from __future__ import annotations
 
