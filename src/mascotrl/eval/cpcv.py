@@ -1,25 +1,9 @@
 """
-Combinatorial Purged Cross-Validation for the option panel.
+Combinatorial Purged Cross-Validation (Lopez de Prado AFML ch. 7/12).
 
-Implements the protocol of Lopez de Prado, *Advances in Financial Machine
-Learning* (Wiley, 2018), chapters 7 and 12:
-
-  * partition the trading calendar into ``n_splits`` contiguous groups;
-  * take every combination of ``n_test_groups`` groups as a test set, giving
-    ``C(n_splits, n_test_groups)`` folds;
-  * **purge** training observations whose label horizon overlaps a test group;
-  * **embargo** a buffer immediately after each test group;
-  * reassemble the folds into ``C(n-1, k-1)`` time-ordered backtest *paths*.
-
-Why this replaces a single walk-forward: one historical path yields one Sharpe
-with no sampling distribution, so robustness and path dependence cannot be
-assessed, and the deflated Sharpe has no credible trial variance to work with.
-CPCV yields a distribution of out-of-sample paths from the same data.
-
-Scope note for the paper: CPCV controls leakage and parameter overfitting on a
-single strategy definition. It does **not** correct for meta-overfitting across
-many strategy ideas; that is what the trial ledger and the deflated Sharpe are
-for.
+Purge overlapping label horizons, embargo after test groups, reconstruct paths.
+Not a substitute for nested WFO: CPCV yields a path distribution; single WFO
+yields one Sharpe with no sampling variance for DSR.
 """
 from __future__ import annotations
 
@@ -51,12 +35,7 @@ log = get_logger("mascotrl.eval.cpcv")
 
 @dataclass(frozen=True)
 class CPCVConfig:
-    """
-    CPCV geometry.
-
-    Defaults (6 groups, 2 test groups) give 15 folds and 5 reconstructed paths,
-    which is the standard worked configuration in AFML ch. 12.
-    """
+    """CPCV geometry (default 6 splits, 2 test groups)."""
 
     n_splits: int = 6
     n_test_groups: int = 2
