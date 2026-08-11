@@ -1,19 +1,7 @@
-"""Point-in-time guards for universe selection and evaluation windows.
+"""PIT guards for universe selection vs evaluation windows.
 
-Historically the universe was frozen once (the policy has a fixed asset count
-K). A frozen universe is acceptable only if the evaluation window used for the
-headline claim begins **after** the selection window ends; otherwise names are
-chosen with information from inside the period being scored.
-
-Time-varying membership under the same fixed K is now supported via slot
-masking (``src.data.slot_mask``): K slots stay fixed, PIT-eligible names fill
-slots at each rebalance, and inactive slots are zeroed in weights and labels.
-Under that design, ``selection_pit_status`` should still be clean for every
-phase (each rebalance uses only a trailing window).
-
-These helpers make the frozen-universe PIT condition machine-checked and
-reportable instead of a prose caveat; they are unchanged for callers that keep
-a frozen universe.
+Frozen universe: eval must start after selection ends. Slot-masked fixed-K:
+PIT-eligible names fill slots each rebalance; inactive slots zeroed.
 """
 from __future__ import annotations
 
@@ -29,16 +17,7 @@ def selection_pit_status(
     phase: str,
     universe_protocol: str = "frozen",
 ) -> dict[str, Any]:
-    """
-    Whether ``phase`` is free of universe-selection look-ahead.
-
-    Under ``universe_protocol="frozen"``, clean when the evaluation window
-    starts strictly after the last date used to select the universe.
-
-    Under ``universe_protocol="slot_masked"``, membership is re-selected at each
-    rebalance from a trailing PIT window only, so every phase is clean by
-    construction (unused slots are zeroed via the validity mask).
-    """
+    """PIT-clean when eval starts after universe selection (or slot-masked)."""
     protocol = str(universe_protocol or "frozen").lower().strip()
     if protocol in {"slot_masked", "slot-masking", "slotmask"}:
         return {
@@ -102,13 +81,7 @@ def membership_filter(
     rows: list[dict],
     members: set[str],
 ) -> tuple[list[dict], dict[str, Any]]:
-    """
-    Restrict candidate universe rows to index members, with a coverage record.
-
-    An empty ``members`` set means the snapshot was unavailable; rows pass
-    through unchanged and the record says membership was not enforced, so the
-    limitation is disclosed rather than hidden.
-    """
+    """Filter rows to index members; empty ``members`` passes through with disclosure."""
     if not members:
         return list(rows), {
             "enforced": False,
