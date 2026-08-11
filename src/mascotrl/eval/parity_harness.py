@@ -1,18 +1,7 @@
-"""Estimand parity harness: identical economic object for policy and peers.
+"""Estimand parity harness: policy and peers share HistoricalArmEnv stepping.
 
-Every strategy (RL policy, industry benchmark, OLPS) is scored by stepping
-``HistoricalArmEnv`` so friction, borrow, RF, and FF4 residualization are
-byte-identical by construction rather than by convention.
-
-Dual scorecard (user decision 2026-08-07):
-- ``total_net`` = gross - cost - borrow - rf   (headline)
-- ``residual``  = total_net - beta · factors   (co-primary)
-
-Every scored series carries an ``estimand_hash`` (and ``estimand_hash_residual``)
-that binds friction, cadence, universe, residualizer, rebalance mask, and the
-scorecard column itself, so two series with the same hash are guaranteed to be
-comparable and two series compared by a statistic (SPA, Romano-Wolf, ...) must
-carry the same scorecard label (see :func:`assert_same_scorecard`).
+Dual scorecard: ``total_net`` (headline) and ``residual`` (co-primary).
+``estimand_hash`` binds friction, cadence, universe, residualizer, and scorecard.
 """
 from __future__ import annotations
 
@@ -76,21 +65,10 @@ def estimand_hash(
     reward: str | None = None,
     feature_channels: Sequence[str] | None = None,
 ) -> str:
-    """Stable SHA-256 of the locked estimand contract.
-
-    ``cadence`` is mandatory: callers must resolve an explicit cadence label
-    rather than let it be inferred from mask density (see A7 in the surface
-    alpha rebuild dossier). ``scorecard`` distinguishes ``total_net`` from
-    ``residual`` so the two columns are never silently comparable.
-    """
+    """SHA-256 of estimand contract; ``cadence`` and ``scorecard`` are mandatory."""
     if not cadence:
         raise ValueError("estimand_hash requires an explicit non-empty cadence")
-    # The residualizer only enters the "residual" scorecard's computation
-    # (total_net = gross - cost - borrow - rf never touches factor betas), so
-    # binding its identity into the total_net hash would make an otherwise
-    # identical total_net series across a policy and a benchmark panel
-    # non-uniform purely because they happen to freeze differently labeled
-    # residualizer fits. Scope residualizer identity to scorecard=="residual".
+    # Residualizer identity only in residual scorecard hash (not total_net).
     resid_fold_id = ""
     resid_model = ""
     if str(scorecard) == "residual" and residualizer is not None:
