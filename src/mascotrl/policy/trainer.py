@@ -26,12 +26,10 @@ class TrainBatch:
     rewards: torch.Tensor
     dones: torch.Tensor  # legacy: terminated OR truncated (compat)
     raw_actions: torch.Tensor | None = None  # (T, K) pre-projection samples
-    # WP1: Pardo / Gymnasium — GAE masks on terminated only; truncations bootstrap.
+    # WP1: GAE masks terminated only; truncations bootstrap.
     terminateds: torch.Tensor | None = None
     truncateds: torch.Tensor | None = None
-    # Genuine V(s_T) after last transition (None → 0.0)
     last_value: float | None = None
-    # WP6: per-step constraint costs C(s,a)
     costs: torch.Tensor | None = None
     cost_values: torch.Tensor | None = None
     last_cost_value: float | None = None
@@ -83,20 +81,7 @@ def _k3_kl(logratio: torch.Tensor) -> torch.Tensor:
 
 
 class HAPPOTrainer:
-    """
-    HAPPO-style sequential factorized PPO (Kuba Algorithm 3).
-
-    Ordering (Alg 3):
-      L7  compute advantages once from pre-update critic
-      L8  draw random agent permutation (once per update)
-      L9  M = A-hat
-      L10-13 sequential PPO-clip actor updates with M compounding
-      L14 critic update AFTER the actor loop
-
-    Multi-epoch PPO ratios always against fixed rollout log-probs (π_old).
-
-    TeamTR occupancy mitigation is engineering (not Kuba) and defaults OFF.
-    """
+    """Sequential factorized PPO (Kuba Alg 3): advantages, permuted actor loop, critic last."""
 
     def __init__(
         self,
