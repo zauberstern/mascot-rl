@@ -1,9 +1,4 @@
-"""Book-grade aesthetic system: unified matplotlib profile for ops book, core suite, tearsheets.
-
-Single visual identity: ``apply_academic_rc`` delegates to ``figure_style.apply_figure_rc``.
-Includes Okabe-Ito color constants, figure helpers, family palette, validators, and
-``save_pdf_png`` / ``use_agg`` for spectrum figure suites.
-"""
+"""Unified matplotlib profile for ops book, core suite, and tearsheets."""
 from __future__ import annotations
 
 import re
