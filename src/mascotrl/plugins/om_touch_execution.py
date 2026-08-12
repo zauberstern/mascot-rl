@@ -11,34 +11,13 @@ from dataclasses import dataclass
 import torch
 
 
-# Fraction of the quoted half-spread actually paid. Muravyev and Pearson
-# (2020, RFS 33(11)) find conventional effective spreads overstate the cost of
-# taking liquidity: the average effective spread is about one quarter smaller
-# than conventional measures, and under 40% for traders who time executions.
-# The full quoted half-spread (1.0) is therefore an upper bound, not a estimate.
+# Muravyev & Pearson (2020): effective spread ~0.75x quoted; 1.0 is upper bound.
 SPREAD_MULTIPLIER_LADDER: tuple[float, ...] = (0.0, 0.25, 0.50, 1.0)
 
 
 @dataclass
 class OMTouchCost:
-    """
-    Per-step touch cost from half-spreads.
-
-    ``half_spreads``: (B, K) or (K,) absolute price half-spreads in the same
-    units as mid (the lake column is already a half-spread; do not halve again).
-
-    ``capital_base``: (B, K) or (K,) dollars of invested capital per unit of the
-    traded package — for delta-hedged options this is (Δ·S − C). Weights are
-    fractions of capital, so a dollar half-spread must be divided by the capital
-    base to land in return units::
-
-        cost_i = |Δw_i| * half_spread_i / capital_base_i
-
-    Omitting ``capital_base`` reverts to the legacy dollar-P&L convention, which
-    is only unit-correct when weights are contract counts.
-
-    ``spread_multiplier`` scales the quoted half-spread for the cost ladder.
-    """
+    """Per-step touch cost from half-spreads (return units when ``capital_base`` set)."""
 
     enabled: bool = False
     fee_bps: float = 0.0
