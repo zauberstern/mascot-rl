@@ -94,16 +94,7 @@ _BACKEND_CTORS = {
 
 # @lat: [[core#Feature extractor]]
 class AlphaFeatureExtractor(nn.Module):
-    """
-    Combines independent per-asset temporal blocks with optional DHGNN.
-    Produces Enriched States (E_i) for the HAPPO Policy Engine.
-
-    Spectrum knobs:
-      - temporal_backend: mlp | gru | lstm | transformer | mamba
-      - use_dhgnn: if False, skip spatial hypergraph (identity pass on Z)
-      - share_temporal_encoder: one temporal block applied to all assets
-        (eq_alloc default; ModuleList remains the status-quo ablation)
-    """
+    """Per-asset temporal blocks + optional DHGNN; outputs enriched states for HAPPO."""
 
     def __init__(
         self,
