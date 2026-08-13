@@ -17,7 +17,13 @@ _REF = Path(__file__).resolve().parents[1] / "library_research" / "mcpg_referenc
 
 def test_mcpg_uses_gae_lambda_one_pure_mc():
     """MCPGAgent must use undiscounted-bootstrap MC (lambda=1), not PPO's 0.95."""
-    src = Path(__file__).resolve().parents[1] / "src" / "mascotrl" / "policy" / "single_agent.py"
+    src = (
+        Path(__file__).resolve().parents[1]
+        / "src"
+        / "mascotrl"
+        / "policy"
+        / "single_agent_agents.py"
+    )
     tree = ast.parse(src.read_text(encoding="utf-8"))
     found = False
     for node in ast.walk(tree):
