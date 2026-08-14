@@ -39,5 +39,6 @@ from mascotrl.data.surface_signals_lake import (
 
 # Private re-exports for tests and internal callers.
 from mascotrl.data.surface_signals_cache import _canonical_secid_key  # noqa: F401
+from mascotrl.data.surface_signals_extract import _mf_moments_at_days  # noqa: F401
 from mascotrl.data.surface_signals_lake import _load_vol_surface_raw  # noqa: F401
 
