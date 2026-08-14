@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install package and dev tools
+        run: pip install -e ".[dev]"
+
+      - name: Ruff (crash rules)
+        run: ruff check src tests --select E9,F63,F7,F82
+
+      - name: Pytest with coverage
+        run: >
+          pytest -q -m "not slow" --strict-markers --tb=short
+          --cov=mascotrl --cov-fail-under=79
+
+      - name: Test count floor
+        run: |
+          COUNT=$(pytest --collect-only -q -m "not slow" 2>/dev/null | tail -1 | grep -oE '^[0-9]+' || true)
+          echo "Collected $COUNT not-slow tests"
+          test -n "$COUNT"
+          test "$COUNT" -ge 1987

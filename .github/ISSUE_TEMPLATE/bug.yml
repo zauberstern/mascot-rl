@@ -1,0 +1,39 @@
+name: Bug report
+description: Something broke in tests, install, or a documented workflow
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Include enough detail to reproduce. Do not paste secrets or `.env` contents.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      placeholder: What you expected vs what you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. pip install -e ".[dev]"
+        2. pytest tests/...
+    validations:
+      required: true
+  - type: textarea
+    id: pytest-output
+    attributes:
+      label: Pytest or traceback output
+      render: shell
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "OS, Python 3.12.x, commit SHA"
+    validations:
+      required: true

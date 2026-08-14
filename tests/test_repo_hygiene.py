@@ -84,8 +84,9 @@ def test_no_uk_behaviour_module_filenames() -> None:
 
 
 def test_root_community_files_present() -> None:
-    # README.md ships in Phase 9; LICENSE is required in the public extract.
     assert (MASCOTRL_ROOT / "LICENSE").is_file(), "missing root LICENSE"
+    assert (MASCOTRL_ROOT / "README.md").is_file(), "missing root README.md"
+    assert (MASCOTRL_ROOT / "CONTRIBUTING.md").is_file(), "missing CONTRIBUTING.md"
 
 
 def test_graveyard_not_tracked_by_git() -> None:

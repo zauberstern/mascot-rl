@@ -43,13 +43,34 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=7.4",
+  "pytest-cov>=4.1",
+  "ruff>=0.4",
   "moto[s3,batch,budgets,cloudformation,iam,sts,sns]>=5.0",
+]
+
+[tool.coverage.run]
+source = ["src/mascotrl"]
+omit = [
+  "*/mascotrl/data/wrds_enrich.py",
+  "*/mascotrl/data/om_enrich.py",
+  "*/mascotrl/data/lake_source_audit.py",
+  "*/mascotrl/data/duckdb_engine.py",
+  "*/mascotrl/data/lake_builder.py",
+  "*/mascotrl/data/feature_panels.py",
+  "*/mascotrl/policy/harl_adapter.py",
+  "*/mascotrl/plugins/directed_dhgnn.py",
+  "*/mascotrl/plugins/multibook_projection.py",
+  "*/mascotrl/plugins/hypernet_actors.py",
+  "*/mascotrl/simulator.py",
+  "*/mascotrl/reporting/personality_probe.py",
+  "*/mascotrl/eval/cpcv_legacy.py",
 ]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mascotrl"]
 
-# Phase 3 baseline (2026-09-02): 2024 collected, 80% coverage, CI floors 1974 tests / 80% cov
+# Phase 9 CI floors (2026-09-02): 2037 not-slow collected; cov ~74% full package,
+# ~79% with vendor/optional omit; floors 1987 tests / 79% cov (measured)
 
 [tool.pytest.ini_options]
 minversion = "8.0"

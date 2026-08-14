@@ -19,9 +19,17 @@ from setuptools import setup
 ENGINE_DIR = ROOT / "src" / "mascotrl" / "engine"
 PRICING_DIR = ROOT / "src" / "mascotrl" / "pricing"
 
+
+def _march_flag() -> str:
+    native = os.environ.get("MASCOTRL_NATIVE", "").strip().lower() in ("1", "true", "yes")
+    if native:
+        return "-march=native"
+    return "-march=x86-64-v2"
+
+
 CXX_FLAGS = [
     "-O3",
-    "-march=znver1",
+    _march_flag(),
     "-mavx2",
     "-mfma",
     "-fopenmp",

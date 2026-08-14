@@ -406,7 +406,7 @@ def ceiling_arm_weight_fn(name: str, **ctx: Any) -> WeightFn:
         w_prev: np.ndarray | None = None,
         **_kw: Any,
     ) -> np.ndarray:
-        del w_prev, _kw
+        del _kw
         r = np.asarray(returns_hist, dtype=np.float64)
         k = int(r.shape[1]) if r.ndim == 2 else int(np.asarray(w_prev).size) if w_prev is not None else 0
         if kelly_images is None or k <= 0:
