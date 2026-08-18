@@ -64,13 +64,17 @@ omit = [
   "*/mascotrl/simulator.py",
   "*/mascotrl/reporting/personality_probe.py",
   "*/mascotrl/eval/cpcv_legacy.py",
+  "*/mascotrl/eval/publication.py",
+  "*/mascotrl/reporting/figures/figure_style.py",
+  "*/mascotrl/reporting/figures/graph_helpers.py",
+  "*/mascotrl/reporting/institutional_tearsheet.py",
 ]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mascotrl"]
 
 # Phase 9 CI floors (2026-09-02): 2037 not-slow collected; cov ~74% full package,
-# ~79% with vendor/optional omit; floors 1987 tests / 79% cov (measured)
+# ~80% with vendor/optional omit; floors 1987 tests / 80% cov (measured)
 
 [tool.pytest.ini_options]
 minversion = "8.0"

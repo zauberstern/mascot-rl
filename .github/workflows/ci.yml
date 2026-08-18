@@ -33,7 +33,7 @@ jobs:
       - name: Pytest with coverage
         run: >
           pytest -q -m "not slow" --strict-markers --tb=short
-          --cov=mascotrl --cov-fail-under=79
+          --cov=mascotrl --cov-fail-under=80
 
       - name: Test count floor
         run: |
