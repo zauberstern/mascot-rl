@@ -21,6 +21,7 @@ dist/
 
 # Data (keep pseudo fixtures)
 /data/*
+!/data/pseudo/
 !/data/pseudo/**
 
 # IDE

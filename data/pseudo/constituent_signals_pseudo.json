@@ -1,0 +1,7 @@
+{
+  "n_assets": 10,
+  "n_days": 60,
+  "seed": 0,
+  "label_stem": "dh_ret_lagdelta",
+  "note": "Synthetic pseudo-data; not licensed OptionMetrics/CRSP."
+}
